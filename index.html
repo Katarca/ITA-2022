@@ -9,39 +9,83 @@
       content="The JavaScript site provides information about Javascript programming language and its history."
     />
     <title>Javascript</title>
+    <link rel="stylesheet" href="/css/globalstyles.css" />
+    <link rel="stylesheet" href="/css/home-styles.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Raleway:wght@800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <nav>
-      <div>
-        <a href="#">About JS</a>
-        <a href="#">Time Line</a>
-        <a href="#">ECMAScript</a>
-        <a href="#">JS Today</a>
+    <section class="home-section">
+      <nav class="center-part">
+        <div class="nav-container">
+          <a href="#">
+            <span class="body-text-grey nav-link">About JS</span>
+          </a>
+          <a href="#">
+            <span class="body-text-grey nav-link">Time Line</span>
+          </a>
+          <a href="#">
+            <span class="body-text-grey nav-link">ECMAScript</span>
+          </a>
+          <a href="#">
+            <span class="body-text-grey nav-link">JS Today</span>
+          </a>
+        </div>
+      </nav>
+      <div class="center-part home-container">
+        <div class="home-text-container">
+          <h1>Javascript</h1>
+          <p class="body-text-grey">
+            JavaScript is a scripting language that enables you to create
+            dynamically updating content, control multimedia, animate images,
+            and pretty much everything else.(Okay, not everything, but it is
+            amazing what you can achieve with a few lines of JavaScript code.)
+          </p>
+        </div>
+        <img src="/assets/images/js.png" alt="Javascript logo" />
       </div>
-      <div>
-        <a href="https://www.w3schools.com/js/js_history.asp"></a>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"></a>
-        <a href="https://stackoverflow.com/questions/tagged/javascript"></a>
+      <div class="center-part logo-container">
+        <a href="https://reactjs.org/">
+          <img
+            src="/assets/images/react.png"
+            alt="React logo"
+            class="home-logo"
+          />
+        </a>
+        <a href="https://nodejs.org/en/">
+          <img
+            src="/assets/images/nodejs.png"
+            alt="Node.js logo"
+            class="home-logo"
+          />
+        </a>
+        <a href="https://www.typescriptlang.org/">
+          <img
+            src="/assets/images/typescript.png"
+            alt="Typescript logo"
+            class="home-logo"
+          />
+        </a>
+        <a href="https://angular.io/">
+          <img
+            src="/assets/images/angular.svg"
+            alt="Angular logo"
+            class="home-logo"
+          />
+        </a>
+        <a href="https://svelte.dev/">
+          <img
+            src="/assets/images/svelte.svg"
+            alt="Svelte logo"
+            class="home-logo"
+          />
+        </a>
       </div>
-    </nav>
-    <div>
-      <div>
-        <h1>Javascript</h1>
-        <p>
-          JavaScript is a scripting language that enables you to create
-          dynamically updating content, control multimedia, animate images, and
-          pretty much everything else.(Okay, not everything, but it is amazing
-          what you can achieve with a few lines of JavaScript code.)
-        </p>
-      </div>
-      <img src="/assets/images/js.png" alt="Javascript logo" />
-    </div>
-    <div>
-      <a href="https://reactjs.org/"></a>
-      <a href="https://nodejs.org/en/"></a>
-      <a href="https://www.typescriptlang.org/"></a>
-      <a href="https://angular.io/"></a>
-      <a href="https://svelte.dev/"></a>
-    </div>
+    </section>
   </body>
 </html>
