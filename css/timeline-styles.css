@@ -1,7 +1,7 @@
 .timeline-section {
   background-color: #f7df1e;
   min-height: 100vh;
-  padding: var(--navHeight) 0 50px 0;
+  padding: var(--timelinePaddingTop) 0 50px 0;
 }
 .timeline-items {
   max-width: 1000px;

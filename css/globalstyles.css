@@ -6,7 +6,11 @@
   box-sizing: inherit;
 }
 :root {
-  --navHeight: 0rem;
+  --navHeight: 0px;
+  --aboutPaddingTop: 0px;
+  --historyPaddingTop: 0px;
+  --timelinePaddingTop: 0px;
+  --todayPaddingTop: 0px;
 }
 html {
   font-size: 62.5%;
@@ -55,7 +59,7 @@ nav {
 }
 /* Text styles */
 .text-container {
-  padding-top: var(--navHeight);
+  padding-top: 50px;
 }
 .text-container p:not(:last-child) {
   padding-bottom: 30px;

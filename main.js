@@ -1,12 +1,53 @@
-function setNavHeight() {
-  const nav = document.querySelector("nav");
-  const root = document.querySelector(":root");
-  root.style.setProperty("--navHeight", `${nav.clientHeight}px`);
+// Navbar gap
+const nav = document.querySelector("nav");
+const about = document.getElementById("about");
+const history = document.getElementById("history");
+const timelineSection = document.getElementById("timeline");
+const today = document.getElementById("today");
+const root = document.querySelector(":root");
+
+function setNavGap() {
+  const navHeight = nav.clientHeight;
+  let paddingAbout = 0;
+  let paddingHistory = 0;
+  let paddingTimeline = 0;
+  let paddingToday = 0;
+  const distAbout = about.getBoundingClientRect().top - navHeight;
+  const distHistory = history.getBoundingClientRect().top - navHeight;
+  const distTimeline = timelineSection.getBoundingClientRect().top - navHeight;
+  const distToday = today.getBoundingClientRect().top - navHeight;
+  if (distAbout < 0 && Math.abs(distAbout) < navHeight) {
+    paddingAbout = Math.abs(distAbout);
+  } else if (distAbout < 0 && Math.abs(distAbout) >= navHeight) {
+    paddingAbout = navHeight;
+  }
+  if (distHistory < 0 && Math.abs(distHistory) <= navHeight) {
+    paddingHistory = Math.abs(distHistory);
+  } else if (distHistory < 0 && Math.abs(distHistory) >= navHeight) {
+    paddingHistory = navHeight;
+  }
+  if (distTimeline < 0 && Math.abs(distTimeline) <= navHeight) {
+    paddingTimeline = Math.abs(distTimeline);
+  } else if (distTimeline < 0 && Math.abs(distTimeline) >= navHeight) {
+    paddingTimeline = navHeight;
+  }
+  if (distToday < 0 && Math.abs(distToday) <= navHeight) {
+    paddingToday = Math.abs(distToday);
+  } else if (distToday < 0 && Math.abs(distToday) >= navHeight) {
+    paddingToday = navHeight;
+  }
+  root.style.setProperty("--navHeight", `${navHeight}px`);
+  root.style.setProperty("--aboutPaddingTop", `${paddingAbout}px`);
+  root.style.setProperty("--historyPaddingTop", `${paddingHistory}px`);
+  root.style.setProperty("--timelinePaddingTop", `${paddingTimeline}px`);
+  root.style.setProperty("--todayPaddingTop", `${paddingToday}px`);
 }
 
-window.addEventListener("resize", setNavHeight);
-window.addEventListener("DOMContentLoaded", setNavHeight);
+window.addEventListener("scroll", setNavGap);
+window.addEventListener("DOMContentLoaded", setNavGap);
+window.addEventListener("resize", setNavGap);
 
+// Mapping timeline items
 const timeline = document.querySelector(".timeline-items");
 
 const timelineContent = [
