@@ -9,11 +9,16 @@ A website about the Javascript programming language, its history and current usa
 ### Content
 
 Content of this website includes:
-1.Basic description
-2.About JS
-3.History
-4.Timeline
-5.JS Today
+
+1. Basic description
+
+2. About JS
+
+3. History
+
+4. Timeline
+
+5. JS Today
 
 ### Tools
 
