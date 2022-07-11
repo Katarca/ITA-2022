@@ -26,4 +26,4 @@ The following tools could be used to work with the code: -[git](https://git-scm.
 
 ### Resources
 
-Used resources: -[w3schools](https://www.w3schools.com/js/js_history.asp -[mdn web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) -[wikipedia](https://cs.wikipedia.org/wiki/JavaScript)
+Used resources: _ [w3schools](https://www.w3schools.com/js/js_history.asp _ [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) \* [wikipedia](https://cs.wikipedia.org/wiki/JavaScript)
