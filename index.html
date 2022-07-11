@@ -26,12 +26,27 @@
   </head>
   <body>
     <nav>
-      <div class="nav-container">
-        <a href="#home" class="body-text-grey nav-link">Home</a>
-        <a href="#about" class="body-text-grey nav-link">About JS</a>
-        <a href="#history" class="body-text-grey nav-link">History</a>
-        <a href="#timeline" class="body-text-grey nav-link">Time Line</a>
-        <a href="#today" class="body-text-grey nav-link">JS Today</a>
+      <ul class="nav-container">
+        <li>
+          <a href="#home" class="nav-link">Home</a>
+        </li>
+        <li>
+          <a href="#about" class="nav-link">About JS</a>
+        </li>
+        <li>
+          <a href="#history" class="nav-link">History</a>
+        </li>
+        <li>
+          <a href="#timeline" class="nav-link">Time Line</a>
+        </li>
+        <li>
+          <a href="#today" class="nav-link">JS Today</a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
     </nav>
     <section class="home-section" id="home">
@@ -173,6 +188,7 @@
       </div>
     </section>
     <section class="timeline-section" id="timeline">
+      <div class="navbar-gap"></div>
       <div class="timeline-items"></div>
     </section>
     <section class="today-section" id="today">
@@ -204,16 +220,16 @@
           means that JavaScript has an exciting future. It's a great time to
           learn JavaScript!
         </p>
-        <div class="return-container">
-          <span class="body-text-white">Return home</span>
-          <a href="#home">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-              <path
-                d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
-              />
-            </svg>
-          </a>
-        </div>
+      </div>
+      <div class="return-container">
+        <span class="body-text-white">Return home</span>
+        <a href="#home">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <path
+              d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
+            />
+          </svg>
+        </a>
       </div>
     </section>
 

@@ -1,7 +1,7 @@
 .timeline-section {
   background-color: #f7df1e;
   min-height: 100vh;
-  padding: var(--timelinePaddingTop) 0 50px 0;
+  padding-bottom: 50px;
 }
 .timeline-items {
   max-width: 1000px;
@@ -24,7 +24,7 @@
   position: relative;
 }
 .timeline-item:not(:last-child) {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .timeline-item:nth-child(odd) {
   padding-right: calc(50% + 30px);
@@ -49,8 +49,7 @@
 }
 .timeline-content {
   background-color: #2f363e;
-  padding: 30px;
-  border-radius: 5px;
+  padding: 20px;
 }
 
 /* responsive */

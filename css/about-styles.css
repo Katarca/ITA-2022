@@ -4,5 +4,5 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--aboutPaddingTop) 0 50px 0;
+  padding: var(--navHeight) 0 50px 0;
 }

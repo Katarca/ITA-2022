@@ -1,55 +1,47 @@
 // Navbar gap
 const nav = document.querySelector("nav");
-const about = document.getElementById("about");
-const history = document.getElementById("history");
-const timelineSection = document.getElementById("timeline");
-const today = document.getElementById("today");
 const root = document.querySelector(":root");
-
 function setNavGap() {
   const navHeight = nav.clientHeight;
-  let paddingAbout = 0;
-  let paddingHistory = 0;
-  let paddingTimeline = 0;
-  let paddingToday = 0;
-  const distAbout = about.getBoundingClientRect().top - navHeight;
-  const distHistory = history.getBoundingClientRect().top - navHeight;
-  const distTimeline = timelineSection.getBoundingClientRect().top - navHeight;
-  const distToday = today.getBoundingClientRect().top - navHeight;
-  if (distAbout < 0 && Math.abs(distAbout) < navHeight) {
-    paddingAbout = Math.abs(distAbout);
-  } else if (distAbout < 0 && Math.abs(distAbout) >= navHeight) {
-    paddingAbout = navHeight;
-  }
-  if (distHistory < 0 && Math.abs(distHistory) <= navHeight) {
-    paddingHistory = Math.abs(distHistory);
-  } else if (distHistory < 0 && Math.abs(distHistory) >= navHeight) {
-    paddingHistory = navHeight;
-  }
-  if (distTimeline < 0 && Math.abs(distTimeline) <= navHeight) {
-    paddingTimeline = Math.abs(distTimeline);
-  } else if (distTimeline < 0 && Math.abs(distTimeline) >= navHeight) {
-    paddingTimeline = navHeight;
-  }
-  if (distToday < 0 && Math.abs(distToday) <= navHeight) {
-    paddingToday = Math.abs(distToday);
-  } else if (distToday < 0 && Math.abs(distToday) >= navHeight) {
-    paddingToday = navHeight;
-  }
   root.style.setProperty("--navHeight", `${navHeight}px`);
-  root.style.setProperty("--aboutPaddingTop", `${paddingAbout}px`);
-  root.style.setProperty("--historyPaddingTop", `${paddingHistory}px`);
-  root.style.setProperty("--timelinePaddingTop", `${paddingTimeline}px`);
-  root.style.setProperty("--todayPaddingTop", `${paddingToday}px`);
 }
-
-window.addEventListener("scroll", setNavGap);
 window.addEventListener("DOMContentLoaded", setNavGap);
 window.addEventListener("resize", setNavGap);
 
+// Navbar highlight link
+const sectionAll = document.querySelectorAll("section");
+function navHighlight() {
+  const scrollY = window.pageYOffset;
+  sectionAll.forEach((current) => {
+    const sectionHeight = current.offsetHeight;
+    const sectionTop = current.offsetTop - 100;
+    const sectionId = current.getAttribute("id");
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      document
+        .querySelector('li a[href*="' + sectionId + '"]')
+        .classList.add("active");
+    } else {
+      document
+        .querySelector('li a[href*="' + sectionId + '"]')
+        .classList.remove("active");
+    }
+  });
+}
+window.addEventListener("scroll", navHighlight);
+window.addEventListener("DOMContentLoaded", navHighlight);
+window.addEventListener("resize", navHighlight);
+
+// Burger menu
+const hamburger = document.querySelector(".hamburger");
+const navContainer = document.querySelector(".nav-container");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("open");
+  navContainer.classList.toggle("open");
+});
+
 // Mapping timeline items
 const timeline = document.querySelector(".timeline-items");
-
 const timelineContent = [
   {
     year: "1995",
