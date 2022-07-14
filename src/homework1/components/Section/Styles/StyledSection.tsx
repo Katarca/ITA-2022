@@ -18,4 +18,13 @@ export const StyledSection = styled.section`
     flex-direction: column;
     justify-content: center;
   }
+  &.history-section {
+    min-height: 100vh;
+    background-color: #020202;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
