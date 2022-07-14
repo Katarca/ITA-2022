@@ -3,6 +3,7 @@ import History from './components/History/History'
 import Home from './components/Home/Home'
 import Navbar from './components/Navbar/Navbar'
 import React from 'react'
+import Timeline from './components/TimeLine/Timeline'
 import Today from './components/Today/Today'
 
 const JavaScriptWeb = () => {
@@ -12,6 +13,7 @@ const JavaScriptWeb = () => {
       <Home />
       <About />
       <History />
+      <Timeline />
       <Today />
     </>
   )

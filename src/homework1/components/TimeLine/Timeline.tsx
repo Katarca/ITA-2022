@@ -1,44 +1,15 @@
-// Navbar gap
-const nav = document.querySelector('nav')
-const root = document.querySelector(':root')
-function setNavGap() {
-  const navHeight = nav.clientHeight
-  root.style.setProperty('--navHeight', `${navHeight}px`)
-}
-window.addEventListener('DOMContentLoaded', setNavGap)
-window.addEventListener('resize', setNavGap)
+import { BodyTextGrey } from '../typo/BodyText'
+import {
+  TimelineContent,
+  TimelineDate,
+  TimelineDot,
+  TimelineItem,
+  TimelineItems,
+} from './Styles/StyledTimeline'
+import React from 'react'
+import Section from '../Section/Section'
 
-// Navbar highlight link
-const sectionAll = document.querySelectorAll('section')
-function navHighlight() {
-  const scrollY = window.pageYOffset
-  sectionAll.forEach(current => {
-    const sectionHeight = current.offsetHeight
-    const sectionTop = current.offsetTop - 100
-    const sectionId = current.getAttribute('id')
-    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      document.querySelector('li a[href*="' + sectionId + '"]').classList.add('active')
-    } else {
-      document.querySelector('li a[href*="' + sectionId + '"]').classList.remove('active')
-    }
-  })
-}
-window.addEventListener('scroll', navHighlight)
-window.addEventListener('DOMContentLoaded', navHighlight)
-window.addEventListener('resize', navHighlight)
-
-// Burger menu
-const hamburger = document.querySelector('.hamburger')
-const navContainer = document.querySelector('.nav-container')
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open')
-  navContainer.classList.toggle('open')
-})
-
-// Mapping timeline items
-const timeline = document.querySelector('.timeline-items')
-const timelineContent = [
+const timelineData = [
   {
     year: '1995',
     info: 'JavaScript was invented by Brendan Eich',
@@ -157,18 +128,22 @@ const timelineContent = [
   },
 ]
 
-timeline.innerHTML = timelineContent
-  .map(
-    infoText => `
-<div class="timeline-item">
-  <div class="timeline-dot"></div>
-  <div class="timeline-date">${infoText.year}</div>
-  <div class="timeline-content">
-    <p class="body-text-grey">
-      ${infoText.info}
-    </p>
-  </div>
-</div>
-`
+const Timeline = () => {
+  return (
+    <Section id='timeline' className='timeline-section'>
+      <TimelineItems>
+        {timelineData.map((data, i) => (
+          <TimelineItem key={i}>
+            <TimelineDot />
+            <TimelineDate>{data.year}</TimelineDate>
+            <TimelineContent>
+              <BodyTextGrey>{data.info}</BodyTextGrey>
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </TimelineItems>
+    </Section>
   )
-  .join('')
+}
+
+export default Timeline

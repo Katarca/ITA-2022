@@ -12,7 +12,7 @@
   position: relative;
 }
 .timeline-items::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 2px;
   height: 100%;

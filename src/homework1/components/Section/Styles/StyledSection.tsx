@@ -36,4 +36,9 @@ export const StyledSection = styled.section`
     flex-direction: column;
     justify-content: center;
   }
+  &.timeline-section {
+    background-color: #f7df1e;
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
 `
