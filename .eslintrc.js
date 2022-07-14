@@ -17,6 +17,12 @@ module.exports = {
     },
   },
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     semi: 'off',
     // '@typescript-eslint/semi': ['error', 'never'],
     // '@typescript-eslint/no-use-before-define': [
