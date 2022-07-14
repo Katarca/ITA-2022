@@ -1,8 +1,10 @@
 export const colors = {
+  white: '#ffffff',
   yellow300: '#f7df1c',
   grey300: '#9c9c9c',
   grey900: '#1b1b1b',
   blue900: '#04001C',
+  black: '#000000',
 }
 
 export const device = {

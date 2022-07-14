@@ -30,3 +30,17 @@ export const NavItem = styled.li`
     transform: scale(1.2);
   }
 `
+
+export const BurgerMenu = styled.div`
+  display: none;
+  cursor: pointer;
+  margin: 0 20px;
+`
+
+export const Bar = styled.span`
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: ${colors.grey300};
+`

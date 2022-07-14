@@ -1,4 +1,4 @@
-import { NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
+import { Bar, BurgerMenu, NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
 import { NavText } from '../typo/BodyText'
 import Link from '../Link/Link'
 import React from 'react'
@@ -33,6 +33,11 @@ const Navbar = () => {
           </Link>
         </NavItem>
       </NavItems>
+      <BurgerMenu>
+        <Bar />
+        <Bar />
+        <Bar />
+      </BurgerMenu>
     </StyledNavbar>
   )
 }

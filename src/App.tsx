@@ -1,13 +1,15 @@
 import { GlobalStyle } from '.'
 import { Route, Routes } from 'react-router-dom'
 import { StyledApp } from './page-style/StyledApp'
-import Navbar from './homework1/components/Navbar/Navbar'
+import JavaScriptWeb from './homework1/JavaScriptWeb'
 import React from 'react'
 
 function App() {
   return (
     <StyledApp>
-      <Navbar />
+      <Routes>
+        <Route path='/js' element={<JavaScriptWeb />} />
+      </Routes>
       <GlobalStyle />
     </StyledApp>
   )

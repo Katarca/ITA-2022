@@ -10,3 +10,8 @@ export const NavText = styled.span`
     color: ${colors.yellow300};
   }
 `
+
+export const BodyTextGrey = styled.p`
+  font-size: 1.4rem;
+  color: ${colors.grey300};
+`

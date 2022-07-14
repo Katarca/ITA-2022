@@ -1,0 +1,18 @@
+import { StyledSection } from './Styles/StyledSection'
+import React from 'react'
+
+export interface SectionProps {
+  id: string
+  className: string
+  children: JSX.Element[]
+}
+
+const Section = ({ id, className, children }: SectionProps) => {
+  return (
+    <StyledSection id={id} className={className}>
+      {children}
+    </StyledSection>
+  )
+}
+
+export default Section
