@@ -1,4 +1,5 @@
 import { HomeContainer, LogoContainer } from '../../Home/Styles/StyledHome'
+import { colors } from '../../../../helpers/consts'
 import styled from 'styled-components'
 
 export const StyledImg = styled.img`
@@ -9,4 +10,8 @@ export const StyledImg = styled.img`
   ${LogoContainer} & {
     width: 35px;
   }
+`
+export const Svg = styled.svg`
+  fill: ${colors.white};
+  transform: rotate(-90deg);
 `

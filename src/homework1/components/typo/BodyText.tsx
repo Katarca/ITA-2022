@@ -41,3 +41,8 @@ export const BodyTextDarkGrey = styled.p`
     padding-bottom: 30px;
   }
 `
+
+export const TextWhite = styled.span`
+  font-size: 1.4rem;
+  color: ${colors.white};
+`

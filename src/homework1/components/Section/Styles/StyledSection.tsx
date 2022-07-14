@@ -27,4 +27,13 @@ export const StyledSection = styled.section`
     flex-direction: column;
     justify-content: center;
   }
+  &.today-section {
+    min-height: 100vh;
+    background-color: #2f363e;
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
