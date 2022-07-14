@@ -10,4 +10,12 @@ export const StyledSection = styled.section`
     flex-direction: column;
     justify-content: space-between;
   }
+  &.about-section {
+    min-height: 100vh;
+    background-color: ${colors.yellow300};
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `

@@ -4,7 +4,7 @@ import React from 'react'
 export interface SectionProps {
   id: string
   className: string
-  children: JSX.Element[]
+  children: JSX.Element | JSX.Element[]
 }
 
 const Section = ({ id, className, children }: SectionProps) => {

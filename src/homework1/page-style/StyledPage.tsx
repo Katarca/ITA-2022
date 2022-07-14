@@ -4,3 +4,7 @@ export const centralPart = css`
   width: 70%;
   margin: 0 auto;
 `
+export const TextContainer = styled.div`
+  padding-top: 50px;
+  ${centralPart}
+`

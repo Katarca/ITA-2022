@@ -23,6 +23,11 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     background-color: ${colors.blue900};
     font-family: 'IBM Plex Mono', monospace;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+    body::-webkit-scrollbar {
+    display: none;
   }
 
 `
