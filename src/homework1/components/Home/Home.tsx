@@ -1,9 +1,8 @@
 import { BodyTextGrey } from '../typo/BodyText'
 import { ExternalLink } from 'react-external-link'
-import { HomeContainer, HomeTextContainer, LogoContainer } from './Styles/StyledHome'
+import { HomeContainer, HomeTextContainer, LogoContainer, NavGap } from './Styles/StyledHome'
 import { MainHeading } from '../typo/Heading'
 import Img from '../Img/Img'
-import Link from '../Link/Link'
 import React from 'react'
 import Section from '../Section/Section'
 import angularLogo from '../../assets/images/angular.svg'
@@ -15,7 +14,8 @@ import typescriptLogo from '../../assets/images/typescript.png'
 
 const Home = () => {
   return (
-    <Section id='home' className='home-section'>
+    <Section id='home' className='home-section' name='home'>
+      <NavGap />
       <HomeContainer>
         <HomeTextContainer>
           <MainHeading>JavaScript</MainHeading>

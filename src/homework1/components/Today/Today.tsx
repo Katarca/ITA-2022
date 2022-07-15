@@ -1,15 +1,14 @@
 import { BodyTextGrey, BodyTextWhite, TextWhite } from '../typo/BodyText'
 import { Heading } from '../typo/Heading'
 import { ReturnContainer } from './Styles/StyledToday'
+import { StyledLink, TextContainer } from '../../page-style/StyledPage'
 import { Svg } from '../Img/Styles/StyledImg'
-import { TextContainer } from '../../page-style/StyledPage'
-import Link from '../Link/Link'
 import React from 'react'
 import Section from '../Section/Section'
 
 const Today = () => {
   return (
-    <Section id='today' className='today-section'>
+    <Section id='today' name='today' className='today-section'>
       <TextContainer>
         <Heading>JS Today</Heading>
         <BodyTextWhite>
@@ -36,11 +35,11 @@ const Today = () => {
       </TextContainer>
       <ReturnContainer>
         <TextWhite>Return home</TextWhite>
-        <Link to='#'>
+        <StyledLink to='home' smooth={true}>
           <Svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
             <path d='M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z' />
           </Svg>
-        </Link>
+        </StyledLink>
       </ReturnContainer>
     </Section>
   )

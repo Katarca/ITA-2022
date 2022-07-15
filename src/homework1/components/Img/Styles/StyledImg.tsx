@@ -9,6 +9,9 @@ export const StyledImg = styled.img`
   }
   ${LogoContainer} & {
     width: 35px;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 `
 export const Svg = styled.svg`

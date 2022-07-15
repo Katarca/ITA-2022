@@ -1,7 +1,7 @@
 import { colors } from '../../../../helpers/consts'
 import styled from 'styled-components'
 
-export const StyledNavbar = styled.nav`
+export const StyledNavbar = styled.div`
   width: 85vw;
   background-color: ${colors.grey900};
   padding: 25px 0 25px 0;

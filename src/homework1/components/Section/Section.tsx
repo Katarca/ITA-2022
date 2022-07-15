@@ -3,6 +3,7 @@ import React from 'react'
 
 export interface SectionProps {
   id: string
+  name: string
   className: string
   children: JSX.Element | JSX.Element[]
 }

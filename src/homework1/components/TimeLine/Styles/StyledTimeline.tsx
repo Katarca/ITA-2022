@@ -13,7 +13,7 @@ export const TimelineItems = styled.div`
     position: absolute;
     width: 2px;
     height: 100%;
-    background-color: #2f363e;
+    background-color: ${colors.grey500};
     left: calc(50% - 1px);
   }
 `
@@ -42,7 +42,6 @@ export const TimelineDot = styled.div`
   top: 10px;
 `
 export const TimelineDate = styled.div`
-  font-size: 1.8rem;
   color: ${colors.black};
   margin: 6px 0 15px;
 `

@@ -1,4 +1,4 @@
-import { BodyTextGrey } from '../typo/BodyText'
+import { BodyTextDarkGrey, BodyTextGrey } from '../typo/BodyText'
 import {
   TimelineContent,
   TimelineDate,
@@ -130,12 +130,14 @@ const timelineData = [
 
 const Timeline = () => {
   return (
-    <Section id='timeline' className='timeline-section'>
+    <Section id='timeline' name='timeline' className='timeline-section'>
       <TimelineItems>
         {timelineData.map((data, i) => (
           <TimelineItem key={i}>
             <TimelineDot />
-            <TimelineDate>{data.year}</TimelineDate>
+            <TimelineDate>
+              <BodyTextDarkGrey>{data.year}</BodyTextDarkGrey>
+            </TimelineDate>
             <TimelineContent>
               <BodyTextGrey>{data.info}</BodyTextGrey>
             </TimelineContent>

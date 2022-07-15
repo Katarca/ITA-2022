@@ -1,36 +1,34 @@
 import { Bar, BurgerMenu, NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
-import { NavText } from '../typo/BodyText'
-import Link from '../Link/Link'
-import React from 'react'
+import { StyledLink } from '../../page-style/StyledPage'
 
 const Navbar = () => {
   return (
     <StyledNavbar>
       <NavItems>
         <NavItem>
-          <Link to='#'>
-            <NavText>Home</NavText>
-          </Link>
+          <StyledLink to='home' activeClass='active' spy={true} smooth={true}>
+            Home
+          </StyledLink>
         </NavItem>
         <NavItem>
-          <Link to='#'>
-            <NavText>About JS</NavText>
-          </Link>
+          <StyledLink to='about' activeClass='active' spy={true} smooth={true}>
+            About JS
+          </StyledLink>
         </NavItem>
         <NavItem>
-          <Link to='#'>
-            <NavText>History</NavText>
-          </Link>
+          <StyledLink to='history' activeClass='active' spy={true} smooth={true}>
+            History
+          </StyledLink>
         </NavItem>
         <NavItem>
-          <Link to='#'>
-            <NavText>Time Line</NavText>
-          </Link>
+          <StyledLink to='timeline' activeClass='active' spy={true} smooth={true}>
+            Timeline
+          </StyledLink>
         </NavItem>
         <NavItem>
-          <Link to='#'>
-            <NavText>JS Today</NavText>
-          </Link>
+          <StyledLink to='today' activeClass='active' spy={true} smooth={true}>
+            JS Today
+          </StyledLink>
         </NavItem>
       </NavItems>
       <BurgerMenu>

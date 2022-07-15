@@ -2,43 +2,39 @@ import { colors } from '../../../../helpers/consts'
 import styled from 'styled-components'
 
 export const StyledSection = styled.section`
+  min-height: 100vh;
+  display: flex;
   &.home-section {
-    min-height: 100vh;
     background-color: ${colors.black};
     color: ${colors.white};
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   &.about-section {
-    min-height: 100vh;
     background-color: ${colors.yellow300};
     text-align: center;
-    display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 120px 0 50px 0;
   }
   &.history-section {
-    min-height: 100vh;
-    background-color: #020202;
-    color: #ffffff;
+    background-color: ${colors.black};
+    color: ${colors.white};
     text-align: center;
-    display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 120px 0 50px 0;
   }
   &.today-section {
-    min-height: 100vh;
-    background-color: #2f363e;
-    color: #ffffff;
+    background-color: ${colors.grey500};
+    color: ${colors.white};
     text-align: center;
-    display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 120px 0 50px 0;
   }
   &.timeline-section {
-    background-color: #f7df1e;
-    min-height: 100vh;
-    padding-bottom: 50px;
+    background-color: ${colors.yellow300};
+    padding: 120px 0 50px 0;
   }
 `
