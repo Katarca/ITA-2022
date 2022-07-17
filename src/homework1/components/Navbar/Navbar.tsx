@@ -1,10 +1,23 @@
-import { Bar, BurgerMenu, NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
+import { HamburgerContainer, NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
 import { StyledLink } from '../../page-style/StyledPage'
+import { colors } from '../../../helpers/consts'
+import { useEffect, useState } from 'react'
+import Hamburger from 'hamburger-react'
 
 const Navbar = () => {
+  const [isOpen, setOpen] = useState(false)
+  const [width, setWidth] = useState(window.innerWidth)
+
+  const handleResize = () => setWidth(window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <StyledNavbar>
-      <NavItems>
+      <NavItems className={`${isOpen ? 'open' : ''}`}>
         <NavItem>
           <StyledLink to='home' activeClass='active' spy={true} smooth={true}>
             Home
@@ -31,11 +44,11 @@ const Navbar = () => {
           </StyledLink>
         </NavItem>
       </NavItems>
-      <BurgerMenu>
-        <Bar />
-        <Bar />
-        <Bar />
-      </BurgerMenu>
+      {width <= 900 && (
+        <HamburgerContainer>
+          <Hamburger toggled={isOpen} toggle={setOpen} color={colors.grey300} size={25} />
+        </HamburgerContainer>
+      )}
     </StyledNavbar>
   )
 }

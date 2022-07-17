@@ -12,6 +12,7 @@ export const StyledNavbar = styled.div`
   left: 7.5%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `
 
 export const NavItems = styled.ul`
@@ -23,6 +24,20 @@ export const NavItems = styled.ul`
   min-height: 70px;
   border-radius: 0 0 8px 8px;
   list-style: none;
+  &.open {
+    left: 7.5%;
+  }
+  @media (max-width: 900px) {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    width: 85vw;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: #1b1b1b;
+    padding-bottom: 20px;
+  }
 `
 
 export const NavItem = styled.li`
@@ -31,16 +46,6 @@ export const NavItem = styled.li`
   }
 `
 
-export const BurgerMenu = styled.div`
-  display: none;
-  cursor: pointer;
-  margin: 0 20px;
-`
-
-export const Bar = styled.span`
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: ${colors.grey300};
+export const HamburgerContainer = styled.div`
+  padding: 0 20px; ;
 `
