@@ -3,6 +3,7 @@ import { Heading } from '../typo/Heading'
 import { ReturnContainer } from './Styles/StyledToday'
 import { StyledLink, TextContainer } from '../../page-style/StyledPage'
 import { Svg } from '../Img/Styles/StyledImg'
+import Link from '../../../components/Link/Link'
 import React from 'react'
 import Section from '../Section/Section'
 
@@ -35,11 +36,11 @@ const Today = () => {
       </TextContainer>
       <ReturnContainer>
         <TextWhite>Return home</TextWhite>
-        <StyledLink to='home' smooth={true}>
+        <Link to='/'>
           <Svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
             <path d='M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z' />
           </Svg>
-        </StyledLink>
+        </Link>
       </ReturnContainer>
     </Section>
   )

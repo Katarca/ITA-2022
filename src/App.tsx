@@ -1,6 +1,7 @@
 import { GlobalStyle } from '.'
 import { Route, Routes } from 'react-router-dom'
 import { StyledApp } from './page-style/StyledApp'
+import Home from './pages/Home'
 import JavaScriptWeb from './homework1/JavaScriptWeb'
 import React from 'react'
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <StyledApp>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/js' element={<JavaScriptWeb />} />
       </Routes>
       <GlobalStyle />

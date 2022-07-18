@@ -25,16 +25,16 @@ export const StyledSection = styled.section`
     justify-content: center;
     padding: 120px 0 50px 0;
   }
+  &.timeline-section {
+    background-color: ${colors.yellow300};
+    padding: 120px 0 50px 0;
+  }
   &.today-section {
     background-color: ${colors.grey500};
     color: ${colors.white};
     text-align: center;
     flex-direction: column;
     justify-content: center;
-    padding: 120px 0 50px 0;
-  }
-  &.timeline-section {
-    background-color: ${colors.yellow300};
     padding: 120px 0 50px 0;
   }
 `

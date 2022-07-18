@@ -16,5 +16,5 @@ export const StyledImg = styled.img`
 `
 export const Svg = styled.svg`
   fill: ${colors.white};
-  transform: rotate(-90deg);
+  transform: rotate(180deg);
 `
