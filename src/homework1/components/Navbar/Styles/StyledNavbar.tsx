@@ -1,4 +1,5 @@
-import { colors } from '../../../../helpers/consts'
+import { Link } from 'react-scroll'
+import { breakpoint, colors } from '../../../../helpers/consts'
 import styled from 'styled-components'
 
 export const StyledNavbar = styled.div`
@@ -27,7 +28,7 @@ export const NavItems = styled.ul`
   &.open {
     left: 7.5%;
   }
-  @media (max-width: 900px) {
+  ${breakpoint.tabletPortrait} {
     position: fixed;
     left: -100%;
     top: 70px;
@@ -48,4 +49,18 @@ export const NavItem = styled.li`
 
 export const HamburgerContainer = styled.div`
   padding: 0 20px; ;
+`
+
+export const StyledLink = styled(Link)`
+  cursor: pointer;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: ${colors.grey300};
+  &:hover {
+    color: ${colors.yellow300};
+  }
+  &.active {
+    color: ${colors.orange300};
+  }
 `

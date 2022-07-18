@@ -14,7 +14,7 @@ import typescriptLogo from '../../assets/images/typescript.png'
 
 const Home = () => {
   return (
-    <Section id='home' className='home-section' name='home'>
+    <Section id='home' name='home' className='home-section'>
       <NavGap />
       <HomeContainer>
         <HomeTextContainer>

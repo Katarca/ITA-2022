@@ -1,5 +1,5 @@
 import { HamburgerContainer, NavItem, NavItems, StyledNavbar } from './Styles/StyledNavbar'
-import { StyledLink } from '../../page-style/StyledPage'
+import { StyledLink } from './Styles/StyledNavbar'
 import { colors } from '../../../helpers/consts'
 import { useEffect, useState } from 'react'
 import Hamburger from 'hamburger-react'

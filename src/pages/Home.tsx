@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <StyledHome>
       <Link to='/js'>
-        <BodyText>JS Web</BodyText>
+        <BodyText>Homework1</BodyText>
       </Link>
     </StyledHome>
   )
