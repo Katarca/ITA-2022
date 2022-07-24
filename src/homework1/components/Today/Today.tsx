@@ -1,11 +1,11 @@
 import { BodyTextGrey, BodyTextWhite, TextWhite } from '../typo/BodyText'
 import { Heading } from '../typo/Heading'
-import { ReturnContainer } from './Styles/StyledToday'
-import { Svg } from '../Img/Styles/StyledImg'
+import { Icon } from '../Icon/Icon'
 import { TextContainer } from '../../page-style/StyledPage'
-import Link from '../../../components/Link/Link'
 import React from 'react'
+import RouterLink from '../../../components/RouterLink/RouterLink'
 import Section from '../Section/Section'
+import styled from 'styled-components'
 
 const Today = () => {
   return (
@@ -36,14 +36,22 @@ const Today = () => {
       </TextContainer>
       <ReturnContainer>
         <TextWhite>Return home</TextWhite>
-        <Link to='/'>
-          <Svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
+        <RouterLink to='/'>
+          <Icon xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
             <path d='M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z' />
-          </Svg>
-        </Link>
+          </Icon>
+        </RouterLink>
       </ReturnContainer>
     </Section>
   )
 }
+
+const ReturnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+`
 
 export default Today

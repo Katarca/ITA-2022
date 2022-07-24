@@ -1,4 +1,4 @@
-import { breakpoint, colors } from '../../helpers/consts'
+import { breakpoint } from '../../helpers/consts'
 import styled, { css } from 'styled-components'
 
 export const centralPart = css`

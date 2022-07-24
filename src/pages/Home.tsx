@@ -1,14 +1,14 @@
 import { BodyText } from '../components/typo/BodyText'
 import { StyledHome } from '../page-style/StyledApp'
-import Link from '../components/Link/Link'
 import React from 'react'
+import RouterLink from '../components/RouterLink/RouterLink'
 
 const Home = () => {
   return (
     <StyledHome>
-      <Link to='/js'>
+      <RouterLink to='/js'>
         <BodyText>Homework1</BodyText>
-      </Link>
+      </RouterLink>
     </StyledHome>
   )
 }
