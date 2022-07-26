@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export interface LinkProps {
-  to: any
+  to: string
   target?: string
   children?: JSX.Element | JSX.Element[]
 }
