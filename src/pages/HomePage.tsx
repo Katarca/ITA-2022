@@ -9,6 +9,9 @@ export const HomePage = () => {
       <RouterLink to='/js'>
         <BodyText>Homework1</BodyText>
       </RouterLink>
+      <RouterLink to='/counter-app'>
+        <BodyText>Homework2</BodyText>
+      </RouterLink>
     </StyledHome>
   )
 }

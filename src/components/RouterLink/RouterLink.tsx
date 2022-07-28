@@ -18,4 +18,5 @@ export const RouterLink = (props: LinkProps) => {
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  padding: 10px;
 `
