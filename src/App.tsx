@@ -5,15 +5,16 @@ import { Route, Routes } from 'react-router-dom'
 import { StyledApp } from './page-style/StyledApp'
 import { colors } from './helpers/theme'
 import { createGlobalStyle } from 'styled-components'
+import { urls } from './helpers/urls'
 import React from 'react'
 
 export function App() {
   return (
     <StyledApp>
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/js' element={<JavaScriptWeb />} />
-        <Route path='/counter-app' element={<CounterApp />} />
+        <Route path={urls.homeUrl} element={<HomePage />} />
+        <Route path={urls.jsWebUrl} element={<JavaScriptWeb />} />
+        <Route path={urls.counterAppUrl} element={<CounterApp />} />
       </Routes>
       <GlobalStyle />
     </StyledApp>

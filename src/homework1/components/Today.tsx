@@ -4,6 +4,7 @@ import { Icon } from './Icon'
 import { RouterLink } from '../../components/RouterLink'
 import { TextContainer } from './StyledPage'
 import { colors } from '../../helpers/theme'
+import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -36,7 +37,7 @@ export const Today = () => {
       </TextContainer>
       <ReturnContainer>
         <TextWhite>Return home</TextWhite>
-        <RouterLink to='/'>
+        <RouterLink to={urls.homeUrl}>
           <Icon xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
             <path d='M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z' />
           </Icon>
