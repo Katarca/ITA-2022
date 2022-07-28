@@ -1,7 +1,7 @@
 import { BodyTextGrey, BodyTextWhite, TextWhite } from './typo/BodyText'
 import { Heading } from './typo/Heading'
 import { Icon } from './Icon'
-import { RouterLink } from '../../components/RouterLink/RouterLink'
+import { RouterLink } from '../../components/RouterLink'
 import { Section } from './Section'
 import { TextContainer } from './StyledPage'
 import React from 'react'

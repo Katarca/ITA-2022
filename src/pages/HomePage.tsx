@@ -1,5 +1,5 @@
 import { BodyText } from '../components/typo/BodyText'
-import { RouterLink } from '../components/RouterLink/RouterLink'
+import { RouterLink } from '../components/RouterLink'
 import { StyledHome } from '../page-style/StyledApp'
 import React from 'react'
 

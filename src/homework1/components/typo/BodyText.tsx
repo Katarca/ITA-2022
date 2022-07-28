@@ -30,7 +30,7 @@ export const BodyTextDarkGrey = styled.p`
   }
 `
 
-export const TextWhite = styled.span`
+export const TextWhite = styled.p`
   font-size: 1.4rem;
   color: ${colors.white};
 `
