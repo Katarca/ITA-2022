@@ -1,6 +1,6 @@
 import { App } from './App'
 import { BrowserRouter } from 'react-router-dom'
-import { colors } from './helpers/consts'
+import { colors } from './helpers/theme'
 import { createGlobalStyle } from 'styled-components'
 import React from 'react'
 import ReactDOM from 'react-dom/client'

@@ -1,5 +1,5 @@
 import { Link } from 'react-scroll'
-import { breakpoint, colors } from '../../helpers/consts'
+import { breakpoint, colors } from '../../helpers/theme'
 import { useEffect, useState } from 'react'
 import Hamburger from 'hamburger-react'
 import styled from 'styled-components'

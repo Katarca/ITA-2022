@@ -3,7 +3,7 @@ import { Heading } from './typo/Heading'
 import { Icon } from './Icon'
 import { RouterLink } from '../../components/RouterLink'
 import { TextContainer } from './StyledPage'
-import { colors } from '../../helpers/consts'
+import { colors } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 

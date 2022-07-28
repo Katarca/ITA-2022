@@ -1,6 +1,6 @@
 import { Button } from './components/Button'
 import { Heading } from './components/Heading'
-import { colors } from '../helpers/consts'
+import { colors } from '../helpers/theme'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
