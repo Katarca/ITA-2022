@@ -1,10 +1,10 @@
 import { BodyTextBlack, BodyTextDarkGrey } from '../typo/BodyText'
 import { Heading } from '../typo/Heading'
+import { Section } from '../Section/Section'
 import { TextContainer } from '../../page-style/StyledPage'
 import React from 'react'
-import Section from '../Section/Section'
 
-const About = () => {
+export const About = () => {
   return (
     <Section id='about' name='about' className='about-section'>
       <TextContainer>
@@ -42,5 +42,3 @@ const About = () => {
     </Section>
   )
 }
-
-export default About

@@ -1,11 +1,11 @@
 import { BodyTextGrey } from '../typo/BodyText'
 import { ExternalLink } from 'react-external-link'
+import { Img } from '../Img/Img'
 import { MainHeading } from '../typo/Heading'
+import { Section } from '../Section/Section'
 import { breakpoint } from '../../../helpers/consts'
 import { centralPart } from '../../page-style/StyledPage'
-import Img from '../Img/Img'
 import React from 'react'
-import Section from '../Section/Section'
 import angularLogo from './Images/angular.svg'
 import jsImg from './Images/js.png'
 import nodeLogo from './Images/nodejs.png'
@@ -14,7 +14,7 @@ import styled from 'styled-components'
 import svelteLogo from './Images/svelte.svg'
 import typescriptLogo from './Images/typescript.png'
 
-const Home = () => {
+export const Home = () => {
   return (
     <Section id='home' name='home' className='home-section'>
       <NavGap />
@@ -83,5 +83,3 @@ const LogoContainer = styled.div`
 const NavGap = styled.div`
   height: 120px;
 `
-
-export default Home

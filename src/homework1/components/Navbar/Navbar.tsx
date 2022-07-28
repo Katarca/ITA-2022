@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Hamburger from 'hamburger-react'
 import styled from 'styled-components'
 
-const Navbar = () => {
+export const Navbar = () => {
   const [isOpen, setOpen] = useState(false)
   const [width, setWidth] = useState(window.innerWidth)
 
@@ -115,5 +115,3 @@ const StyledLink = styled(Link)`
     color: ${colors.orange300};
   }
 `
-
-export default Navbar

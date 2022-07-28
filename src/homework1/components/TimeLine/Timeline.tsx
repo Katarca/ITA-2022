@@ -1,7 +1,7 @@
 import { BodyTextDarkGrey, BodyTextGrey } from '../typo/BodyText'
+import { Section } from '../Section/Section'
 import { breakpoint, colors } from '../../../helpers/consts'
 import React from 'react'
-import Section from '../Section/Section'
 import styled from 'styled-components'
 
 const timelineData = [
@@ -123,7 +123,7 @@ const timelineData = [
   },
 ]
 
-const Timeline = () => {
+export const Timeline = () => {
   return (
     <Section id='timeline' name='timeline' className='timeline-section'>
       <TimelineItems>
@@ -205,5 +205,3 @@ const TimelineContent = styled.div`
   background-color: ${colors.grey500};
   padding: 20px;
 `
-
-export default Timeline

@@ -1,9 +1,9 @@
 import { BodyText } from '../components/typo/BodyText'
+import { RouterLink } from '../components/RouterLink/RouterLink'
 import { StyledHome } from '../page-style/StyledApp'
 import React from 'react'
-import RouterLink from '../components/RouterLink/RouterLink'
 
-const Home = () => {
+export const HomePage = () => {
   return (
     <StyledHome>
       <RouterLink to='/js'>
@@ -12,5 +12,3 @@ const Home = () => {
     </StyledHome>
   )
 }
-
-export default Home

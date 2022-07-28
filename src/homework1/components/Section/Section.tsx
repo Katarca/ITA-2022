@@ -9,7 +9,7 @@ export interface SectionProps {
   children: JSX.Element | JSX.Element[]
 }
 
-const Section = ({ id, className, children }: SectionProps) => {
+export const Section = ({ id, className, children }: SectionProps) => {
   return (
     <StyledSection id={id} className={className}>
       {children}
@@ -54,5 +54,3 @@ const StyledSection = styled.section`
     padding: 120px 0 50px 0;
   }
 `
-
-export default Section

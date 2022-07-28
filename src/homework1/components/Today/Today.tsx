@@ -1,13 +1,13 @@
 import { BodyTextGrey, BodyTextWhite, TextWhite } from '../typo/BodyText'
 import { Heading } from '../typo/Heading'
 import { Icon } from '../Icon/Icon'
+import { RouterLink } from '../../../components/RouterLink/RouterLink'
+import { Section } from '../Section/Section'
 import { TextContainer } from '../../page-style/StyledPage'
 import React from 'react'
-import RouterLink from '../../../components/RouterLink/RouterLink'
-import Section from '../Section/Section'
 import styled from 'styled-components'
 
-const Today = () => {
+export const Today = () => {
   return (
     <Section id='today' name='today' className='today-section'>
       <TextContainer>
@@ -53,5 +53,3 @@ const ReturnContainer = styled.div`
   gap: 10px;
   padding: 20px;
 `
-
-export default Today

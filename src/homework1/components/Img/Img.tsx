@@ -6,7 +6,7 @@ interface ImgProps {
   className?: string
 }
 
-const Img = ({ src, className }: ImgProps) => {
+export const Img = ({ src, className }: ImgProps) => {
   return <StyledImg src={src} className={className} />
 }
 
@@ -22,5 +22,3 @@ const StyledImg = styled.img`
     }
   }
 `
-
-export default Img

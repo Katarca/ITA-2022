@@ -1,10 +1,10 @@
 import { BodyTextGrey, BodyTextWhite } from '../typo/BodyText'
 import { Heading } from '../typo/Heading'
+import { Section } from '../Section/Section'
 import { TextContainer } from '../../page-style/StyledPage'
 import React from 'react'
-import Section from '../Section/Section'
 
-const History = () => {
+export const History = () => {
   return (
     <Section id='history' name='history' className='history-section'>
       <TextContainer>
@@ -43,5 +43,3 @@ const History = () => {
     </Section>
   )
 }
-
-export default History

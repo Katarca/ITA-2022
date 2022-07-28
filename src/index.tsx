@@ -1,10 +1,9 @@
+import { App } from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { colors } from './helpers/consts'
 import { createGlobalStyle } from 'styled-components'
-import App from './App'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import reportWebVitals from './reportWebVitals'
 
 export const GlobalStyle = createGlobalStyle`
     *,
@@ -40,5 +39,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 )
-
-reportWebVitals()

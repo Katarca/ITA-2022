@@ -8,7 +8,7 @@ export interface LinkProps {
   children?: JSX.Element | JSX.Element[]
 }
 
-const RouterLink = ({ to, target, children }: LinkProps) => {
+export const RouterLink = ({ to, target, children }: LinkProps) => {
   return (
     <StyledLink to={to} target={target}>
       {children}
@@ -19,4 +19,3 @@ const RouterLink = ({ to, target, children }: LinkProps) => {
 const StyledLink = styled(Link)`
   text-decoration: none;
 `
-export default RouterLink

@@ -1,20 +1,18 @@
 import { GlobalStyle } from '.'
+import { HomePage } from './pages/HomePage'
+import { JavaScriptWeb } from './homework1/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
 import { StyledApp } from './page-style/StyledApp'
-import Home from './pages/Home'
-import JavaScriptWeb from './homework1/JavaScriptWeb'
 import React from 'react'
 
-function App() {
+export function App() {
   return (
     <StyledApp>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<HomePage />} />
         <Route path='/js' element={<JavaScriptWeb />} />
       </Routes>
       <GlobalStyle />
     </StyledApp>
   )
 }
-
-export default App
