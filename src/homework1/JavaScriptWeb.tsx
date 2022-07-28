@@ -1,9 +1,9 @@
-import { About } from './components/About'
-import { History } from './components/History'
-import { Home } from './components/Home'
+import { About } from './pages/About'
+import { History } from './pages/History'
+import { Home } from './pages/Home/Home'
 import { Navbar } from './components/Navbar'
-import { Timeline } from './components/Timeline'
-import { Today } from './components/Today'
+import { Timeline } from './pages/Timeline'
+import { Today } from './pages/Today'
 import React from 'react'
 
 export const JavaScriptWeb = () => {

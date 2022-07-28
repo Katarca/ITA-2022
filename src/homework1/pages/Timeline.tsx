@@ -1,5 +1,5 @@
-import { BodyTextDarkGrey, BodyTextGrey } from './typo/BodyText'
-import { breakpoint, colors } from '../../helpers/theme'
+import { P_BodyTextDarkGrey, P_BodyTextGrey } from '../components/BodyText'
+import { breakpoint, colors, space } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -130,10 +130,10 @@ export const Timeline = () => {
           <TimelineItem key={i}>
             <TimelineDot />
             <TimelineDate>
-              <BodyTextDarkGrey>{data.year}</BodyTextDarkGrey>
+              <P_BodyTextDarkGrey>{data.year}</P_BodyTextDarkGrey>
             </TimelineDate>
             <TimelineContent>
-              <BodyTextGrey>{data.info}</BodyTextGrey>
+              <P_BodyTextGrey>{data.info}</P_BodyTextGrey>
             </TimelineContent>
           </TimelineItem>
         ))}
@@ -146,7 +146,7 @@ const TimelineSection = styled.section`
   min-height: 100vh;
   display: flex;
   background-color: ${colors.yellow300};
-  padding: 120px 0 50px 0;
+  padding: ${space.extraBig} 0 ${space.medium} 0;
 `
 
 const TimelineItems = styled.div`
@@ -172,7 +172,7 @@ const TimelineItem = styled.div`
   width: 100%;
   position: relative;
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: ${space.small};
   }
   &:nth-child(odd) {
     padding-right: calc(50% + 30px);
@@ -198,7 +198,7 @@ const TimelineDot = styled.div`
   position: absolute;
   left: calc(50% - 8px);
   border-radius: 50%;
-  top: 10px;
+  top: ${space.extraSmall};
   ${breakpoint.tabletPortrait} {
     left: 0;
   }
@@ -209,5 +209,5 @@ const TimelineDate = styled.div`
 `
 const TimelineContent = styled.div`
   background-color: ${colors.grey500};
-  padding: 20px;
+  padding: ${space.small};
 `

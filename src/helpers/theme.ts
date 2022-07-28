@@ -30,3 +30,18 @@ export const breakpoint = {
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px)`,
 }
+
+export const space = {
+  extraSmall: '10px',
+  small: '20px',
+  medium: '50px',
+  big: '70px',
+  extraBig: '120px',
+}
+
+export const fontSize = {
+  small: '1.4rem',
+  medium: '2rem',
+  big: '4rem',
+  extraBig: '8rem',
+}

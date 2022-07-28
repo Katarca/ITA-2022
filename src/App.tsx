@@ -1,12 +1,12 @@
 import { CounterApp } from './homework2/CounterApp'
-import { HomePage } from './pages/HomePage'
+import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './homework1/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
-import { StyledApp } from './page-style/StyledApp'
 import { colors } from './helpers/theme'
 import { createGlobalStyle } from 'styled-components'
 import { urls } from './helpers/urls'
 import React from 'react'
+import styled from 'styled-components'
 
 export function App() {
   return (
@@ -20,6 +20,8 @@ export function App() {
     </StyledApp>
   )
 }
+
+const StyledApp = styled.div``
 
 const GlobalStyle = createGlobalStyle`
     *,

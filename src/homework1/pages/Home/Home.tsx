@@ -1,9 +1,6 @@
-import { BodyTextGrey } from './typo/BodyText'
 import { ExternalLink } from 'react-external-link'
-import { Img } from './Img'
-import { MainHeading } from './typo/Heading'
-import { breakpoint, colors } from '../../helpers/theme'
-import { centralPart } from './StyledPage'
+import { P_BodyTextGrey } from '../../components/BodyText'
+import { breakpoint, colors, fontSize, space } from '../../../helpers/theme'
 import React from 'react'
 import angularLogo from './Images/angular.svg'
 import jsImg from './Images/js.png'
@@ -20,29 +17,29 @@ export const Home = () => {
       <HomeContainer>
         <HomeTextContainer>
           <MainHeading>JavaScript</MainHeading>
-          <BodyTextGrey>
+          <P_BodyTextGrey>
             JavaScript is a scripting language that enables you to create dynamically updating
             content, control multimedia, animate images, and pretty much everything else.(Okay, not
             everything, but it is amazing what you can achieve with a few lines of JavaScript code.)
-          </BodyTextGrey>
+          </P_BodyTextGrey>
         </HomeTextContainer>
-        <Img src={jsImg} className='home-img' />
+        <HomeImg src={jsImg} />
       </HomeContainer>
       <LogoContainer>
         <ExternalLink href='https://reactjs.org/'>
-          <Img src={reactLogo} className='logo-img' />
+          <LogoImg src={reactLogo} />
         </ExternalLink>
         <ExternalLink href='https://nodejs.org/en/'>
-          <Img src={nodeLogo} className='logo-img' />
+          <LogoImg src={nodeLogo} />
         </ExternalLink>
         <ExternalLink href='https://www.typescriptlang.org/'>
-          <Img src={typescriptLogo} className='logo-img' />
+          <LogoImg src={typescriptLogo} />
         </ExternalLink>
         <ExternalLink href='https://angular.io/'>
-          <Img src={angularLogo} className='logo-img' />
+          <LogoImg src={angularLogo} />
         </ExternalLink>
         <ExternalLink href='https://svelte.dev/'>
-          <Img src={svelteLogo} className='logo-img' />
+          <LogoImg src={svelteLogo} />
         </ExternalLink>
       </LogoContainer>
     </HomeSection>
@@ -57,21 +54,25 @@ const HomeSection = styled.section`
   flex-direction: column;
   justify-content: space-between;
 `
+const NavGap = styled.div`
+  height: ${space.extraBig};
+`
 
 const HomeContainer = styled.div`
-  ${centralPart}
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 0 50px 0;
+  padding: ${space.medium} 0 ${space.medium} 0;
   ${breakpoint.phone} {
+    width: 80%;
     flex-direction: column;
-    gap: 20px;
+    gap: ${space.small};
   }
 `
-
 const HomeTextContainer = styled.div`
-  padding-right: 50px;
+  padding-right: ${space.medium};
   ${breakpoint.phone} {
     width: 100%;
     padding-right: unset;
@@ -79,15 +80,31 @@ const HomeTextContainer = styled.div`
   }
 `
 
+const MainHeading = styled.h1`
+  font-family: 'Raleway', sans-serif;
+  font-size: ${fontSize.big};
+  padding-bottom: ${space.small};
+`
+const HomeImg = styled.img`
+  width: 40%;
+  max-width: 350px;
+`
+
+const LogoImg = styled.img`
+  width: 35px;
+  &:hover {
+    transform: scale(1.2);
+  }
+`
+
 const LogoContainer = styled.div`
-  ${centralPart}
-  padding-bottom: 50px;
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: ${space.medium};
   display: flex;
   justify-content: space-evenly;
   ${breakpoint.phone} {
+    width: 80%;
     justify-content: space-between;
   }
-`
-const NavGap = styled.div`
-  height: 120px;
 `

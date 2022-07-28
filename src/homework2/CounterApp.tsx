@@ -1,5 +1,5 @@
 import { Button } from './components/Button'
-import { Heading } from './components/Heading'
+import { H_Heading } from './components/Heading'
 import { colors } from '../helpers/theme'
 import React, { Component } from 'react'
 import styled from 'styled-components'
@@ -21,7 +21,7 @@ export class CounterApp extends Component<Props, State> {
   render() {
     return (
       <CounterContainer>
-        <Heading>{this.state.counter}</Heading>
+        <H_Heading>{this.state.counter}</H_Heading>
         <ButtonContainer>
           <Button
             onClick={() => {

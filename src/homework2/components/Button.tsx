@@ -1,4 +1,4 @@
-import { colors } from '../../helpers/theme'
+import { colors, fontSize, space } from '../../helpers/theme'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -17,11 +17,11 @@ const StyledButton = styled.button`
   background-color: ${colors.yellow300};
   border: 2px solid ${colors.white};
   border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 2rem;
+  padding: ${space.extraSmall} ${space.small};
+  font-size: ${fontSize.medium};
   color: ${colors.white};
   font-weight: 900;
-  margin: 10px;
+  margin: ${space.extraSmall};
   cursor: pointer;
   &:hover {
     background-color: ${colors.orange300};

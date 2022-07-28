@@ -1,5 +1,5 @@
 import { Link } from 'react-scroll'
-import { breakpoint, colors } from '../../helpers/theme'
+import { breakpoint, colors, fontSize, space } from '../../helpers/theme'
 import { useEffect, useState } from 'react'
 import Hamburger from 'hamburger-react'
 import styled from 'styled-components'
@@ -55,10 +55,10 @@ export const Navbar = () => {
 const StyledNavbar = styled.div`
   width: 85vw;
   background-color: ${colors.grey900};
-  padding: 25px 0 25px 0;
+  padding: ${space.small} 0 ${space.small} 0;
   border-radius: 0 0 8px 8px;
   position: fixed;
-  top: 0px;
+  top: 0;
   z-index: 1;
   left: 7.5%;
   display: flex;
@@ -72,7 +72,7 @@ const NavItems = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 70px;
+  min-height: ${space.big};
   border-radius: 0 0 8px 8px;
   list-style: none;
   &.open {
@@ -81,13 +81,13 @@ const NavItems = styled.ul`
   ${breakpoint.tabletPortrait} {
     position: fixed;
     left: -100%;
-    top: 70px;
+    top: ${space.big};
     width: 85vw;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: ${space.extraSmall};
     background-color: #1b1b1b;
-    padding-bottom: 20px;
+    padding-bottom: ${space.small};
   }
 `
 
@@ -98,14 +98,14 @@ const NavItem = styled.li`
 `
 
 const HamburgerContainer = styled.div`
-  padding: 0 20px; ;
+  padding: 0 ${space.small};
 `
 
 const StyledLink = styled(Link)`
   cursor: pointer;
-  padding: 10px;
+  padding: ${space.extraSmall};
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: ${fontSize.small};
   color: ${colors.grey300};
   &:hover {
     color: ${colors.yellow300};
