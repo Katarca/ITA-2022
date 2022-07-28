@@ -1,12 +1,13 @@
 import { BodyTextBlack, BodyTextDarkGrey } from './typo/BodyText'
 import { Heading } from './typo/Heading'
-import { Section } from './Section'
 import { TextContainer } from './StyledPage'
+import { colors } from '../../helpers/consts'
 import React from 'react'
+import styled from 'styled-components'
 
 export const About = () => {
   return (
-    <Section id='about' className='about-section'>
+    <AboutSection id='about'>
       <TextContainer>
         <Heading>About JS</Heading>
         <BodyTextBlack>
@@ -39,6 +40,16 @@ export const About = () => {
           libraries, the two languages are distinct and differ greatly in design.
         </BodyTextDarkGrey>
       </TextContainer>
-    </Section>
+    </AboutSection>
   )
 }
+
+const AboutSection = styled.section`
+  min-height: 100vh;
+  display: flex;
+  background-color: ${colors.yellow300};
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 50px 0;
+`

@@ -1,5 +1,4 @@
 import { BodyTextDarkGrey, BodyTextGrey } from './typo/BodyText'
-import { Section } from './Section'
 import { breakpoint, colors } from '../../helpers/consts'
 import React from 'react'
 import styled from 'styled-components'
@@ -125,7 +124,7 @@ const timelineData = [
 
 export const Timeline = () => {
   return (
-    <Section id='timeline' className='timeline-section'>
+    <TimelineSection id='timeline'>
       <TimelineItems>
         {timelineData.map((data, i) => (
           <TimelineItem key={i}>
@@ -139,9 +138,16 @@ export const Timeline = () => {
           </TimelineItem>
         ))}
       </TimelineItems>
-    </Section>
+    </TimelineSection>
   )
 }
+
+const TimelineSection = styled.section`
+  min-height: 100vh;
+  display: flex;
+  background-color: ${colors.yellow300};
+  padding: 120px 0 50px 0;
+`
 
 const TimelineItems = styled.div`
   max-width: 1000px;

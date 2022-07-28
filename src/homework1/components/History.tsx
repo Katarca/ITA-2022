@@ -1,12 +1,13 @@
 import { BodyTextGrey, BodyTextWhite } from './typo/BodyText'
 import { Heading } from './typo/Heading'
-import { Section } from './Section'
 import { TextContainer } from './StyledPage'
+import { colors } from '../../helpers/consts'
 import React from 'react'
+import styled from 'styled-components'
 
 export const History = () => {
   return (
-    <Section id='history' className='history-section'>
+    <HistorySection id='history'>
       <TextContainer>
         <Heading>History</Heading>
         <BodyTextWhite>
@@ -40,6 +41,17 @@ export const History = () => {
           Facebook, Twitter, Netflix, and Google, all use JavaScript in their products.
         </BodyTextGrey>
       </TextContainer>
-    </Section>
+    </HistorySection>
   )
 }
+
+export const HistorySection = styled.section`
+  min-height: 100vh;
+  display: flex;
+  background-color: ${colors.black};
+  color: ${colors.white};
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 50px 0;
+`

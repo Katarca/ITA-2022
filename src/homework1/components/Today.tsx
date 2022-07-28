@@ -2,14 +2,14 @@ import { BodyTextGrey, BodyTextWhite, TextWhite } from './typo/BodyText'
 import { Heading } from './typo/Heading'
 import { Icon } from './Icon'
 import { RouterLink } from '../../components/RouterLink'
-import { Section } from './Section'
 import { TextContainer } from './StyledPage'
+import { colors } from '../../helpers/consts'
 import React from 'react'
 import styled from 'styled-components'
 
 export const Today = () => {
   return (
-    <Section id='today' className='today-section'>
+    <TodaySection id='today'>
       <TextContainer>
         <Heading>JS Today</Heading>
         <BodyTextWhite>
@@ -42,9 +42,20 @@ export const Today = () => {
           </Icon>
         </RouterLink>
       </ReturnContainer>
-    </Section>
+    </TodaySection>
   )
 }
+
+const TodaySection = styled.section`
+  min-height: 100vh;
+  display: flex;
+  background-color: ${colors.grey500};
+  color: ${colors.white};
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 50px 0;
+`
 
 const ReturnContainer = styled.div`
   display: flex;
