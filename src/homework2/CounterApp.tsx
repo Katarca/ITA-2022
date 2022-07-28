@@ -1,5 +1,5 @@
-import { Button } from './components/Button/Button'
-import { Heading } from './components/typo/Heading'
+import { Button } from './components/Button'
+import { Heading } from './components/Heading'
 import { colors } from '../helpers/consts'
 import React, { Component } from 'react'
 import styled from 'styled-components'

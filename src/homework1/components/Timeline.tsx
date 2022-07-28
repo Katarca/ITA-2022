@@ -1,6 +1,6 @@
-import { BodyTextDarkGrey, BodyTextGrey } from '../typo/BodyText'
-import { Section } from '../Section/Section'
-import { breakpoint, colors } from '../../../helpers/consts'
+import { BodyTextDarkGrey, BodyTextGrey } from './typo/BodyText'
+import { Section } from './Section'
+import { breakpoint, colors } from '../../helpers/consts'
 import React from 'react'
 import styled from 'styled-components'
 

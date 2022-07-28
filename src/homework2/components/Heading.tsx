@@ -1,4 +1,4 @@
-import { colors } from '../../../helpers/consts'
+import { colors } from '../../helpers/consts'
 import styled from 'styled-components'
 
 export const Heading = styled.h1`

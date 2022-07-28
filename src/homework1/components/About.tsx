@@ -1,7 +1,7 @@
-import { BodyTextBlack, BodyTextDarkGrey } from '../typo/BodyText'
-import { Heading } from '../typo/Heading'
-import { Section } from '../Section/Section'
-import { TextContainer } from '../../page-style/StyledPage'
+import { BodyTextBlack, BodyTextDarkGrey } from './typo/BodyText'
+import { Heading } from './typo/Heading'
+import { Section } from './Section'
+import { TextContainer } from './StyledPage'
 import React from 'react'
 
 export const About = () => {
