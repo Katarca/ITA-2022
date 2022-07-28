@@ -6,7 +6,7 @@ import React from 'react'
 
 export const History = () => {
   return (
-    <Section id='history' name='history' className='history-section'>
+    <Section id='history' className='history-section'>
       <TextContainer>
         <Heading>History</Heading>
         <BodyTextWhite>

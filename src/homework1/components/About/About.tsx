@@ -6,7 +6,7 @@ import React from 'react'
 
 export const About = () => {
   return (
-    <Section id='about' name='about' className='about-section'>
+    <Section id='about' className='about-section'>
       <TextContainer>
         <Heading>About JS</Heading>
         <BodyTextBlack>

@@ -9,7 +9,7 @@ import styled from 'styled-components'
 
 export const Today = () => {
   return (
-    <Section id='today' name='today' className='today-section'>
+    <Section id='today' className='today-section'>
       <TextContainer>
         <Heading>JS Today</Heading>
         <BodyTextWhite>

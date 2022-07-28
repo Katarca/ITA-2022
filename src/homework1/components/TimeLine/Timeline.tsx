@@ -125,7 +125,7 @@ const timelineData = [
 
 export const Timeline = () => {
   return (
-    <Section id='timeline' name='timeline' className='timeline-section'>
+    <Section id='timeline' className='timeline-section'>
       <TimelineItems>
         {timelineData.map((data, i) => (
           <TimelineItem key={i}>

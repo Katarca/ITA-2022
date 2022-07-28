@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 type SectionProps = {
   id: string
-  name: string
   className: string
   children: JSX.Element | JSX.Element[]
 }
