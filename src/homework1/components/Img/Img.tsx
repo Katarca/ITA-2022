@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-interface ImgProps {
+type ImgProps = {
   src: string
   className?: string
 }
 
-export const Img = ({ src, className }: ImgProps) => {
-  return <StyledImg src={src} className={className} />
+export const Img = (props: ImgProps) => {
+  return <StyledImg src={props.src} className={props.className} />
 }
 
 const StyledImg = styled.img`

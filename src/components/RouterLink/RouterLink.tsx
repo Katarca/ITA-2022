@@ -2,16 +2,16 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 
-export interface LinkProps {
+type LinkProps = {
   to: string
   target?: string
-  children?: JSX.Element | JSX.Element[]
+  children: JSX.Element | JSX.Element[]
 }
 
-export const RouterLink = ({ to, target, children }: LinkProps) => {
+export const RouterLink = (props: LinkProps) => {
   return (
-    <StyledLink to={to} target={target}>
-      {children}
+    <StyledLink to={props.to} target={props.target}>
+      {props.children}
     </StyledLink>
   )
 }

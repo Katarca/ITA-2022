@@ -2,17 +2,17 @@ import { colors } from '../../../helpers/consts'
 import React from 'react'
 import styled from 'styled-components'
 
-export interface SectionProps {
+type SectionProps = {
   id: string
   name: string
   className: string
   children: JSX.Element | JSX.Element[]
 }
 
-export const Section = ({ id, className, children }: SectionProps) => {
+export const Section = (props: SectionProps) => {
   return (
-    <StyledSection id={id} className={className}>
-      {children}
+    <StyledSection id={props.id} className={props.className}>
+      {props.children}
     </StyledSection>
   )
 }
