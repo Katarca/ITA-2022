@@ -1,5 +1,5 @@
 import { Link } from 'react-scroll'
-import { breakpoint, colors, fontSize, space } from '../../helpers/theme'
+import { breakpoint, styles } from '../../helpers/theme'
 import { useEffect, useState } from 'react'
 import Hamburger from 'hamburger-react'
 import styled from 'styled-components'
@@ -45,7 +45,7 @@ export const Navbar = () => {
       </NavItems>
       {width <= 900 && (
         <HamburgerContainer>
-          <Hamburger toggled={isOpen} toggle={setOpen} color={colors.grey300} size={25} />
+          <Hamburger toggled={isOpen} toggle={setOpen} color={styles.colors.grey300} size={25} />
         </HamburgerContainer>
       )}
     </StyledNavbar>
@@ -54,8 +54,8 @@ export const Navbar = () => {
 
 const StyledNavbar = styled.div`
   width: 85vw;
-  background-color: ${colors.grey900};
-  padding: ${space.small} 0 ${space.small} 0;
+  background-color: ${styles.colors.grey900};
+  padding: ${styles.spacing.sm} 0 ${styles.spacing.sm} 0;
   border-radius: 0 0 8px 8px;
   position: fixed;
   top: 0;
@@ -72,7 +72,7 @@ const NavItems = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: ${space.big};
+  min-height: ${styles.spacing.lg};
   border-radius: 0 0 8px 8px;
   list-style: none;
   &.open {
@@ -81,13 +81,13 @@ const NavItems = styled.ul`
   ${breakpoint.tabletPortrait} {
     position: fixed;
     left: -100%;
-    top: ${space.big};
+    top: ${styles.spacing.lg};
     width: 85vw;
     flex-direction: column;
     align-items: center;
-    gap: ${space.extraSmall};
+    gap: ${styles.spacing.xs};
     background-color: #1b1b1b;
-    padding-bottom: ${space.small};
+    padding-bottom: ${styles.spacing.sm};
   }
 `
 
@@ -98,19 +98,19 @@ const NavItem = styled.li`
 `
 
 const HamburgerContainer = styled.div`
-  padding: 0 ${space.small};
+  padding: 0 ${styles.spacing.sm};
 `
 
 const StyledLink = styled(Link)`
   cursor: pointer;
-  padding: ${space.extraSmall};
+  padding: ${styles.spacing.xs};
   text-decoration: none;
-  font-size: ${fontSize.small};
-  color: ${colors.grey300};
+  font-size: ${styles.fontSize.xs};
+  color: ${styles.colors.grey300};
   &:hover {
-    color: ${colors.yellow300};
+    color: ${styles.colors.yellow300};
   }
   &.active {
-    color: ${colors.orange300};
+    color: ${styles.colors.orange300};
   }
 `

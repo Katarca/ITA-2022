@@ -2,7 +2,7 @@ import { Div_TextContainer } from '../components/TextContainer'
 import { H_Heading } from '../components/Heading'
 import { P_BodyTextGrey, P_BodyTextWhite } from '../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
-import { colors, fontSize, space } from '../../helpers/theme'
+import { styles } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -49,28 +49,28 @@ export const Today = () => {
 const TodaySection = styled.section`
   min-height: 100vh;
   display: flex;
-  background-color: ${colors.grey500};
-  color: ${colors.white};
+  background-color: ${styles.colors.grey500};
+  color: ${styles.colors.white};
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: ${space.extraBig} 0 ${space.medium} 0;
+  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
 `
 
 const ArrowIcon = styled.svg`
-  fill: ${colors.white};
+  fill: ${styles.colors.white};
   transform: rotate(180deg);
 `
 
 const TextWhite = styled.span`
-  font-size: ${fontSize.small};
-  color: ${colors.white};
+  font-size: ${styles.fontSize.xs};
+  color: ${styles.colors.white};
 `
 
 const ReturnContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: ${space.extraSmall};
-  padding: ${space.small};
+  gap: ${styles.spacing.xs};
+  padding: ${styles.spacing.sm};
 `

@@ -1,6 +1,6 @@
 import { Button } from './components/Button'
 import { H_Heading } from './components/Heading'
-import { colors } from '../helpers/theme'
+import { styles } from '../helpers/theme'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -50,7 +50,7 @@ export class CounterApp extends Component<Props, State> {
 const CounterContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${colors.black};
+  background-color: ${styles.colors.black};
   display: flex;
   flex-direction: column;
   justify-content: center;

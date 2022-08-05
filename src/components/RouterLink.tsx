@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { space } from '../helpers/theme'
+import { styles } from '../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -19,5 +19,5 @@ export const RouterLink = (props: LinkProps) => {
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  padding: ${space.extraSmall};
+  padding: ${styles.spacing.xs};
 `

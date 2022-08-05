@@ -2,8 +2,8 @@ import { CounterApp } from './homework2/CounterApp'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './homework1/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
-import { colors } from './helpers/theme'
 import { createGlobalStyle } from 'styled-components'
+import { styles } from './helpers/theme'
 import { urls } from './helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
     box-sizing: border-box;
-    background-color: ${colors.blue900};
+    background-color: ${styles.colors.blue900};
     font-family: 'IBM Plex Mono', monospace;
     -ms-overflow-style: none;
     scrollbar-width: none;
