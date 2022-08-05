@@ -1,4 +1,4 @@
-import { Button } from './components/Button'
+import { Button } from '../components/Button'
 import { H_Heading } from './components/Heading'
 import { styles } from '../helpers/theme'
 import React, { Component } from 'react'

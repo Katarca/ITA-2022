@@ -5,16 +5,11 @@ import styled from 'styled-components'
 
 type LinkProps = {
   to: string
-  target?: string
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 export const RouterLink = (props: LinkProps) => {
-  return (
-    <StyledLink to={props.to} target={props.target}>
-      {props.children}
-    </StyledLink>
-  )
+  return <StyledLink to={props.to}>{props.children}</StyledLink>
 }
 
 const StyledLink = styled(Link)`

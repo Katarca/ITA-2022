@@ -1,13 +1,9 @@
 import { styles } from '../helpers/theme'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import styled from 'styled-components'
 
-type ButtonProps = {
-  children: React.ReactNode
-}
-
-export const Button = (props: ButtonProps) => {
-  return <StyledButton>{props.children}</StyledButton>
+export const Button = (props: ComponentProps<'button'>) => {
+  return <StyledButton onClick={props.onClick}>{props.children}</StyledButton>
 }
 
 const StyledButton = styled.button`
