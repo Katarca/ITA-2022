@@ -2,11 +2,11 @@ import { styles } from '../helpers/theme'
 import React, { ComponentProps } from 'react'
 import styled from 'styled-components'
 
-export const Form = (props: ComponentProps<'form'>) => {
-  return <StyledForm onSubmit={props.onSubmit}>{props.children}</StyledForm>
+const Form = (props: ComponentProps<'form'>) => {
+  return <form {...props}>{props.children}</form>
 }
 
-const StyledForm = styled.form`
+export const CustomForm = styled(Form)`
   display: flex;
   padding: ${styles.spacing.sm};
 `

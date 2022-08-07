@@ -1,7 +1,7 @@
-import { Button } from '../components/Button'
 import { H_Heading } from '../components/Heading'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { YellowButton } from '../components/Button'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { Component } from 'react'
@@ -26,7 +26,7 @@ export class CounterApp extends Component<Props, State> {
       <CounterContainer>
         <H_Heading>{this.state.counter}</H_Heading>
         <ButtonContainer>
-          <Button
+          <YellowButton
             onClick={() => {
               this.setState({
                 counter: this.state.counter + 1,
@@ -34,8 +34,8 @@ export class CounterApp extends Component<Props, State> {
             }}
           >
             <P_BodyText>+</P_BodyText>
-          </Button>
-          <Button
+          </YellowButton>
+          <YellowButton
             onClick={() => {
               this.setState({
                 counter: this.state.counter - 1,
@@ -43,7 +43,7 @@ export class CounterApp extends Component<Props, State> {
             }}
           >
             <P_BodyText>-</P_BodyText>
-          </Button>
+          </YellowButton>
         </ButtonContainer>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
