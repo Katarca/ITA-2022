@@ -15,4 +15,7 @@ export const RouterLink = (props: LinkProps) => {
 const StyledLink = styled(Link)`
   text-decoration: none;
   padding: ${styles.spacing.xs};
+  &:hover {
+    transform: scale(1.1);
+  }
 `

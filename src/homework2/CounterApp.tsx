@@ -1,6 +1,9 @@
 import { Button } from '../components/Button'
-import { H_Heading } from './components/Heading'
+import { H_Heading } from '../components/Heading'
+import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
 import { styles } from '../helpers/theme'
+import { urls } from '../helpers/urls'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -30,7 +33,7 @@ export class CounterApp extends Component<Props, State> {
               })
             }}
           >
-            +
+            <P_BodyText>+</P_BodyText>
           </Button>
           <Button
             onClick={() => {
@@ -39,9 +42,12 @@ export class CounterApp extends Component<Props, State> {
               })
             }}
           >
-            -
+            <P_BodyText>-</P_BodyText>
           </Button>
         </ButtonContainer>
+        <RouterLink to={urls.homePage}>
+          <P_LinkBodyText>Return home</P_LinkBodyText>
+        </RouterLink>
       </CounterContainer>
     )
   }

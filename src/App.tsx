@@ -2,6 +2,7 @@ import { CounterApp } from './homework2/CounterApp'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './homework1/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
+import { ToDoList } from './homework3/ToDoList'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
 import { urls } from './helpers/urls'
@@ -12,9 +13,10 @@ export function App() {
   return (
     <StyledApp>
       <Routes>
-        <Route path={urls.homeUrl} element={<HomePage />} />
-        <Route path={urls.jsWebUrl} element={<JavaScriptWeb />} />
-        <Route path={urls.counterAppUrl} element={<CounterApp />} />
+        <Route path={urls.homePage} element={<HomePage />} />
+        <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
+        <Route path={urls.counterApp} element={<CounterApp />} />
+        <Route path={urls.todoList} element={<ToDoList />} />
       </Routes>
       <GlobalStyle />
     </StyledApp>
