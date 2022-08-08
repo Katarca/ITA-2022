@@ -52,7 +52,7 @@ export const ToDoList = () => {
     completed: (toDo: ToDoProps) => toDo.completed,
   }
 
-  const filterNames = Object.keys(filterMap)
+  const filterNames = Object.keys(filterMap).sort((a, b) => a.length - b.length)
 
   const filterList = filterNames.map(name => (
     <TransparentButtonBorder
