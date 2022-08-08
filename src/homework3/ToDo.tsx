@@ -2,7 +2,7 @@ import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_FlexContainer } from '../components/Container'
 import { P_BodyText } from '../components/BodyText'
-import { ToDoProps } from './ToDoList'
+import { P_ErrorText, ToDoProps } from './ToDoList'
 import { TransparentButton, TransparentButtonBorder } from '../components/Button'
 import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { ReactComponent as editIcon } from './icons/edit-icon.svg'
@@ -20,6 +20,11 @@ type ToDoItemProps = ToDoProps & {
 export const ToDo = (props: ToDoItemProps) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState('')
+  const [error, setError] = useState('')
+  const handleCancel = () => {
+    setEditing(false)
+    setError('')
+  }
   return (
     <Li_ListItem key={props.id}>
       {editing ? (
@@ -27,12 +32,13 @@ export const ToDo = (props: ToDoItemProps) => {
           onSubmit={e => {
             e.preventDefault()
             if (newTask.trim().length === 0) {
-              alert('Please enter a value!')
+              setError('Please enter a value!')
               return
             }
             props.editToDoList(props.id, newTask)
             setNewTask('')
             setEditing(false)
+            setError('')
           }}
         >
           <Div_EditContainer>
@@ -42,11 +48,12 @@ export const ToDo = (props: ToDoItemProps) => {
               value={newTask}
               onChange={e => setNewTask(e.target.value)}
             />
+            {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
             <Div_Wrapper>
               <TransparentButtonBorder type='submit'>
                 <P_BodyText>Save</P_BodyText>
               </TransparentButtonBorder>
-              <TransparentButtonBorder onClick={() => setEditing(false)}>
+              <TransparentButtonBorder onClick={() => handleCancel()}>
                 <P_BodyText>Cancel</P_BodyText>
               </TransparentButtonBorder>
             </Div_Wrapper>

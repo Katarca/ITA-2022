@@ -31,6 +31,7 @@ export const ToDoList = () => {
   }
   const [toDos, _setToDos] = useState(getToDosFromLocalStorage())
   const [task, setTask] = useState('')
+  const [error, setError] = useState('')
 
   const setToDos = (toDos: ToDoProps[]) => {
     localStorage.setItem(lsId.toDos, JSON.stringify(toDos))
@@ -72,7 +73,7 @@ export const ToDoList = () => {
         onSubmit={e => {
           e.preventDefault()
           if (task.trim().length === 0) {
-            alert('Please enter a value!')
+            setError('Please enter a value!')
             return
           }
           setToDos([
@@ -84,6 +85,7 @@ export const ToDoList = () => {
             ...toDos,
           ])
           setTask('')
+          setError('')
         }}
       >
         <CustomInput
@@ -97,6 +99,7 @@ export const ToDoList = () => {
           <P_BodyText>Add</P_BodyText>
         </BlueButton>
       </CustomForm>
+      {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
       <Div_ButtonContainer>
         <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
           <P_BodyText>Active</P_BodyText>
@@ -154,4 +157,9 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     width: 100%;
     align-items: center;
   }
+`
+export const P_ErrorText = styled(P_BodyText)`
+  font-size: ${styles.fontSize.xs};
+  color: ${styles.colors.yellow300};
+  padding: 0 ${styles.spacing.xs} ${styles.spacing.xs} ${styles.spacing.xs};
 `
