@@ -1,30 +1,29 @@
+import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_FlexContainer } from '../components/Container'
 import { P_BodyText } from '../components/BodyText'
+import { ToDoProps } from './ToDoList'
 import { TransparentButton, TransparentButtonBorder } from '../components/Button'
+import { breakpoint, styles } from '../helpers/theme'
 import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { ReactComponent as editIcon } from './icons/edit-icon.svg'
-import { styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type ToDo = {
-  id: string
-  task: string
-  completed: boolean
+type ToDoItemProps = ToDoProps & {
   key: string
   deleteToDo: (id: string) => void
   toggleCompleted: (id: string) => void
   editToDoList: (id: string, newTask: string) => void
 }
 
-export const ToDo = (props: ToDo) => {
+export const ToDo = (props: ToDoItemProps) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState('')
   return (
     <Li_ListItem key={props.id}>
       {editing ? (
-        <form
+        <CustomForm
           onSubmit={e => {
             e.preventDefault()
             if (newTask.trim().length === 0) {
@@ -36,21 +35,23 @@ export const ToDo = (props: ToDo) => {
             setEditing(false)
           }}
         >
-          <CustomInput
-            type='text'
-            placeholder={props.task}
-            value={newTask}
-            onChange={e => setNewTask(e.target.value)}
-          />
-          <Div_FlexContainer>
-            <TransparentButtonBorder onClick={() => setEditing(false)}>
-              <P_BodyText>Cancel</P_BodyText>
-            </TransparentButtonBorder>
-            <TransparentButtonBorder type='submit'>
-              <P_BodyText>Save</P_BodyText>
-            </TransparentButtonBorder>
-          </Div_FlexContainer>
-        </form>
+          <Div_EditContainer>
+            <CustomInput
+              type='text'
+              placeholder={props.task}
+              value={newTask}
+              onChange={e => setNewTask(e.target.value)}
+            />
+            <Div_Wrapper>
+              <TransparentButtonBorder type='submit'>
+                <P_BodyText>Save</P_BodyText>
+              </TransparentButtonBorder>
+              <TransparentButtonBorder onClick={() => setEditing(false)}>
+                <P_BodyText>Cancel</P_BodyText>
+              </TransparentButtonBorder>
+            </Div_Wrapper>
+          </Div_EditContainer>
+        </CustomForm>
       ) : (
         <Div_Wrapper>
           <Div_FlexContainer>
@@ -78,15 +79,20 @@ export const ToDo = (props: ToDo) => {
 const Li_ListItem = styled.li`
   border: 2px solid ${styles.colors.white};
   border-radius: 8px;
-  margin: ${styles.spacing.sm};
+  margin: ${styles.spacing.sm} 0;
 `
 const CrossIcon = styled(crossIcon)`
   width: 25px;
-  fill: #ffffff;
+  fill: ${styles.colors.white};
 `
 const EditIcon = styled(editIcon)`
   width: 25px;
-  fill: #ffffff;
+  fill: ${styles.colors.white};
 `
 
 const Div_Wrapper = styled.div``
+
+const Div_EditContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`

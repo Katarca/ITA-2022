@@ -1,4 +1,4 @@
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import React, { ComponentProps } from 'react'
 import styled from 'styled-components'
 
@@ -12,6 +12,7 @@ export const BlueButton = styled(Button)`
   border-radius: 8px;
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
+  width: fit-content;
   cursor: pointer;
   &:hover {
     background-color: ${styles.colors.orange300};
@@ -33,12 +34,16 @@ export const TransparentButtonBorder = styled(Button)`
   &[aria-pressed='true'] {
     border: 2px solid ${styles.colors.orange300};
   }
+  ${breakpoint.phone} {
+    width: 80%;
+  }
 `
 
 export const TransparentButton = styled(Button)`
   background: transparent;
   margin: 0 ${styles.spacing.xs};
   cursor: pointer;
+  border: none;
   &:hover {
     transform: scale(1.1);
   }

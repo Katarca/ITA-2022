@@ -6,18 +6,18 @@ import { H_Heading } from '../components/Heading'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type ToDo = {
+export type ToDoProps = {
   id: string
   task: string
   completed: boolean
 }
 export const ToDoList = () => {
-  const getToDosFromLocalStorage = (): ToDo[] => {
+  const getToDosFromLocalStorage = (): ToDoProps[] => {
     const lsToDos = localStorage.getItem(lsId.toDos)
     if (lsToDos) {
       return JSON.parse(lsToDos)
@@ -31,7 +31,7 @@ export const ToDoList = () => {
   const [toDos, _setToDos] = useState(getToDosFromLocalStorage())
   const [task, setTask] = useState('')
 
-  const setToDos = (toDos: ToDo[]) => {
+  const setToDos = (toDos: ToDoProps[]) => {
     localStorage.setItem(lsId.toDos, JSON.stringify(toDos))
     _setToDos(toDos)
   }
@@ -65,8 +65,8 @@ export const ToDoList = () => {
 
   const filterMap = {
     all: () => true,
-    active: (toDo: ToDo) => !toDo.completed,
-    completed: (toDo: ToDo) => toDo.completed,
+    active: (toDo: ToDoProps) => !toDo.completed,
+    completed: (toDo: ToDoProps) => toDo.completed,
   }
 
   const filterNames = Object.keys(filterMap)
@@ -117,7 +117,7 @@ export const ToDoList = () => {
           <P_BodyText>Add</P_BodyText>
         </BlueButton>
       </CustomForm>
-      <Div_FlexContainer>{filterList}</Div_FlexContainer>
+      <Div_ButtonContainer>{filterList}</Div_ButtonContainer>
       <Ul_List>
         {toDos.filter(filterMap[filter as keyof object]).map(toDo => (
           <ToDo
@@ -145,4 +145,17 @@ const H_TodoHeading = styled(H_Heading)`
 const Ul_List = styled.ul`
   padding: ${styles.spacing.sm};
   width: 70%;
+  ${breakpoint.tabletPortrait} {
+    width: 90%;
+  }
+  ${breakpoint.phone} {
+    width: 100%;
+  }
+`
+const Div_ButtonContainer = styled(Div_FlexContainer)`
+  ${breakpoint.phone} {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
 `
