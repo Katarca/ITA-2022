@@ -8,13 +8,13 @@ export const HomePage = () => {
   return (
     <StyledHomePage>
       <RouterLink to={urls.jsWeb}>
-        <P_LinkBodyText>Homework1</P_LinkBodyText>
+        <P_LinkBodyText>Javascript Web</P_LinkBodyText>
       </RouterLink>
       <RouterLink to={urls.counterApp}>
-        <P_LinkBodyText>Homework2</P_LinkBodyText>
+        <P_LinkBodyText>Counter App</P_LinkBodyText>
       </RouterLink>
       <RouterLink to={urls.todoList}>
-        <P_LinkBodyText>Homework3</P_LinkBodyText>
+        <P_LinkBodyText>ToDo List</P_LinkBodyText>
       </RouterLink>
     </StyledHomePage>
   )

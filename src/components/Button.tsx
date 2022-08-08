@@ -6,8 +6,8 @@ const Button = (props: ComponentProps<'button'>) => {
   return <button {...props}>{props.children}</button>
 }
 
-export const YellowButton = styled(Button)`
-  background-color: ${styles.colors.yellow300};
+export const BlueButton = styled(Button)`
+  background-color: ${styles.colors.blue900};
   border: 2px solid ${styles.colors.white};
   border-radius: 8px;
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
@@ -29,6 +29,9 @@ export const TransparentButtonBorder = styled(Button)`
   &:hover {
     background-color: ${styles.colors.orange300};
     transform: scale(1.1);
+  }
+  &[aria-pressed='true'] {
+    border: 2px solid ${styles.colors.orange300};
   }
 `
 

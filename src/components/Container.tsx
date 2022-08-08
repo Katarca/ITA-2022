@@ -11,3 +11,7 @@ export const Div_Container = styled.div`
   align-items: center;
   padding: ${styles.spacing.md};
 `
+export const Div_FlexContainer = styled.div`
+  display: flex;
+  padding: ${styles.spacing.xs};
+`

@@ -6,7 +6,7 @@ export const styles = {
     grey300: '#9c9c9c',
     grey500: '#2f363e',
     grey900: '#1b1b1b',
-    blue900: '#04001C',
+    blue900: '#0A0048',
     black: '#000000',
   },
   spacing: {
