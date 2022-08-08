@@ -45,28 +45,17 @@ export const ToDoList = () => {
   const editToDoList = (id: string, newTask: string) =>
     setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
 
-  const [filter, setFilter] = useState('all')
-
   const filterMap = {
     all: () => true,
     active: (toDo: ToDoProps) => !toDo.completed,
     completed: (toDo: ToDoProps) => toDo.completed,
   }
 
-  const filterNames = Object.keys(filterMap).sort((a, b) => a.length - b.length)
+  type Keys = keyof typeof filterMap
 
-  const filterList = filterNames.map(name => (
-    <TransparentButtonBorder
-      onClick={() => setFilter(name)}
-      key={name}
-      aria-pressed={name === filter}
-    >
-      <P_BodyText>{name}</P_BodyText>
-    </TransparentButtonBorder>
-  ))
+  const [filter, setFilter] = useState<Keys>('all')
 
-  const activeToDos = toDos.filter(filterMap['active' as keyof object])
-
+  const activeToDos = toDos.filter(filterMap['active'])
   return (
     <Div_Container>
       <H_TodoHeading>ToDo List</H_TodoHeading>
@@ -108,9 +97,25 @@ export const ToDoList = () => {
           <P_BodyText>Add</P_BodyText>
         </BlueButton>
       </CustomForm>
-      <Div_ButtonContainer>{filterList}</Div_ButtonContainer>
+      <Div_ButtonContainer>
+        <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
+          <P_BodyText>Active</P_BodyText>
+        </TransparentButtonBorder>
+        <TransparentButtonBorder
+          onClick={() => setFilter('active')}
+          aria-pressed={'active' === filter}
+        >
+          <P_BodyText>Active</P_BodyText>
+        </TransparentButtonBorder>
+        <TransparentButtonBorder
+          onClick={() => setFilter('completed')}
+          aria-pressed={'completed' === filter}
+        >
+          <P_BodyText>Completed</P_BodyText>
+        </TransparentButtonBorder>
+      </Div_ButtonContainer>
       <Ul_List>
-        {toDos.filter(filterMap[filter as keyof object]).map(toDo => (
+        {toDos.filter(filterMap[filter]).map(toDo => (
           <ToDo
             id={toDo.id}
             key={toDo.id}
