@@ -36,30 +36,13 @@ export const ToDoList = () => {
     _setToDos(toDos)
   }
 
-  const deleteToDo = (id: string) => {
-    const remainingToDos = toDos.filter(toDo => id !== toDo.id)
-    setToDos(remainingToDos)
-  }
+  const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
 
-  const toggleCompleted = (id: string) => {
-    const updatedToDos = toDos.map(toDo => {
-      if (id === toDo.id) {
-        return { ...toDo, completed: !toDo.completed }
-      }
-      return toDo
-    })
-    setToDos(updatedToDos)
-  }
+  const toggleCompleted = (id: string) =>
+    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo)))
 
-  const editToDoList = (id: string, newTask: string) => {
-    const editedToDoList = toDos.map(toDo => {
-      if (id === toDo.id) {
-        return { ...toDo, task: newTask }
-      }
-      return toDo
-    })
-    setToDos(editedToDoList)
-  }
+  const editToDoList = (id: string, newTask: string) =>
+    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
 
   const [filter, setFilter] = useState('all')
 
