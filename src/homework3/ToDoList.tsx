@@ -7,6 +7,7 @@ import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
+import { idGenerator } from '../helpers/utils'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -87,7 +88,7 @@ export const ToDoList = () => {
           }
           setToDos([
             {
-              id: Math.random().toString(),
+              id: idGenerator(),
               task,
               completed: false,
             },
