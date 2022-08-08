@@ -69,8 +69,15 @@ export const ToDoList = () => {
   return (
     <Div_Container>
       <H_TodoHeading>ToDo List</H_TodoHeading>
-      {activeToDos.length === 1 && <P_BodyText>{activeToDos.length} task left</P_BodyText>}
-      {activeToDos.length > 1 && <P_BodyText>{activeToDos.length} tasks left</P_BodyText>}
+      {activeToDos.length >= 1 ? (
+        <P_BodyText>
+          {activeToDos.length === 1
+            ? `${activeToDos.length} task left`
+            : `${activeToDos.length} tasks left`}
+        </P_BodyText>
+      ) : (
+        ''
+      )}
       <CustomForm
         onSubmit={e => {
           e.preventDefault()
