@@ -65,9 +65,7 @@ export const ToDoList = () => {
     completed: (toDo: ToDoProps) => toDo.completed,
   }
 
-  type Keys = keyof typeof filterMap
-
-  const [filter, setFilter] = useState<Keys>('all')
+  const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
   const activeToDos = toDos.filter(filterMap['active'])
   return (
