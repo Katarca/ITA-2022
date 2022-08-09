@@ -12,31 +12,48 @@ import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+export const useLocalStorage = <T,>(key: string, initialValue: T) => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === 'undefined') {
+      return initialValue
+    }
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      console.error()
+      return initialValue
+    }
+  })
+
+  const setValue = (value: T | ((val: T) => T)) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value
+      setStoredValue(valueToStore)
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      }
+    } catch (error) {
+      console.error()
+    }
+  }
+  return [storedValue, setValue] as const
+}
+
 export type ToDoProps = {
   id: string
   task: string
   completed: boolean
 }
-export const ToDoList = () => {
-  const getToDosFromLocalStorage = (): ToDoProps[] => {
-    const lsToDos = localStorage.getItem(lsId.toDos)
-    if (lsToDos) {
-      return JSON.parse(lsToDos)
-    }
-    return []
-  }
 
-  const lsId = {
-    toDos: 'toDos: list',
-  }
-  const [toDos, _setToDos] = useState(getToDosFromLocalStorage())
+const lsId = {
+  toDos: 'toDos: list',
+}
+
+export const ToDoList = () => {
+  const [toDos, setToDos] = useLocalStorage<ToDoProps[]>(lsId.toDos, [] as ToDoProps[])
   const [task, setTask] = useState('')
   const [error, setError] = useState('')
-
-  const setToDos = (toDos: ToDoProps[]) => {
-    localStorage.setItem(lsId.toDos, JSON.stringify(toDos))
-    _setToDos(toDos)
-  }
 
   const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
 
