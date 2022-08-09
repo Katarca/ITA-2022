@@ -49,7 +49,7 @@ export type ToDoProps = {
 export const ToDoList = () => {
   const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
   const [task, setTask] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
   const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
 
@@ -96,7 +96,7 @@ export const ToDoList = () => {
             ...toDos,
           ])
           setTask('')
-          setError('')
+          setError(null)
         }}
       >
         <CustomInput

@@ -20,10 +20,10 @@ type ToDoItemProps = ToDoProps & {
 export const ToDo = (props: ToDoItemProps) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string | null>(null)
   const handleCancel = () => {
     setEditing(false)
-    setError('')
+    setError(null)
   }
   return (
     <Li_ListItem key={props.id}>
@@ -38,7 +38,7 @@ export const ToDo = (props: ToDoItemProps) => {
             props.editToDoList(props.id, newTask)
             setNewTask('')
             setEditing(false)
-            setError('')
+            setError(null)
           }}
         >
           <Div_EditContainer>
