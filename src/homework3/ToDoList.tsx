@@ -46,12 +46,8 @@ export type ToDoProps = {
   completed: boolean
 }
 
-const lsId = {
-  toDos: 'toDos: list',
-}
-
 export const ToDoList = () => {
-  const [toDos, setToDos] = useLocalStorage<ToDoProps[]>(lsId.toDos, [] as ToDoProps[])
+  const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
   const [task, setTask] = useState('')
   const [error, setError] = useState('')
 
