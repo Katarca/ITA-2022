@@ -1,6 +1,9 @@
-import { Button } from './components/Button'
-import { H_Heading } from './components/Heading'
-import { colors } from '../helpers/theme'
+import { BlueButton } from '../components/Button'
+import { H_Heading } from '../components/Heading'
+import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
+import { styles } from '../helpers/theme'
+import { urls } from '../helpers/urls'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -23,25 +26,28 @@ export class CounterApp extends Component<Props, State> {
       <CounterContainer>
         <H_Heading>{this.state.counter}</H_Heading>
         <ButtonContainer>
-          <Button
+          <BlueButton
             onClick={() => {
               this.setState({
                 counter: this.state.counter + 1,
               })
             }}
           >
-            +
-          </Button>
-          <Button
+            <P_BodyText>+</P_BodyText>
+          </BlueButton>
+          <BlueButton
             onClick={() => {
               this.setState({
                 counter: this.state.counter - 1,
               })
             }}
           >
-            -
-          </Button>
+            <P_BodyText>-</P_BodyText>
+          </BlueButton>
         </ButtonContainer>
+        <RouterLink to={urls.homePage}>
+          <P_LinkBodyText>Return home</P_LinkBodyText>
+        </RouterLink>
       </CounterContainer>
     )
   }
@@ -50,7 +56,7 @@ export class CounterApp extends Component<Props, State> {
 const CounterContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${colors.black};
+  background-color: ${styles.colors.black};
   display: flex;
   flex-direction: column;
   justify-content: center;

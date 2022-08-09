@@ -1,6 +1,6 @@
 import { ExternalLink } from 'react-external-link'
 import { P_BodyTextGrey } from '../../components/BodyText'
-import { breakpoint, colors, fontSize, space } from '../../../helpers/theme'
+import { breakpoint, styles } from '../../../helpers/theme'
 import React from 'react'
 import angularLogo from './Images/angular.svg'
 import jsImg from './Images/js.png'
@@ -49,13 +49,13 @@ export const Home = () => {
 const HomeSection = styled.section`
   min-height: 100vh;
   display: flex;
-  background-color: ${colors.black};
-  color: ${colors.white};
+  background-color: ${styles.colors.black};
+  color: ${styles.colors.white};
   flex-direction: column;
   justify-content: space-between;
 `
 const NavGap = styled.div`
-  height: ${space.extraBig};
+  height: ${styles.spacing.xl};
 `
 
 const HomeContainer = styled.div`
@@ -64,15 +64,15 @@ const HomeContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${space.medium} 0 ${space.medium} 0;
+  padding: ${styles.spacing.md} 0 ${styles.spacing.md} 0;
   ${breakpoint.phone} {
     width: 80%;
     flex-direction: column;
-    gap: ${space.small};
+    gap: ${styles.spacing.sm};
   }
 `
 const HomeTextContainer = styled.div`
-  padding-right: ${space.medium};
+  padding-right: ${styles.spacing.md};
   ${breakpoint.phone} {
     width: 100%;
     padding-right: unset;
@@ -82,8 +82,8 @@ const HomeTextContainer = styled.div`
 
 const MainHeading = styled.h1`
   font-family: 'Raleway', sans-serif;
-  font-size: ${fontSize.big};
-  padding-bottom: ${space.small};
+  font-size: ${styles.fontSize.lg};
+  padding-bottom: ${styles.spacing.sm};
 `
 const HomeImg = styled.img`
   width: 40%;
@@ -100,7 +100,7 @@ const LogoImg = styled.img`
 const LogoContainer = styled.div`
   width: 70%;
   margin: 0 auto;
-  padding-bottom: ${space.medium};
+  padding-bottom: ${styles.spacing.md};
   display: flex;
   justify-content: space-evenly;
   ${breakpoint.phone} {

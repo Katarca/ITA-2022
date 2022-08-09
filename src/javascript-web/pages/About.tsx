@@ -1,7 +1,7 @@
 import { Div_TextContainer } from '../components/TextContainer'
 import { H_Heading } from '../components/Heading'
 import { P_BodyTextBlack, P_BodyTextDarkGrey } from '../components/BodyText'
-import { colors, space } from '../../helpers/theme'
+import { styles } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -46,9 +46,9 @@ export const About = () => {
 const AboutSection = styled.section`
   min-height: 100vh;
   display: flex;
-  background-color: ${colors.yellow300};
+  background-color: ${styles.colors.yellow300};
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: ${space.extraBig} 0 ${space.medium} 0;
+  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
 `

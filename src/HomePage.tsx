@@ -1,4 +1,4 @@
-import { P_BodyText } from './components/BodyText'
+import { P_LinkBodyText } from './components/BodyText'
 import { RouterLink } from './components/RouterLink'
 import { urls } from './helpers/urls'
 import React from 'react'
@@ -7,11 +7,14 @@ import styled from 'styled-components'
 export const HomePage = () => {
   return (
     <StyledHomePage>
-      <RouterLink to={urls.jsWebUrl}>
-        <P_BodyText>Homework1</P_BodyText>
+      <RouterLink to={urls.jsWeb}>
+        <P_LinkBodyText>Javascript Web</P_LinkBodyText>
       </RouterLink>
-      <RouterLink to={urls.counterAppUrl}>
-        <P_BodyText>Homework2</P_BodyText>
+      <RouterLink to={urls.counterApp}>
+        <P_LinkBodyText>Counter App</P_LinkBodyText>
+      </RouterLink>
+      <RouterLink to={urls.todoList}>
+        <P_LinkBodyText>ToDo List</P_LinkBodyText>
       </RouterLink>
     </StyledHomePage>
   )

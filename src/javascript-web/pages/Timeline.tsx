@@ -1,5 +1,5 @@
 import { P_BodyTextDarkGrey, P_BodyTextGrey } from '../components/BodyText'
-import { breakpoint, colors, space } from '../../helpers/theme'
+import { breakpoint, styles } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -145,8 +145,8 @@ export const Timeline = () => {
 const TimelineSection = styled.section`
   min-height: 100vh;
   display: flex;
-  background-color: ${colors.yellow300};
-  padding: ${space.extraBig} 0 ${space.medium} 0;
+  background-color: ${styles.colors.yellow300};
+  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
 `
 
 const TimelineItems = styled.div`
@@ -161,7 +161,7 @@ const TimelineItems = styled.div`
     position: absolute;
     width: 2px;
     height: 100%;
-    background-color: ${colors.grey500};
+    background-color: ${styles.colors.grey500};
     left: calc(50% - 1px);
     ${breakpoint.tabletPortrait} {
       left: 7px;
@@ -172,7 +172,7 @@ const TimelineItem = styled.div`
   width: 100%;
   position: relative;
   &:not(:last-child) {
-    margin-bottom: ${space.small};
+    margin-bottom: ${styles.spacing.sm};
   }
   &:nth-child(odd) {
     padding-right: calc(50% + 30px);
@@ -194,20 +194,20 @@ const TimelineItem = styled.div`
 const TimelineDot = styled.div`
   height: 16px;
   width: 16px;
-  background-color: ${colors.black};
+  background-color: ${styles.colors.black};
   position: absolute;
   left: calc(50% - 8px);
   border-radius: 50%;
-  top: ${space.extraSmall};
+  top: ${styles.spacing.xs};
   ${breakpoint.tabletPortrait} {
     left: 0;
   }
 `
 const TimelineDate = styled.div`
-  color: ${colors.black};
+  color: ${styles.colors.black};
   margin: 6px 0 15px;
 `
 const TimelineContent = styled.div`
-  background-color: ${colors.grey500};
-  padding: ${space.small};
+  background-color: ${styles.colors.grey500};
+  padding: ${styles.spacing.sm};
 `

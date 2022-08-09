@@ -1,5 +1,6 @@
 export const urls = {
-  homeUrl: '/',
-  jsWebUrl: '/js',
-  counterAppUrl: '/counter-app',
-}
+  homePage: '/',
+  jsWeb: '/js',
+  counterApp: '/counter-app',
+  todoList: '/todo-list',
+} as const

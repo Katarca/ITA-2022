@@ -1,7 +1,7 @@
 import { Div_TextContainer } from '../components/TextContainer'
 import { H_Heading } from '../components/Heading'
 import { P_BodyTextGrey, P_BodyTextWhite } from '../components/BodyText'
-import { colors, space } from '../../helpers/theme'
+import { styles } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -48,10 +48,10 @@ export const History = () => {
 export const HistorySection = styled.section`
   min-height: 100vh;
   display: flex;
-  background-color: ${colors.black};
-  color: ${colors.white};
+  background-color: ${styles.colors.black};
+  color: ${styles.colors.white};
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: ${space.extraBig} 0 ${space.medium} 0;
+  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
 `

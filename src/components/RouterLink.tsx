@@ -1,23 +1,21 @@
 import { Link } from 'react-router-dom'
-import { space } from '../helpers/theme'
+import { styles } from '../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
 type LinkProps = {
   to: string
-  target?: string
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 export const RouterLink = (props: LinkProps) => {
-  return (
-    <StyledLink to={props.to} target={props.target}>
-      {props.children}
-    </StyledLink>
-  )
+  return <StyledLink to={props.to}>{props.children}</StyledLink>
 }
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  padding: ${space.extraSmall};
+  padding: ${styles.spacing.xs};
+  &:hover {
+    transform: scale(1.1);
+  }
 `
