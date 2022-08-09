@@ -6,7 +6,7 @@ import { RouterLink } from '../components/RouterLink'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const CODE = DummyCode
 const CODE_SEGMENT = 5
@@ -14,8 +14,21 @@ const CODE_SEGMENT = 5
 export const HackerTyper = () => {
   const [hackerCode, setHackerCode] = useState('')
   const [index, setIndex] = useState(0)
+  const [message, setMessage] = useState('')
 
-  const handleKeyDown = () => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.ctrlKey) {
+      setMessage('Access denied')
+    }
+    if (e.key === 'Enter') {
+      setMessage('Access granted')
+    }
+    if (e.key === 'Escape') {
+      setMessage('')
+    }
+  }
+
+  const runCode = () => {
     setIndex(index + CODE_SEGMENT)
     setHackerCode(CODE.substring(0, index))
     if (index === CODE.length) {
@@ -25,11 +38,31 @@ export const HackerTyper = () => {
 
   return (
     <Div_Container>
+      {message ? (
+        <div>
+          {message === 'Access denied' ? (
+            <Div_DeniedContainer>
+              <H_MsgHeading>{message}</H_MsgHeading>
+            </Div_DeniedContainer>
+          ) : (
+            <Div_GrantedContainer>
+              <H_MsgHeading>{message}</H_MsgHeading>
+            </Div_GrantedContainer>
+          )}
+        </div>
+      ) : (
+        ''
+      )}
       <H_HackHeading>Hacker Typer</H_HackHeading>
       <TA_TextArea
-        value={!hackerCode ? 'Start typing...' : hackerCode}
-        onKeyDown={handleKeyDown}
+        value={
+          !hackerCode
+            ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
+            : hackerCode
+        }
+        onChange={!message ? runCode : () => {}}
         autoFocus={true}
+        onKeyDown={handleKeyDown}
       />
       <RouterLink to={urls.homePage}>
         <P_LinkBodyText>Return home</P_LinkBodyText>
@@ -55,4 +88,31 @@ const TA_TextArea = styled.textarea`
   &::-webkit-scrollbar {
     display: none;
   }
+`
+
+const MsgContainerStyles = css`
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: ${styles.colors.black};
+`
+
+const Div_GrantedContainer = styled.div`
+  ${MsgContainerStyles};
+  border: 2px solid ${styles.colors.matrixGreen};
+  color: ${styles.colors.matrixGreen};
+`
+
+const Div_DeniedContainer = styled.div`
+  ${MsgContainerStyles};
+  border: 2px solid ${styles.colors.red};
+  color: ${styles.colors.red};
+`
+
+const H_MsgHeading = styled.h2`
+  text-transform: uppercase;
+  font-size: ${styles.fontSize.md};
+  padding: ${styles.spacing.md};
 `

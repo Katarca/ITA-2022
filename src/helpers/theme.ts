@@ -8,6 +8,8 @@ export const styles = {
     grey900: '#1b1b1b',
     blue900: '#0A0048',
     black: '#000000',
+    matrixGreen: '#03A062',
+    red: '#FF0000',
   },
   spacing: {
     xs: '10px',
