@@ -49,18 +49,18 @@ export const ToDo = (props: ToDoItemProps) => {
               onChange={e => setNewTask(e.target.value)}
             />
             {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
-            <Div_Wrapper>
+            <div>
               <TransparentButtonBorder type='submit'>
                 <P_BodyText>Save</P_BodyText>
               </TransparentButtonBorder>
               <TransparentButtonBorder onClick={() => handleCancel()}>
                 <P_BodyText>Cancel</P_BodyText>
               </TransparentButtonBorder>
-            </Div_Wrapper>
+            </div>
           </Div_EditContainer>
         </CustomForm>
       ) : (
-        <Div_Wrapper>
+        <div>
           <Div_FlexContainer>
             <CustomInput
               type='checkbox'
@@ -77,7 +77,7 @@ export const ToDo = (props: ToDoItemProps) => {
               <CrossIcon />
             </TransparentButton>
           </Div_FlexContainer>
-        </Div_Wrapper>
+        </div>
       )}
     </Li_ListItem>
   )
@@ -96,9 +96,6 @@ const EditIcon = styled(editIcon)`
   width: 25px;
   fill: ${styles.colors.white};
 `
-
-const Div_Wrapper = styled.div``
-
 const Div_EditContainer = styled.div`
   display: flex;
   flex-direction: column;
