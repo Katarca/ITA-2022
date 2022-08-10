@@ -17,11 +17,9 @@ export const HackerTyper = () => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.ctrlKey) {
       setMessage('Access denied')
-    }
-    if (e.key === 'Enter') {
+    } else if (e.key === 'Enter') {
       setMessage('Access granted')
-    }
-    if (e.key === 'Escape') {
+    } else if (e.key === 'Escape') {
       setMessage(null)
     }
   }
