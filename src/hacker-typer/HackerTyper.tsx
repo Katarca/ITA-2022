@@ -8,7 +8,6 @@ import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-const CODE = dummyCode
 const CODE_SEGMENT = 5
 
 export const HackerTyper = () => {
@@ -30,8 +29,8 @@ export const HackerTyper = () => {
 
   const runCode = () => {
     setIndex(index + CODE_SEGMENT)
-    setHackerCode(CODE.substring(0, index))
-    if (index === CODE.length) {
+    setHackerCode(dummyCode.substring(0, index))
+    if (index === dummyCode.length) {
       setIndex(0)
     }
   }
