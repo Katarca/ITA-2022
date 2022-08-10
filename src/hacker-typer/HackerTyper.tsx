@@ -12,7 +12,7 @@ const CODE_SEGMENT = 5
 
 export const HackerTyper = () => {
   const [hackerCode, setHackerCode] = useState('')
-  const [index, setIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [message, setMessage] = useState('')
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -28,10 +28,10 @@ export const HackerTyper = () => {
   }
 
   const runCode = () => {
-    setIndex(index + CODE_SEGMENT)
-    setHackerCode(dummyCode.substring(0, index))
-    if (index === dummyCode.length) {
-      setIndex(0)
+    setCurrentIndex(currentIndex + CODE_SEGMENT)
+    setHackerCode(dummyCode.substring(0, currentIndex))
+    if (currentIndex === dummyCode.length) {
+      setCurrentIndex(0)
     }
   }
 
