@@ -113,7 +113,7 @@ export const ToDoList = () => {
       {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
       <Div_ButtonContainer>
         <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
-          <P_BodyText>Active</P_BodyText>
+          <P_BodyText>All</P_BodyText>
         </TransparentButtonBorder>
         <TransparentButtonBorder
           onClick={() => setFilter('active')}

@@ -3,4 +3,5 @@ export const urls = {
   jsWeb: '/js',
   counterApp: '/counter-app',
   todoList: '/todo-list',
+  hackerTyper: '/hacker-typer',
 } as const

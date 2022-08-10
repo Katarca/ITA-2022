@@ -16,6 +16,9 @@ export const HomePage = () => {
       <RouterLink to={urls.todoList}>
         <P_LinkBodyText>ToDo List</P_LinkBodyText>
       </RouterLink>
+      <RouterLink to={urls.hackerTyper}>
+        <P_LinkBodyText>Hacker Typer</P_LinkBodyText>
+      </RouterLink>
     </StyledHomePage>
   )
 }
