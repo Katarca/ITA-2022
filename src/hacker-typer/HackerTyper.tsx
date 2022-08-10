@@ -13,7 +13,7 @@ const CODE_SEGMENT = 5
 export const HackerTyper = () => {
   const [hackerCode, setHackerCode] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<'Access denied' | 'Access granted' | ''>('')
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.ctrlKey) {
