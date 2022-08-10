@@ -11,7 +11,6 @@ import styled, { css } from 'styled-components'
 const CODE_SEGMENT = 5
 
 export const HackerTyper = () => {
-  const [hackerCode, setHackerCode] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [message, setMessage] = useState<'Access denied' | 'Access granted' | ''>('')
 
@@ -29,8 +28,7 @@ export const HackerTyper = () => {
 
   const runCode = () => {
     setCurrentIndex(currentIndex + CODE_SEGMENT)
-    setHackerCode(dummyCode.substring(0, currentIndex))
-    if (currentIndex === dummyCode.length) {
+    if (currentIndex + CODE_SEGMENT >= dummyCode.length) {
       setCurrentIndex(0)
     }
   }
@@ -55,9 +53,9 @@ export const HackerTyper = () => {
       <H_HackHeading>Hacker Typer</H_HackHeading>
       <TA_TextArea
         value={
-          !hackerCode
+          currentIndex === 0
             ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
-            : hackerCode
+            : dummyCode.substring(0, currentIndex)
         }
         onChange={!message ? runCode : () => {}}
         autoFocus={true}
