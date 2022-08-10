@@ -26,10 +26,7 @@ export const HackerTyper = () => {
 
   const runCode = () => {
     const step = currentIndex + CODE_SEGMENT
-    setCurrentIndex(step)
-    if (step >= dummyCode.length) {
-      setCurrentIndex(0)
-    }
+    setCurrentIndex(step >= dummyCode.length ? 0 : step)
   }
 
   return (
