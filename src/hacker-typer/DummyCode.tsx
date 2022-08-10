@@ -1,4 +1,4 @@
-export const DummyCode = `
+export const dummyCode = `
 #define WIN32_LEAN_AND_MEAN
 #define CREATE_THREAD_ACCESS (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION)
 

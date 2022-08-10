@@ -1,14 +1,14 @@
 import { Div_Container } from '../components/Container'
-import { DummyCode } from './DummyCode'
 import { H_Heading } from '../components/Heading'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { dummyCode } from './dummyCode'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-const CODE = DummyCode
+const CODE = dummyCode
 const CODE_SEGMENT = 5
 
 export const HackerTyper = () => {
