@@ -58,6 +58,12 @@ export const genericHookContextBuilder = <T, P>(hook: () => T) => {
   }
 }
 
+export type ToDoProps = {
+  id: string
+  task: string
+  completed: boolean
+}
+
 const useLogicState = () => {
   const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
   return {
@@ -68,12 +74,6 @@ const useLogicState = () => {
 
 export const { ContextProvider: LogicStateContextProvider, Context: LogicStateContext } =
   genericHookContextBuilder(useLogicState)
-
-export type ToDoProps = {
-  id: string
-  task: string
-  completed: boolean
-}
 
 export const ToDoApp = () => {
   return (
