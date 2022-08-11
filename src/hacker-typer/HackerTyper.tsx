@@ -37,7 +37,7 @@ export const HackerTyper = () => {
           <title>Katarína Soušková | Hacker Typer</title>
           <meta name='description' content='Hacker Typer clone' />
         </Helmet>
-        {message ? (
+        {message && (
           <div>
             {message === 'Access denied' ? (
               <Div_DeniedContainer>
@@ -49,8 +49,6 @@ export const HackerTyper = () => {
               </Div_GrantedContainer>
             )}
           </div>
-        ) : (
-          ''
         )}
         <H_HackHeading>Hacker Typer</H_HackHeading>
         <TA_TextArea
