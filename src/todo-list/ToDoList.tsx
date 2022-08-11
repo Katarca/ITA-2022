@@ -3,11 +3,13 @@ import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
 import { idGenerator } from '../helpers/utils'
+import { metaData } from '../helpers/metaData'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -69,82 +71,88 @@ export const ToDoList = () => {
 
   const activeToDos = toDos.filter(filterMap['active'])
   return (
-    <Div_Container>
-      <H_TodoHeading>ToDo List</H_TodoHeading>
-      {activeToDos.length >= 1 ? (
-        <P_BodyText>
-          {activeToDos.length === 1
-            ? `${activeToDos.length} task left`
-            : `${activeToDos.length} tasks left`}
-        </P_BodyText>
-      ) : (
-        ''
-      )}
-      <CustomForm
-        onSubmit={e => {
-          e.preventDefault()
-          if (task.trim().length === 0) {
-            setError('Please enter a value!')
-            return
-          }
-          setToDos([
-            {
-              id: idGenerator(),
-              task,
-              completed: false,
-            },
-            ...toDos,
-          ])
-          setTask('')
-          setError(null)
-        }}
-      >
-        <CustomInput
-          type='text'
-          placeholder='task'
-          value={task}
-          onChange={e => setTask(e.target.value)}
-          autoComplete='off'
-        />
-        <BlueButton type='submit'>
-          <P_BodyText>Add</P_BodyText>
-        </BlueButton>
-      </CustomForm>
-      {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
-      <Div_ButtonContainer>
-        <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
-          <P_BodyText>All</P_BodyText>
-        </TransparentButtonBorder>
-        <TransparentButtonBorder
-          onClick={() => setFilter('active')}
-          aria-pressed={'active' === filter}
+    <HelmetProvider>
+      <Div_Container>
+        <Helmet>
+          <title>{metaData.title.todoList}</title>
+          <meta name='description' content={metaData.description.todoList} />
+        </Helmet>
+        <H_TodoHeading>ToDo List</H_TodoHeading>
+        {activeToDos.length >= 1 ? (
+          <P_BodyText>
+            {activeToDos.length === 1
+              ? `${activeToDos.length} task left`
+              : `${activeToDos.length} tasks left`}
+          </P_BodyText>
+        ) : (
+          ''
+        )}
+        <CustomForm
+          onSubmit={e => {
+            e.preventDefault()
+            if (task.trim().length === 0) {
+              setError('Please enter a value!')
+              return
+            }
+            setToDos([
+              {
+                id: idGenerator(),
+                task,
+                completed: false,
+              },
+              ...toDos,
+            ])
+            setTask('')
+            setError(null)
+          }}
         >
-          <P_BodyText>Active</P_BodyText>
-        </TransparentButtonBorder>
-        <TransparentButtonBorder
-          onClick={() => setFilter('completed')}
-          aria-pressed={'completed' === filter}
-        >
-          <P_BodyText>Completed</P_BodyText>
-        </TransparentButtonBorder>
-      </Div_ButtonContainer>
-      <Ul_List>
-        {toDos.filter(filterMap[filter]).map(toDo => (
-          <ToDo
-            id={toDo.id}
-            key={toDo.id}
-            task={toDo.task}
-            completed={toDo.completed}
-            deleteToDo={deleteToDo}
-            toggleCompleted={toggleCompleted}
-            editToDoList={editToDoList}
+          <CustomInput
+            type='text'
+            placeholder='task'
+            value={task}
+            onChange={e => setTask(e.target.value)}
+            autoComplete='off'
           />
-        ))}
-      </Ul_List>
-      <RouterLink to={urls.homePage}>
-        <P_LinkBodyText>Return home</P_LinkBodyText>
-      </RouterLink>
-    </Div_Container>
+          <BlueButton type='submit'>
+            <P_BodyText>Add</P_BodyText>
+          </BlueButton>
+        </CustomForm>
+        {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
+        <Div_ButtonContainer>
+          <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
+            <P_BodyText>All</P_BodyText>
+          </TransparentButtonBorder>
+          <TransparentButtonBorder
+            onClick={() => setFilter('active')}
+            aria-pressed={'active' === filter}
+          >
+            <P_BodyText>Active</P_BodyText>
+          </TransparentButtonBorder>
+          <TransparentButtonBorder
+            onClick={() => setFilter('completed')}
+            aria-pressed={'completed' === filter}
+          >
+            <P_BodyText>Completed</P_BodyText>
+          </TransparentButtonBorder>
+        </Div_ButtonContainer>
+        <Ul_List>
+          {toDos.filter(filterMap[filter]).map(toDo => (
+            <ToDo
+              id={toDo.id}
+              key={toDo.id}
+              task={toDo.task}
+              completed={toDo.completed}
+              deleteToDo={deleteToDo}
+              toggleCompleted={toggleCompleted}
+              editToDoList={editToDoList}
+            />
+          ))}
+        </Ul_List>
+        <RouterLink to={urls.homePage}>
+          <P_LinkBodyText>Return home</P_LinkBodyText>
+        </RouterLink>
+      </Div_Container>
+    </HelmetProvider>
   )
 }
 

@@ -1,7 +1,9 @@
 import { BlueButton } from '../components/Button'
 import { H_Heading } from '../components/Heading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { metaData } from '../helpers/metaData'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { Component } from 'react'
@@ -23,32 +25,38 @@ export class CounterApp extends Component<Props, State> {
 
   render() {
     return (
-      <CounterContainer>
-        <H_Heading>{this.state.counter}</H_Heading>
-        <ButtonContainer>
-          <BlueButton
-            onClick={() => {
-              this.setState({
-                counter: this.state.counter + 1,
-              })
-            }}
-          >
-            <P_BodyText>+</P_BodyText>
-          </BlueButton>
-          <BlueButton
-            onClick={() => {
-              this.setState({
-                counter: this.state.counter - 1,
-              })
-            }}
-          >
-            <P_BodyText>-</P_BodyText>
-          </BlueButton>
-        </ButtonContainer>
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
-      </CounterContainer>
+      <HelmetProvider>
+        <CounterContainer>
+          <Helmet>
+            <title>{metaData.title.counterApp}</title>
+            <meta name='description' content={metaData.description.counterApp} />
+          </Helmet>
+          <H_Heading>{this.state.counter}</H_Heading>
+          <ButtonContainer>
+            <BlueButton
+              onClick={() => {
+                this.setState({
+                  counter: this.state.counter + 1,
+                })
+              }}
+            >
+              <P_BodyText>+</P_BodyText>
+            </BlueButton>
+            <BlueButton
+              onClick={() => {
+                this.setState({
+                  counter: this.state.counter - 1,
+                })
+              }}
+            >
+              <P_BodyText>-</P_BodyText>
+            </BlueButton>
+          </ButtonContainer>
+          <RouterLink to={urls.homePage}>
+            <P_LinkBodyText>Return home</P_LinkBodyText>
+          </RouterLink>
+        </CounterContainer>
+      </HelmetProvider>
     )
   }
 }

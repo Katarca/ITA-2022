@@ -1,8 +1,10 @@
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { dummyCode } from './dummyCode'
+import { metaData } from '../helpers/metaData'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
@@ -30,37 +32,43 @@ export const HackerTyper = () => {
   }
 
   return (
-    <Div_Container>
-      {message ? (
-        <div>
-          {message === 'Access denied' ? (
-            <Div_DeniedContainer>
-              <H_MsgHeading>{message}</H_MsgHeading>
-            </Div_DeniedContainer>
-          ) : (
-            <Div_GrantedContainer>
-              <H_MsgHeading>{message}</H_MsgHeading>
-            </Div_GrantedContainer>
-          )}
-        </div>
-      ) : (
-        ''
-      )}
-      <H_HackHeading>Hacker Typer</H_HackHeading>
-      <TA_TextArea
-        value={
-          currentIndex === 0
-            ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
-            : dummyCode.substring(0, currentIndex)
-        }
-        onChange={!message ? runCode : () => {}}
-        autoFocus={true}
-        onKeyDown={handleKeyDown}
-      />
-      <RouterLink to={urls.homePage}>
-        <P_LinkBodyText>Return home</P_LinkBodyText>
-      </RouterLink>
-    </Div_Container>
+    <HelmetProvider>
+      <Div_Container>
+        <Helmet>
+          <title>{metaData.title.hackerTyper}</title>
+          <meta name='description' content={metaData.description.hackerTyper} />
+        </Helmet>
+        {message ? (
+          <div>
+            {message === 'Access denied' ? (
+              <Div_DeniedContainer>
+                <H_MsgHeading>{message}</H_MsgHeading>
+              </Div_DeniedContainer>
+            ) : (
+              <Div_GrantedContainer>
+                <H_MsgHeading>{message}</H_MsgHeading>
+              </Div_GrantedContainer>
+            )}
+          </div>
+        ) : (
+          ''
+        )}
+        <H_HackHeading>Hacker Typer</H_HackHeading>
+        <TA_TextArea
+          value={
+            currentIndex === 0
+              ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
+              : dummyCode.substring(0, currentIndex)
+          }
+          onChange={!message ? runCode : () => {}}
+          autoFocus={true}
+          onKeyDown={handleKeyDown}
+        />
+        <RouterLink to={urls.homePage}>
+          <P_LinkBodyText>Return home</P_LinkBodyText>
+        </RouterLink>
+      </Div_Container>
+    </HelmetProvider>
   )
 }
 
