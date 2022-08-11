@@ -10,7 +10,7 @@ import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
 import { idGenerator } from '../helpers/utils'
 import { urls } from '../helpers/urls'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export const useLocalStorage = <T,>(key: string, initialValue: T) => {
@@ -41,24 +41,53 @@ export const useLocalStorage = <T,>(key: string, initialValue: T) => {
   return [storedValue, setValue] as const
 }
 
+type Props = {
+  children: React.ReactNode
+}
+
+export const genericHookContextBuilder = <T, P>(hook: () => T) => {
+  const Context = React.createContext<T>(undefined as never)
+
+  return {
+    Context,
+    ContextProvider: (props: Props & P) => {
+      const value = hook()
+
+      return <Context.Provider value={value}>{props.children}</Context.Provider>
+    },
+  }
+}
+
+const useLogicState = () => {
+  const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
+  return {
+    toDos,
+    setToDos,
+  }
+}
+
+export const { ContextProvider: LogicStateContextProvider, Context: LogicStateContext } =
+  genericHookContextBuilder(useLogicState)
+
 export type ToDoProps = {
   id: string
   task: string
   completed: boolean
 }
 
-export const ToDoList = () => {
-  const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
+export const ToDoApp = () => {
+  return (
+    <LogicStateContextProvider>
+      <ToDoList />
+    </LogicStateContextProvider>
+  )
+}
+
+const ToDoList = () => {
   const [task, setTask] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
-
-  const toggleCompleted = (id: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo)))
-
-  const editToDoList = (id: string, newTask: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
+  const { toDos, setToDos } = useContext(LogicStateContext)
 
   const filterMap = {
     all: () => true,
@@ -69,6 +98,7 @@ export const ToDoList = () => {
   const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
   const activeToDos = toDos.filter(filterMap['active'])
+
   return (
     <HelmetProvider>
       <Div_Container>
@@ -137,15 +167,7 @@ export const ToDoList = () => {
         </Div_ButtonContainer>
         <Ul_List>
           {toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo
-              id={toDo.id}
-              key={toDo.id}
-              task={toDo.task}
-              completed={toDo.completed}
-              deleteToDo={deleteToDo}
-              toggleCompleted={toggleCompleted}
-              editToDoList={editToDoList}
-            />
+            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
           ))}
         </Ul_List>
         <RouterLink to={urls.homePage}>
