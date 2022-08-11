@@ -3,7 +3,6 @@ import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { metaData } from '../helpers/metaData'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { Component } from 'react'
@@ -28,8 +27,8 @@ export class CounterApp extends Component<Props, State> {
       <HelmetProvider>
         <CounterContainer>
           <Helmet>
-            <title>{metaData.title.counterApp}</title>
-            <meta name='description' content={metaData.description.counterApp} />
+            <title>Katarína Soušková | Counter App</title>
+            <meta name='description' content='Simple counter app using react class components' />
           </Helmet>
           <H_Heading>{this.state.counter}</H_Heading>
           <ButtonContainer>

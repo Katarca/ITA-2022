@@ -5,7 +5,6 @@ import { Home } from './pages/Home/Home'
 import { Navbar } from './components/Navbar'
 import { Timeline } from './pages/Timeline'
 import { Today } from './pages/Today'
-import { metaData } from '../helpers/metaData'
 import React from 'react'
 
 export const JavaScriptWeb = () => {
@@ -13,8 +12,8 @@ export const JavaScriptWeb = () => {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>{metaData.title.jsWeb}</title>
-          <meta name='description' content={metaData.description.jsWeb} />
+          <title>Katarína Soušková | JS Web</title>
+          <meta name='description' content='Web about history and usage of JavaScript' />
         </Helmet>
         <Navbar />
         <Home />

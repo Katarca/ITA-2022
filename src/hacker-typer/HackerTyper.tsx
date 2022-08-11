@@ -4,7 +4,6 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { dummyCode } from './dummyCode'
-import { metaData } from '../helpers/metaData'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
@@ -35,8 +34,8 @@ export const HackerTyper = () => {
     <HelmetProvider>
       <Div_Container>
         <Helmet>
-          <title>{metaData.title.hackerTyper}</title>
-          <meta name='description' content={metaData.description.hackerTyper} />
+          <title>Katarína Soušková | Hacker Typer</title>
+          <meta name='description' content='Hacker Typer clone' />
         </Helmet>
         {message ? (
           <div>
@@ -60,7 +59,7 @@ export const HackerTyper = () => {
               ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
               : dummyCode.substring(0, currentIndex)
           }
-          onChange={!message ? runCode : () => {}}
+          onChange={!message ? runCode : undefined}
           autoFocus={true}
           onKeyDown={handleKeyDown}
         />

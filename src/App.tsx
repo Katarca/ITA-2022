@@ -6,7 +6,6 @@ import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoList } from './todo-list/ToDoList'
 import { createGlobalStyle } from 'styled-components'
-import { metaData } from './helpers/metaData'
 import { styles } from './helpers/theme'
 import { urls } from './helpers/urls'
 import React from 'react'
@@ -17,8 +16,11 @@ export function App() {
     <HelmetProvider>
       <StyledApp>
         <Helmet>
-          <title>{metaData.title.main}</title>
-          <meta name='description' content={metaData.description.main} />
+          <title>Katarína Soušková</title>
+          <meta
+            name='description'
+            content='Portfolio of react front-end developer Katarína Soušková'
+          />
         </Helmet>
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />

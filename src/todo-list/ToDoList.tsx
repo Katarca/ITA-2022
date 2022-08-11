@@ -9,7 +9,6 @@ import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
 import { idGenerator } from '../helpers/utils'
-import { metaData } from '../helpers/metaData'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -74,8 +73,11 @@ export const ToDoList = () => {
     <HelmetProvider>
       <Div_Container>
         <Helmet>
-          <title>{metaData.title.todoList}</title>
-          <meta name='description' content={metaData.description.todoList} />
+          <title>Katarína Soušková | ToDo List</title>
+          <meta
+            name='description'
+            content='Todo app where you can write, edit, filter and delete tasks'
+          />
         </Helmet>
         <H_TodoHeading>ToDo List</H_TodoHeading>
         {activeToDos.length >= 1 ? (
