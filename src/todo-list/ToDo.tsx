@@ -1,8 +1,8 @@
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_FlexContainer } from '../components/Container'
-import { LogicStateContext, P_ErrorText, ToDoProps } from './ToDoList'
 import { P_BodyText } from '../components/BodyText'
+import { P_ErrorText, ToDoProps, ToDoStateContext } from './ToDoList'
 import { TransparentButton, TransparentButtonBorder } from '../components/Button'
 import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { ReactComponent as editIcon } from './icons/edit-icon.svg'
@@ -15,21 +15,16 @@ type ToDoItemProps = ToDoProps & {
 }
 
 export const ToDo = (props: ToDoItemProps) => {
-  const { toDos, setToDos } = useContext(LogicStateContext)
+  const { toDos, setToDos } = useContext(ToDoStateContext)
 
-  const deleteToDo = (id: string) => setToDos(toDos.filter((toDo: ToDoProps) => id !== toDo.id))
+  const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
 
   const toggleCompleted = (id: string) =>
-    setToDos(
-      toDos.map((toDo: ToDoProps) =>
-        id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo
-      )
-    )
+    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo)))
 
   const editToDoList = (id: string, newTask: string) =>
-    setToDos(toDos.map((toDo: ToDoProps) => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
+    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
 
-  //
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState<string | null>(null)

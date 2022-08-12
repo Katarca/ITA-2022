@@ -72,14 +72,14 @@ const useLogicState = () => {
   }
 }
 
-export const { ContextProvider: LogicStateContextProvider, Context: LogicStateContext } =
+export const { ContextProvider: ToDoContextProvider, Context: ToDoStateContext } =
   genericHookContextBuilder(useLogicState)
 
 export const ToDoApp = () => {
   return (
-    <LogicStateContextProvider>
+    <ToDoContextProvider>
       <ToDoList />
-    </LogicStateContextProvider>
+    </ToDoContextProvider>
   )
 }
 
@@ -87,7 +87,7 @@ const ToDoList = () => {
   const [task, setTask] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const { toDos, setToDos } = useContext(LogicStateContext)
+  const { toDos, setToDos } = useContext(ToDoStateContext)
 
   const filterMap = {
     all: () => true,
