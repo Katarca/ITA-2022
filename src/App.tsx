@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
 import { Route, Routes } from 'react-router-dom'
-import { ToDoList } from './todo-list/ToDoList'
+import { ToDoApp } from './todo-list/ToDoList'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
 import { urls } from './helpers/urls'
@@ -26,7 +26,7 @@ export function App() {
           <Route path={urls.homePage} element={<HomePage />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
           <Route path={urls.counterApp} element={<CounterApp />} />
-          <Route path={urls.todoList} element={<ToDoList />} />
+          <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
         </Routes>
         <GlobalStyle />

@@ -8,38 +8,12 @@ import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
-import { idGenerator } from '../helpers/utils'
+import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
+import { idGenerator } from '../utils/idGenerator'
 import { urls } from '../helpers/urls'
-import React, { useState } from 'react'
+import { useLocalStorage } from '../utils/useLocalStorage'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-
-export const useLocalStorage = <T,>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') {
-      return initialValue
-    }
-    try {
-      const item = window.localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
-    } catch (error) {
-      console.error()
-      return initialValue
-    }
-  })
-
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value
-      setStoredValue(valueToStore)
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore))
-      }
-    } catch (error) {
-      console.error()
-    }
-  }
-  return [storedValue, setValue] as const
-}
 
 export type ToDoProps = {
   id: string
@@ -47,18 +21,30 @@ export type ToDoProps = {
   completed: boolean
 }
 
-export const ToDoList = () => {
+const useLogicState = () => {
   const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
+  return {
+    toDos,
+    setToDos,
+  }
+}
+
+export const { ContextProvider: ToDoContextProvider, Context: ToDoStateContext } =
+  genericHookContextBuilder(useLogicState)
+
+export const ToDoApp = () => {
+  return (
+    <ToDoContextProvider>
+      <ToDoList />
+    </ToDoContextProvider>
+  )
+}
+
+const ToDoList = () => {
   const [task, setTask] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
-
-  const toggleCompleted = (id: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo)))
-
-  const editToDoList = (id: string, newTask: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
+  const toDoLogic = useContext(ToDoStateContext)
 
   const filterMap = {
     all: () => true,
@@ -68,7 +54,8 @@ export const ToDoList = () => {
 
   const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
-  const activeToDos = toDos.filter(filterMap['active'])
+  const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
+
   return (
     <HelmetProvider>
       <Div_Container>
@@ -94,13 +81,13 @@ export const ToDoList = () => {
               setError('Please enter a value!')
               return
             }
-            setToDos([
+            toDoLogic.setToDos([
               {
                 id: idGenerator(),
                 task,
                 completed: false,
               },
-              ...toDos,
+              ...toDoLogic.toDos,
             ])
             setTask('')
             setError(null)
@@ -136,16 +123,8 @@ export const ToDoList = () => {
           </TransparentButtonBorder>
         </Div_ButtonContainer>
         <Ul_List>
-          {toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo
-              id={toDo.id}
-              key={toDo.id}
-              task={toDo.task}
-              completed={toDo.completed}
-              deleteToDo={deleteToDo}
-              toggleCompleted={toggleCompleted}
-              editToDoList={editToDoList}
-            />
+          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
+            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
           ))}
         </Ul_List>
         <RouterLink to={urls.homePage}>
