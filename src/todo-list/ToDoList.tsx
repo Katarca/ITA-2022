@@ -8,28 +8,12 @@ import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
 import { breakpoint, styles } from '../helpers/theme'
+import { genericHookContextBuilder } from '../hooks/genericHookContextBuilder'
 import { idGenerator } from '../helpers/utils'
 import { urls } from '../helpers/urls'
-import { useLocalStorage } from '../helpers/hooks'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-
-type Props = {
-  children: React.ReactNode
-}
-
-export const genericHookContextBuilder = <T, P>(hook: () => T) => {
-  const Context = React.createContext<T>(undefined as never)
-
-  return {
-    Context,
-    ContextProvider: (props: Props & P) => {
-      const value = hook()
-
-      return <Context.Provider value={value}>{props.children}</Context.Provider>
-    },
-  }
-}
 
 export type ToDoProps = {
   id: string
