@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+// Code of useLocalStorage hook borrowed from https://usehooks.com/useLocalStorage/
+
 export const useLocalStorage = <T>(key: string, initialValue: T) => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
