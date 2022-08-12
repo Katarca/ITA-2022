@@ -15,15 +15,20 @@ type ToDoItemProps = ToDoProps & {
 }
 
 export const ToDo = (props: ToDoItemProps) => {
-  const { toDos, setToDos } = useContext(ToDoStateContext)
+  const toDoLogic = useContext(ToDoStateContext)
 
-  const deleteToDo = (id: string) => setToDos(toDos.filter(toDo => id !== toDo.id))
+  const deleteToDo = (id: string) =>
+    toDoLogic.setToDos(toDoLogic.toDos.filter(toDo => id !== toDo.id))
 
   const toggleCompleted = (id: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo)))
+    toDoLogic.setToDos(
+      toDoLogic.toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo))
+    )
 
   const editToDoList = (id: string, newTask: string) =>
-    setToDos(toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo)))
+    toDoLogic.setToDos(
+      toDoLogic.toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo))
+    )
 
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState('')

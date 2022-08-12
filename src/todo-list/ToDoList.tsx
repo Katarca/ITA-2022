@@ -44,7 +44,7 @@ const ToDoList = () => {
   const [task, setTask] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const { toDos, setToDos } = useContext(ToDoStateContext)
+  const toDoLogic = useContext(ToDoStateContext)
 
   const filterMap = {
     all: () => true,
@@ -54,7 +54,7 @@ const ToDoList = () => {
 
   const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
-  const activeToDos = toDos.filter(filterMap['active'])
+  const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
 
   return (
     <HelmetProvider>
@@ -81,13 +81,13 @@ const ToDoList = () => {
               setError('Please enter a value!')
               return
             }
-            setToDos([
+            toDoLogic.setToDos([
               {
                 id: idGenerator(),
                 task,
                 completed: false,
               },
-              ...toDos,
+              ...toDoLogic.toDos,
             ])
             setTask('')
             setError(null)
@@ -123,7 +123,7 @@ const ToDoList = () => {
           </TransparentButtonBorder>
         </Div_ButtonContainer>
         <Ul_List>
-          {toDos.filter(filterMap[filter]).map(toDo => (
+          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
             <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
           ))}
         </Ul_List>
