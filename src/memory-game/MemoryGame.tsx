@@ -15,6 +15,8 @@ const cardPics = ['🤠', '🐎', '🦅', '🐻', '🪕', '👢', '💰', '🧨'
 type Card = {
   id: string
   value: string
+  frozen: boolean
+  flipped: boolean
 }
 
 const createBoard = (): Card[] =>
@@ -22,13 +24,58 @@ const createBoard = (): Card[] =>
     [...cardPics, ...cardPics].map(cardPic => ({
       id: idGenerator(),
       value: cardPic,
+      frozen: false,
+      flipped: false,
     }))
   )
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
+  const [matches, setMatches] = useState<number>(0)
 
-  //   console.log(cars)
+  const handleCardClick = (clickedCard: Card) => {
+    !clickedCard.frozen && cardClick(clickedCard)
+  }
+
+  const handleReset = () => {
+    setCards(createBoard())
+    setMatches(0)
+  }
+
+  const cardClick = (clickedCard: Card) => {
+    setCards(
+      cards.map(card =>
+        card.id === clickedCard.id ? { ...card, frozen: true, flipped: true } : card
+      )
+    )
+    if (!selectedCard) {
+      setSelectedCard(clickedCard)
+      return
+    } else if (clickedCard.value === selectedCard.value) {
+      setMatches(matches + 1)
+      setCards(
+        cards.map(card =>
+          card.id === clickedCard.id || card.id === selectedCard.id
+            ? { ...card, frozen: true, flipped: true }
+            : card
+        )
+      )
+      setSelectedCard(null)
+      return
+    } else if (selectedCard && clickedCard.value !== selectedCard.value) {
+      setTimeout(() => {
+        setCards(
+          cards.map(card =>
+            card.id === clickedCard.id || card.id === selectedCard.id
+              ? { ...card, frozen: false, flipped: false }
+              : card
+          )
+        )
+        setSelectedCard(null)
+      }, 500)
+    }
+  }
 
   return (
     <HelmetProvider>
@@ -36,15 +83,23 @@ export const MemoryGame = () => {
         <title>Katarína Soušková | Memory Game</title>
       </Helmet>
       <Div_Container>
-        <H_MgHeading>Wild West Memory Game 🤠</H_MgHeading>
+        <H_MgHeading>
+          {matches === cards.length / 2 ? 'Congrats!' : 'Wild West Memory Game 🤠'}
+        </H_MgHeading>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
-              {cards.map(card => (
-                <Div_Card key={card.id}>
-                  <P_EmojiText>{card.value}</P_EmojiText>
-                </Div_Card>
-              ))}
+              {matches !== cards.length / 2 ? (
+                cards.map(card => (
+                  <Div_Card key={card.id} onClick={() => handleCardClick(card)}>
+                    <P_EmojiText>{card.flipped ? card.value : '❌'}</P_EmojiText>
+                  </Div_Card>
+                ))
+              ) : (
+                <Div_ResetContainer onClick={() => handleReset()}>
+                  <H_MgHeading>Reset game</H_MgHeading>
+                </Div_ResetContainer>
+              )}
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
@@ -98,17 +153,23 @@ const Div_Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 
 const P_EmojiText = styled.p`
-  font-size: ${styles.fontSize.xxl};
-  ${breakpoint.tabletPortrait} {
-    font-size: ${styles.fontSize.xl};
-  }
+  font-size: ${styles.fontSize.xl};
   ${breakpoint.phone} {
     font-size: ${styles.fontSize.lg};
   }
   ${breakpoint.miniPhone} {
     font-size: ${styles.fontSize.md};
   }
+`
+const Div_ResetContainer = styled.div`
+  grid-column: 1/5;
+  grid-row: 1/5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `
