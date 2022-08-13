@@ -23,12 +23,13 @@ export const styles = {
     sm: '2rem',
     md: '3rem',
     lg: '4rem',
-    xl: '8rem',
+    xl: '6rem',
+    xxl: '8rem',
   },
 } as const
 
 export const device = {
-  miniPhone: 350,
+  miniPhone: 380,
   phone: 650,
   tabletPortrait: 900,
   tabletLandscape: 1250,
