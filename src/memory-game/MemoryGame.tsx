@@ -38,11 +38,6 @@ export const MemoryGame = () => {
     !clickedCard.frozen && cardClick(clickedCard)
   }
 
-  const handleReset = () => {
-    setCards(createBoard())
-    setMatches(0)
-  }
-
   const cardClick = (clickedCard: Card) => {
     setCards(
       cards.map(card =>
@@ -77,6 +72,11 @@ export const MemoryGame = () => {
     }
   }
 
+  const handleReset = () => {
+    setCards(createBoard())
+    setMatches(0)
+  }
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -84,7 +84,7 @@ export const MemoryGame = () => {
       </Helmet>
       <Div_Container>
         <H_MgHeading>
-          {matches === cards.length / 2 ? 'Congrats!' : 'Wild West Memory Game 🤠'}
+          {matches === cards.length / 2 ? 'Congrats Partner!' : 'Wild West Memory Game 🤠'}
         </H_MgHeading>
         <Div_BoardBox>
           <Div_BoardWrapper>
