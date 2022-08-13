@@ -32,7 +32,7 @@ const createBoard = (): Card[] =>
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
   const [selectedCard, setSelectedCard] = useState<Card | null>(null)
-  const [matches, setMatches] = useState<number>(0)
+  const [matches, setMatches] = useState(0)
 
   const handleCardClick = (clickedCard: Card) => {
     !clickedCard.frozen && cardClick(clickedCard)
