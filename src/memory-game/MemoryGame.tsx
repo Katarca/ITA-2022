@@ -19,20 +19,23 @@ type Card = {
   flipped: boolean
 }
 
-const createBoard = (): Card[] =>
+const createBoard = () =>
   shuffleArray(
-    [...cardPics, ...cardPics].map(cardPic => ({
-      id: idGenerator(),
-      value: cardPic,
-      frozen: false,
-      flipped: false,
-    }))
+    [...cardPics, ...cardPics].map(
+      cardPic =>
+        ({
+          id: idGenerator(),
+          value: cardPic,
+          frozen: false,
+          flipped: false,
+        } as Card)
+    )
   )
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
-  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
-  const [matches, setMatches] = useState(0)
+  const [selectedCard, setSelectedCard] = useState(null as Card | null)
+  const [matches, setMatches] = useState<number>(0)
 
   const handleCardClick = (clickedCard: Card) => {
     !clickedCard.frozen && cardClick(clickedCard)
