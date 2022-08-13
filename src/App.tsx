@@ -3,6 +3,7 @@ import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
+import { MemoryGame } from './memory-game/MemoryGame'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
 import { createGlobalStyle } from 'styled-components'
@@ -28,6 +29,7 @@ export function App() {
           <Route path={urls.counterApp} element={<CounterApp />} />
           <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
+          <Route path={urls.memoryGame} element={<MemoryGame />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>
