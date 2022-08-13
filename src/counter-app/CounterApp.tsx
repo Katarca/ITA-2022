@@ -28,7 +28,6 @@ export class CounterApp extends Component<Props, State> {
         <CounterContainer>
           <Helmet>
             <title>Katarína Soušková | Counter App</title>
-            <meta name='description' content='Simple counter app using react class components' />
           </Helmet>
           <H_Heading>{this.state.counter}</H_Heading>
           <ButtonContainer>

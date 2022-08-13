@@ -18,10 +18,6 @@ export function App() {
       <StyledApp>
         <Helmet>
           <title>Katarína Soušková</title>
-          <meta
-            name='description'
-            content='Portfolio of react front-end developer Katarína Soušková'
-          />
         </Helmet>
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />

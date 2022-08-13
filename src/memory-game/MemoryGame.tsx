@@ -1,3 +1,5 @@
+import { Div_Container } from '../components/Container'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { idGenerator } from '../utils/idGenerator'
 import { shuffleArray } from '../utils/shuffleArray'
 import React, { useState } from 'react'
@@ -20,5 +22,12 @@ const createBoard = (): Card[] =>
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
 
-  return <div>MemoryGame</div>
+  return (
+    <HelmetProvider>
+      <Helmet>
+        <title>Katarína Soušková | Memory Game</title>
+      </Helmet>
+      <Div_Container>MemoryGame</Div_Container>
+    </HelmetProvider>
+  )
 }
