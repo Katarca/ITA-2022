@@ -37,7 +37,7 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(() => resolve(un
 export const MemoryGame = () => {
   const [cards, setCards] = useState(createBoard())
   const [selectedCard, setSelectedCard] = useState(null as Card | null)
-  const [matches, setMatches] = useState<number>(0)
+  const [matches, setMatches] = useState(0)
 
   const handleCardClick = (clickedCard: Card) => {
     !clickedCard.frozen && cardClick(clickedCard)
