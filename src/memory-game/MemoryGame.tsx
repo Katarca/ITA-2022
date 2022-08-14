@@ -35,7 +35,7 @@ const createBoard = () =>
 const delay = (ms: number) => new Promise(resolve => setTimeout(() => resolve(undefined), ms))
 
 export const MemoryGame = () => {
-  const [cards, setCards] = useState<Card[]>(createBoard())
+  const [cards, setCards] = useState(createBoard())
   const [selectedCard, setSelectedCard] = useState(null as Card | null)
   const [matches, setMatches] = useState<number>(0)
 
