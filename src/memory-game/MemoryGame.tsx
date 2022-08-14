@@ -32,6 +32,12 @@ const createBoard = () =>
     )
   )
 
+const delay = (ms: number) => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(undefined), ms)
+  })
+}
+
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
   const [selectedCard, setSelectedCard] = useState(null as Card | null)
@@ -62,16 +68,38 @@ export const MemoryGame = () => {
       setSelectedCard(null)
       return
     } else if (selectedCard && clickedCard.value !== selectedCard.value) {
-      setTimeout(() => {
-        setCards(
-          cards.map(card =>
-            card.id === clickedCard.id || card.id === selectedCard.id
-              ? { ...card, frozen: false, flipped: false }
-              : card
+      new Promise(resolve => {
+        setTimeout(() => resolve(undefined), 500)
+      })
+        .then(() => {
+          setCards(
+            cards.map(card =>
+              card.id === clickedCard.id || card.id === selectedCard.id
+                ? { ...card, frozen: false, flipped: false }
+                : card
+            )
           )
-        )
-        setSelectedCard(null)
-      }, 500)
+        })
+        .then(() => {
+          setSelectedCard(null)
+        })
+      const flipBack = async () => {
+        await delay(500)
+          .then(() => {
+            setCards(
+              cards.map(card =>
+                card.id === clickedCard.id || card.id === selectedCard.id
+                  ? { ...card, frozen: false, flipped: false }
+                  : card
+              )
+            )
+            return null
+          })
+          .then(() => {
+            setSelectedCard(null)
+          })
+      }
+      flipBack()
     }
   }
 
