@@ -68,21 +68,6 @@ export const MemoryGame = () => {
       setSelectedCard(null)
       return
     } else if (selectedCard && clickedCard.value !== selectedCard.value) {
-      new Promise(resolve => {
-        setTimeout(() => resolve(undefined), 500)
-      })
-        .then(() => {
-          setCards(
-            cards.map(card =>
-              card.id === clickedCard.id || card.id === selectedCard.id
-                ? { ...card, frozen: false, flipped: false }
-                : card
-            )
-          )
-        })
-        .then(() => {
-          setSelectedCard(null)
-        })
       const flipBack = async () => {
         await delay(500)
           .then(() => {
