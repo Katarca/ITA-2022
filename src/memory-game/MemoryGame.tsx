@@ -32,11 +32,7 @@ const createBoard = () =>
     )
   )
 
-const delay = (ms: number) => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(undefined), ms)
-  })
-}
+const delay = (ms: number) => new Promise(resolve => setTimeout(() => resolve(undefined), ms))
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState<Card[]>(createBoard())
