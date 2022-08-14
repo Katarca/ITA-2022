@@ -40,7 +40,7 @@ export const MemoryGame = () => {
   const [matches, setMatches] = useState(0)
 
   const handleCardClick = (clickedCard: Card) => {
-    !clickedCard.frozen && cardClick(clickedCard)
+    if (!clickedCard.frozen) cardClick(clickedCard)
   }
 
   const cardClick = (clickedCard: Card) => {
