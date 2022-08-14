@@ -35,7 +35,6 @@ export const HackerTyper = () => {
       <Div_Container>
         <Helmet>
           <title>Katarína Soušková | Hacker Typer</title>
-          <meta name='description' content='Hacker Typer clone' />
         </Helmet>
         {message && (
           <div>

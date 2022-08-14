@@ -19,6 +19,9 @@ export const HomePage = () => {
       <RouterLink to={urls.hackerTyper}>
         <P_LinkBodyText>Hacker Typer</P_LinkBodyText>
       </RouterLink>
+      <RouterLink to={urls.memoryGame}>
+        <P_LinkBodyText>Memory Game</P_LinkBodyText>
+      </RouterLink>
     </StyledHomePage>
   )
 }

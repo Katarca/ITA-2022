@@ -13,7 +13,6 @@ export const JavaScriptWeb = () => {
       <HelmetProvider>
         <Helmet>
           <title>Katarína Soušková | JS Web</title>
-          <meta name='description' content='Web about history and usage of JavaScript' />
         </Helmet>
         <Navbar />
         <Home />

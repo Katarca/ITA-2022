@@ -61,10 +61,6 @@ const ToDoList = () => {
       <Div_Container>
         <Helmet>
           <title>Katarína Soušková | ToDo List</title>
-          <meta
-            name='description'
-            content='Todo app where you can write, edit, filter and delete tasks'
-          />
         </Helmet>
         <H_TodoHeading>ToDo List</H_TodoHeading>
         {activeToDos.length >= 1 && (
