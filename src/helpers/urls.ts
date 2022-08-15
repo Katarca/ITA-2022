@@ -5,4 +5,5 @@ export const urls = {
   todoList: '/todo-list',
   hackerTyper: '/hacker-typer',
   memoryGame: '/memory-game',
+  mortgageCalculator: '/mortgage-calculator',
 } as const
