@@ -1,10 +1,12 @@
+import { BlueButton } from '../components/Button'
+import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -23,6 +25,12 @@ export const MortgageCalculator = () => {
   const [numMonths, setNumMonths] = useState(0)
   const monthlyPayment = paymentCalc(loanAmount, interestRate, numMonths)
 
+  const handleReset = () => {
+    setLoanAmount(0)
+    setInterestRate(0)
+    setNumMonths(0)
+  }
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -30,27 +38,34 @@ export const MortgageCalculator = () => {
       </Helmet>
       <Div_Container>
         <H_MCHeading>Mortgage Calculator</H_MCHeading>
-        <div>
-          <CustomInput
-            type='number'
-            placeholder='Loan Amount'
-            onChange={e => setLoanAmount(Number(e.target.value))}
-          />
-          <CustomInput
-            type='number'
-            placeholder='Interest Rate'
-            onChange={e => setInterestRate(Number(e.target.value))}
-          />
-          <CustomInput
-            type='number'
-            placeholder='Number of Months'
-            onChange={e => setNumMonths(Number(e.target.value))}
-          />
+        <CalculatorForm onReset={() => handleReset()}>
+          <Div_InputContainer>
+            <NumInput
+              type='number'
+              placeholder='loan amount'
+              onChange={e => setLoanAmount(Number(e.target.value))}
+            />
+            <NumInput
+              type='number'
+              placeholder='interest rate'
+              onChange={e => setInterestRate(Number(e.target.value))}
+            />
+            <NumInput
+              type='number'
+              placeholder='number of months'
+              onChange={e => setNumMonths(Number(e.target.value))}
+            />
+          </Div_InputContainer>
+          <BlueButton type='reset'>
+            <P_BodyText>Clear inputs</P_BodyText>
+          </BlueButton>
+        </CalculatorForm>
+        <Div_PaymentContainer>
           <P_BodyText>
             Estimated monthly payments{' '}
             {!monthlyPayment || !isFinite(monthlyPayment) ? '0.00' : monthlyPayment.toFixed(2)} CZK
           </P_BodyText>
-        </div>
+        </Div_PaymentContainer>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -61,4 +76,28 @@ export const MortgageCalculator = () => {
 
 const H_MCHeading = styled(H_Heading)`
   font-size: ${styles.fontSize.md};
+  text-align: center;
+`
+
+const CalculatorForm = styled(CustomForm)`
+  flex-direction: column;
+  align-items: center;
+`
+
+const Div_InputContainer = styled.div`
+  display: flex;
+  padding: ${styles.spacing.sm};
+  ${breakpoint.tabletPortrait} {
+    flex-direction: column;
+  }
+`
+
+const Div_PaymentContainer = styled.div`
+  padding: ${styles.spacing.sm};
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`
+const NumInput = styled(CustomInput)`
+  width: 100%;
 `
