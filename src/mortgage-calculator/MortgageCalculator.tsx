@@ -11,7 +11,7 @@ import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const paymentCalc = (loan: number, rate: number, months: number) => {
+const calculatePayment = (loan: number, rate: number, months: number) => {
   const monthlyRate = rate / 100 / 12
   return (
     (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) /
@@ -23,7 +23,7 @@ export const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(0)
   const [interestRate, setInterestRate] = useState(0)
   const [numMonths, setNumMonths] = useState(0)
-  const monthlyPayment = paymentCalc(loanAmount, interestRate, numMonths)
+  const monthlyPayment = calculatePayment(loanAmount, interestRate, numMonths)
 
   const handleReset = () => {
     setLoanAmount(0)
@@ -38,19 +38,19 @@ export const MortgageCalculator = () => {
       </Helmet>
       <Div_Container>
         <H_MCHeading>Mortgage Calculator</H_MCHeading>
-        <CalculatorForm onReset={() => handleReset()}>
+        <CustomForm_MCForm onReset={() => handleReset()}>
           <Div_InputContainer>
-            <NumInput
+            <CustomInput_MCInput
               type='number'
               placeholder='loan amount'
               onChange={e => setLoanAmount(Number(e.target.value))}
             />
-            <NumInput
+            <CustomInput_MCInput
               type='number'
               placeholder='interest rate'
               onChange={e => setInterestRate(Number(e.target.value))}
             />
-            <NumInput
+            <CustomInput_MCInput
               type='number'
               placeholder='number of months'
               onChange={e => setNumMonths(Number(e.target.value))}
@@ -59,7 +59,7 @@ export const MortgageCalculator = () => {
           <BlueButton type='reset'>
             <P_BodyText>Clear inputs</P_BodyText>
           </BlueButton>
-        </CalculatorForm>
+        </CustomForm_MCForm>
         <Div_PaymentContainer>
           <P_BodyText>
             Estimated monthly payments{' '}
@@ -79,7 +79,7 @@ const H_MCHeading = styled(H_Heading)`
   text-align: center;
 `
 
-const CalculatorForm = styled(CustomForm)`
+const CustomForm_MCForm = styled(CustomForm)`
   flex-direction: column;
   align-items: center;
 `
@@ -98,6 +98,6 @@ const Div_PaymentContainer = styled.div`
   justify-content: center;
   text-align: center;
 `
-const NumInput = styled(CustomInput)`
+const CustomInput_MCInput = styled(CustomInput)`
   width: 100%;
 `
