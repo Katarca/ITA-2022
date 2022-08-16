@@ -68,7 +68,7 @@ export const MemoryGame = () => {
         setCards(
           cards.map(card =>
             card.id === clickedCard.id || card.id === selectedCard.id
-              ? { ...card, frozen: true, flipped: true }
+              ? { ...card, flipped: true }
               : { ...card, frozen: true }
           )
         )
