@@ -7,6 +7,7 @@ export const Input = (props: ComponentProps<'input'>) => {
 }
 
 export const CustomInput = styled(Input)`
+  font-family: 'IBM Plex Mono', monospace;
   background: transparent;
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.white};

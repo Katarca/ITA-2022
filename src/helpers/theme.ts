@@ -3,6 +3,7 @@ export const styles = {
     white: '#ffffff',
     yellow300: '#f7df1c',
     orange300: '#f77f1c',
+    orangeTransparent: 'rgba(247, 127, 28, 0.6)',
     grey300: '#9c9c9c',
     grey500: '#2f363e',
     grey900: '#1b1b1b',

@@ -6,7 +6,8 @@ export const P_BodyText = styled.p`
   color: ${styles.colors.white};
   &[aria-checked='true'] {
     text-decoration: line-through;
-    text-decoration-color: ${styles.colors.orange300};
+    text-decoration-color: ${styles.colors.orangeTransparent};
+    color: ${styles.colors.orangeTransparent};
   }
 `
 export const P_LinkBodyText = styled(P_BodyText)`

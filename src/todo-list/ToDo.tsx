@@ -3,30 +3,27 @@ import { Div_FlexContainer } from '../components/Container'
 import { Form } from '../components/Form'
 import { P_BodyText } from '../components/BodyText'
 import { ToDoProps, ToDoStateContext } from './ToDoList'
-import { TransparentButton, TransparentButtonBorder } from '../components/Button'
+import { TransparentButton } from '../components/Button'
 import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
-type ToDoItemProps = ToDoProps & {
-  key: string
-}
-
-export const ToDo = (props: ToDoItemProps) => {
+export const ToDo = (props: ToDoProps) => {
   const toDoLogic = useContext(ToDoStateContext)
 
-  const deleteToDo = (id: string) =>
-    toDoLogic.setToDos(toDoLogic.toDos.filter(toDo => id !== toDo.id))
+  const deleteToDo = () => toDoLogic.setToDos(toDoLogic.toDos.filter(toDo => props.id !== toDo.id))
 
-  const toggleCompleted = (id: string) =>
+  const toggleCompleted = () =>
     toDoLogic.setToDos(
-      toDoLogic.toDos.map(toDo => (id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo))
+      toDoLogic.toDos.map(toDo =>
+        props.id === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo
+      )
     )
 
-  const editToDoList = (id: string, newTask: string) =>
+  const editToDoList = (newTask: string) =>
     toDoLogic.setToDos(
-      toDoLogic.toDos.map(toDo => (id === toDo.id ? { ...toDo, task: newTask } : toDo))
+      toDoLogic.toDos.map(toDo => (props.id === toDo.id ? { ...toDo, task: newTask } : toDo))
     )
 
   const [editing, setEditing] = useState(false)
@@ -39,7 +36,7 @@ export const ToDo = (props: ToDoItemProps) => {
           <CustomInput
             type='checkbox'
             checked={props.completed}
-            onChange={() => toggleCompleted(props.id)}
+            onChange={() => toggleCompleted()}
           />
           <Div_TaskContainer onClick={() => setEditing(true)}>
             {editing ? (
@@ -49,12 +46,12 @@ export const ToDo = (props: ToDoItemProps) => {
                   if (newTask.trim().length === 0) {
                     return
                   }
-                  editToDoList(props.id, newTask)
+                  editToDoList(newTask)
                   setNewTask(newTask)
                   setEditing(false)
                 }}
               >
-                <CustomInput
+                <CustomInput_EditInput
                   type='text'
                   value={newTask}
                   onChange={e => setNewTask(e.target.value)}
@@ -65,7 +62,7 @@ export const ToDo = (props: ToDoItemProps) => {
             )}
           </Div_TaskContainer>
         </Div_FlexContainer>
-        <TransparentButton_DeleteButton onClick={() => deleteToDo(props.id)}>
+        <TransparentButton_DeleteButton onClick={() => deleteToDo()}>
           <CrossIcon />
         </TransparentButton_DeleteButton>
       </Div_TodoContainer>
@@ -96,5 +93,13 @@ const Div_TodoContainer = styled.div`
   justify-content: space-between;
   &:hover ${TransparentButton_DeleteButton} {
     opacity: 1;
+  }
+`
+const CustomInput_EditInput = styled(CustomInput)`
+  padding: unset;
+  margin: unset;
+  border: none;
+  &:focus {
+    outline: none;
   }
 `
