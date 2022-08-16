@@ -1,4 +1,3 @@
-import { BlueButton, TransparentButtonBorder } from '../components/Button'
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
@@ -7,6 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
+import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { idGenerator } from '../utils/idGenerator'
@@ -42,7 +42,6 @@ export const ToDoApp = () => {
 
 const ToDoList = () => {
   const [task, setTask] = useState('')
-  const [error, setError] = useState<string | null>(null)
 
   const toDoLogic = useContext(ToDoStateContext)
 
@@ -74,7 +73,6 @@ const ToDoList = () => {
           onSubmit={e => {
             e.preventDefault()
             if (task.trim().length === 0) {
-              setError('Please enter a value!')
               return
             }
             toDoLogic.setToDos([
@@ -86,7 +84,6 @@ const ToDoList = () => {
               ...toDoLogic.toDos,
             ])
             setTask('')
-            setError(null)
           }}
         >
           <CustomInput
@@ -96,11 +93,7 @@ const ToDoList = () => {
             onChange={e => setTask(e.target.value)}
             autoComplete='off'
           />
-          <BlueButton type='submit'>
-            <P_BodyText>Add</P_BodyText>
-          </BlueButton>
         </CustomForm>
-        {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
         <Div_ButtonContainer>
           <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
             <P_BodyText>All</P_BodyText>
@@ -151,9 +144,4 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     width: 100%;
     align-items: center;
   }
-`
-export const P_ErrorText = styled(P_BodyText)`
-  font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.yellow300};
-  padding: 0 ${styles.spacing.xs} ${styles.spacing.xs} ${styles.spacing.xs};
 `

@@ -2,7 +2,7 @@ import { styles } from '../helpers/theme'
 import React, { ComponentProps } from 'react'
 import styled from 'styled-components'
 
-const Input = (props: ComponentProps<'input'>) => {
+export const Input = (props: ComponentProps<'input'>) => {
   return <input {...props} />
 }
 
