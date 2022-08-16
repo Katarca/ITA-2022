@@ -62,13 +62,6 @@ const ToDoList = () => {
           <title>Katarína Soušková | ToDo List</title>
         </Helmet>
         <H_TodoHeading>ToDo List</H_TodoHeading>
-        {activeToDos.length >= 1 && (
-          <P_BodyText>
-            {activeToDos.length === 1
-              ? `${activeToDos.length} task left`
-              : `${activeToDos.length} tasks left`}
-          </P_BodyText>
-        )}
         <CustomForm
           onSubmit={e => {
             e.preventDefault()
@@ -94,6 +87,18 @@ const ToDoList = () => {
             autoComplete='off'
           />
         </CustomForm>
+        <Ul_List>
+          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
+            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
+          ))}
+        </Ul_List>
+        {activeToDos.length >= 1 && (
+          <P_TaskText>
+            {activeToDos.length === 1
+              ? `${activeToDos.length} task left`
+              : `${activeToDos.length} tasks left`}
+          </P_TaskText>
+        )}
         <Div_ButtonContainer>
           <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
             <P_BodyText>All</P_BodyText>
@@ -111,11 +116,6 @@ const ToDoList = () => {
             <P_BodyText>Completed</P_BodyText>
           </TransparentButtonBorder>
         </Div_ButtonContainer>
-        <Ul_List>
-          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
-          ))}
-        </Ul_List>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -129,7 +129,7 @@ const H_TodoHeading = styled(H_Heading)`
 `
 
 const Ul_List = styled.ul`
-  padding: ${styles.spacing.sm};
+  padding: ${styles.spacing.xs};
   width: 70%;
   ${breakpoint.tabletPortrait} {
     width: 90%;
@@ -144,4 +144,8 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     width: 100%;
     align-items: center;
   }
+`
+const P_TaskText = styled(P_BodyText)`
+  font-size: ${styles.fontSize.xs};
+  color: ${styles.colors.grey300};
 `

@@ -4,6 +4,7 @@ import { Form } from '../components/Form'
 import { P_BodyText } from '../components/BodyText'
 import { ToDoProps, ToDoStateContext } from './ToDoList'
 import { TransparentButton } from '../components/Button'
+import { ReactComponent as completedIcon } from './icons/completed-icon.svg'
 import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import React, { useContext, useState } from 'react'
@@ -30,14 +31,12 @@ export const ToDo = (props: ToDoProps) => {
   const [newTask, setNewTask] = useState(props.task)
 
   return (
-    <Li_ListItem key={props.id}>
+    <Li_ListItem>
       <Div_TodoContainer>
         <Div_FlexContainer>
-          <CustomInput
-            type='checkbox'
-            checked={props.completed}
-            onChange={() => toggleCompleted()}
-          />
+          <Div_IconBox onClick={() => toggleCompleted()}>
+            {props.completed && <CompletedIcon />}
+          </Div_IconBox>
           <Div_TaskContainer onClick={() => setEditing(true)}>
             {editing ? (
               <Form
@@ -71,9 +70,18 @@ export const ToDo = (props: ToDoProps) => {
 }
 
 const Li_ListItem = styled.li`
-  border: 2px solid ${styles.colors.white};
-  border-radius: 8px;
-  margin: ${styles.spacing.sm} 0;
+  border-top: 2px solid ${styles.colors.orangeTransparent};
+  border-right: 2px solid ${styles.colors.orangeTransparent};
+  border-left: 2px solid ${styles.colors.orangeTransparent};
+  &:first-child {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  &:last-child {
+    border-bottom: 2px solid ${styles.colors.orangeTransparent};
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
 `
 const CrossIcon = styled(crossIcon)`
   width: 25px;
@@ -102,4 +110,18 @@ const CustomInput_EditInput = styled(CustomInput)`
   &:focus {
     outline: none;
   }
+`
+const CompletedIcon = styled(completedIcon)`
+  width: 12px;
+`
+const Div_IconBox = styled.div`
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${styles.spacing.sm};
+  border: 2px solid ${styles.colors.grey300};
+  border-radius: 5px;
+  cursor: pointer;
 `
