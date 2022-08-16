@@ -1,4 +1,3 @@
-import { BlueButton, TransparentButtonBorder } from '../components/Button'
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
@@ -7,6 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { ToDo } from './ToDo'
+import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { idGenerator } from '../utils/idGenerator'
@@ -42,7 +42,6 @@ export const ToDoApp = () => {
 
 const ToDoList = () => {
   const [task, setTask] = useState('')
-  const [error, setError] = useState<string | null>(null)
 
   const toDoLogic = useContext(ToDoStateContext)
 
@@ -63,18 +62,10 @@ const ToDoList = () => {
           <title>Katarína Soušková | ToDo List</title>
         </Helmet>
         <H_TodoHeading>ToDo List</H_TodoHeading>
-        {activeToDos.length >= 1 && (
-          <P_BodyText>
-            {activeToDos.length === 1
-              ? `${activeToDos.length} task left`
-              : `${activeToDos.length} tasks left`}
-          </P_BodyText>
-        )}
         <CustomForm
           onSubmit={e => {
             e.preventDefault()
             if (task.trim().length === 0) {
-              setError('Please enter a value!')
               return
             }
             toDoLogic.setToDos([
@@ -86,7 +77,6 @@ const ToDoList = () => {
               ...toDoLogic.toDos,
             ])
             setTask('')
-            setError(null)
           }}
         >
           <CustomInput
@@ -96,11 +86,19 @@ const ToDoList = () => {
             onChange={e => setTask(e.target.value)}
             autoComplete='off'
           />
-          <BlueButton type='submit'>
-            <P_BodyText>Add</P_BodyText>
-          </BlueButton>
         </CustomForm>
-        {error ? <P_ErrorText>{error}</P_ErrorText> : ''}
+        <Ul_List>
+          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
+            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
+          ))}
+        </Ul_List>
+        {activeToDos.length >= 1 && (
+          <P_TaskText>
+            {activeToDos.length === 1
+              ? `${activeToDos.length} task left`
+              : `${activeToDos.length} tasks left`}
+          </P_TaskText>
+        )}
         <Div_ButtonContainer>
           <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
             <P_BodyText>All</P_BodyText>
@@ -118,11 +116,6 @@ const ToDoList = () => {
             <P_BodyText>Completed</P_BodyText>
           </TransparentButtonBorder>
         </Div_ButtonContainer>
-        <Ul_List>
-          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
-          ))}
-        </Ul_List>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -136,7 +129,7 @@ const H_TodoHeading = styled(H_Heading)`
 `
 
 const Ul_List = styled.ul`
-  padding: ${styles.spacing.sm};
+  padding: ${styles.spacing.xs};
   width: 70%;
   ${breakpoint.tabletPortrait} {
     width: 90%;
@@ -152,8 +145,7 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     align-items: center;
   }
 `
-export const P_ErrorText = styled(P_BodyText)`
+const P_TaskText = styled(P_BodyText)`
   font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.yellow300};
-  padding: 0 ${styles.spacing.xs} ${styles.spacing.xs} ${styles.spacing.xs};
+  color: ${styles.colors.grey300};
 `
