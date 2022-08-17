@@ -127,7 +127,6 @@ export const MemoryGame = () => {
 
 const H_MgHeading = styled(H_Heading)`
   font-size: ${styles.fontSize.md};
-  text-align: center;
 `
 
 const Div_BoardBox = styled.div`

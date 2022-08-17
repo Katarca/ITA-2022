@@ -1,4 +1,4 @@
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import styled from 'styled-components'
 
 export const Div_Container = styled.div`
@@ -10,6 +10,9 @@ export const Div_Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: ${styles.spacing.md};
+  ${breakpoint.phone} {
+    padding: ${styles.spacing.sm};
+  }
 `
 export const Div_FlexContainer = styled.div`
   display: flex;
