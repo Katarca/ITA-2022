@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Hermione Russell",
+      "email": "sit.amet@hotmail.org"
+    },
+    { "id": "2", "name": "Nell Bryant", "email": "sem.egestas@icloud.ca" },
+    { "id": "3", "name": "Elaine Mcdaniel", "email": "convallis.convallis.dolor@icloud.net" },
+    { "id": "4", "name": "Daryl Bradley", "email": "ultrices@yahoo.couk" },
+    { "id": "5", "name": "Kaseem Mclaughlin", "email": "dignissim@google.edu" },
+    { "id": "6", "name": "Vaughan Beach", "email": "lorem.ac@google.net" },
+    { "id": "7", "name": "Reese Tucker", "email": "feugiat@hotmail.org" },
+    { "id": "8", "name": "Tanek Mathis", "email": "donec@hotmail.ca" },
+    { "id": "9", "name": "Ishmael Gilmore", "email": "pede.nec@outlook.org" },
+    { "id": "10", "name": "Finn Lewis", "email": "ligula.elit@outlook.com" }
+  ]
+}
