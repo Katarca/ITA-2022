@@ -1,14 +1,25 @@
+import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
+import { Form } from '../components/Form'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
+type User = {
+  id: string
+  name: string
+  email: string
+}
+
 export const HttpFilter = () => {
+  const [data, setData] = useState(null as User[] | null)
+  const [searchTerm, setSearchTerm] = useState(null as null | string)
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -16,6 +27,20 @@ export const HttpFilter = () => {
       </Helmet>
       <Div_Container>
         <H_HFHeading>Http Filter</H_HFHeading>
+        <Form
+          onSubmit={async e => {
+            e.preventDefault()
+            const response = await fetch(`http://localhost:5000/search/${searchTerm}`)
+            setData(await response.json())
+          }}
+        >
+          <CustomInput
+            type='text'
+            placeholder='search user'
+            onChange={e => setSearchTerm(e.target.value.trim().toLowerCase())}
+          />
+        </Form>
+        <StyledPre>{JSON.stringify(data, null, 2)}</StyledPre>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -26,4 +51,7 @@ export const HttpFilter = () => {
 
 const H_HFHeading = styled(H_Heading)`
   font-size: ${styles.fontSize.md};
+`
+const StyledPre = styled.pre`
+  color: white;
 `
