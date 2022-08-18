@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --respawn src/index.ts"
+  },
+  "author": "Katarína Soušková",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
