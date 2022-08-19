@@ -12,11 +12,11 @@ type User = {
   name: string
   email: string
 }
-app.get('/search/:str', (req, res) => {
+app.get('/search/:search', (req, res) => {
   const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
   const data = JSON.parse(dataString).users
   const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
-  const params = formatTerm(req.params.str)
+  const params = formatTerm(req.params.search)
 
   let searchData = data.filter((user: User) =>
     Object.values(user)
