@@ -38,7 +38,7 @@ export const HttpFilter = () => {
           <CustomInput
             type='text'
             placeholder='search user'
-            onChange={e => setSearchTerm(e.target.value.trim().toLowerCase())}
+            onChange={e => setSearchTerm(e.target.value)}
           />
           <BlueButton type='submit'>
             <P_BodyText>Search</P_BodyText>
