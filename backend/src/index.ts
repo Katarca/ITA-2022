@@ -19,7 +19,9 @@ app.get('/search/:str', (req, res) => {
   const params = formatTerm(req.params.str)
 
   let searchData = data.filter((user: User) =>
-    Object.values(user).some(val => formatTerm(val).includes(params))
+    Object.values(user)
+      .filter(val => !formatTerm(val).includes('id'))
+      .some(val => formatTerm(val).includes(params))
   )
 
   res.send(searchData)
