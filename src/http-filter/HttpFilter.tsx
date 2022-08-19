@@ -21,6 +21,8 @@ export const HttpFilter = () => {
   const [data, setData] = useState([] as User[])
   const [searchTerm, setSearchTerm] = useState(null as null | string)
 
+  const url = process.env.REACT_APP_URL
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -31,7 +33,7 @@ export const HttpFilter = () => {
         <Form
           onSubmit={async e => {
             e.preventDefault()
-            const response = await fetch(`http://localhost:5000/search/${searchTerm}`)
+            const response = await fetch(`${url}${searchTerm}`)
             setData(await response.json())
           }}
         >
