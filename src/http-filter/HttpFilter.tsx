@@ -23,6 +23,15 @@ export const HttpFilter = () => {
 
   const url = process.env.REACT_APP_URL
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${url}${searchTerm}`)
+      setData(await response.json())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -31,10 +40,9 @@ export const HttpFilter = () => {
       <Div_Container>
         <H_HFHeading>Http Filter</H_HFHeading>
         <Form
-          onSubmit={async e => {
+          onSubmit={e => {
             e.preventDefault()
-            const response = await fetch(`${url}${searchTerm}`)
-            setData(await response.json())
+            fetchData()
           }}
         >
           <CustomInput

@@ -12,19 +12,23 @@ type User = {
   name: string
   email: string
 }
-app.get('/search/:search', (req, res) => {
-  const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
-  const data = JSON.parse(dataString).users
-  const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
-  const params = formatTerm(req.params.search)
+app.get('/search/:search', async (req, res) => {
+  try {
+    const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
+    const data = JSON.parse(dataString).users
+    const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
+    const params = formatTerm(req.params.search)
 
-  let searchData = data.filter((user: User) =>
-    Object.values(user)
-      .filter(val => !formatTerm(val).includes('id'))
-      .some(val => formatTerm(val).includes(params))
-  )
+    let searchData = data.filter((user: User) =>
+      Object.values(user)
+        .filter(val => !formatTerm(val).includes('id'))
+        .some(val => formatTerm(val).includes(params))
+    )
 
-  res.send(searchData)
+    res.send(searchData)
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 app.listen(port, () => {
