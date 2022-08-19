@@ -18,7 +18,7 @@ type User = {
 }
 
 export const HttpFilter = () => {
-  const [data, setData] = useState(null as User[] | null)
+  const [data, setData] = useState([] as User[])
   const [searchTerm, setSearchTerm] = useState(null as null | string)
 
   return (
