@@ -8,3 +8,5 @@ export const urls = {
   mortgageCalculator: '/mortgage-calculator',
   httpFilter: '/http-filter',
 } as const
+
+export const filterUrl = process.env.REACT_APP_URL

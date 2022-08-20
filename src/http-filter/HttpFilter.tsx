@@ -6,8 +6,8 @@ import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { filterUrl, urls } from '../helpers/urls'
 import { styles } from '../helpers/theme'
-import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -28,12 +28,10 @@ export const HttpFilter = () => {
     noResult: false,
   })
 
-  const url = process.env.REACT_APP_URL
-
   const fetchData = async () => {
     try {
       setDataObj({ ...dataObj, loading: true, errorMsg: '' })
-      const response = await fetch(`${url}${searchTerm}`)
+      const response = await fetch(`${filterUrl}${searchTerm}`)
       if (!response.ok) {
         throw Error
       } else {
