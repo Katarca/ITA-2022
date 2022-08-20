@@ -12,23 +12,33 @@ type User = {
   name: string
   email: string
 }
-app.get('/search/:search', async (req, res) => {
-  try {
-    const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
-    const data = JSON.parse(dataString).users
-    const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
-    const params = formatTerm(req.params.search)
 
-    let searchData = data.filter((user: User) =>
-      Object.values(user)
-        .filter(val => !formatTerm(val).includes('id'))
-        .some(val => formatTerm(val).includes(params))
-    )
+app.get('/search/:search', async (req, res, next) => {
+  fs.readFile(`${__dirname}/../data.json`, 'utf-8', (err, jsonString) => {
+    if (err) {
+      next(err)
+      return
+    }
+    try {
+      const data = JSON.parse(jsonString).users
+      const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
+      const params = formatTerm(req.params.search)
+      let searchData = data.filter((user: User) =>
+        Object.values(user)
+          .filter(val => !formatTerm(val).includes('id'))
+          .some(val => formatTerm(val).includes(params))
+      )
+      res.send(searchData)
+    } catch (err) {
+      next(err)
+    }
+  })
+})
 
-    res.send(searchData)
-  } catch (error) {
-    console.error(error)
-  }
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err)
+  res.status(500)
+  res.json(err)
 })
 
 app.listen(port, () => {
