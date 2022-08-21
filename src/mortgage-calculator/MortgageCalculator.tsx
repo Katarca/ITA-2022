@@ -111,7 +111,7 @@ export const MortgageCalculator = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {loanData.map((installment: Installments, i: number) => (
+                  {loanData.map((installment, i) => (
                     <tr key={i}>
                       <td>
                         <P_TableText>{i + 1}</P_TableText>
