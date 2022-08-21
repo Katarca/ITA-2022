@@ -24,35 +24,25 @@ export const HttpFilter = () => {
   const [userData, setUserData] = useState([] as User[])
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [noResult, setNoResult] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const fetchData = async () => {
+    setLoading(p => !p)
     try {
-      setLoading(p => !p)
-      setErrorMsg('')
       const response = await fetch(`${filterUrl}${searchTerm}`)
       if (!response.ok) {
         throw Error
       } else {
         const json = await response.json()
-        if (json.length === 0) {
-          setLoading(p => !p)
-          setErrorMsg(p => p)
-          setNoResult(true)
-        } else {
-          setUserData(json)
-          setLoading(p => !p)
-          setErrorMsg(p => p)
-          setNoResult(false)
-        }
+        setUserData(json)
+        setErrorMsg('')
       }
     } catch (error) {
       console.error(error)
       setUserData([])
-      setLoading(p => !p)
-      setNoResult(p => !p)
       setErrorMsg(`An error occurred while fetching users`)
     }
+    setLoading(p => !p)
   }
 
   const loadingJSX = (
@@ -98,6 +88,7 @@ export const HttpFilter = () => {
               setEmptyInputError('Enter value')
               return
             }
+            setIsSubmitted(true)
             fetchData()
             setEmptyInputError(null)
           }}
@@ -119,7 +110,13 @@ export const HttpFilter = () => {
           )}
         </Form>
         <Div_UsersContainer>
-          {loading ? loadingJSX : errorMsg ? errorJSX : noResult ? noResultJSX : dataJSX}
+          {loading
+            ? loadingJSX
+            : errorMsg
+            ? errorJSX
+            : isSubmitted && userData.length === 0
+            ? noResultJSX
+            : dataJSX}
         </Div_UsersContainer>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
