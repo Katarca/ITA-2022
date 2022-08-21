@@ -30,18 +30,15 @@ export const HttpFilter = () => {
     setLoading(p => !p)
     try {
       const response = await fetch(`${filterUrl}${searchTerm}`)
-      if (!response.ok) {
-        throw Error
-      } else {
-        const json = await response.json()
-        setUserData(json)
-        setErrorMsg('')
-      }
+      if (!response.ok) throw Error
+      const json = await response.json()
+      setUserData(json)
+      setErrorMsg('')
     } catch (error) {
       setUserData([])
       setErrorMsg(`An error occurred while fetching users`)
     }
-    setLoading(p => !p)
+    setLoading(false)
   }
 
   const loadingJSX = (
