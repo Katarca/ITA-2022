@@ -28,40 +28,50 @@ export const HttpFilter = () => {
     noResult: false,
   })
 
+  const [userData, setUserData] = useState([] as User[])
+  const [loading, setLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [noResult, setNoResult] = useState(false)
+
   const fetchData = async () => {
     try {
-      setDataObj({ ...dataObj, loading: true, errorMsg: '' })
+      // setDataObj({ ...dataObj, loading: true, errorMsg: '' })
+      setLoading(true)
+      setErrorMsg('')
       const response = await fetch(`${filterUrl}${searchTerm}`)
       if (!response.ok) {
         throw Error
       } else {
         const json = await response.json()
         if (json.length === 0) {
-          setDataObj({ ...dataObj, loading: false, errorMsg: '', noResult: true })
+          setLoading(false)
+          setErrorMsg('')
+          setNoResult(true)
         } else {
-          setDataObj({ userData: json, loading: false, errorMsg: '', noResult: false })
+          setUserData(json)
+          setLoading(false)
+          setErrorMsg('')
+          setNoResult(false)
         }
       }
     } catch (error) {
       console.error(error)
-      setDataObj({
-        userData: [],
-        loading: false,
-        errorMsg: `An error occurred while fetching users`,
-        noResult: false,
-      })
+      setUserData([])
+      setLoading(false)
+      setNoResult(false)
+      setErrorMsg(`An error occurred while fetching users`)
     }
   }
 
   const loadingJSX = (
     <Div_MsgContainer>
-      <P_BodyText>{dataObj.loading}</P_BodyText>
+      <P_BodyText>{loading}</P_BodyText>
     </Div_MsgContainer>
   )
 
   const errorJSX = (
     <Div_MsgContainer>
-      <P_BodyText>{dataObj.errorMsg}</P_BodyText>
+      <P_BodyText>{errorMsg}</P_BodyText>
     </Div_MsgContainer>
   )
 
@@ -73,7 +83,7 @@ export const HttpFilter = () => {
 
   const dataJSX = (
     <div>
-      {dataObj.userData?.map(user => (
+      {userData?.map(user => (
         <Div_UserBox key={user.id}>
           <P_BodyText>{user.name}</P_BodyText>
           <P_BodyText>{user.email}</P_BodyText>
@@ -117,13 +127,7 @@ export const HttpFilter = () => {
           )}
         </Form>
         <Div_UsersContainer>
-          {dataObj.loading
-            ? loadingJSX
-            : dataObj.errorMsg
-            ? errorJSX
-            : dataObj.noResult
-            ? noResultJSX
-            : dataJSX}
+          {loading ? loadingJSX : errorMsg ? errorJSX : noResult ? noResultJSX : dataJSX}
         </Div_UsersContainer>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
