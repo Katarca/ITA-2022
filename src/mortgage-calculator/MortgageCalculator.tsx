@@ -7,6 +7,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
+import { formatAmount } from '../utils/formatAmount'
 import { urls } from '../helpers/urls'
 import LoanJS from 'loanjs'
 import React, { useEffect, useState } from 'react'
@@ -40,9 +41,6 @@ export const MortgageCalculator = () => {
     if (loanAmount > 0 && interestRate > 0 && numYears > 0)
       setLoanData(LoanJS.Loan(loanAmount, numYears * 12, interestRate, true).installments)
   }
-
-  const formatAmount = (amount: number) =>
-    Math.ceil(amount).toLocaleString('en-US').replace(',', ' ')
 
   return (
     <HelmetProvider>
