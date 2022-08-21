@@ -27,7 +27,7 @@ export const HttpFilter = () => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
   const fetchData = async () => {
-    setLoading(p => !p)
+    setLoading(true)
     try {
       const response = await fetch(`${filterUrl}${searchTerm}`)
       if (!response.ok) throw Error
