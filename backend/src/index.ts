@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
+import util from 'util'
 
 const app = express()
 const port = 5000
@@ -15,25 +16,22 @@ type User = {
 
 const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
 
+const readFile = util.promisify(fs.readFile)
+
 app.get('/search/:search', async (req, res, next) => {
-  fs.readFile(`${__dirname}/../data.json`, 'utf-8', (err, jsonString) => {
-    if (err) {
-      next(err)
-      return
-    }
-    try {
-      const data = JSON.parse(jsonString).users
-      const params = formatTerm(req.params.search)
-      let searchData = data.filter((user: User) =>
-        Object.values(user)
-          .filter(val => !formatTerm(val).includes('id'))
-          .some(val => formatTerm(val).includes(params))
-      )
-      res.send(searchData)
-    } catch (err) {
-      next(err)
-    }
-  })
+  try {
+    const jsonString = await readFile(`${__dirname}/../data.json`, 'utf8')
+    const data = JSON.parse(jsonString).users
+    const params = formatTerm(req.params.search)
+    let searchData = data.filter((user: User) =>
+      Object.values(user)
+        .filter(val => !formatTerm(val).includes('id'))
+        .some(val => formatTerm(val).includes(params))
+    )
+    res.send(searchData)
+  } catch (err) {
+    next(err)
+  }
 })
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
