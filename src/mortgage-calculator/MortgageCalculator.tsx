@@ -8,29 +8,41 @@ import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
-import React, { useState } from 'react'
+import LoanJS from 'loanjs'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const calculatePayment = (loan: number, rate: number, years: number) => {
-  const monthlyRate = rate / 100 / 12
-  const months = years * 12
-  return (
-    (loan * monthlyRate * Math.pow(1 + monthlyRate, months)) /
-    (Math.pow(1 + monthlyRate, months) - 1)
-  )
+type Installments = {
+  capital: number
+  interest: number
+  installment: number
+  remain: number
+  interestSum: number
 }
 
 export const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
   const [numYears, setNumYears] = useState(5)
-  const monthlyPayment = calculatePayment(loanAmount, interestRate, numYears)
+  const [loanData, setLoanData] = useState([] as Installments[])
+  const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
 
-  const handleReset = () => {
-    setLoanAmount(0)
-    setInterestRate(0)
-    setNumYears(0)
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const calculateLoan = () => {
+    if (loanAmount > 0 && interestRate > 0 && numYears > 0)
+      setLoanData(LoanJS.Loan(loanAmount, numYears * 12, interestRate, true).installments)
   }
+
+  const formatAmount = (amount: number) =>
+    Math.ceil(amount).toLocaleString('en-US').replace(',', ' ')
 
   return (
     <HelmetProvider>
@@ -39,7 +51,7 @@ export const MortgageCalculator = () => {
       </Helmet>
       <Div_Container>
         <H_MCHeading>Mortgage Calculator</H_MCHeading>
-        <MCForm onReset={() => handleReset()}>
+        <MCForm>
           <Div_InputsContainer>
             <Div_InputWrapper>
               <Label_MCLabel>Loan Amount (CZK)</Label_MCLabel>
@@ -66,16 +78,81 @@ export const MortgageCalculator = () => {
               />
             </Div_InputWrapper>
           </Div_InputsContainer>
-          <BlueButton type='reset'>
-            <P_BodyText>Clear inputs</P_BodyText>
-          </BlueButton>
         </MCForm>
-        <Div_PaymentContainer>
-          <P_BodyText>
-            Estimated monthly payments{' '}
-            {!monthlyPayment || !isFinite(monthlyPayment) ? '0.00' : monthlyPayment.toFixed(2)} CZK
-          </P_BodyText>
-        </Div_PaymentContainer>
+        <Div_ButtonContainer>
+          <BlueButton
+            onClick={() => calculateLoan()}
+            disabled={loanAmount <= 0 || interestRate <= 0 || numYears <= 0}
+          >
+            <P_BodyText>See Details</P_BodyText>
+          </BlueButton>
+        </Div_ButtonContainer>
+        {loanData.length > 0 && (
+          <>
+            {windowWidth && windowWidth > 900 ? (
+              <Table_MCTable>
+                <thead>
+                  <tr>
+                    <th>
+                      <P_TableText>Month</P_TableText>
+                    </th>
+                    <th>
+                      <P_TableText>Payment Amount (CZK)</P_TableText>
+                    </th>
+                    <th>
+                      <P_TableText>Interest Paid (CZK)</P_TableText>
+                    </th>
+                    <th>
+                      <P_TableText>Principal Paid (CZK)</P_TableText>
+                    </th>
+                    <th>
+                      <P_TableText>Remain (CZK)</P_TableText>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loanData.map((installment: Installments, i: number) => (
+                    <tr key={i}>
+                      <td>
+                        <P_TableText>{i + 1}</P_TableText>
+                      </td>
+                      <td>
+                        <P_TableText>{formatAmount(installment.installment)}</P_TableText>
+                      </td>
+                      <td>
+                        <P_TableText>{formatAmount(installment.interest)}</P_TableText>
+                      </td>
+                      <td>
+                        <P_TableText>{formatAmount(installment.capital)}</P_TableText>
+                      </td>
+                      <td>
+                        <P_TableText>{formatAmount(installment.remain)}</P_TableText>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table_MCTable>
+            ) : (
+              <>
+                {loanData.map((installment: Installments, i: number) => (
+                  <Div_MobileContainer key={i}>
+                    <P_TableText>{i + 1} month</P_TableText>
+                    <P_TableText>
+                      Payment amount: {formatAmount(installment.installment)} CZK
+                    </P_TableText>
+                    <P_TableText>
+                      Interest paid: {formatAmount(installment.interest)} CZK
+                    </P_TableText>
+                    <P_TableText>
+                      Principal paid: {formatAmount(installment.capital)} CZK
+                    </P_TableText>
+                    <P_TableText>Remain: {formatAmount(installment.remain)} CZK</P_TableText>
+                  </Div_MobileContainer>
+                ))}
+              </>
+            )}
+          </>
+        )}
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -107,22 +184,6 @@ const Div_InputsContainer = styled.div`
   }
 `
 
-const Div_PaymentContainer = styled.div`
-  padding: ${styles.spacing.sm};
-  margin: ${styles.spacing.md} 0;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  background-color: ${styles.colors.grey500};
-  border-radius: 8px;
-  ${breakpoint.phone} {
-    max-width: 70%;
-  }
-  ${breakpoint.miniPhone} {
-    max-width: 90%;
-  }
-`
-
 const Div_InputWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -140,4 +201,31 @@ const Label_MCLabel = styled.label`
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
+`
+const Table_MCTable = styled.table`
+  width: 90%;
+  text-align: center;
+  padding: ${styles.spacing.sm};
+  ${breakpoint.smallNotebook} {
+    width: 100%;
+    padding: ${styles.spacing.sm} 0;
+  }
+  ${breakpoint.phone} {
+    overflow-x: scroll;
+  }
+`
+const P_TableText = styled(P_BodyText)`
+  padding: ${styles.spacing.xs} ${styles.spacing.xs} 0 ${styles.spacing.xs};
+  font-size: ${styles.fontSize.xs};
+`
+const Div_MobileContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: ${styles.spacing.xs};
+  margin: ${styles.spacing.xs};
+  border: 1px solid ${styles.colors.grey300};
+  border-radius: 8px;
+`
+const Div_ButtonContainer = styled.div`
+  padding: ${styles.spacing.sm};
 `

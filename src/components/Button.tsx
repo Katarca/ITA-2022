@@ -18,6 +18,13 @@ export const BlueButton = styled(Button)`
     background-color: ${styles.colors.orange300};
     transform: scale(1.1);
   }
+  &:disabled {
+    background-color: ${styles.colors.grey300};
+    cursor: not-allowed;
+    &:hover {
+      transform: scale(1);
+    }
+  }
 `
 
 export const TransparentButtonBorder = styled(Button)`
