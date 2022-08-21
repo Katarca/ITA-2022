@@ -38,7 +38,6 @@ export const HttpFilter = () => {
         setErrorMsg('')
       }
     } catch (error) {
-      console.error(error)
       setUserData([])
       setErrorMsg(`An error occurred while fetching users`)
     }
