@@ -13,6 +13,8 @@ type User = {
   email: string
 }
 
+const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
+
 app.get('/search/:search', async (req, res, next) => {
   fs.readFile(`${__dirname}/../data.json`, 'utf-8', (err, jsonString) => {
     if (err) {
@@ -21,7 +23,6 @@ app.get('/search/:search', async (req, res, next) => {
     }
     try {
       const data = JSON.parse(jsonString).users
-      const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
       const params = formatTerm(req.params.search)
       let searchData = data.filter((user: User) =>
         Object.values(user)
