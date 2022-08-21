@@ -21,13 +21,6 @@ export const HttpFilter = () => {
   const [searchTerm, setSearchTerm] = useState(null as null | string)
   const [emptyInputError, setEmptyInputError] = useState(null as null | string)
 
-  const [dataObj, setDataObj] = useState({
-    userData: [] as User[],
-    loading: false,
-    errorMsg: '',
-    noResult: false,
-  })
-
   const [userData, setUserData] = useState([] as User[])
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -35,8 +28,7 @@ export const HttpFilter = () => {
 
   const fetchData = async () => {
     try {
-      // setDataObj({ ...dataObj, loading: true, errorMsg: '' })
-      setLoading(true)
+      setLoading(p => !p)
       setErrorMsg('')
       const response = await fetch(`${filterUrl}${searchTerm}`)
       if (!response.ok) {
@@ -44,21 +36,21 @@ export const HttpFilter = () => {
       } else {
         const json = await response.json()
         if (json.length === 0) {
-          setLoading(false)
-          setErrorMsg('')
+          setLoading(p => !p)
+          setErrorMsg(p => p)
           setNoResult(true)
         } else {
           setUserData(json)
-          setLoading(false)
-          setErrorMsg('')
+          setLoading(p => !p)
+          setErrorMsg(p => p)
           setNoResult(false)
         }
       }
     } catch (error) {
       console.error(error)
       setUserData([])
-      setLoading(false)
-      setNoResult(false)
+      setLoading(p => !p)
+      setNoResult(p => !p)
       setErrorMsg(`An error occurred while fetching users`)
     }
   }
