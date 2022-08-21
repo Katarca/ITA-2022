@@ -24,7 +24,7 @@ export const HttpFilter = () => {
   const [userData, setUserData] = useState([] as User[])
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [wasSubmitted, setWasSubmitted] = useState(false)
 
   const fetchData = async () => {
     setLoading(p => !p)
@@ -84,7 +84,7 @@ export const HttpFilter = () => {
               setEmptyInputError('Enter value')
               return
             }
-            setIsSubmitted(true)
+            setWasSubmitted(true)
             fetchData()
             setEmptyInputError(null)
           }}
@@ -110,7 +110,7 @@ export const HttpFilter = () => {
             ? loadingJSX
             : errorMsg
             ? errorJSX
-            : isSubmitted && userData.length === 0
+            : wasSubmitted && userData.length === 0
             ? noResultJSX
             : dataJSX}
         </Div_UsersContainer>
