@@ -5,25 +5,18 @@ import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { breakpoint, styles } from '../helpers/theme'
+import { breakpoint, device, styles } from '../helpers/theme'
 import { formatAmount } from '../utils/formatAmount'
 import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-type LoanDetails = {
-  monthlyPayment: number
-  balance: number
-  monthlyPrincipal: number
-  monthlyInterest: number
-}
 
 const calculateAmortization = (arg: { principal: number; interestRate: number; years: number }) => {
   const monthlyRate = arg.interestRate / 100 / 12
   const months = arg.years * 12
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
 
-  const mortgageData: LoanDetails[] = [
+  const mortgageData = [
     {
       monthlyPayment: payment,
       balance: arg.principal - (payment - arg.principal * monthlyRate),
@@ -43,6 +36,8 @@ const calculateAmortization = (arg: { principal: number; interestRate: number; y
 
   return mortgageData
 }
+
+type LoanDetails = ReturnType<typeof calculateAmortization>
 
 export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
@@ -98,7 +93,7 @@ export const MortgageCalculator = () => {
         </MCForm>
         {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
           <>
-            {windowWidth && windowWidth > 900 ? (
+            {windowWidth && windowWidth > device.tabletPortrait ? (
               <Table_MCTable>
                 <thead>
                   <tr>
