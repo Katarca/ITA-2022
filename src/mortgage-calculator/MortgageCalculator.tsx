@@ -1,4 +1,3 @@
-import { BlueButton } from '../components/Button'
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
@@ -9,7 +8,6 @@ import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { formatAmount } from '../utils/formatAmount'
 import { urls } from '../helpers/urls'
-import LoanJS from 'loanjs'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
