@@ -38,7 +38,7 @@ export const device = {
   notebook: 1600,
   largeNotebook: 1920,
   monitor: 1921,
-}
+} as const
 
 export const breakpoint = {
   miniPhone: `@media (max-width: ${device.miniPhone}px)`,
