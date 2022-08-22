@@ -13,19 +13,18 @@ import LoanJS from 'loanjs'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-type Installments = {
-  capital: number
-  interest: number
-  installment: number
-  remain: number
-  interestSum: number
+type LoanDetails = {
+  monthlyPayment: number
+  balance: number
+  monthlyPrincipal: number
+  monthlyInterest: number
 }
 
 export const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
   const [numYears, setNumYears] = useState(5)
-  const [loanData, setLoanData] = useState([] as Installments[])
+  const [loanData, setLoanData] = useState([] as LoanDetails[])
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
 
   useEffect(() => {
@@ -37,9 +36,40 @@ export const MortgageCalculator = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const calculateAmortization = (principal: number, interestRate: number, years: number) => {
+    const monthlyRate = interestRate / 100 / 12
+    const months = years * 12
+    const payment = principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
+
+    const mortgageData: LoanDetails[] = [
+      {
+        monthlyPayment: Number(payment.toFixed(2)),
+        balance: Number((principal - (payment - principal * monthlyRate)).toFixed(2)),
+        monthlyPrincipal: Number((principal * monthlyRate).toFixed(2)),
+        monthlyInterest: Number((payment - principal * monthlyRate).toFixed(2)),
+      },
+    ]
+
+    for (let i = 1; i < months; i++) {
+      mortgageData.push({
+        monthlyPayment: Number(payment.toFixed(2)),
+        balance: Number(
+          (
+            mortgageData[i - 1].balance -
+            (payment - mortgageData[i - 1].balance * monthlyRate)
+          ).toFixed(2)
+        ),
+        monthlyInterest: Number((mortgageData[i - 1].balance * monthlyRate).toFixed(2)),
+        monthlyPrincipal: Number((payment - mortgageData[i - 1].balance * monthlyRate).toFixed(2)),
+      })
+    }
+
+    return mortgageData
+  }
+
   const calculateLoan = () => {
     if (loanAmount > 0 && interestRate > 0 && numYears > 0)
-      setLoanData(LoanJS.Loan(loanAmount, numYears * 12, interestRate, true).installments)
+      setLoanData(calculateAmortization(loanAmount, interestRate, numYears))
   }
 
   return (
@@ -95,7 +125,10 @@ export const MortgageCalculator = () => {
                       <P_TableText>Month</P_TableText>
                     </th>
                     <th>
-                      <P_TableText>Payment Amount (CZK)</P_TableText>
+                      <P_TableText>Monthly Payment (CZK)</P_TableText>
+                    </th>
+                    <th>
+                      <P_TableText>Balance (CZK)</P_TableText>
                     </th>
                     <th>
                       <P_TableText>Interest Paid (CZK)</P_TableText>
@@ -103,28 +136,25 @@ export const MortgageCalculator = () => {
                     <th>
                       <P_TableText>Principal Paid (CZK)</P_TableText>
                     </th>
-                    <th>
-                      <P_TableText>Remain (CZK)</P_TableText>
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {loanData.map((installment, i) => (
+                  {loanData.map((data, i) => (
                     <tr key={i}>
                       <td>
                         <P_TableText>{i + 1}</P_TableText>
                       </td>
                       <td>
-                        <P_TableText>{formatAmount(installment.installment)}</P_TableText>
+                        <P_TableText>{formatAmount(data.monthlyPayment)}</P_TableText>
                       </td>
                       <td>
-                        <P_TableText>{formatAmount(installment.interest)}</P_TableText>
+                        <P_TableText>{formatAmount(data.balance)}</P_TableText>
                       </td>
                       <td>
-                        <P_TableText>{formatAmount(installment.capital)}</P_TableText>
+                        <P_TableText>{formatAmount(data.monthlyInterest)}</P_TableText>
                       </td>
                       <td>
-                        <P_TableText>{formatAmount(installment.remain)}</P_TableText>
+                        <P_TableText>{formatAmount(data.monthlyPrincipal)}</P_TableText>
                       </td>
                     </tr>
                   ))}
@@ -132,19 +162,19 @@ export const MortgageCalculator = () => {
               </Table_MCTable>
             ) : (
               <>
-                {loanData.map((installment: Installments, i: number) => (
+                {loanData.map((data, i) => (
                   <Div_MobileContainer key={i}>
                     <P_TableText>{i + 1} month</P_TableText>
                     <P_TableText>
-                      Payment amount: {formatAmount(installment.installment)} CZK
+                      Monthly payment: {formatAmount(data.monthlyPayment)} CZK
+                    </P_TableText>
+                    <P_TableText>Balance: {formatAmount(data.balance)} CZK</P_TableText>
+                    <P_TableText>
+                      Interest paid: {formatAmount(data.monthlyInterest)} CZK
                     </P_TableText>
                     <P_TableText>
-                      Interest paid: {formatAmount(installment.interest)} CZK
+                      Principal Paid: {formatAmount(data.monthlyPrincipal)} CZK
                     </P_TableText>
-                    <P_TableText>
-                      Principal paid: {formatAmount(installment.capital)} CZK
-                    </P_TableText>
-                    <P_TableText>Remain: {formatAmount(installment.remain)} CZK</P_TableText>
                   </Div_MobileContainer>
                 ))}
               </>
