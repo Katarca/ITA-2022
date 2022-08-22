@@ -18,6 +18,32 @@ type LoanDetails = {
   monthlyInterest: number
 }
 
+const calculateAmortization = (principal: number, interestRate: number, years: number) => {
+  const monthlyRate = interestRate / 100 / 12
+  const months = years * 12
+  const payment = principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
+
+  const mortgageData: LoanDetails[] = [
+    {
+      monthlyPayment: payment,
+      balance: principal - (payment - principal * monthlyRate),
+      monthlyPrincipal: principal * monthlyRate,
+      monthlyInterest: payment - principal * monthlyRate,
+    },
+  ]
+
+  for (let i = 1; i < months; i++) {
+    mortgageData.push({
+      monthlyPayment: payment,
+      balance: mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
+      monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
+      monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
+    })
+  }
+
+  return mortgageData
+}
+
 export const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
@@ -32,33 +58,6 @@ export const MortgageCalculator = () => {
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-
-  const calculateAmortization = (principal: number, interestRate: number, years: number) => {
-    const monthlyRate = interestRate / 100 / 12
-    const months = years * 12
-    const payment = principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
-
-    const mortgageData: LoanDetails[] = [
-      {
-        monthlyPayment: payment,
-        balance: principal - (payment - principal * monthlyRate),
-        monthlyPrincipal: principal * monthlyRate,
-        monthlyInterest: payment - principal * monthlyRate,
-      },
-    ]
-
-    for (let i = 1; i < months; i++) {
-      mortgageData.push({
-        monthlyPayment: payment,
-        balance:
-          mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
-        monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
-        monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
-      })
-    }
-
-    return mortgageData
-  }
 
   const loanDetail = calculateAmortization(loanAmount, interestRate, numYears)
 
