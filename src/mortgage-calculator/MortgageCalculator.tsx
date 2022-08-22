@@ -65,6 +65,7 @@ export const MortgageCalculator = () => {
   }, [])
 
   const loanDetail = calculateAmortization({ principal, interestRate, years })
+  const dataExist = principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0
 
   return (
     <HelmetProvider>
@@ -101,7 +102,7 @@ export const MortgageCalculator = () => {
             </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
-        {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
+        {dataExist && (
           <>
             {windowWidth && windowWidth > device.tabletPortrait ? (
               <Table_MCTable>
@@ -167,9 +168,7 @@ export const MortgageCalculator = () => {
             )}
           </>
         )}
-        {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
-          <Charts loanDetail={loanDetail} windowWidth={windowWidth} />
-        )}
+        {dataExist && <Charts loanDetail={loanDetail} windowWidth={windowWidth} />}
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -179,19 +178,16 @@ export const MortgageCalculator = () => {
 }
 
 const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) => {
+  const chartWidth = props.windowWidth
+    ? props.windowWidth > device.tabletLandscape
+      ? props.windowWidth / 2.1
+      : props.windowWidth / 1.2
+    : 0
+
   return (
     <Div_ChartsContainer>
       <Div_ChartContainer>
-        <ResponsiveContainer
-          width={
-            props.windowWidth
-              ? props.windowWidth > device.tabletLandscape
-                ? props.windowWidth / 2.1
-                : props.windowWidth / 1.2
-              : 0
-          }
-          aspect={1.5}
-        >
+        <ResponsiveContainer width={chartWidth} aspect={1.5}>
           <LineChart
             data={props.loanDetail.map((data, i) => ({
               Principal: roundAmount(data.monthlyPrincipal),
@@ -216,16 +212,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
         </ResponsiveContainer>
       </Div_ChartContainer>
       <Div_ChartContainer>
-        <ResponsiveContainer
-          width={
-            props.windowWidth
-              ? props.windowWidth > device.tabletLandscape
-                ? props.windowWidth / 2.1
-                : props.windowWidth / 1.2
-              : 0
-          }
-          aspect={1.5}
-        >
+        <ResponsiveContainer width={chartWidth} aspect={1.5}>
           <LineChart
             data={props.loanDetail.map((data, i) => ({
               Balance: roundAmount(data.balance),
