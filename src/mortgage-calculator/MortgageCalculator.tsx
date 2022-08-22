@@ -1,3 +1,4 @@
+import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
@@ -29,15 +30,13 @@ const calculateAmortization = (arg: { principal: number; interestRate: number; y
     mortgageData.push({
       monthlyPayment: payment,
       balance: mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
-      monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
-      monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
+      monthlyPrincipal: mortgageData[i - 1].balance * monthlyRate,
+      monthlyInterest: payment - mortgageData[i - 1].balance * monthlyRate,
     })
   }
 
   return mortgageData
 }
-
-type LoanDetails = ReturnType<typeof calculateAmortization>
 
 export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
@@ -157,6 +156,54 @@ export const MortgageCalculator = () => {
             )}
           </>
         )}
+        {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
+          <Div_ChartsContainer>
+            <LineChart
+              width={500}
+              height={300}
+              data={loanDetail.map((data, i) => ({
+                Principal: data.monthlyPrincipal,
+                Interest: data.monthlyInterest,
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+            </LineChart>
+            <LineChart
+              width={500}
+              height={300}
+              data={loanDetail.map((data, i) => ({
+                Balance: data.balance,
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+            </LineChart>
+          </Div_ChartsContainer>
+        )}
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
@@ -229,4 +276,8 @@ const Div_MobileContainer = styled.div`
   margin: ${styles.spacing.xs};
   border: 1px solid ${styles.colors.grey300};
   border-radius: 8px;
+`
+const Div_ChartsContainer = styled.div`
+  padding: ${styles.spacing.sm};
+  display: flex;
 `
