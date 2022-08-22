@@ -18,17 +18,17 @@ type LoanDetails = {
   monthlyInterest: number
 }
 
-const calculateAmortization = (principal: number, interestRate: number, years: number) => {
-  const monthlyRate = interestRate / 100 / 12
-  const months = years * 12
-  const payment = principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
+const calculateAmortization = (arg: { principal: number; interestRate: number; years: number }) => {
+  const monthlyRate = arg.interestRate / 100 / 12
+  const months = arg.years * 12
+  const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
 
   const mortgageData: LoanDetails[] = [
     {
       monthlyPayment: payment,
-      balance: principal - (payment - principal * monthlyRate),
-      monthlyPrincipal: principal * monthlyRate,
-      monthlyInterest: payment - principal * monthlyRate,
+      balance: arg.principal - (payment - arg.principal * monthlyRate),
+      monthlyPrincipal: arg.principal * monthlyRate,
+      monthlyInterest: payment - arg.principal * monthlyRate,
     },
   ]
 
@@ -45,9 +45,9 @@ const calculateAmortization = (principal: number, interestRate: number, years: n
 }
 
 export const MortgageCalculator = () => {
-  const [loanAmount, setLoanAmount] = useState(1500000)
+  const [principal, setPrincipal] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
-  const [numYears, setNumYears] = useState(5)
+  const [years, setYears] = useState(5)
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const MortgageCalculator = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const loanDetail = calculateAmortization(loanAmount, interestRate, numYears)
+  const loanDetail = calculateAmortization({ principal, interestRate, years })
 
   return (
     <HelmetProvider>
@@ -74,8 +74,8 @@ export const MortgageCalculator = () => {
               <Label_MCLabel>Loan Amount (CZK)</Label_MCLabel>
               <CustomInput_MCInput
                 type='number'
-                defaultValue={loanAmount}
-                onChange={e => setLoanAmount(Number(e.target.value))}
+                defaultValue={principal}
+                onChange={e => setPrincipal(Number(e.target.value))}
               />
             </Div_InputWrapper>
             <Div_InputWrapper>
@@ -90,13 +90,13 @@ export const MortgageCalculator = () => {
               <Label_MCLabel>Loan Term (years)</Label_MCLabel>
               <CustomInput_MCInput
                 type='number'
-                defaultValue={numYears}
-                onChange={e => setNumYears(Number(e.target.value))}
+                defaultValue={years}
+                onChange={e => setYears(Number(e.target.value))}
               />
             </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
-        {loanAmount > 0 && interestRate > 0 && numYears > 0 && loanDetail.length > 0 && (
+        {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
           <>
             {windowWidth && windowWidth > 900 ? (
               <Table_MCTable>
