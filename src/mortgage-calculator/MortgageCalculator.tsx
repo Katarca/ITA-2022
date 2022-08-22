@@ -24,7 +24,6 @@ export const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
   const [numYears, setNumYears] = useState(5)
-  const [loanData, setLoanData] = useState([] as LoanDetails[])
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
 
   useEffect(() => {
@@ -67,10 +66,7 @@ export const MortgageCalculator = () => {
     return mortgageData
   }
 
-  const calculateLoan = () => {
-    if (loanAmount > 0 && interestRate > 0 && numYears > 0)
-      setLoanData(calculateAmortization(loanAmount, interestRate, numYears))
-  }
+  const loanDetail = calculateAmortization(loanAmount, interestRate, numYears)
 
   return (
     <HelmetProvider>
@@ -107,15 +103,7 @@ export const MortgageCalculator = () => {
             </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
-        <Div_ButtonContainer>
-          <BlueButton
-            onClick={() => calculateLoan()}
-            disabled={loanAmount <= 0 || interestRate <= 0 || numYears <= 0}
-          >
-            <P_BodyText>See Details</P_BodyText>
-          </BlueButton>
-        </Div_ButtonContainer>
-        {loanData.length > 0 && (
+        {loanAmount > 0 && interestRate > 0 && numYears > 0 && loanDetail.length > 0 && (
           <>
             {windowWidth && windowWidth > 900 ? (
               <Table_MCTable>
@@ -139,7 +127,7 @@ export const MortgageCalculator = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {loanData.map((data, i) => (
+                  {loanDetail.map((data, i) => (
                     <tr key={i}>
                       <td>
                         <P_TableText>{i + 1}</P_TableText>
@@ -162,7 +150,7 @@ export const MortgageCalculator = () => {
               </Table_MCTable>
             ) : (
               <>
-                {loanData.map((data, i) => (
+                {loanDetail.map((data, i) => (
                   <Div_MobileContainer key={i}>
                     <P_TableText>{i + 1} month</P_TableText>
                     <P_TableText>
@@ -253,7 +241,4 @@ const Div_MobileContainer = styled.div`
   margin: ${styles.spacing.xs};
   border: 1px solid ${styles.colors.grey300};
   border-radius: 8px;
-`
-const Div_ButtonContainer = styled.div`
-  padding: ${styles.spacing.sm};
 `
