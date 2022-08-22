@@ -40,24 +40,20 @@ export const MortgageCalculator = () => {
 
     const mortgageData: LoanDetails[] = [
       {
-        monthlyPayment: Number(payment.toFixed(2)),
-        balance: Number((principal - (payment - principal * monthlyRate)).toFixed(2)),
-        monthlyPrincipal: Number((principal * monthlyRate).toFixed(2)),
-        monthlyInterest: Number((payment - principal * monthlyRate).toFixed(2)),
+        monthlyPayment: payment,
+        balance: principal - (payment - principal * monthlyRate),
+        monthlyPrincipal: principal * monthlyRate,
+        monthlyInterest: payment - principal * monthlyRate,
       },
     ]
 
     for (let i = 1; i < months; i++) {
       mortgageData.push({
-        monthlyPayment: Number(payment.toFixed(2)),
-        balance: Number(
-          (
-            mortgageData[i - 1].balance -
-            (payment - mortgageData[i - 1].balance * monthlyRate)
-          ).toFixed(2)
-        ),
-        monthlyInterest: Number((mortgageData[i - 1].balance * monthlyRate).toFixed(2)),
-        monthlyPrincipal: Number((payment - mortgageData[i - 1].balance * monthlyRate).toFixed(2)),
+        monthlyPayment: payment,
+        balance:
+          mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
+        monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
+        monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
       })
     }
 
