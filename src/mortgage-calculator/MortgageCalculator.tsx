@@ -1,4 +1,13 @@
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
@@ -7,7 +16,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, device, styles } from '../helpers/theme'
-import { formatAmount } from '../utils/formatAmount'
+import { formatAmount, roundAmount } from '../utils/formatAmount'
 import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -158,50 +167,72 @@ export const MortgageCalculator = () => {
         )}
         {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
           <Div_ChartsContainer>
-            <LineChart
-              width={500}
-              height={300}
-              data={loanDetail.map((data, i) => ({
-                Principal: data.monthlyPrincipal,
-                Interest: data.monthlyInterest,
-                index: i + 1,
-              }))}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-              <XAxis dataKey='index' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
-              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
-            </LineChart>
-            <LineChart
-              width={500}
-              height={300}
-              data={loanDetail.map((data, i) => ({
-                Balance: data.balance,
-                index: i + 1,
-              }))}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-              <XAxis dataKey='index' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
-            </LineChart>
+            <Div_ChartContainer>
+              <ResponsiveContainer
+                width={
+                  windowWidth
+                    ? windowWidth > device.tabletLandscape
+                      ? windowWidth / 2.1
+                      : windowWidth / 1.2
+                    : 0
+                }
+                aspect={1.5}
+              >
+                <LineChart
+                  data={loanDetail.map((data, i) => ({
+                    Principal: roundAmount(data.monthlyPrincipal),
+                    Interest: roundAmount(data.monthlyInterest),
+                    index: i + 1,
+                  }))}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+                  <XAxis dataKey='index' />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
+                  <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+                </LineChart>
+              </ResponsiveContainer>
+            </Div_ChartContainer>
+            <Div_ChartContainer>
+              <ResponsiveContainer
+                width={
+                  windowWidth
+                    ? windowWidth > device.tabletLandscape
+                      ? windowWidth / 2.1
+                      : windowWidth / 1.2
+                    : 0
+                }
+                aspect={1.5}
+              >
+                <LineChart
+                  data={loanDetail.map((data, i) => ({
+                    Balance: roundAmount(data.balance),
+                    index: i + 1,
+                  }))}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+                  <XAxis dataKey='index' />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+                </LineChart>
+              </ResponsiveContainer>
+            </Div_ChartContainer>
           </Div_ChartsContainer>
         )}
         <RouterLink to={urls.homePage}>
@@ -278,6 +309,12 @@ const Div_MobileContainer = styled.div`
   border-radius: 8px;
 `
 const Div_ChartsContainer = styled.div`
-  padding: ${styles.spacing.sm};
+  padding: ${styles.spacing.md} 0;
   display: flex;
+  ${breakpoint.tabletLandscape} {
+    flex-direction: column;
+  }
+`
+const Div_ChartContainer = styled.div`
+  padding-top: ${styles.spacing.sm};
 `
