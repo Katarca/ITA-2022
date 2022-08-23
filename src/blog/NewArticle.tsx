@@ -28,9 +28,11 @@ export const NewArticle = () => {
             <Label_BlogLabel>Content</Label_BlogLabel>
             <BlogTextArea />
           </Div_InputContainer>
-          <TransparentButtonBorder type='submit'>
-            <P_BodyText>Submit</P_BodyText>
-          </TransparentButtonBorder>
+          <Div_ButtonContainer>
+            <TransparentButtonBorder type='submit'>
+              <P_BodyText>Submit</P_BodyText>
+            </TransparentButtonBorder>
+          </Div_ButtonContainer>
         </BlogForm>
       </Div_NewArticleContainer>
     </HelmetProvider>
@@ -55,6 +57,7 @@ const BlogTextArea = styled(CustomTextarea)`
 const Label_BlogLabel = styled.label`
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.grey300};
+  padding: 0 ${styles.spacing.xs};
 `
 
 const BlogForm = styled(Form)`
@@ -63,7 +66,11 @@ const BlogForm = styled(Form)`
   width: 100%;
 `
 const Div_InputContainer = styled.div`
-  padding: ${styles.spacing.sm} 0;
+  padding: 0 0 ${styles.spacing.sm} 0;
   display: flex;
   flex-direction: column;
+`
+const Div_ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `

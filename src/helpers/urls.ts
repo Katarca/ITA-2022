@@ -10,7 +10,8 @@ export const urls = {
   nestedPath: '/*',
   blog: '/blog',
   newArticle: '/new-article',
-  articleDetail: '/:articleSlug',
+  articleDetail: '/articleDetail/',
+  slug: '/:slug',
 } as const
 
 export const filterUrl = process.env.REACT_APP_URL

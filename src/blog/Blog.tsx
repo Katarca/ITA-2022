@@ -1,7 +1,7 @@
+import { ArticleDetail } from './ArticleDetail'
 import { Articles } from './Articles'
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { NewArticle } from './NewArticle'
 import { P_LinkBodyText } from '../components/BodyText'
 import { Route, Routes } from 'react-router-dom'
@@ -10,11 +10,10 @@ import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
-import ArticleDetail from './ArticleDetail'
 import React from 'react'
 import styled from 'styled-components'
 
-type BlogPost = {
+type Article = {
   id: string
   date: string
   author: string
@@ -23,10 +22,10 @@ type BlogPost = {
 }
 
 const useLogicState = () => {
-  const [blogPosts, setBlogPosts] = useLocalStorage('BlogPostsLs', [] as BlogPost[])
+  const [articles, setArticles] = useLocalStorage('BlogArticlesLs', [] as Article[])
   return {
-    blogPosts,
-    setBlogPosts,
+    articles,
+    setArticles,
   }
 }
 
@@ -49,7 +48,7 @@ export const BlogApp = () => {
         <Routes>
           <Route path={urls.homePage} element={<Articles />} />
           <Route path={urls.newArticle} element={<NewArticle />} />
-          <Route path={urls.articleDetail} element={<ArticleDetail />} />
+          <Route path={`${urls.articleDetail}${urls.slug}`} element={<ArticleDetail />} />
         </Routes>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
