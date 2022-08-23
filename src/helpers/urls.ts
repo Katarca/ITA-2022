@@ -11,7 +11,7 @@ export const urls = {
   blog: '/blog',
   newArticle: '/new-article',
   articleDetail: '/articleDetail/',
-  slug: '/:slug',
+  slug: ':slug',
 } as const
 
 export const filterUrl = process.env.REACT_APP_URL

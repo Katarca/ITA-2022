@@ -6,8 +6,8 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BlogTextXs } from './Articles'
 import { P_BodyText } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
+import { breakpoint, styles } from '../helpers/theme'
 import { idGenerator } from '../utils/idGenerator'
-import { styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext, useState } from 'react'
@@ -93,6 +93,12 @@ export const NewArticle = () => {
 const Div_NewArticleContainer = styled.div`
   padding: ${styles.spacing.md};
   width: 70%;
+  ${breakpoint.tabletPortrait} {
+    width: 90%;
+  }
+  ${breakpoint.phone} {
+    width: 100%;
+  }
 `
 
 const BlogInput = styled(CustomInput)`

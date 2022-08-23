@@ -1,7 +1,7 @@
 import { BlogStateContext } from './Blog'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterLink } from '../components/RouterLink'
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
@@ -12,11 +12,14 @@ export const Articles = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Katarína Soušková | Blog </title>
+        <title>Katarína Soušková | Articles </title>
       </Helmet>
       <Div_ArticlesContainer>
-        {blogLogic.articles.map(article => (
-          <RouterLink to={`${urls.blog}${urls.articleDetail}/${article.id}`} key={article.id}>
+        {blogLogic?.articles.map(article => (
+          <RouterLink
+            to={`${urls.blog}${urls.articleDetail}${article.title}${article.id}`}
+            key={article.id}
+          >
             <Div_ArticleBox>
               <P_BlogText>{article.title}</P_BlogText>
               <Div_TextContainer>
@@ -34,17 +37,25 @@ export const Articles = () => {
 const Div_ArticlesContainer = styled.div`
   padding: ${styles.spacing.md};
   width: 80%;
+  ${breakpoint.phone} {
+    width: 100%;
+  }
 `
 const Div_ArticleBox = styled.div`
   border: 2px solid ${styles.colors.grey300};
   border-radius: 8px;
-  padding: ${styles.spacing.sm};
+  padding: ${styles.spacing.xs};
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 `
 export const P_BlogText = styled.p`
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.grey300};
+  ${breakpoint.tabletPortrait} {
+    text-align: center;
+  }
 `
 export const P_BlogTextXs = styled.p`
   font-size: ${styles.fontSize.xs};
@@ -52,4 +63,5 @@ export const P_BlogTextXs = styled.p`
 `
 const Div_TextContainer = styled.div`
   text-align: right;
+  padding: ${styles.spacing.xs} 0;
 `
