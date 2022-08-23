@@ -7,6 +7,10 @@ export const urls = {
   memoryGame: '/memory-game',
   mortgageCalculator: '/mortgage-calculator',
   httpFilter: '/http-filter',
+  nestedPath: '/*',
+  blog: '/blog',
+  newArticle: '/new-article',
+  articleDetail: '/:articleSlug',
 } as const
 
 export const filterUrl = process.env.REACT_APP_URL

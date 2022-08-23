@@ -1,3 +1,4 @@
+import { BlogApp } from './blog/Blog'
 import { CounterApp } from './counter-app/CounterApp'
 import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
@@ -30,6 +31,7 @@ export function App() {
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
           <Route path={urls.httpFilter} element={<HttpFilter />} />
+          <Route path={`${urls.blog}${urls.nestedPath}`} element={<BlogApp />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>
