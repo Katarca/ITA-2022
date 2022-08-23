@@ -1,3 +1,13 @@
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
@@ -6,7 +16,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, device, styles } from '../helpers/theme'
-import { formatAmount } from '../utils/formatAmount'
+import { formatAmount, roundAmount } from '../utils/formatAmount'
 import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -29,15 +39,15 @@ const calculateAmortization = (arg: { principal: number; interestRate: number; y
     mortgageData.push({
       monthlyPayment: payment,
       balance: mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
-      monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
-      monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
+      monthlyPrincipal: mortgageData[i - 1].balance * monthlyRate,
+      monthlyInterest: payment - mortgageData[i - 1].balance * monthlyRate,
     })
   }
 
   return mortgageData
 }
 
-type LoanDetails = ReturnType<typeof calculateAmortization>
+type Loan = ReturnType<typeof calculateAmortization>
 
 export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
@@ -55,6 +65,7 @@ export const MortgageCalculator = () => {
   }, [])
 
   const loanDetail = calculateAmortization({ principal, interestRate, years })
+  const dataExist = principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0
 
   return (
     <HelmetProvider>
@@ -91,7 +102,7 @@ export const MortgageCalculator = () => {
             </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
-        {principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0 && (
+        {dataExist && (
           <>
             {windowWidth && windowWidth > device.tabletPortrait ? (
               <Table_MCTable>
@@ -157,11 +168,73 @@ export const MortgageCalculator = () => {
             )}
           </>
         )}
+        {dataExist && <Charts loanDetail={loanDetail} windowWidth={windowWidth} />}
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>
         </RouterLink>
       </Div_Container>
     </HelmetProvider>
+  )
+}
+
+const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) => {
+  const chartWidth = props.windowWidth
+    ? props.windowWidth > device.tabletLandscape
+      ? props.windowWidth / 2.1
+      : props.windowWidth / 1.2
+    : 0
+
+  return (
+    <Div_ChartsContainer>
+      <Div_ChartContainer>
+        <ResponsiveContainer width={chartWidth} aspect={1.5}>
+          <LineChart
+            data={props.loanDetail.map((data, i) => ({
+              Principal: roundAmount(data.monthlyPrincipal),
+              Interest: roundAmount(data.monthlyInterest),
+              index: i + 1,
+            }))}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+            <XAxis dataKey='index' />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
+            <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+          </LineChart>
+        </ResponsiveContainer>
+      </Div_ChartContainer>
+      <Div_ChartContainer>
+        <ResponsiveContainer width={chartWidth} aspect={1.5}>
+          <LineChart
+            data={props.loanDetail.map((data, i) => ({
+              Balance: roundAmount(data.balance),
+              index: i + 1,
+            }))}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+            <XAxis dataKey='index' />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+          </LineChart>
+        </ResponsiveContainer>
+      </Div_ChartContainer>
+    </Div_ChartsContainer>
   )
 }
 
@@ -229,4 +302,14 @@ const Div_MobileContainer = styled.div`
   margin: ${styles.spacing.xs};
   border: 1px solid ${styles.colors.grey300};
   border-radius: 8px;
+`
+const Div_ChartsContainer = styled.div`
+  padding: ${styles.spacing.md} 0;
+  display: flex;
+  ${breakpoint.tabletLandscape} {
+    flex-direction: column;
+  }
+`
+const Div_ChartContainer = styled.div`
+  padding-top: ${styles.spacing.sm};
 `
