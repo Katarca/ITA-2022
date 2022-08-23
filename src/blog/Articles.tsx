@@ -12,7 +12,7 @@ export const Articles = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Katarína Soušková | Blog | Articles</title>
+        <title>Katarína Soušková | Blog </title>
       </Helmet>
       <Div_ArticlesContainer>
         {blogLogic.articles.map(article => (
@@ -46,7 +46,7 @@ export const P_BlogText = styled.p`
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.grey300};
 `
-const P_BlogTextXs = styled.p`
+export const P_BlogTextXs = styled.p`
   font-size: ${styles.fontSize.xs};
   color: ${styles.colors.grey300};
 `

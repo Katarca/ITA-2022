@@ -1,5 +1,6 @@
 import { BlogStateContext } from './Blog'
 import { H_Heading, H_SubHeading } from '../components/Heading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BlogText } from './Articles'
 import { P_BodyText } from '../components/BodyText'
 import { styles } from '../helpers/theme'
@@ -14,21 +15,31 @@ export const ArticleDetail = () => {
   const articleDetail = blogLogic.articles.find(article => article.id === slug)
 
   return articleDetail ? (
-    <Div_ArticleContainer>
-      <H_ArticleHeading>{articleDetail.title}</H_ArticleHeading>
-      <Div_DetailContainer>
-        <P_BlogText>Author: {articleDetail.author}</P_BlogText>
-        <P_BlogText>created at {articleDetail.date}</P_BlogText>
-      </Div_DetailContainer>
-      <Div_ContentContainer>
-        <P_BlogText>{articleDetail.content}</P_BlogText>
-      </Div_ContentContainer>
-    </Div_ArticleContainer>
+    <HelmetProvider>
+      <Helmet>
+        <title>{articleDetail.title}</title>
+      </Helmet>
+      <Div_ArticleContainer>
+        <H_ArticleHeading>{articleDetail.title}</H_ArticleHeading>
+        <Div_DetailContainer>
+          <P_BlogText>Author: {articleDetail.author}</P_BlogText>
+          <P_BlogText>created at {articleDetail.date}</P_BlogText>
+        </Div_DetailContainer>
+        <Div_ContentContainer>
+          <P_BlogText>{articleDetail.content}</P_BlogText>
+        </Div_ContentContainer>
+      </Div_ArticleContainer>
+    </HelmetProvider>
   ) : (
-    <Div_ArticleContainer>
-      <H_Heading>404</H_Heading>
-      <H_SubHeading>page cannot be found</H_SubHeading>
-    </Div_ArticleContainer>
+    <HelmetProvider>
+      <Helmet>
+        <title>404 page not found</title>
+      </Helmet>
+      <Div_ArticleContainer>
+        <H_Heading>404</H_Heading>
+        <H_SubHeading>page not found</H_SubHeading>
+      </Div_ArticleContainer>
+    </HelmetProvider>
   )
 }
 
