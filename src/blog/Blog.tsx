@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
+import { getSlug } from '../utils/getSlug'
 import { idGenerator } from '../utils/idGenerator'
 import { urlString, urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
@@ -36,6 +37,9 @@ const useLogicState = () => {
     if (title.trim().length === 0) {
       validInputs = false
       setTitleErr('Title is required')
+    } else if (articles.some(article => getSlug(article.title) === getSlug(title))) {
+      validInputs = false
+      setTitleErr('Title must be unique')
     }
     if (author.trim().length === 0) {
       validInputs = false
