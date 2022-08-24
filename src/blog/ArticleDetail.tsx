@@ -14,7 +14,7 @@ import remarkGfm from 'remark-gfm'
 import styled from 'styled-components'
 
 export const ArticleDetail = () => {
-  const { slug } = useParams<string>()
+  const { slug } = useParams<{ slug: string }>()
   const blogLogic = useContext(BlogStateContext)
 
   const articleDetail = blogLogic.articles.find(article => `${article.title}${article.id}` === slug)
