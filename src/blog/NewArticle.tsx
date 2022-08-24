@@ -7,7 +7,6 @@ import { P_BlogTextXs } from './Articles'
 import { P_BodyText } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
-import { idGenerator } from '../utils/idGenerator'
 import { urls } from '../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext, useState } from 'react'
@@ -17,9 +16,7 @@ export const NewArticle = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [content, setContent] = useState('')
-  const [validationErr, setValidationErr] = useState('')
 
-  const createDate = () => new Date()
   let navigate = useNavigate()
 
   const blogLogic = useContext(BlogStateContext)
@@ -32,28 +29,11 @@ export const NewArticle = () => {
         <BlogForm
           onSubmit={e => {
             e.preventDefault()
-            if (
-              title.trim().length === 0 ||
-              author.trim().length === 0 ||
-              content.trim().length === 0
-            ) {
-              setValidationErr('All fields are required')
-              return
-            }
-            blogLogic.setArticles([
-              {
-                id: idGenerator(),
-                date: createDate().toLocaleDateString(),
-                title,
-                author,
-                content,
-              },
-              ...blogLogic.articles,
-            ])
+            if (!blogLogic.validateInputs(title, author, content)) return
+            blogLogic.addArticleData(title, author, content)
             setTitle('')
             setAuthor('')
             setContent('')
-            setValidationErr('')
             navigate(urls.blog)
           }}
         >
@@ -65,20 +45,30 @@ export const NewArticle = () => {
               onChange={e => setTitle(e.target.value)}
               autoComplete='off'
             />
+            {blogLogic.titleErr && (
+              <Div_ErrContainer>
+                <P_BlogTextXs>{blogLogic.titleErr}</P_BlogTextXs>
+              </Div_ErrContainer>
+            )}
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Author</Label_BlogLabel>
             <BlogInput type='text' value={author} onChange={e => setAuthor(e.target.value)} />
+            {blogLogic.authorErr && (
+              <Div_ErrContainer>
+                <P_BlogTextXs>{blogLogic.authorErr}</P_BlogTextXs>
+              </Div_ErrContainer>
+            )}
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Content</Label_BlogLabel>
             <BlogTextArea value={content} onChange={e => setContent(e.target.value)} />
+            {blogLogic.contentErr && (
+              <Div_ErrContainer>
+                <P_BlogTextXs>{blogLogic.contentErr}</P_BlogTextXs>
+              </Div_ErrContainer>
+            )}
           </Div_InputContainer>
-          {validationErr && (
-            <Div_ErrContainer>
-              <P_BlogTextXs>{validationErr}</P_BlogTextXs>
-            </Div_ErrContainer>
-          )}
           <Div_ButtonContainer>
             <TransparentButtonBorder type='submit'>
               <P_BodyText>Submit</P_BodyText>
