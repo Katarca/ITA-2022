@@ -2,7 +2,10 @@ import { BlogStateContext } from './Blog'
 import { H_Heading, H_SubHeading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BlogText } from './Articles'
+import { P_LinkBodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
+import { urls } from '../helpers/urls'
 import { useParams } from 'react-router-dom'
 import React, { useContext } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -13,7 +16,7 @@ export const ArticleDetail = () => {
   const { slug } = useParams<string>()
   const blogLogic = useContext(BlogStateContext)
 
-  const articleDetail = blogLogic.articles.find(article => article.title + article.id === slug)
+  const articleDetail = blogLogic.articles.find(article => `${article.title}${article.id}` === slug)
 
   return articleDetail ? (
     <HelmetProvider>
@@ -41,6 +44,9 @@ export const ArticleDetail = () => {
       <Div_ArticleContainer>
         <H_Heading>404</H_Heading>
         <H_SubHeading>page not found</H_SubHeading>
+        <RouterLink to={urls.blog}>
+          <P_LinkBodyText>Return to articles</P_LinkBodyText>
+        </RouterLink>
       </Div_ArticleContainer>
     </HelmetProvider>
   )
