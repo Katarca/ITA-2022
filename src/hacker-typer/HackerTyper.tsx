@@ -1,3 +1,4 @@
+import { CustomTextarea } from '../components/Textarea'
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
@@ -50,7 +51,7 @@ export const HackerTyper = () => {
           </div>
         )}
         <H_HackHeading>Hacker Typer</H_HackHeading>
-        <TA_TextArea
+        <HackTextArea
           value={
             currentIndex === 0
               ? 'Start typing on your keyboard to run the code. Hit CTRL for Access Denied and ENTER for Access Granted message. Hit ESCAPE to clear Access Denied/Granted. Happy Hacking!'
@@ -71,20 +72,12 @@ export const HackerTyper = () => {
 const H_HackHeading = styled(H_Heading)`
   font-size: ${styles.fontSize.md};
 `
-const TA_TextArea = styled.textarea`
+const HackTextArea = styled(CustomTextarea)`
   width: 100%;
   height: 65vh;
-  border: 2px solid ${styles.colors.orange300};
-  border-radius: 8px;
-  background: transparent;
   font-size: ${styles.fontSize.xs};
   color: ${styles.colors.orange300};
   padding: ${styles.spacing.xs};
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `
 
 const MsgContainerStyles = css`

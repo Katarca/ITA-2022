@@ -11,6 +11,7 @@ export const P_BodyText = styled.p`
   }
 `
 export const P_LinkBodyText = styled(P_BodyText)`
+  text-align: center;
   &:hover {
     color: ${styles.colors.orange300};
   }
