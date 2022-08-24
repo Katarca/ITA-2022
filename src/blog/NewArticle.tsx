@@ -54,7 +54,7 @@ export const NewArticle = () => {
             setAuthor('')
             setContent('')
             setValidationErr('')
-            navigate(`${urls.blog}`, { replace: true })
+            navigate(urls.blog)
           }}
         >
           <Div_InputContainer>
