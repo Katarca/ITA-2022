@@ -39,6 +39,7 @@ const Div_ArticlesContainer = styled.div`
   width: 80%;
   ${breakpoint.phone} {
     width: 100%;
+    padding: ${styles.spacing.xs};
   }
 `
 const Div_ArticleBox = styled.div`

@@ -68,6 +68,7 @@ const Nav_BlogNavbar = styled.nav`
   padding: ${styles.spacing.sm};
   border-bottom: 2px solid ${styles.colors.orange300};
   text-align: center;
+  margin-bottom: ${styles.spacing.sm};
   ${breakpoint.tabletPortrait} {
     width: 70%;
   }
