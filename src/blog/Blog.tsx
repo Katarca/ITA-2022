@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
-import { urls } from '../helpers/urls'
+import { urlString, urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
 import React from 'react'
 import styled from 'styled-components'
@@ -41,14 +41,14 @@ export const BlogApp = () => {
           <RouterLink to={urls.blog}>
             <P_LinkBodyText>Articles</P_LinkBodyText>
           </RouterLink>
-          <RouterLink to={`${urls.blog}${urls.newArticle}`}>
+          <RouterLink to={urlString(urls.blog, urls.newArticle)}>
             <P_LinkBodyText>New Article</P_LinkBodyText>
           </RouterLink>
         </Nav_BlogNavbar>
         <Routes>
           <Route path={urls.homePage} element={<Articles />} />
           <Route path={urls.newArticle} element={<NewArticle />} />
-          <Route path={`${urls.articleDetail}${urls.slug}`} element={<ArticleDetail />} />
+          <Route path={urlString(urls.articleDetail, urls.slug)} element={<ArticleDetail />} />
         </Routes>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>

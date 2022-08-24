@@ -2,13 +2,12 @@ import { BlogStateContext } from './Blog'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
-import { urls } from '../helpers/urls'
+import { urlString, urls } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const Articles = () => {
   const blogLogic = useContext(BlogStateContext)
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -17,7 +16,7 @@ export const Articles = () => {
       <Div_ArticlesContainer>
         {blogLogic?.articles.map(article => (
           <RouterLink
-            to={`${urls.blog}${urls.articleDetail}${article.title}${article.id}`}
+            to={urlString(urls.blog, urls.articleDetail, article.title, article.id)}
             key={article.id}
           >
             <Div_ArticleBox>

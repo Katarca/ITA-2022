@@ -14,4 +14,6 @@ export const urls = {
   slug: ':slug',
 } as const
 
+export const urlString = (...urls: string[]) => urls.join('')
+
 export const filterUrl = process.env.REACT_APP_URL
