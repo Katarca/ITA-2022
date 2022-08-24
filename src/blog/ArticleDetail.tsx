@@ -1,7 +1,7 @@
 import { BlogStateContext } from './Blog'
 import { H_Heading, H_SubHeading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { MarkdownStyles } from '../components/MarkdownStyles'
+import { MarkDown } from '../components/MarkDown'
 import { P_BlogText } from './Articles'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -9,8 +9,6 @@ import { breakpoint, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import { useParams } from 'react-router-dom'
 import React, { useContext } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import styled from 'styled-components'
 
 export const ArticleDetail = () => {
@@ -31,9 +29,7 @@ export const ArticleDetail = () => {
           <P_BlogText>created at {articleDetail.date}</P_BlogText>
         </Div_DetailContainer>
         <Div_ContentContainer>
-          <MarkdownStyles>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleDetail.content}</ReactMarkdown>
-          </MarkdownStyles>
+          <MarkDown>{articleDetail.content}</MarkDown>
         </Div_ContentContainer>
       </Div_ArticleContainer>
     </HelmetProvider>

@@ -1,7 +1,19 @@
 import { breakpoint, styles } from '../helpers/theme'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import styled from 'styled-components'
 
-export const MarkdownStyles = styled.div`
+type MarkDown = {
+  children: string
+}
+
+export const MarkDown = (props: MarkDown) => (
+  <MarkdownStyles>
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>{props.children}</ReactMarkdown>
+  </MarkdownStyles>
+)
+
+const MarkdownStyles = styled.div`
   & > h1 {
     font-size: ${styles.fontSize.lg};
     color: ${styles.colors.orange300};
