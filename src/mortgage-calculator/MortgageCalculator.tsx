@@ -123,7 +123,7 @@ export const MortgageCalculator = () => {
               />
             </Div_InputWrapper>
             <Div_InputWrapper>
-              <Label_MCLabel>Inflation (%)</Label_MCLabel>
+              <Label_MCLabel>Inflation Rate(%)</Label_MCLabel>
               <CustomInput_MCInput
                 type='number'
                 defaultValue={inflation}
