@@ -298,7 +298,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
-                BalanceI: roundAmount(data.balanceInflation),
+                Balance: roundAmount(data.balanceInflation),
                 index: i + 1,
               }))}
               margin={{
@@ -313,7 +313,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type='monotone' dataKey='BalanceI' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
