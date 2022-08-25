@@ -11,7 +11,7 @@ import {
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
-import { H_Heading } from '../components/Heading'
+import { H_Heading, H_SubHeading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -21,7 +21,12 @@ import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const calculateAmortization = (arg: { principal: number; interestRate: number; years: number }) => {
+const calculateAmortization = (arg: {
+  principal: number
+  interestRate: number
+  years: number
+  inflation: number
+}) => {
   const monthlyRate = arg.interestRate / 100 / 12
   const months = arg.years * 12
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
@@ -30,8 +35,15 @@ const calculateAmortization = (arg: { principal: number; interestRate: number; y
     {
       monthlyPayment: payment,
       balance: arg.principal - (payment - arg.principal * monthlyRate),
-      monthlyPrincipal: arg.principal * monthlyRate,
-      monthlyInterest: payment - arg.principal * monthlyRate,
+      balanceInflation:
+        (arg.principal - (payment - arg.principal * monthlyRate)) /
+        Math.pow(1 + arg.inflation / 100, 1 / 12),
+      monthlyInterest: arg.principal * monthlyRate,
+      monthlyInterestInflation:
+        (arg.principal * monthlyRate) / Math.pow(1 + arg.inflation / 100, 1 / 12),
+      monthlyPrincipal: payment - arg.principal * monthlyRate,
+      monthlyPrincipalInflation:
+        (payment - arg.principal * monthlyRate) / Math.pow(1 + arg.inflation / 100, 1 / 12),
     },
   ]
 
@@ -39,8 +51,17 @@ const calculateAmortization = (arg: { principal: number; interestRate: number; y
     mortgageData.push({
       monthlyPayment: payment,
       balance: mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
-      monthlyPrincipal: mortgageData[i - 1].balance * monthlyRate,
-      monthlyInterest: payment - mortgageData[i - 1].balance * monthlyRate,
+      balanceInflation:
+        (mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate)) /
+        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
+      monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
+      monthlyInterestInflation:
+        (mortgageData[i - 1].balance * monthlyRate) /
+        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
+      monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
+      monthlyPrincipalInflation:
+        (payment - mortgageData[i - 1].balance * monthlyRate) /
+        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
     })
   }
 
@@ -53,6 +74,7 @@ export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
   const [years, setYears] = useState(5)
+  const [inflation, setInflation] = useState(6)
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
 
   useEffect(() => {
@@ -64,7 +86,7 @@ export const MortgageCalculator = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const loanDetail = calculateAmortization({ principal, interestRate, years })
+  const loanDetail = calculateAmortization({ principal, interestRate, years, inflation })
   const dataExist = principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0
 
   return (
@@ -185,56 +207,110 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
     : 0
 
   return (
-    <Div_ChartsContainer>
-      <Div_ChartContainer>
-        <ResponsiveContainer width={chartWidth} aspect={1.5}>
-          <LineChart
-            data={props.loanDetail.map((data, i) => ({
-              Principal: roundAmount(data.monthlyPrincipal),
-              Interest: roundAmount(data.monthlyInterest),
-              index: i + 1,
-            }))}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-            <XAxis dataKey='index' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
-            <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
-          </LineChart>
-        </ResponsiveContainer>
-      </Div_ChartContainer>
-      <Div_ChartContainer>
-        <ResponsiveContainer width={chartWidth} aspect={1.5}>
-          <LineChart
-            data={props.loanDetail.map((data, i) => ({
-              Balance: roundAmount(data.balance),
-              index: i + 1,
-            }))}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-            <XAxis dataKey='index' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
-          </LineChart>
-        </ResponsiveContainer>
-      </Div_ChartContainer>
-    </Div_ChartsContainer>
+    <>
+      <H_SubHeading>Values without inflation</H_SubHeading>
+      <Div_ChartsContainer>
+        <Div_ChartContainer>
+          <ResponsiveContainer width={chartWidth} aspect={1.5}>
+            <LineChart
+              data={props.loanDetail.map((data, i) => ({
+                Principal: roundAmount(data.monthlyPrincipal),
+                Interest: roundAmount(data.monthlyInterest),
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Div_ChartContainer>
+        <Div_ChartContainer>
+          <ResponsiveContainer width={chartWidth} aspect={1.5}>
+            <LineChart
+              data={props.loanDetail.map((data, i) => ({
+                Balance: roundAmount(data.balance),
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Div_ChartContainer>
+      </Div_ChartsContainer>
+      <H_SubHeading>Values with inflation</H_SubHeading>
+      <Div_ChartsContainer>
+        <Div_ChartContainer>
+          <ResponsiveContainer width={chartWidth} aspect={1.5}>
+            <LineChart
+              data={props.loanDetail.map((data, i) => ({
+                Principal: roundAmount(data.monthlyPrincipalInflation),
+                Interest: roundAmount(data.monthlyInterestInflation),
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Div_ChartContainer>
+        <Div_ChartContainer>
+          <ResponsiveContainer width={chartWidth} aspect={1.5}>
+            <LineChart
+              data={props.loanDetail.map((data, i) => ({
+                BalanceI: roundAmount(data.balanceInflation),
+                index: i + 1,
+              }))}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <XAxis dataKey='index' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type='monotone' dataKey='BalanceI' stroke={styles.colors.orange300} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Div_ChartContainer>
+      </Div_ChartsContainer>
+    </>
   )
 }
 
