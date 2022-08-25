@@ -122,6 +122,14 @@ export const MortgageCalculator = () => {
                 onChange={e => setYears(Number(e.target.value))}
               />
             </Div_InputWrapper>
+            <Div_InputWrapper>
+              <Label_MCLabel>Inflation (%)</Label_MCLabel>
+              <CustomInput_MCInput
+                type='number'
+                defaultValue={inflation}
+                onChange={e => setInflation(Number(e.target.value))}
+              />
+            </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
         {dataExist && (
