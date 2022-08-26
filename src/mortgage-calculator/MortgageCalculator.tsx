@@ -30,38 +30,35 @@ const calculateAmortization = (arg: {
   const monthlyRate = arg.interestRate / 100 / 12
   const months = arg.years * 12
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
+  const principalMonthlyRate = arg.principal * monthlyRate
+  const balanceMonthlyRate = (i: number) => mortgageData[i - 1].balance * monthlyRate
+  const amountAfterInflation = (amount: number, i: number) =>
+    amount / Math.pow(1 + arg.inflation / 100, (i + 1) / 12)
 
   const mortgageData = [
     {
       monthlyPayment: payment,
-      balance: arg.principal - (payment - arg.principal * monthlyRate),
-      balanceInflation:
-        (arg.principal - (payment - arg.principal * monthlyRate)) /
-        Math.pow(1 + arg.inflation / 100, 1 / 12),
-      monthlyInterest: arg.principal * monthlyRate,
-      monthlyInterestInflation:
-        (arg.principal * monthlyRate) / Math.pow(1 + arg.inflation / 100, 1 / 12),
-      monthlyPrincipal: payment - arg.principal * monthlyRate,
-      monthlyPrincipalInflation:
-        (payment - arg.principal * monthlyRate) / Math.pow(1 + arg.inflation / 100, 1 / 12),
+      balance: arg.principal - (payment - principalMonthlyRate),
+      balanceInflation: amountAfterInflation(arg.principal - (payment - principalMonthlyRate), 0),
+      monthlyInterest: principalMonthlyRate,
+      monthlyInterestInflation: amountAfterInflation(principalMonthlyRate, 0),
+      monthlyPrincipal: payment - principalMonthlyRate,
+      monthlyPrincipalInflation: amountAfterInflation(payment - principalMonthlyRate, 0),
     },
   ]
 
   for (let i = 1; i < months; i++) {
     mortgageData.push({
       monthlyPayment: payment,
-      balance: mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate),
-      balanceInflation:
-        (mortgageData[i - 1].balance - (payment - mortgageData[i - 1].balance * monthlyRate)) /
-        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
-      monthlyInterest: mortgageData[i - 1].balance * monthlyRate,
-      monthlyInterestInflation:
-        (mortgageData[i - 1].balance * monthlyRate) /
-        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
-      monthlyPrincipal: payment - mortgageData[i - 1].balance * monthlyRate,
-      monthlyPrincipalInflation:
-        (payment - mortgageData[i - 1].balance * monthlyRate) /
-        Math.pow(1 + arg.inflation / 100, (i + 1) / 12),
+      balance: mortgageData[i - 1].balance - (payment - balanceMonthlyRate(i)),
+      balanceInflation: amountAfterInflation(
+        mortgageData[i - 1].balance - (payment - balanceMonthlyRate(i)),
+        i
+      ),
+      monthlyInterest: balanceMonthlyRate(i),
+      monthlyInterestInflation: amountAfterInflation(balanceMonthlyRate(i), i),
+      monthlyPrincipal: payment - balanceMonthlyRate(i),
+      monthlyPrincipalInflation: amountAfterInflation(payment - balanceMonthlyRate(i), i),
     })
   }
 
@@ -222,8 +219,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
-                Principal: roundAmount(data.monthlyPrincipal),
-                Interest: roundAmount(data.monthlyInterest),
+                principal: roundAmount(data.monthlyPrincipal),
+                interest: roundAmount(data.monthlyInterest),
                 index: i + 1,
               }))}
               margin={{
@@ -238,8 +235,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
-              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+              <Line type='monotone' dataKey='principal' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='interest' stroke={styles.colors.grey300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
@@ -247,7 +244,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
-                Balance: roundAmount(data.balance),
+                balance: roundAmount(data.balance),
                 index: i + 1,
               }))}
               margin={{
@@ -262,7 +259,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='balance' stroke={styles.colors.orange300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
@@ -273,8 +270,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
-                Principal: roundAmount(data.monthlyPrincipalInflation),
-                Interest: roundAmount(data.monthlyInterestInflation),
+                principal: roundAmount(data.monthlyPrincipalInflation),
+                interest: roundAmount(data.monthlyInterestInflation),
                 index: i + 1,
               }))}
               margin={{
@@ -289,8 +286,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type='monotone' dataKey='Principal' stroke={styles.colors.orange300} />
-              <Line type='monotone' dataKey='Interest' stroke={styles.colors.grey300} />
+              <Line type='monotone' dataKey='principal' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='interest' stroke={styles.colors.grey300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
@@ -298,7 +295,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
-                Balance: roundAmount(data.balanceInflation),
+                balance: roundAmount(data.balanceInflation),
                 index: i + 1,
               }))}
               margin={{
@@ -313,7 +310,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type='monotone' dataKey='Balance' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='balance' stroke={styles.colors.orange300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
