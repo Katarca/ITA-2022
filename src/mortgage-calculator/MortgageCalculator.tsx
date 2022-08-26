@@ -40,11 +40,11 @@ const calculateAmortization = (arg: {
     {
       monthlyPayment: payment,
       balance: arg.principal - (payment - principalMonthlyRate),
-      balanceInflation: amountAfterInflation(arg.principal - (payment - principalMonthlyRate), 1),
+      balanceInflation: arg.principal - (payment - principalMonthlyRate),
       monthlyInterest: principalMonthlyRate,
-      monthlyInterestInflation: amountAfterInflation(principalMonthlyRate, 1),
+      monthlyInterestInflation: principalMonthlyRate,
       monthlyPrincipal: payment - principalMonthlyRate,
-      monthlyPrincipalInflation: amountAfterInflation(payment - principalMonthlyRate, 1),
+      monthlyPrincipalInflation: payment - principalMonthlyRate,
     },
   ]
 
