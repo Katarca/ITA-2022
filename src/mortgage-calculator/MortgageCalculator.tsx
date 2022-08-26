@@ -32,18 +32,19 @@ const calculateAmortization = (arg: {
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
   const principalMonthlyRate = arg.principal * monthlyRate
   const balanceMonthlyRate = (i: number) => mortgageData[i - 1].balance * monthlyRate
+
   const amountAfterInflation = (amount: number, i: number) =>
-    amount / Math.pow(1 + arg.inflation / 100, (i + 1) / 12)
+    amount * (1 + -arg.inflation / 100) ** (i / 12) - 1
 
   const mortgageData = [
     {
       monthlyPayment: payment,
       balance: arg.principal - (payment - principalMonthlyRate),
-      balanceInflation: amountAfterInflation(arg.principal - (payment - principalMonthlyRate), 0),
+      balanceInflation: amountAfterInflation(arg.principal - (payment - principalMonthlyRate), 1),
       monthlyInterest: principalMonthlyRate,
-      monthlyInterestInflation: amountAfterInflation(principalMonthlyRate, 0),
+      monthlyInterestInflation: amountAfterInflation(principalMonthlyRate, 1),
       monthlyPrincipal: payment - principalMonthlyRate,
-      monthlyPrincipalInflation: amountAfterInflation(payment - principalMonthlyRate, 0),
+      monthlyPrincipalInflation: amountAfterInflation(payment - principalMonthlyRate, 1),
     },
   ]
 
