@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
-import fs from 'fs'
+import fs, { readSync } from 'fs'
 import util from 'util'
 
 const app = express()
@@ -117,6 +117,32 @@ app.delete('/articles/:id', async (req, res, next) => {
     }
     await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(filteredData, null, 2), 'utf8')
     res.send(filteredData)
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.post('/articles/:id', async (req, res, next) => {
+  try {
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString)
+    const params = formatTerm(req.params.id)
+    const updatedData = {
+      ...data,
+      articles: data.articles.map((article: Article) =>
+        article.id === params
+          ? {
+              ...article,
+              title: req.body.title ? req.body.title : article.title,
+              slug: req.body.title ? formatTerm(req.body.title) : article.slug,
+              author: req.body.author ? req.body.author : article.author,
+              content: req.body.content ? req.body.content : article.content,
+            }
+          : article
+      ),
+    }
+    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(updatedData, null, 2), 'utf8')
+    res.send(updatedData)
   } catch (err) {
     next(err)
   }
