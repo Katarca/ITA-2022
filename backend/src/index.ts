@@ -14,7 +14,13 @@ type User = {
   email: string
 }
 
-const formatTerm = (term: string) => term.toLowerCase().trim().replace(/ +/g, '')
+const formatTerm = (term: string) =>
+  term
+    .toLowerCase()
+    .trim()
+    .replace(/ +/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
 
 const readFile = util.promisify(fs.readFile)
 
@@ -29,6 +35,50 @@ app.get('/search/:search', async (req, res, next) => {
         .some(val => formatTerm(val).includes(params))
     )
     res.send(searchData)
+  } catch (err) {
+    next(err)
+  }
+})
+
+type Article = {
+  id: string
+  title: string
+  slug: string
+  author: string
+  content: string
+}
+
+app.get('/articles/search/:search', async (req, res, next) => {
+  try {
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString).articles
+    const params = formatTerm(req.params.search)
+    let searchData = data.filter((article: Article) =>
+      Object.values(article).some(val => formatTerm(val).includes(params))
+    )
+    res.send(searchData)
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.get('/articles', async (req, res, next) => {
+  try {
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString).articles
+    res.send(data)
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.get('/articles/:id', async (req, res, next) => {
+  try {
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString).articles
+    const params = formatTerm(req.params.id)
+    let article = data.find((article: Article) => article.id === params)
+    res.send(article)
   } catch (err) {
     next(err)
   }
