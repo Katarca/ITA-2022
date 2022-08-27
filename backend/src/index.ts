@@ -106,6 +106,22 @@ app.post('/articles', async (req, res, next) => {
   }
 })
 
+app.delete('/articles/:id', async (req, res, next) => {
+  try {
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString)
+    const params = formatTerm(req.params.id)
+    let filteredData = {
+      ...data,
+      articles: data.articles.filter((article: Article) => article.id !== params),
+    }
+    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(filteredData, null, 2), 'utf8')
+    res.send(filteredData)
+  } catch (err) {
+    next(err)
+  }
+})
+
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err)
   res.status(500)
