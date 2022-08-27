@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
@@ -7,6 +8,7 @@ const app = express()
 const port = 5000
 
 app.use(cors())
+app.use(bodyParser.json())
 
 type User = {
   id: string
@@ -23,6 +25,7 @@ const formatTerm = (term: string) =>
     .replace(/[\u0300-\u036f]/g, '')
 
 const readFile = util.promisify(fs.readFile)
+const writeFile = util.promisify(fs.writeFile)
 
 app.get('/search/:search', async (req, res, next) => {
   try {
@@ -79,6 +82,25 @@ app.get('/articles/:id', async (req, res, next) => {
     const params = formatTerm(req.params.id)
     let article = data.find((article: Article) => article.id === params)
     res.send(article)
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.post('/articles', async (req, res, next) => {
+  try {
+    const newArticle = {
+      id: Math.random().toString(),
+      title: req.body.title,
+      slug: formatTerm(req.body.title),
+      author: req.body.author,
+      content: req.body.content,
+    }
+    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+    const data = JSON.parse(jsonString)
+    const newData = { ...data, articles: [...data.articles, newArticle] }
+    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(newData, null, 2), 'utf8')
+    res.send(newArticle)
   } catch (err) {
     next(err)
   }
