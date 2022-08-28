@@ -17,15 +17,25 @@ export const NewArticle = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [content, setContent] = useState('')
-
   let navigate = useNavigate()
+
   return (
     <HelmetProvider>
       <Helmet>
         <title>Katarína Soušková | New Article</title>
       </Helmet>
       <Div_NewArticleContainer>
-        <BlogForm>
+        <BlogForm
+          onSubmit={e => {
+            e.preventDefault()
+            if (!newArticleLogic.validateInputs(title, author, content)) return
+            newArticleLogic.postData(title, author, content)
+            setTitle('')
+            setAuthor('')
+            setContent('')
+            navigate(urls.blogApp)
+          }}
+        >
           <Div_InputContainer>
             <Label_BlogLabel>Title</Label_BlogLabel>
             <BlogInput
