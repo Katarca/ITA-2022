@@ -1,3 +1,4 @@
+import { ArticleDetailContext } from '../article-detail/ArticleDetailContext'
 import { Articles } from './Articles'
 import { Div_Container } from '../../components/Container'
 import { H_Heading } from '../../components/Heading'
@@ -10,7 +11,7 @@ import { urlString, urls } from '../../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type Article = {
+export type Article = {
   id: string
   date: string
   author: string
@@ -45,7 +46,10 @@ export const ArticlesContext = () => {
         <Routes>
           <Route path={urls.homePage} element={<Articles />} />
           <Route path={urls.newArticle} />
-          <Route path={urlString(urls.articleDetail, urls.slug)} />
+          <Route
+            path={urlString(urls.articleDetail, urls.slug, '/', ':id')}
+            element={<ArticleDetailContext />}
+          />
         </Routes>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>

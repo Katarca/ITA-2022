@@ -45,7 +45,7 @@ export const Articles = () => {
     <>
       {articlesLogic?.articles.map(article => (
         <RouterLink
-          to={urlString(urls.blog, urls.articleDetail, getSlug(article.title))}
+          to={urlString(urls.blogApp, urls.articleDetail, getSlug(article.title), '/', article.id)}
           key={article.id}
         >
           <Div_ArticleBox>
