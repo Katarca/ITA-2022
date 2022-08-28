@@ -1,4 +1,5 @@
 import { ArticleDetailStateContext } from './ArticleDetailContext'
+import { Div_MsgContainer, P_BlogText } from '../articles/Articles'
 import { H_Heading, H_SubHeading } from '../../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { MarkDown } from '../../components/MarkDown'
@@ -111,14 +112,4 @@ const Div_DetailContainer = styled.div`
 
 const Div_ContentContainer = styled.div`
   padding: ${styles.spacing.md} ${styles.spacing.sm} ${styles.spacing.sm} ${styles.spacing.sm};
-`
-export const P_BlogText = styled.p`
-  font-size: ${styles.fontSize.sm};
-  color: ${styles.colors.grey300};
-  ${breakpoint.tabletPortrait} {
-    text-align: center;
-  }
-`
-const Div_MsgContainer = styled.div`
-  margin: ${styles.spacing.xs};
 `

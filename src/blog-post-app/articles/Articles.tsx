@@ -104,6 +104,6 @@ const Div_TextContainer = styled.div`
   text-align: right;
   padding: ${styles.spacing.xs} 0;
 `
-const Div_MsgContainer = styled.div`
+export const Div_MsgContainer = styled.div`
   margin: ${styles.spacing.xs};
 `

@@ -2,6 +2,7 @@ import { ArticleDetailContext } from '../article-detail/ArticleDetailContext'
 import { Articles } from './Articles'
 import { Div_Container } from '../../components/Container'
 import { H_Heading } from '../../components/Heading'
+import { NewArticleContext } from '../new-article/NewArticleContext'
 import { P_LinkBodyText } from '../../components/BodyText'
 import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../../components/RouterLink'
@@ -45,7 +46,7 @@ export const ArticlesContext = () => {
         </Nav_BlogNavbar>
         <Routes>
           <Route path={urls.homePage} element={<Articles />} />
-          <Route path={urls.newArticle} />
+          <Route path={urls.newArticle} element={<NewArticleContext />} />
           <Route
             path={urlString(urls.articleDetail, urls.slug, '/', ':id')}
             element={<ArticleDetailContext />}
