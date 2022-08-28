@@ -24,6 +24,16 @@ const formatTerm = (term: string) =>
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
+const getSlug = (term: string) =>
+  term
+    .toLowerCase()
+    .trim()
+    .replace(/ +/g, '-')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+
+const createDate = () => new Date().toLocaleDateString()
+
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
 
@@ -47,6 +57,7 @@ type Article = {
   id: string
   title: string
   slug: string
+  date: string
   author: string
   content: string
 }
@@ -92,7 +103,8 @@ app.post('/articles', async (req, res, next) => {
     const newArticle = {
       id: Math.random().toString(),
       title: req.body.title,
-      slug: formatTerm(req.body.title),
+      slug: getSlug(req.body.title),
+      date: createDate(),
       author: req.body.author,
       content: req.body.content,
     }
@@ -134,7 +146,7 @@ app.post('/articles/:id', async (req, res, next) => {
           ? {
               ...article,
               title: req.body.title ? req.body.title : article.title,
-              slug: req.body.title ? formatTerm(req.body.title) : article.slug,
+              slug: req.body.title ? getSlug(req.body.title) : article.slug,
               author: req.body.author ? req.body.author : article.author,
               content: req.body.content ? req.body.content : article.content,
             }
