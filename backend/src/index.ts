@@ -110,7 +110,7 @@ app.post('/articles', async (req, res, next) => {
     }
     const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
     const data = JSON.parse(jsonString)
-    const newData = { ...data, articles: [...data.articles, newArticle] }
+    const newData = { ...data, articles: [newArticle, ...data.articles] }
     await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(newData, null, 2), 'utf8')
     res.send(newArticle)
   } catch (err) {
