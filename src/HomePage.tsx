@@ -31,6 +31,9 @@ export const HomePage = () => {
       <RouterLink to={urls.blog}>
         <P_LinkBodyText>Blog</P_LinkBodyText>
       </RouterLink>
+      <RouterLink to={urls.blogApp}>
+        <P_LinkBodyText>Blog Post App</P_LinkBodyText>
+      </RouterLink>
     </StyledHomePage>
   )
 }

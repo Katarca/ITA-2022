@@ -1,3 +1,4 @@
+import { ArticlesContext } from './blog-post-app/articles/ArticlesContext'
 import { BlogApp } from './blog/Blog'
 import { CounterApp } from './counter-app/CounterApp'
 import { HackerTyper } from './hacker-typer/HackerTyper'
@@ -11,7 +12,7 @@ import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
-import { urls } from './helpers/urls'
+import { urlString, urls } from './helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -31,7 +32,8 @@ export function App() {
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
           <Route path={urls.httpFilter} element={<HttpFilter />} />
-          <Route path={`${urls.blog}${urls.nestedPath}`} element={<BlogApp />} />
+          <Route path={urlString(urls.blog, urls.nestedPath)} element={<BlogApp />} />
+          <Route path={urlString(urls.blogApp, urls.nestedPath)} element={<ArticlesContext />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>

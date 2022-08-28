@@ -10,10 +10,13 @@ export const urls = {
   nestedPath: '/*',
   blog: '/blog',
   newArticle: '/new-article',
-  articleDetail: '/articleDetail/',
+  articleDetail: '/article-detail/',
   slug: ':slug',
+  blogApp: '/blog-app',
 } as const
 
 export const urlString = (...urls: string[]) => urls.join('')
 
 export const filterUrl = process.env.REACT_APP_URL
+
+export const blogAppUrl = process.env.REACT_APP_URL_BLOG
