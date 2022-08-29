@@ -22,9 +22,12 @@ export type Article = {
 
 const useLogicState = () => {
   const [articles, setArticles] = useState([] as Article[])
+  const [searchedArticles, setSearchedArticles] = useState([] as Article[])
   return {
     articles,
     setArticles,
+    searchedArticles,
+    setSearchedArticles,
   }
 }
 

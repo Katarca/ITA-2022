@@ -1,6 +1,10 @@
 import { ArticlesStateContext } from './ArticlesContext'
+import { CustomInput } from '../../components/Input'
+import { Form } from '../../components/Form'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { P_BodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
+import { TransparentButtonBorder } from '../../components/Button'
 import { blogAppUrl, urlString, urls } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
 import { getSlug } from '../../utils/getSlug'
@@ -9,8 +13,13 @@ import styled from 'styled-components'
 
 export const Articles = () => {
   const articlesLogic = useContext(ArticlesStateContext)
+
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const [emptyInputError, setEmptyInputError] = useState(null as null | string)
+  const [wasSubmitted, setWasSubmitted] = useState(false)
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -21,13 +30,26 @@ export const Articles = () => {
         const json = await response.json()
         articlesLogic.setArticles(json)
       } catch (error) {
-        console.error(error)
+        articlesLogic.setArticles([])
         setErrorMsg(`An error occurred while fetching articles`)
       }
       setLoading(false)
     }
     fetchArticles()
   }, [])
+
+  const searchArticles = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch(`${blogAppUrl}search/${searchTerm}`)
+      const json = await response.json()
+      articlesLogic.setSearchedArticles(json)
+    } catch (error) {
+      articlesLogic.setSearchedArticles([])
+      setErrorMsg(`An error occurred while fetching articles`)
+    }
+    setLoading(false)
+  }
 
   const loadingJSX = (
     <Div_MsgContainer>
@@ -41,22 +63,85 @@ export const Articles = () => {
     </Div_MsgContainer>
   )
 
+  const noResultJSX = (
+    <Div_MsgContainer>
+      <P_BlogText>No results</P_BlogText>
+      <Div_ButtonContainer>
+        <TransparentButtonBorder
+          onClick={() => {
+            articlesLogic.setSearchedArticles([])
+            setWasSubmitted(false)
+            setSearchTerm('')
+          }}
+        >
+          <P_BodyText>Clear filter</P_BodyText>
+        </TransparentButtonBorder>
+      </Div_ButtonContainer>
+    </Div_MsgContainer>
+  )
+
   const articlesJSX = (
     <>
-      {articlesLogic?.articles.map(article => (
-        <RouterLink
-          to={urlString(urls.blogApp, urls.articleDetail, getSlug(article.title), '/', article.id)}
-          key={article.id}
-        >
-          <Div_ArticleBox>
-            <P_BlogText>{article.title}</P_BlogText>
-            <Div_TextContainer>
-              <P_BlogTextXs>by {article.author}</P_BlogTextXs>
-              <P_BlogTextXs>{article.date}</P_BlogTextXs>
-            </Div_TextContainer>
-          </Div_ArticleBox>
-        </RouterLink>
-      ))}
+      {articlesLogic.searchedArticles.length > 0 ? (
+        <div>
+          {articlesLogic.searchedArticles.map(article => (
+            <RouterLink
+              to={urlString(
+                urls.blogApp,
+                urls.articleDetail,
+                getSlug(article.title),
+                '/',
+                article.id
+              )}
+              key={article.id}
+            >
+              <Div_ArticleBox>
+                <P_BlogText>{article.title}</P_BlogText>
+                <Div_TextContainer>
+                  <P_BlogTextXs>by {article.author}</P_BlogTextXs>
+                  <P_BlogTextXs>{article.date}</P_BlogTextXs>
+                </Div_TextContainer>
+              </Div_ArticleBox>
+            </RouterLink>
+          ))}
+          <Div_ButtonContainer>
+            <TransparentButtonBorder
+              onClick={() => {
+                articlesLogic.setSearchedArticles([])
+                setWasSubmitted(false)
+                setSearchTerm('')
+              }}
+            >
+              <P_BodyText>Clear filter</P_BodyText>
+            </TransparentButtonBorder>
+          </Div_ButtonContainer>
+        </div>
+      ) : articlesLogic.searchedArticles.length === 0 && wasSubmitted ? (
+        noResultJSX
+      ) : (
+        <>
+          {articlesLogic?.articles.map(article => (
+            <RouterLink
+              to={urlString(
+                urls.blogApp,
+                urls.articleDetail,
+                getSlug(article.title),
+                '/',
+                article.id
+              )}
+              key={article.id}
+            >
+              <Div_ArticleBox>
+                <P_BlogText>{article.title}</P_BlogText>
+                <Div_TextContainer>
+                  <P_BlogTextXs>by {article.author}</P_BlogTextXs>
+                  <P_BlogTextXs>{article.date}</P_BlogTextXs>
+                </Div_TextContainer>
+              </Div_ArticleBox>
+            </RouterLink>
+          ))}
+        </>
+      )}
     </>
   )
 
@@ -65,6 +150,37 @@ export const Articles = () => {
       <Helmet>
         <title>Katarína Soušková | Articles </title>
       </Helmet>
+      <Div_FormContainer>
+        <Form
+          onSubmit={e => {
+            e.preventDefault()
+            if (!searchTerm) {
+              setEmptyInputError('Enter value')
+              return
+            }
+            setWasSubmitted(true)
+            searchArticles()
+            setEmptyInputError(null)
+          }}
+        >
+          <div>
+            <CustomInput
+              type='text'
+              placeholder='search article'
+              onChange={e => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+            <TransparentButtonBorder type='submit'>
+              <P_BodyText>Search</P_BodyText>
+            </TransparentButtonBorder>
+          </div>
+          {emptyInputError && (
+            <Div_MsgContainer>
+              <P_BodyText>Please enter value</P_BodyText>
+            </Div_MsgContainer>
+          )}
+        </Form>
+      </Div_FormContainer>
       <Div_ArticlesContainer>
         {loading ? loadingJSX : errorMsg ? errorJSX : articlesJSX}
       </Div_ArticlesContainer>
@@ -73,7 +189,7 @@ export const Articles = () => {
 }
 
 const Div_ArticlesContainer = styled.div`
-  padding: ${styles.spacing.md};
+  padding: ${styles.spacing.sm};
   width: 80%;
   ${breakpoint.phone} {
     width: 100%;
@@ -107,4 +223,10 @@ const Div_TextContainer = styled.div`
 export const Div_MsgContainer = styled.div`
   margin: ${styles.spacing.xs};
   text-align: center;
+`
+const Div_FormContainer = styled.div`
+  padding: ${styles.spacing.sm} 0;
+`
+const Div_ButtonContainer = styled.div`
+  padding: ${styles.spacing.sm} 0;
 `
