@@ -145,10 +145,10 @@ app.post('/articles/:id', async (req, res, next) => {
         article.id === params
           ? {
               ...article,
-              title: req.body.title ? req.body.title : article.title,
-              slug: req.body.title ? getSlug(req.body.title) : article.slug,
-              author: req.body.author ? req.body.author : article.author,
-              content: req.body.content ? req.body.content : article.content,
+              title: req.body.title,
+              slug: getSlug(req.body.title),
+              author: req.body.author,
+              content: req.body.content,
             }
           : article
       ),

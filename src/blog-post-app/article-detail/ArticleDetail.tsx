@@ -3,17 +3,16 @@ import { CustomInput } from '../../components/Input'
 import { CustomTextarea } from '../../components/Textarea'
 import { Div_MsgContainer, P_BlogText, P_BlogTextXs } from '../articles/Articles'
 import { Form } from '../../components/Form'
-import { H_Heading, H_SubHeading } from '../../components/Heading'
+import { H_SubHeading } from '../../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { MarkDown } from '../../components/MarkDown'
 import { P_BodyText, P_LinkBodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
-import { blogAppUrl, urlString, urls } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
-import { getSlug } from '../../utils/getSlug'
-import { useNavigate, useParams } from 'react-router-dom'
-import React, { useContext, useEffect, useState } from 'react'
+import { urls } from '../../helpers/urls'
+import { useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export const ArticleDetail = () => {
@@ -192,4 +191,5 @@ const EditTextarea = styled(CustomTextarea)`
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
   height: 400px;
+  border-color: ${styles.colors.white};
 `
