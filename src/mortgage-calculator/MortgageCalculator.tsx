@@ -33,6 +33,7 @@ const calculateAmortization = (arg: {
   const principalMonthlyRate = arg.principal * monthlyRate
   const balanceMonthlyRate = (i: number) => mortgageData[i - 1].balance * monthlyRate
 
+  // Formula borrowed from https://www.financevpraxi.cz/finance-vyber-financniho-produktu
   const amountAfterInflation = (amount: number, i: number) =>
     amount * (1 + -arg.inflation / 100) ** (i / 12) - 1
 
