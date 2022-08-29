@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
-import fs, { readSync } from 'fs'
+import fs from 'fs'
 import util from 'util'
 
 const app = express()
@@ -9,12 +9,6 @@ const port = 5000
 
 app.use(cors())
 app.use(bodyParser.json())
-
-type User = {
-  id: string
-  name: string
-  email: string
-}
 
 const formatTerm = (term: string) =>
   term
@@ -36,22 +30,6 @@ const createDate = () => new Date().toLocaleDateString()
 
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
-
-app.get('/search/:search', async (req, res, next) => {
-  try {
-    const jsonString = await readFile(`${__dirname}/../data.json`, 'utf8')
-    const data = JSON.parse(jsonString).users
-    const params = formatTerm(req.params.search)
-    let searchData = data.filter((user: User) =>
-      Object.values(user)
-        .filter(val => !formatTerm(val).includes('id'))
-        .some(val => formatTerm(val).includes(params))
-    )
-    res.send(searchData)
-  } catch (err) {
-    next(err)
-  }
-})
 
 type Article = {
   id: string

@@ -51,7 +51,7 @@ export const ArticlesContext = () => {
           <Route path={urls.homePage} element={<Articles />} />
           <Route path={urls.newArticle} element={<NewArticleContext />} />
           <Route
-            path={urlString(urls.articleDetail, urls.slug, '/', ':id')}
+            path={urlString(urls.articleDetail, urls.slug, urls.id)}
             element={<ArticleDetailContext />}
           />
         </Routes>

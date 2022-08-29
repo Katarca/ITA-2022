@@ -4,7 +4,6 @@ import { CounterApp } from './counter-app/CounterApp'
 import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
-import { HttpFilter } from './http-filter/HttpFilter'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
 import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
@@ -31,7 +30,6 @@ export function App() {
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
-          <Route path={urls.httpFilter} element={<HttpFilter />} />
           <Route path={urlString(urls.blog, urls.nestedPath)} element={<BlogApp />} />
           <Route path={urlString(urls.blogApp, urls.nestedPath)} element={<ArticlesContext />} />
         </Routes>

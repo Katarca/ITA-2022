@@ -6,12 +6,12 @@ export const urls = {
   hackerTyper: '/hacker-typer',
   memoryGame: '/memory-game',
   mortgageCalculator: '/mortgage-calculator',
-  httpFilter: '/http-filter',
   nestedPath: '/*',
   blog: '/blog',
   newArticle: '/new-article',
   articleDetail: '/article-detail/',
   slug: ':slug',
+  id: '/:id',
   blogApp: '/blog-app',
 } as const
 
