@@ -3,11 +3,12 @@ import { Div_MsgContainer, P_BlogText } from '../articles/Articles'
 import { H_Heading, H_SubHeading } from '../../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { MarkDown } from '../../components/MarkDown'
-import { P_LinkBodyText } from '../../components/BodyText'
+import { P_BodyText, P_LinkBodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
+import { TransparentButtonBorder } from '../../components/Button'
 import { blogAppUrl, urls } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -17,6 +18,8 @@ export const ArticleDetail = () => {
   const articleDetailLogic = useContext(ArticleDetailStateContext)
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+
+  let navigate = useNavigate()
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -35,6 +38,20 @@ export const ArticleDetail = () => {
     fetchArticles()
   }, [])
 
+  const deleteArticle = async () => {
+    try {
+      const response = await fetch(`${blogAppUrl}${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      if (!response.ok) throw Error
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const loadingJSX = (
     <Div_MsgContainer>
       <P_BlogText>Loading articles...</P_BlogText>
@@ -44,6 +61,9 @@ export const ArticleDetail = () => {
   const errorJSX = (
     <Div_MsgContainer>
       <P_BlogText>{errorMsg}</P_BlogText>
+      <RouterLink to={urls.blogApp}>
+        <P_LinkBodyText>Return to articles</P_LinkBodyText>
+      </RouterLink>
     </Div_MsgContainer>
   )
 
@@ -57,29 +77,29 @@ export const ArticleDetail = () => {
       <Div_ContentContainer>
         <MarkDown>{articleDetailLogic.articleDetail.content}</MarkDown>
       </Div_ContentContainer>
+      <Div_ButtonContainer>
+        <TransparentButtonBorder>
+          <P_BodyText>Edit</P_BodyText>
+        </TransparentButtonBorder>
+        <TransparentButtonBorder
+          onClick={() => {
+            deleteArticle()
+            navigate(urls.blogApp)
+          }}
+        >
+          <P_BodyText>Delete</P_BodyText>
+        </TransparentButtonBorder>
+      </Div_ButtonContainer>
     </>
   )
 
-  return articleDetailLogic.articleDetail ? (
+  return (
     <HelmetProvider>
       <Helmet>
-        <title>{articleDetailLogic.articleDetail.title}</title>
+        <title>{articleDetailLogic?.articleDetail.title}</title>
       </Helmet>
       <Div_ArticleContainer>
         {loading ? loadingJSX : errorMsg ? errorJSX : articleDetailJSX}
-      </Div_ArticleContainer>
-    </HelmetProvider>
-  ) : (
-    <HelmetProvider>
-      <Helmet>
-        <title>404 page not found</title>
-      </Helmet>
-      <Div_ArticleContainer>
-        <H_Heading>404</H_Heading>
-        <H_SubHeading>page not found</H_SubHeading>
-        <RouterLink to={urls.blogApp}>
-          <P_LinkBodyText>Return to articles</P_LinkBodyText>
-        </RouterLink>
       </Div_ArticleContainer>
     </HelmetProvider>
   )
@@ -112,4 +132,9 @@ const Div_DetailContainer = styled.div`
 
 const Div_ContentContainer = styled.div`
   padding: ${styles.spacing.md} ${styles.spacing.sm} ${styles.spacing.sm} ${styles.spacing.sm};
+`
+
+const Div_ButtonContainer = styled.div`
+  display: flex;
+  padding: ${styles.spacing.sm} 0;
 `

@@ -106,4 +106,5 @@ const Div_TextContainer = styled.div`
 `
 export const Div_MsgContainer = styled.div`
   margin: ${styles.spacing.xs};
+  text-align: center;
 `
