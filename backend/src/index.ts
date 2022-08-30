@@ -39,7 +39,7 @@ type Articles = {
 
 const readFile = util.promisify(fs.readFile)
 
-const readJsonData = async (): Promise<Articles> => {
+const getJsonData = async (): Promise<Articles> => {
   const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
   return JSON.parse(jsonString)
 }
@@ -51,7 +51,7 @@ const writeJsonData = async (data: {}) =>
 
 app.get('/articles/search/:search', async (req, res, next) => {
   try {
-    const data = await readJsonData()
+    const data = await getJsonData()
     const articles = data.articles
     const params = formatTerm(req.params.search)
     let searchData = articles.filter(article =>
@@ -65,7 +65,7 @@ app.get('/articles/search/:search', async (req, res, next) => {
 
 app.get('/articles', async (req, res, next) => {
   try {
-    const data = await readJsonData()
+    const data = await getJsonData()
     const articles = data.articles
     res.send(articles)
   } catch (err) {
@@ -75,7 +75,7 @@ app.get('/articles', async (req, res, next) => {
 
 app.get('/articles/:id', async (req, res, next) => {
   try {
-    const data = await readJsonData()
+    const data = await getJsonData()
     const articles = data.articles
     const params = formatTerm(req.params.id)
     let article = articles.find(article => article.id === params)
@@ -95,7 +95,7 @@ app.post('/articles', async (req, res, next) => {
       author: req.body.author,
       content: req.body.content,
     }
-    const data = await readJsonData()
+    const data = await getJsonData()
     const newData = { ...data, articles: [newArticle, ...data.articles] }
     writeJsonData(newData)
     res.send(newArticle)
@@ -106,7 +106,7 @@ app.post('/articles', async (req, res, next) => {
 
 app.delete('/articles/:id', async (req, res, next) => {
   try {
-    const data = await readJsonData()
+    const data = await getJsonData()
     const params = formatTerm(req.params.id)
     let filteredData = {
       ...data,
@@ -121,7 +121,7 @@ app.delete('/articles/:id', async (req, res, next) => {
 
 app.post('/articles/:id', async (req, res, next) => {
   try {
-    const data = await readJsonData()
+    const data = await getJsonData()
     const params = formatTerm(req.params.id)
     const updatedData = {
       ...data,
