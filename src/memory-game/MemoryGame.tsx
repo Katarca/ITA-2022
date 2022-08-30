@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
+import { delay } from '../utils/delay'
 import { idGenerator } from '../utils/idGenerator'
 import { shuffleArray } from '../utils/shuffleArray'
 import { urls } from '../helpers/urls'
@@ -31,8 +32,6 @@ const createBoard = () =>
         } as Card)
     )
   )
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(() => resolve(undefined), ms))
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState(createBoard())
@@ -68,7 +67,7 @@ export const MemoryGame = () => {
         setCards(
           cards.map(card =>
             card.id === clickedCard.id || card.id === selectedCard.id
-              ? { ...card, flipped: true }
+              ? { ...card, flipped: true, frozen: true }
               : { ...card, frozen: true }
           )
         )

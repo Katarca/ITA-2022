@@ -2,11 +2,13 @@ import { CustomInput } from '../../components/Input'
 import { CustomTextarea } from '../../components/Textarea'
 import { Form } from '../../components/Form'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { MessageJSX } from '../../components/MessageJSX'
 import { NewArticleStateContext } from './NewArticleContext'
 import { P_BlogTextXs } from '../articles/Articles'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
 import { breakpoint, styles } from '../../helpers/theme'
+import { delay } from '../../utils/delay'
 import { urls } from '../../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext, useState } from 'react'
@@ -26,14 +28,16 @@ export const NewArticle = () => {
       </Helmet>
       <Div_NewArticleContainer>
         <BlogForm
-          onSubmit={e => {
+          onSubmit={async e => {
             e.preventDefault()
             if (!newArticle.validateInputs(title, author, content)) return
             newArticle.postNewArticle(title, author, content)
+            await delay(1000)
             setTitle('')
             setAuthor('')
             setContent('')
             navigate(urls.blogApp)
+            newArticle.setNewArticleErr('')
           }}
         >
           <Div_InputContainer>
@@ -74,6 +78,7 @@ export const NewArticle = () => {
             </TransparentButtonBorder>
           </Div_ButtonContainer>
         </BlogForm>
+        {newArticle.newArticleErr && <MessageJSX text={newArticle.newArticleErr} />}
       </Div_NewArticleContainer>
     </HelmetProvider>
   )

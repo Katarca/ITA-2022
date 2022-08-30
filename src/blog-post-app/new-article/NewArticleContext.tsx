@@ -11,6 +11,8 @@ const useLogicState = () => {
   const [authorErr, setAuthorErr] = useState('')
   const [contentErr, setContentErr] = useState('')
 
+  const [newArticleErr, setNewArticleErr] = useState('')
+
   const validateInputs = (title: string, author: string, content: string) => {
     let validInputs = true
     if (title.trim().length === 0) {
@@ -33,6 +35,7 @@ const useLogicState = () => {
       await services.addNewArticle(title, author, content)
     } catch (error) {
       console.error(error)
+      setNewArticleErr('An error occurred while posting article')
     }
   }
 
@@ -44,6 +47,8 @@ const useLogicState = () => {
     contentErr,
     validateInputs,
     postNewArticle,
+    newArticleErr,
+    setNewArticleErr,
   }
 }
 
