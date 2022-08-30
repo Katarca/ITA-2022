@@ -56,14 +56,10 @@ const useLogicState = () => {
   }
 
   return {
-    newArticle,
-    setNewArticle,
     titleErr,
     authorErr,
     contentErr,
-    postNewArticle,
     newArticleErr,
-    setNewArticleErr,
     submitArticle,
     title,
     setTitle,
