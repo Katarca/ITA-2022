@@ -34,7 +34,6 @@ const useLogicState = () => {
     try {
       await services.addNewArticle(title, author, content)
     } catch (error) {
-      console.error(error)
       setNewArticleErr('An error occurred while posting article')
     }
   }
