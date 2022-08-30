@@ -5,6 +5,7 @@ import { Div_MsgContainer, P_BlogText, P_BlogTextXs } from '../articles/Articles
 import { Form } from '../../components/Form'
 import { H_SubHeading } from '../../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { LoadingJSX } from '../../components/LoadingJSX'
 import { MarkDown } from '../../components/MarkDown'
 import { P_BodyText, P_LinkBodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
@@ -20,12 +21,6 @@ export const ArticleDetail = () => {
   const [editing, setEditing] = useState(false)
 
   let navigate = useNavigate()
-
-  const loadingJSX = (
-    <Div_MsgContainer>
-      <P_BlogText>Loading articles...</P_BlogText>
-    </Div_MsgContainer>
-  )
 
   const errorJSX = (
     <Div_MsgContainer>
@@ -127,7 +122,7 @@ export const ArticleDetail = () => {
       </Helmet>
       <Div_ArticleContainer>
         {articleDetailLogic.loading
-          ? loadingJSX
+          ? LoadingJSX('Loading article detail...')
           : articleDetailLogic.errorMsg
           ? errorJSX
           : articleDetailJSX}
