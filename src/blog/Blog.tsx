@@ -6,11 +6,11 @@ import { NewArticle } from './NewArticle'
 import { P_LinkBodyText } from '../components/BodyText'
 import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../components/RouterLink'
+import { articleDetailUrl, newArticleUrl, urls } from '../helpers/urls'
 import { breakpoint, styles } from '../helpers/theme'
 import { convertToSlug } from '../utils/convertToSlug'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { idGenerator } from '../utils/idGenerator'
-import { urlString, urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -91,14 +91,14 @@ export const BlogApp = () => {
           <RouterLink to={urls.blog}>
             <P_LinkBodyText>Articles</P_LinkBodyText>
           </RouterLink>
-          <RouterLink to={urlString(urls.blog, urls.newArticle)}>
+          <RouterLink to={newArticleUrl}>
             <P_LinkBodyText>New Article</P_LinkBodyText>
           </RouterLink>
         </Nav_BlogNavbar>
         <Routes>
           <Route path={urls.homePage} element={<Articles />} />
           <Route path={urls.newArticle} element={<NewArticle />} />
-          <Route path={urlString(urls.articleDetail, urls.slug)} element={<ArticleDetail />} />
+          <Route path={articleDetailUrl} element={<ArticleDetail />} />
         </Routes>
         <RouterLink to={urls.homePage}>
           <P_LinkBodyText>Return home</P_LinkBodyText>

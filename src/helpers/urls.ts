@@ -21,10 +21,15 @@ export const urls = {
   nestedBlogApp: '/blog-app/*',
 } as const
 
-export const urlString = (...urls: string[]) => urls.join('')
+// const urlString = (...urls: string[]) => urls.join('')
+
+export const newArticleUrl = `${urls.blog}${urls.newArticle}`
+export const articleDetailUrl = `${urls.articleDetail}${urls.slug}`
+export const getArticleDetail = (title: string) =>
+  `${urls.blog}${urls.articleDetail}${convertToSlug(title)}`
 
 export const getArticleDetailUrl = (title: string, id: string) =>
-  urlString(urls.blogApp, urls.articleDetail, convertToSlug(title), '/', id)
+  `${urls.blogApp}${urls.articleDetail}${convertToSlug(title)}/${id}`
 
 export const filterUrl = process.env.REACT_APP_URL
 

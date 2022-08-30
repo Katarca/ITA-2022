@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { convertToSlug } from '../utils/convertToSlug'
-import { urlString, urls } from '../helpers/urls'
+import { getArticleDetail, urls } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
@@ -16,10 +16,7 @@ export const Articles = () => {
       </Helmet>
       <Div_ArticlesContainer>
         {blogLogic?.articles.map(article => (
-          <RouterLink
-            to={urlString(urls.blog, urls.articleDetail, convertToSlug(article.title))}
-            key={article.id}
-          >
+          <RouterLink to={getArticleDetail(article.title)} key={article.id}>
             <Div_ArticleBox>
               <P_BlogText>{article.title}</P_BlogText>
               <Div_TextContainer>
