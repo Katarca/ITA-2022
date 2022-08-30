@@ -13,7 +13,7 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export const NewArticle = () => {
-  const newArticleLogic = useContext(NewArticleStateContext)
+  const newArticle = useContext(NewArticleStateContext)
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [content, setContent] = useState('')
@@ -28,8 +28,8 @@ export const NewArticle = () => {
         <BlogForm
           onSubmit={e => {
             e.preventDefault()
-            if (!newArticleLogic.validateInputs(title, author, content)) return
-            newArticleLogic.postNewArticle(title, author, content)
+            if (!newArticle.validateInputs(title, author, content)) return
+            newArticle.postNewArticle(title, author, content)
             setTitle('')
             setAuthor('')
             setContent('')
@@ -44,27 +44,27 @@ export const NewArticle = () => {
               onChange={e => setTitle(e.target.value)}
               autoComplete='off'
             />
-            {newArticleLogic.titleErr && (
+            {newArticle.titleErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{newArticleLogic.titleErr}</P_BlogTextXs>
+                <P_BlogTextXs>{newArticle.titleErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Author</Label_BlogLabel>
             <BlogInput type='text' value={author} onChange={e => setAuthor(e.target.value)} />
-            {newArticleLogic.authorErr && (
+            {newArticle.authorErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{newArticleLogic.authorErr}</P_BlogTextXs>
+                <P_BlogTextXs>{newArticle.authorErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Content</Label_BlogLabel>
             <BlogTextArea value={content} onChange={e => setContent(e.target.value)} />
-            {newArticleLogic.contentErr && (
+            {newArticle.contentErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{newArticleLogic.contentErr}</P_BlogTextXs>
+                <P_BlogTextXs>{newArticle.contentErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>

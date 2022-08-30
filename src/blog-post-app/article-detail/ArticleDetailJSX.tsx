@@ -14,17 +14,17 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const ArticleDetailJSX = () => {
-  const articleDetailLogic = useContext(ArticleDetailStateContext)
+  const articleData = useContext(ArticleDetailStateContext)
   let navigate = useNavigate()
   return (
     <>
-      {articleDetailLogic.editing ? (
+      {articleData.editing ? (
         <Form
           onSubmit={e => {
             e.preventDefault()
-            if (!articleDetailLogic.validateInputs()) return
-            articleDetailLogic.updateArticle()
-            articleDetailLogic.setEditing(false)
+            if (!articleData.validateInputs()) return
+            articleData.updateArticle()
+            articleData.setEditing(false)
             navigate(urls.blogApp)
           }}
         >
@@ -32,12 +32,12 @@ export const ArticleDetailJSX = () => {
             <Label_EditLabel>Title</Label_EditLabel>
             <CustomInput
               type='text'
-              value={articleDetailLogic.newTitle}
-              onChange={e => articleDetailLogic.setNewTitle(e.target.value)}
+              value={articleData.newTitle}
+              onChange={e => articleData.setNewTitle(e.target.value)}
             />
-            {articleDetailLogic.newTitleErr && (
+            {articleData.newTitleErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{articleDetailLogic.newTitleErr}</P_BlogTextXs>
+                <P_BlogTextXs>{articleData.newTitleErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
@@ -45,24 +45,24 @@ export const ArticleDetailJSX = () => {
             <Label_EditLabel>Author</Label_EditLabel>
             <CustomInput
               type='text'
-              value={articleDetailLogic.newAuthor}
-              onChange={e => articleDetailLogic.setNewAuthor(e.target.value)}
+              value={articleData.newAuthor}
+              onChange={e => articleData.setNewAuthor(e.target.value)}
             />
-            {articleDetailLogic.newAuthorErr && (
+            {articleData.newAuthorErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{articleDetailLogic.newAuthorErr}</P_BlogTextXs>
+                <P_BlogTextXs>{articleData.newAuthorErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_EditLabel>Content</Label_EditLabel>
             <EditTextarea
-              value={articleDetailLogic.newContent}
-              onChange={e => articleDetailLogic.setNewContent(e.target.value)}
+              value={articleData.newContent}
+              onChange={e => articleData.setNewContent(e.target.value)}
             />
-            {articleDetailLogic.newContentErr && (
+            {articleData.newContentErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{articleDetailLogic.newContentErr}</P_BlogTextXs>
+                <P_BlogTextXs>{articleData.newContentErr}</P_BlogTextXs>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
@@ -74,21 +74,21 @@ export const ArticleDetailJSX = () => {
         </Form>
       ) : (
         <>
-          <H_ArticleHeading>{articleDetailLogic.articleDetail.title}</H_ArticleHeading>
+          <H_ArticleHeading>{articleData.articleDetail.title}</H_ArticleHeading>
           <Div_DetailContainer>
-            <P_BlogText>Author: {articleDetailLogic.articleDetail.author}</P_BlogText>
-            <P_BlogText>created at {articleDetailLogic.articleDetail.date}</P_BlogText>
+            <P_BlogText>Author: {articleData.articleDetail.author}</P_BlogText>
+            <P_BlogText>created at {articleData.articleDetail.date}</P_BlogText>
           </Div_DetailContainer>
           <Div_ContentContainer>
-            <MarkDown>{articleDetailLogic.articleDetail.content}</MarkDown>
+            <MarkDown>{articleData.articleDetail.content}</MarkDown>
           </Div_ContentContainer>
           <Div_ButtonContainer>
-            <TransparentButtonBorder onClick={() => articleDetailLogic.setEditing(true)}>
+            <TransparentButtonBorder onClick={() => articleData.setEditing(true)}>
               <P_BodyText>Edit</P_BodyText>
             </TransparentButtonBorder>
             <TransparentButtonBorder
               onClick={() => {
-                articleDetailLogic.deleteArticle()
+                articleData.deleteArticle()
                 navigate(urls.blogApp)
               }}
             >

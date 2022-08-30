@@ -18,18 +18,18 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export const ArticleDetail = () => {
-  const articleDetailLogic = useContext(ArticleDetailStateContext)
+  const articleData = useContext(ArticleDetailStateContext)
 
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{articleDetailLogic?.articleDetail.title}</title>
+        <title>{articleData?.articleDetail.title}</title>
       </Helmet>
       <Div_ArticleContainer>
-        {articleDetailLogic.loading ? (
+        {articleData.loading ? (
           <MessageJSX text='Loading article detail...' />
-        ) : articleDetailLogic.errorMsg ? (
-          <MessageJSX text={articleDetailLogic.errorMsg}>
+        ) : articleData.errorMsg ? (
+          <MessageJSX text={articleData.errorMsg}>
             <RouterLink to={urls.blogApp}>
               <P_LinkBodyText>Return to articles</P_LinkBodyText>
             </RouterLink>
