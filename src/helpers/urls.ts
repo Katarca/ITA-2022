@@ -15,6 +15,8 @@ export const urls = {
   slug: ':slug',
   id: '/:id',
   blogApp: '/blog-app',
+  linkNewArticle: '/blog-app/new-article',
+  articleDetailRoute: '/article-detail/:slug/:id',
 } as const
 
 export const urlString = (...urls: string[]) => urls.join('')

@@ -19,17 +19,14 @@ export const ArticlesRoutes = () => {
         <RouterLink to={urls.blogApp}>
           <P_LinkBodyText>All Articles</P_LinkBodyText>
         </RouterLink>
-        <RouterLink to={urlString(urls.blogApp, urls.newArticle)}>
+        <RouterLink to={urls.linkNewArticle}>
           <P_LinkBodyText>New Article</P_LinkBodyText>
         </RouterLink>
       </Nav_BlogNavbar>
       <Routes>
         <Route path={urls.homePage} element={<Articles />} />
         <Route path={urls.newArticle} element={<NewArticleContext />} />
-        <Route
-          path={urlString(urls.articleDetail, urls.slug, urls.id)}
-          element={<ArticleDetailContext />}
-        />
+        <Route path={urls.articleDetailRoute} element={<ArticleDetailContext />} />
       </Routes>
       <RouterLink to={urls.homePage}>
         <P_LinkBodyText>Return home</P_LinkBodyText>

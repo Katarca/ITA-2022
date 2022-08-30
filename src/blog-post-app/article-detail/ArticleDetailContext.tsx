@@ -16,6 +16,7 @@ const useLogicState = () => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newContent, setNewContent] = useState('')
+  const [editing, setEditing] = useState(false)
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -104,6 +105,8 @@ const useLogicState = () => {
     setNewTitle,
     setNewAuthor,
     setNewContent,
+    editing,
+    setEditing,
   }
 }
 
