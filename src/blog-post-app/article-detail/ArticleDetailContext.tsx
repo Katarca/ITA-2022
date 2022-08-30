@@ -64,7 +64,7 @@ const useLogicState = () => {
 
   const updateArticle = async () => {
     try {
-      services.updateArticleById(id!, newTitle, newAuthor, newContent)
+      await services.updateArticleById(id!, newTitle, newAuthor, newContent)
     } catch (error) {
       console.error(error)
     }
