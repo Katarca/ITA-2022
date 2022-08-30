@@ -11,7 +11,7 @@ import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
-import { urlString, urls } from './helpers/urls'
+import { urls } from './helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -30,8 +30,8 @@ export function App() {
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
-          <Route path={urlString(urls.blog, urls.nestedPath)} element={<BlogApp />} />
-          <Route path={urlString(urls.blogApp, urls.nestedPath)} element={<ArticlesContext />} />
+          <Route path={urls.nestedBlog} element={<BlogApp />} />
+          <Route path={urls.nestedBlogApp} element={<ArticlesContext />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>

@@ -7,7 +7,7 @@ import { P_LinkBodyText } from '../../components/BodyText'
 import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../../components/RouterLink'
 import { breakpoint, styles } from '../../helpers/theme'
-import { urlString, urls } from '../../helpers/urls'
+import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
