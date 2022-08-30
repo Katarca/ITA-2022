@@ -2,10 +2,15 @@ import { styles } from '../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
-export const MessageJSX = (text: string, children?: React.ReactNode) => (
+type MessageJSX = {
+  text: string
+  children?: React.ReactNode
+}
+
+export const MessageJSX = (props: MessageJSX) => (
   <Div_MessageContainer>
-    <P_MessageText>{text}</P_MessageText>
-    {children}
+    <P_MessageText>{props.text}</P_MessageText>
+    {props.children}
   </Div_MessageContainer>
 )
 

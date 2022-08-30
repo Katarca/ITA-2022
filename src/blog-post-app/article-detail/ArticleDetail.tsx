@@ -27,14 +27,13 @@ export const ArticleDetail = () => {
       </Helmet>
       <Div_ArticleContainer>
         {articleDetailLogic.loading ? (
-          MessageJSX('Loading article detail...')
+          <MessageJSX text='Loading article detail...' />
         ) : articleDetailLogic.errorMsg ? (
-          MessageJSX(
-            articleDetailLogic.errorMsg,
+          <MessageJSX text={articleDetailLogic.errorMsg}>
             <RouterLink to={urls.blogApp}>
               <P_LinkBodyText>Return to articles</P_LinkBodyText>
             </RouterLink>
-          )
+          </MessageJSX>
         ) : (
           <ArticleDetailJSX />
         )}

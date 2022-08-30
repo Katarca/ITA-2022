@@ -84,9 +84,9 @@ export const Articles = () => {
       </Div_FormContainer>
       <Div_ArticlesContainer>
         {loading ? (
-          MessageJSX('Loading articles...')
+          <MessageJSX text='Loading articles...' />
         ) : errorMsg ? (
-          MessageJSX(errorMsg)
+          <MessageJSX text={errorMsg} />
         ) : (
           <ArticlesJSX />
         )}

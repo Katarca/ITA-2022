@@ -39,8 +39,7 @@ export const ArticlesJSX = () => {
           </Div_ButtonContainer>
         </div>
       ) : articlesLogic.searchedArticles.length === 0 && articlesLogic.wasSubmitted ? (
-        MessageJSX(
-          'No result',
+        <MessageJSX text='No result'>
           <Div_ButtonContainer>
             <TransparentButtonBorder
               onClick={() => {
@@ -52,7 +51,7 @@ export const ArticlesJSX = () => {
               <P_BodyText>Clear filter</P_BodyText>
             </TransparentButtonBorder>
           </Div_ButtonContainer>
-        )
+        </MessageJSX>
       ) : (
         <>
           {articlesLogic?.articles.map(article => (
