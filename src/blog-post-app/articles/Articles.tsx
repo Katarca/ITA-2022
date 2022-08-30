@@ -6,9 +6,9 @@ import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
-import { blogAppUrl, urlString, urls } from '../../helpers/urls'
+import { blogAppUrl, getArticleDetailUrl, urlString, urls } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
-import { getSlug } from '../../utils/getSlug'
+import { convertToSlug } from '../../utils/convertToSlug'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -57,16 +57,7 @@ export const Articles = () => {
       {articlesLogic.searchedArticles.length > 0 ? (
         <div>
           {articlesLogic.searchedArticles.map(article => (
-            <RouterLink
-              to={urlString(
-                urls.blogApp,
-                urls.articleDetail,
-                getSlug(article.title),
-                '/',
-                article.id
-              )}
-              key={article.id}
-            >
+            <RouterLink to={getArticleDetailUrl(article.title, article.id)} key={article.id}>
               <Div_ArticleBox>
                 <P_BlogText>{article.title}</P_BlogText>
                 <Div_TextContainer>
@@ -106,16 +97,7 @@ export const Articles = () => {
       ) : (
         <>
           {articlesLogic?.articles.map(article => (
-            <RouterLink
-              to={urlString(
-                urls.blogApp,
-                urls.articleDetail,
-                getSlug(article.title),
-                '/',
-                article.id
-              )}
-              key={article.id}
-            >
+            <RouterLink to={getArticleDetailUrl(article.title, article.id)} key={article.id}>
               <Div_ArticleBox>
                 <P_BlogText>{article.title}</P_BlogText>
                 <Div_TextContainer>

@@ -7,8 +7,8 @@ import { P_LinkBodyText } from '../components/BodyText'
 import { Route, Routes } from 'react-router-dom'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
+import { convertToSlug } from '../utils/convertToSlug'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
-import { getSlug } from '../utils/getSlug'
 import { idGenerator } from '../utils/idGenerator'
 import { urlString, urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
@@ -37,7 +37,7 @@ const useLogicState = () => {
     if (title.trim().length === 0) {
       validInputs = false
       setTitleErr('Title is required')
-    } else if (articles.some(article => getSlug(article.title) === getSlug(title))) {
+    } else if (articles.some(article => convertToSlug(article.title) === convertToSlug(title))) {
       validInputs = false
       setTitleErr('Title must be unique')
     }

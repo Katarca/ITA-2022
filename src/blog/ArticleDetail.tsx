@@ -6,7 +6,7 @@ import { P_BlogText } from './Articles'
 import { P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
-import { getSlug } from '../utils/getSlug'
+import { convertToSlug } from '../utils/convertToSlug'
 import { urls } from '../helpers/urls'
 import { useParams } from 'react-router-dom'
 import React, { useContext } from 'react'
@@ -16,7 +16,7 @@ export const ArticleDetail = () => {
   const { slug } = useParams<{ slug: string }>()
   const blogLogic = useContext(BlogStateContext)
 
-  const articleDetail = blogLogic.articles.find(article => getSlug(article.title) === slug)
+  const articleDetail = blogLogic.articles.find(article => convertToSlug(article.title) === slug)
 
   return articleDetail ? (
     <HelmetProvider>

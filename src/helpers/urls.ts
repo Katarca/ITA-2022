@@ -1,3 +1,5 @@
+import { convertToSlug } from '../utils/convertToSlug'
+
 export const urls = {
   homePage: '/',
   jsWeb: '/js',
@@ -16,6 +18,9 @@ export const urls = {
 } as const
 
 export const urlString = (...urls: string[]) => urls.join('')
+
+export const getArticleDetailUrl = (title: string, id: string) =>
+  urlString(urls.blogApp, urls.articleDetail, convertToSlug(title), '/', id)
 
 export const filterUrl = process.env.REACT_APP_URL
 
