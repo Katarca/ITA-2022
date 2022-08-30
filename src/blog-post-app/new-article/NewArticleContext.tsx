@@ -1,7 +1,10 @@
 import { Article } from '../articles/ArticlesContext'
 import { NewArticle } from './NewArticle'
+import { delay } from '../../utils/delay'
 import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder'
 import { services } from '../../utils/services'
+import { urls } from '../../helpers/urls'
+import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 
 const useLogicState = () => {
@@ -13,29 +16,43 @@ const useLogicState = () => {
 
   const [newArticleErr, setNewArticleErr] = useState(null as null | string)
 
-  const validateInputs = (title: string, author: string, content: string) => {
-    let validInputs = true
-    if (title.trim().length === 0) {
-      validInputs = false
-      setTitleErr('Title is required')
-    }
-    if (author.trim().length === 0) {
-      validInputs = false
-      setAuthorErr('Author is required')
-    }
-    if (content.trim().length === 0) {
-      validInputs = false
-      setContentErr('Content is required')
-    }
-    return validInputs
-  }
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [content, setContent] = useState('')
 
-  const postNewArticle = async (title: string, author: string, content: string) => {
+  let navigate = useNavigate()
+
+  const postNewArticle = async () => {
     try {
       await services.addNewArticle(title, author, content)
     } catch (error) {
       setNewArticleErr('An error occurred while posting article')
     }
+  }
+
+  const submitArticle = async () => {
+    setTitleErr(null)
+    setAuthorErr(null)
+    setContentErr(null)
+    if (title.trim().length === 0) {
+      setTitleErr('Title is required')
+      return
+    }
+    if (author.trim().length === 0) {
+      setAuthorErr('Author is required')
+      return
+    }
+    if (content.trim().length === 0) {
+      setContentErr('Content is required')
+      return
+    }
+    postNewArticle()
+    await delay(1000)
+    setTitle('')
+    setAuthor('')
+    setContent('')
+    navigate(urls.blogApp)
+    setNewArticleErr(null)
   }
 
   return {
@@ -44,10 +61,16 @@ const useLogicState = () => {
     titleErr,
     authorErr,
     contentErr,
-    validateInputs,
     postNewArticle,
     newArticleErr,
     setNewArticleErr,
+    submitArticle,
+    title,
+    setTitle,
+    author,
+    setAuthor,
+    content,
+    setContent,
   }
 }
 

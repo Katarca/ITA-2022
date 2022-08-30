@@ -8,18 +8,11 @@ import { P_BlogTextXs } from '../articles/Articles'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
 import { breakpoint, styles } from '../../helpers/theme'
-import { delay } from '../../utils/delay'
-import { urls } from '../../helpers/urls'
-import { useNavigate } from 'react-router-dom'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const NewArticle = () => {
   const newArticle = useContext(NewArticleStateContext)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [content, setContent] = useState('')
-  let navigate = useNavigate()
 
   return (
     <HelmetProvider>
@@ -30,22 +23,15 @@ export const NewArticle = () => {
         <BlogForm
           onSubmit={async e => {
             e.preventDefault()
-            if (!newArticle.validateInputs(title, author, content)) return
-            newArticle.postNewArticle(title, author, content)
-            await delay(1000)
-            setTitle('')
-            setAuthor('')
-            setContent('')
-            navigate(urls.blogApp)
-            newArticle.setNewArticleErr('')
+            newArticle.submitArticle()
           }}
         >
           <Div_InputContainer>
             <Label_BlogLabel>Title</Label_BlogLabel>
             <BlogInput
               type='text'
-              value={title}
-              onChange={e => setTitle(e.target.value)}
+              value={newArticle.title}
+              onChange={e => newArticle.setTitle(e.target.value)}
               autoComplete='off'
             />
             {newArticle.titleErr && (
@@ -56,7 +42,11 @@ export const NewArticle = () => {
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Author</Label_BlogLabel>
-            <BlogInput type='text' value={author} onChange={e => setAuthor(e.target.value)} />
+            <BlogInput
+              type='text'
+              value={newArticle.author}
+              onChange={e => newArticle.setAuthor(e.target.value)}
+            />
             {newArticle.authorErr && (
               <Div_ErrContainer>
                 <P_BlogTextXs>{newArticle.authorErr}</P_BlogTextXs>
@@ -65,7 +55,10 @@ export const NewArticle = () => {
           </Div_InputContainer>
           <Div_InputContainer>
             <Label_BlogLabel>Content</Label_BlogLabel>
-            <BlogTextArea value={content} onChange={e => setContent(e.target.value)} />
+            <BlogTextArea
+              value={newArticle.content}
+              onChange={e => newArticle.setContent(e.target.value)}
+            />
             {newArticle.contentErr && (
               <Div_ErrContainer>
                 <P_BlogTextXs>{newArticle.contentErr}</P_BlogTextXs>
