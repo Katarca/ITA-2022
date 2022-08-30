@@ -20,6 +20,8 @@ const convertToSlug = (term: string) =>
 
 const formatTerm = (term: string) => convertToSlug(term).replaceAll('-', '')
 
+const getIdString = () => Math.random().toString()
+
 const createDate = () => new Date().toLocaleDateString()
 
 const readFile = util.promisify(fs.readFile)
@@ -73,7 +75,7 @@ app.get('/articles/:id', async (req, res, next) => {
 app.post('/articles', async (req, res, next) => {
   try {
     const newArticle = {
-      id: Math.random().toString(),
+      id: getIdString(),
       title: req.body.title,
       slug: convertToSlug(req.body.title),
       date: createDate(),

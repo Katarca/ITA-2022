@@ -21,8 +21,6 @@ export const urls = {
   nestedBlogApp: '/blog-app/*',
 } as const
 
-// const urlString = (...urls: string[]) => urls.join('')
-
 export const newArticleUrl = `${urls.blog}${urls.newArticle}`
 export const articleDetailUrl = `${urls.articleDetail}${urls.slug}`
 export const getArticleDetail = (title: string) =>
