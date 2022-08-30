@@ -10,7 +10,7 @@ const port = 5000
 app.use(cors())
 app.use(bodyParser.json())
 
-const getSlug = (term: string) =>
+const convertToSlug = (term: string) =>
   term
     .toLowerCase()
     .trim()
@@ -18,7 +18,7 @@ const getSlug = (term: string) =>
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
-const formatTerm = (term: string) => getSlug(term).replaceAll('-', '')
+const formatTerm = (term: string) => convertToSlug(term).replaceAll('-', '')
 
 const createDate = () => new Date().toLocaleDateString()
 
@@ -75,7 +75,7 @@ app.post('/articles', async (req, res, next) => {
     const newArticle = {
       id: Math.random().toString(),
       title: req.body.title,
-      slug: getSlug(req.body.title),
+      slug: convertToSlug(req.body.title),
       date: createDate(),
       author: req.body.author,
       content: req.body.content,
@@ -118,7 +118,7 @@ app.post('/articles/:id', async (req, res, next) => {
           ? {
               ...article,
               title: req.body.title,
-              slug: getSlug(req.body.title),
+              slug: convertToSlug(req.body.title),
               author: req.body.author,
               content: req.body.content,
             }
