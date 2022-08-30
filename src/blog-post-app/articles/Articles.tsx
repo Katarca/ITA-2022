@@ -17,7 +17,7 @@ export const Articles = () => {
   const articlesLogic = useContext(ArticlesStateContext)
 
   const [loading, setLoading] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState(null as null | string)
   const [emptyInputError, setEmptyInputError] = useState(null as null | string)
 
   const fetchArticles = async () => {

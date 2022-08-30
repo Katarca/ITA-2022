@@ -7,11 +7,11 @@ import React, { useState } from 'react'
 const useLogicState = () => {
   const [newArticle, setNewArticle] = useState({} as Article)
 
-  const [titleErr, setTitleErr] = useState('')
-  const [authorErr, setAuthorErr] = useState('')
-  const [contentErr, setContentErr] = useState('')
+  const [titleErr, setTitleErr] = useState(null as null | string)
+  const [authorErr, setAuthorErr] = useState(null as null | string)
+  const [contentErr, setContentErr] = useState(null as null | string)
 
-  const [newArticleErr, setNewArticleErr] = useState('')
+  const [newArticleErr, setNewArticleErr] = useState(null as null | string)
 
   const validateInputs = (title: string, author: string, content: string) => {
     let validInputs = true
