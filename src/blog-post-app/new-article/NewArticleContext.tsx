@@ -1,7 +1,7 @@
 import { Article } from '../articles/ArticlesContext'
 import { NewArticle } from './NewArticle'
-import { blogAppUrl } from '../../helpers/urls'
 import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder'
+import { services } from '../../utils/services'
 import React, { useState } from 'react'
 
 const useLogicState = () => {
@@ -30,18 +30,7 @@ const useLogicState = () => {
 
   const postNewArticle = async (title: string, author: string, content: string) => {
     try {
-      const response = await fetch(`${blogAppUrl}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          author,
-          content,
-        }),
-      })
-      if (!response.ok) throw Error
+      services.addNewArticle(title, author, content)
     } catch (error) {
       console.error(error)
     }

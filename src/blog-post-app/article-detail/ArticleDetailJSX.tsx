@@ -23,7 +23,7 @@ export const ArticleDetailJSX = () => {
           onSubmit={e => {
             e.preventDefault()
             if (!articleDetailLogic.validateInputs()) return
-            articleDetailLogic.postData()
+            articleDetailLogic.updateArticle()
             articleDetailLogic.setEditing(false)
             navigate(urls.blogApp)
           }}

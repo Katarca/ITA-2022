@@ -33,19 +33,24 @@ type Article = {
   content: string
 }
 
-const readJsonData = () => {
-  const jsonString = fs.readFileSync(`${__dirname}/../blogData.json`, 'utf8')
+const readFile = util.promisify(fs.readFile)
+
+const readJsonData = async () => {
+  const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
   return JSON.parse(jsonString)
 }
 
-const writeJsonData = (data: {}) =>
-  fs.writeFileSync(`${__dirname}/../blogData.json`, JSON.stringify(data, null, 2), 'utf8')
+const writeFile = util.promisify(fs.writeFile)
+
+const writeJsonData = async (data: {}) =>
+  await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(data, null, 2), 'utf8')
 
 app.get('/articles/search/:search', async (req, res, next) => {
   try {
-    const data = readJsonData().articles
+    const data = await readJsonData()
+    const articles = data.articles
     const params = formatTerm(req.params.search)
-    let searchData = data.filter((article: Article) =>
+    let searchData = articles.filter((article: Article) =>
       Object.values(article).some(val => formatTerm(val).includes(params))
     )
     res.send(searchData)
@@ -56,8 +61,9 @@ app.get('/articles/search/:search', async (req, res, next) => {
 
 app.get('/articles', async (req, res, next) => {
   try {
-    const data = readJsonData().articles
-    res.send(data)
+    const data = await readJsonData()
+    const articles = data.articles
+    res.send(articles)
   } catch (err) {
     next(err)
   }
@@ -65,9 +71,10 @@ app.get('/articles', async (req, res, next) => {
 
 app.get('/articles/:id', async (req, res, next) => {
   try {
-    const data = readJsonData().articles
+    const data = await readJsonData()
+    const articles = data.articles
     const params = formatTerm(req.params.id)
-    let article = data.find((article: Article) => article.id === params)
+    let article = articles.find((article: Article) => article.id === params)
     res.send(article)
   } catch (err) {
     next(err)
@@ -84,7 +91,7 @@ app.post('/articles', async (req, res, next) => {
       author: req.body.author,
       content: req.body.content,
     }
-    const data = readJsonData()
+    const data = await readJsonData()
     const newData = { ...data, articles: [newArticle, ...data.articles] }
     writeJsonData(newData)
     res.send(newArticle)
@@ -95,7 +102,7 @@ app.post('/articles', async (req, res, next) => {
 
 app.delete('/articles/:id', async (req, res, next) => {
   try {
-    const data = readJsonData()
+    const data = await readJsonData()
     const params = formatTerm(req.params.id)
     let filteredData = {
       ...data,
@@ -110,7 +117,7 @@ app.delete('/articles/:id', async (req, res, next) => {
 
 app.post('/articles/:id', async (req, res, next) => {
   try {
-    const data = readJsonData()
+    const data = await readJsonData()
     const params = formatTerm(req.params.id)
     const updatedData = {
       ...data,

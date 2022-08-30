@@ -1,12 +1,13 @@
 import { Article } from '../articles/ArticlesContext'
 import { ArticleDetail } from './ArticleDetail'
-import { blogAppUrl } from '../../helpers/urls'
 import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder'
+import { services } from '../../utils/services'
 import { useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 
 const useLogicState = () => {
-  const { id } = useParams<{ id: string }>()
+  const params = useParams<{ id: string }>()
+  const id = params.id
   const [articleDetail, setArticleDetail] = useState({} as Article)
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -22,9 +23,7 @@ const useLogicState = () => {
     const fetchArticles = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`${blogAppUrl}${id}`)
-        if (!response.ok) throw Error
-        const json = await response.json()
+        const json = await services.getArticleById(id!)
         setArticleDetail(json)
         setNewTitle(json.title)
         setNewAuthor(json.author)
@@ -40,13 +39,7 @@ const useLogicState = () => {
 
   const deleteArticle = async () => {
     try {
-      const response = await fetch(`${blogAppUrl}${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      if (!response.ok) throw Error
+      services.deleteArticleById(id!)
     } catch (error) {
       console.error(error)
     }
@@ -69,20 +62,9 @@ const useLogicState = () => {
     return validInputs
   }
 
-  const postData = async () => {
+  const updateArticle = async () => {
     try {
-      const response = await fetch(`${blogAppUrl}${id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: newTitle,
-          author: newAuthor,
-          content: newContent,
-        }),
-      })
-      if (!response.ok) throw Error
+      services.updateArticleById(id!, newTitle, newAuthor, newContent)
     } catch (error) {
       console.error(error)
     }
@@ -95,7 +77,7 @@ const useLogicState = () => {
     errorMsg,
     deleteArticle,
     validateInputs,
-    postData,
+    updateArticle,
     newTitleErr,
     newAuthorErr,
     newContentErr,

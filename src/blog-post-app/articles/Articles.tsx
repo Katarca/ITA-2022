@@ -8,6 +8,7 @@ import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
 import { blogAppUrl } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
+import { services } from '../../utils/services'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -22,9 +23,7 @@ export const Articles = () => {
     const fetchArticles = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`${blogAppUrl}`)
-        if (!response.ok) throw Error
-        const json = await response.json()
+        const json = await services.getAllArticles()
         articlesLogic.setArticles(json)
       } catch (error) {
         articlesLogic.setArticles([])
@@ -38,8 +37,7 @@ export const Articles = () => {
   const searchArticles = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`${blogAppUrl}search/${articlesLogic.searchTerm}`)
-      const json = await response.json()
+      const json = await services.getSearchedArticles(articlesLogic.searchTerm)
       articlesLogic.setSearchedArticles(json)
     } catch (error) {
       articlesLogic.setSearchedArticles([])
