@@ -10,21 +10,15 @@ const port = 5000
 app.use(cors())
 app.use(bodyParser.json())
 
-const formatTerm = (term: string) =>
-  term
-    .toLowerCase()
-    .trim()
-    .replace(/ +/g, '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-
 const getSlug = (term: string) =>
   term
     .toLowerCase()
     .trim()
-    .replace(/ +/g, '-')
+    .replaceAll(/ +/g, '-')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
+
+const formatTerm = (term: string) => getSlug(term).replaceAll('-', '')
 
 const createDate = () => new Date().toLocaleDateString()
 
