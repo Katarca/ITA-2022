@@ -30,7 +30,7 @@ const useLogicState = () => {
 
   const postNewArticle = async (title: string, author: string, content: string) => {
     try {
-      services.addNewArticle(title, author, content)
+      await services.addNewArticle(title, author, content)
     } catch (error) {
       console.error(error)
     }
