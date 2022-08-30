@@ -29,7 +29,7 @@ export const NewArticle = () => {
           onSubmit={e => {
             e.preventDefault()
             if (!newArticleLogic.validateInputs(title, author, content)) return
-            newArticleLogic.postData(title, author, content)
+            newArticleLogic.postNewArticle(title, author, content)
             setTitle('')
             setAuthor('')
             setContent('')

@@ -28,7 +28,7 @@ const useLogicState = () => {
     return validInputs
   }
 
-  const postData = async (title: string, author: string, content: string) => {
+  const postNewArticle = async (title: string, author: string, content: string) => {
     try {
       const response = await fetch(`${blogAppUrl}`, {
         method: 'POST',
@@ -54,7 +54,7 @@ const useLogicState = () => {
     authorErr,
     contentErr,
     validateInputs,
-    postData,
+    postNewArticle,
   }
 }
 
