@@ -24,9 +24,6 @@ const getIdString = () => Math.random().toString()
 
 const createDate = () => new Date().toLocaleDateString()
 
-const readFile = util.promisify(fs.readFile)
-const writeFile = util.promisify(fs.writeFile)
-
 type Article = {
   id: string
   title: string
@@ -36,10 +33,17 @@ type Article = {
   content: string
 }
 
+const readJsonData = () => {
+  const jsonString = fs.readFileSync(`${__dirname}/../blogData.json`, 'utf8')
+  return JSON.parse(jsonString)
+}
+
+const writeJsonData = (data: {}) =>
+  fs.writeFileSync(`${__dirname}/../blogData.json`, JSON.stringify(data, null, 2), 'utf8')
+
 app.get('/articles/search/:search', async (req, res, next) => {
   try {
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString).articles
+    const data = readJsonData().articles
     const params = formatTerm(req.params.search)
     let searchData = data.filter((article: Article) =>
       Object.values(article).some(val => formatTerm(val).includes(params))
@@ -52,8 +56,7 @@ app.get('/articles/search/:search', async (req, res, next) => {
 
 app.get('/articles', async (req, res, next) => {
   try {
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString).articles
+    const data = readJsonData().articles
     res.send(data)
   } catch (err) {
     next(err)
@@ -62,8 +65,7 @@ app.get('/articles', async (req, res, next) => {
 
 app.get('/articles/:id', async (req, res, next) => {
   try {
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString).articles
+    const data = readJsonData().articles
     const params = formatTerm(req.params.id)
     let article = data.find((article: Article) => article.id === params)
     res.send(article)
@@ -82,10 +84,9 @@ app.post('/articles', async (req, res, next) => {
       author: req.body.author,
       content: req.body.content,
     }
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString)
+    const data = readJsonData()
     const newData = { ...data, articles: [newArticle, ...data.articles] }
-    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(newData, null, 2), 'utf8')
+    writeJsonData(newData)
     res.send(newArticle)
   } catch (err) {
     next(err)
@@ -94,14 +95,13 @@ app.post('/articles', async (req, res, next) => {
 
 app.delete('/articles/:id', async (req, res, next) => {
   try {
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString)
+    const data = readJsonData()
     const params = formatTerm(req.params.id)
     let filteredData = {
       ...data,
       articles: data.articles.filter((article: Article) => article.id !== params),
     }
-    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(filteredData, null, 2), 'utf8')
+    writeJsonData(filteredData)
     res.send(filteredData)
   } catch (err) {
     next(err)
@@ -110,8 +110,7 @@ app.delete('/articles/:id', async (req, res, next) => {
 
 app.post('/articles/:id', async (req, res, next) => {
   try {
-    const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
-    const data = JSON.parse(jsonString)
+    const data = readJsonData()
     const params = formatTerm(req.params.id)
     const updatedData = {
       ...data,
@@ -127,7 +126,7 @@ app.post('/articles/:id', async (req, res, next) => {
           : article
       ),
     }
-    await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(updatedData, null, 2), 'utf8')
+    writeJsonData(updatedData)
     res.send(updatedData)
   } catch (err) {
     next(err)
