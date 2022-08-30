@@ -5,8 +5,8 @@ import { Div_MsgContainer, P_BlogText, P_BlogTextXs } from '../articles/Articles
 import { Form } from '../../components/Form'
 import { H_SubHeading } from '../../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { LoadingJSX } from '../../components/LoadingJSX'
 import { MarkDown } from '../../components/MarkDown'
+import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText, P_LinkBodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
@@ -21,15 +21,6 @@ export const ArticleDetail = () => {
   const [editing, setEditing] = useState(false)
 
   let navigate = useNavigate()
-
-  const errorJSX = (
-    <Div_MsgContainer>
-      <P_BlogText>{articleDetailLogic.errorMsg}</P_BlogText>
-      <RouterLink to={urls.blogApp}>
-        <P_LinkBodyText>Return to articles</P_LinkBodyText>
-      </RouterLink>
-    </Div_MsgContainer>
-  )
 
   const articleDetailJSX = (
     <>
@@ -122,9 +113,14 @@ export const ArticleDetail = () => {
       </Helmet>
       <Div_ArticleContainer>
         {articleDetailLogic.loading
-          ? LoadingJSX('Loading article detail...')
+          ? MessageJSX('Loading article detail...')
           : articleDetailLogic.errorMsg
-          ? errorJSX
+          ? MessageJSX(
+              articleDetailLogic.errorMsg,
+              <RouterLink to={urls.blogApp}>
+                <P_LinkBodyText>Return to articles</P_LinkBodyText>
+              </RouterLink>
+            )
           : articleDetailJSX}
       </Div_ArticleContainer>
     </HelmetProvider>

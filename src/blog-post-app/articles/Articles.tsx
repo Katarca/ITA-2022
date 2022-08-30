@@ -2,7 +2,7 @@ import { ArticlesStateContext } from './ArticlesContext'
 import { CustomInput } from '../../components/Input'
 import { Form } from '../../components/Form'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { LoadingJSX } from '../../components/LoadingJSX'
+import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
@@ -51,12 +51,6 @@ export const Articles = () => {
     }
     setLoading(false)
   }
-
-  const errorJSX = (
-    <Div_MsgContainer>
-      <P_BlogText>{errorMsg}</P_BlogText>
-    </Div_MsgContainer>
-  )
 
   const noResultJSX = (
     <Div_MsgContainer>
@@ -177,7 +171,11 @@ export const Articles = () => {
         </Form>
       </Div_FormContainer>
       <Div_ArticlesContainer>
-        {loading ? LoadingJSX('Loading articles...') : errorMsg ? errorJSX : articlesJSX}
+        {loading
+          ? MessageJSX('Loading articles...')
+          : errorMsg
+          ? MessageJSX(errorMsg)
+          : articlesJSX}
       </Div_ArticlesContainer>
     </HelmetProvider>
   )
