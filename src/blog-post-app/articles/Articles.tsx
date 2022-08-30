@@ -52,23 +52,6 @@ export const Articles = () => {
     setLoading(false)
   }
 
-  const noResultJSX = (
-    <Div_MsgContainer>
-      <P_BlogText>No results</P_BlogText>
-      <Div_ButtonContainer>
-        <TransparentButtonBorder
-          onClick={() => {
-            articlesLogic.setSearchedArticles([])
-            setWasSubmitted(false)
-            setSearchTerm('')
-          }}
-        >
-          <P_BodyText>Clear filter</P_BodyText>
-        </TransparentButtonBorder>
-      </Div_ButtonContainer>
-    </Div_MsgContainer>
-  )
-
   const articlesJSX = (
     <>
       {articlesLogic.searchedArticles.length > 0 ? (
@@ -106,7 +89,20 @@ export const Articles = () => {
           </Div_ButtonContainer>
         </div>
       ) : articlesLogic.searchedArticles.length === 0 && wasSubmitted ? (
-        noResultJSX
+        MessageJSX(
+          'No result',
+          <Div_ButtonContainer>
+            <TransparentButtonBorder
+              onClick={() => {
+                articlesLogic.setSearchedArticles([])
+                setWasSubmitted(false)
+                setSearchTerm('')
+              }}
+            >
+              <P_BodyText>Clear filter</P_BodyText>
+            </TransparentButtonBorder>
+          </Div_ButtonContainer>
+        )
       ) : (
         <>
           {articlesLogic?.articles.map(article => (
