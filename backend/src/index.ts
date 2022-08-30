@@ -35,6 +35,11 @@ type Article = {
 
 const readFile = util.promisify(fs.readFile)
 
+const readJsonArticles = async (): Promise<Article[]> => {
+  const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
+  return JSON.parse(jsonString).articles
+}
+
 const readJsonData = async () => {
   const jsonString = await readFile(`${__dirname}/../blogData.json`, 'utf8')
   return JSON.parse(jsonString)
@@ -47,10 +52,10 @@ const writeJsonData = async (data: {}) =>
 
 app.get('/articles/search/:search', async (req, res, next) => {
   try {
-    const data = await readJsonData()
-    const articles = data.articles
+    const data = await readJsonArticles()
+    const articles = data
     const params = formatTerm(req.params.search)
-    let searchData = articles.filter((article: Article) =>
+    let searchData = articles.filter(article =>
       Object.values(article).some(val => formatTerm(val).includes(params))
     )
     res.send(searchData)
@@ -61,8 +66,7 @@ app.get('/articles/search/:search', async (req, res, next) => {
 
 app.get('/articles', async (req, res, next) => {
   try {
-    const data = await readJsonData()
-    const articles = data.articles
+    const articles = await readJsonArticles()
     res.send(articles)
   } catch (err) {
     next(err)
@@ -71,10 +75,9 @@ app.get('/articles', async (req, res, next) => {
 
 app.get('/articles/:id', async (req, res, next) => {
   try {
-    const data = await readJsonData()
-    const articles = data.articles
+    const articles = await readJsonArticles()
     const params = formatTerm(req.params.id)
-    let article = articles.find((article: Article) => article.id === params)
+    let article = articles.find(article => article.id === params)
     res.send(article)
   } catch (err) {
     next(err)
