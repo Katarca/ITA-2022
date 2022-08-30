@@ -2,6 +2,7 @@ import { Article } from '../articles/ArticlesContext'
 import { ArticleDetail } from './ArticleDetail'
 import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder'
 import { services } from '../../utils/services'
+import { useComponentDidMount } from '../../utils/useComponentDidMount'
 import { useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 
@@ -19,23 +20,22 @@ const useLogicState = () => {
   const [newContent, setNewContent] = useState('')
   const [editing, setEditing] = useState(false)
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      setLoading(true)
-      try {
-        const json = await services.getArticleById(id!)
-        setArticleDetail(json)
-        setNewTitle(json.title)
-        setNewAuthor(json.author)
-        setNewContent(json.content)
-      } catch (error) {
-        console.error(error)
-        setErrorMsg(`An error occurred while fetching article`)
-      }
-      setLoading(false)
+  const fetchArticles = async () => {
+    setLoading(true)
+    try {
+      const json = await services.getArticleById(id!)
+      setArticleDetail(json)
+      setNewTitle(json.title)
+      setNewAuthor(json.author)
+      setNewContent(json.content)
+    } catch (error) {
+      console.error(error)
+      setErrorMsg(`An error occurred while fetching article`)
     }
-    fetchArticles()
-  }, [])
+    setLoading(false)
+  }
+
+  useComponentDidMount(fetchArticles)
 
   const deleteArticle = async () => {
     try {

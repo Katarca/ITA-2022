@@ -9,6 +9,7 @@ import { TransparentButtonBorder } from '../../components/Button'
 import { blogAppUrl } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
 import { services } from '../../utils/services'
+import { useComponentDidMount } from '../../utils/useComponentDidMount'
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -19,20 +20,19 @@ export const Articles = () => {
   const [errorMsg, setErrorMsg] = useState('')
   const [emptyInputError, setEmptyInputError] = useState(null as null | string)
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      setLoading(true)
-      try {
-        const json = await services.getAllArticles()
-        articlesLogic.setArticles(json)
-      } catch (error) {
-        articlesLogic.setArticles([])
-        setErrorMsg(`An error occurred while fetching articles`)
-      }
-      setLoading(false)
+  const fetchArticles = async () => {
+    setLoading(true)
+    try {
+      const json = await services.getAllArticles()
+      articlesLogic.setArticles(json)
+    } catch (error) {
+      articlesLogic.setArticles([])
+      setErrorMsg(`An error occurred while fetching articles`)
     }
-    fetchArticles()
-  }, [])
+    setLoading(false)
+  }
+
+  useComponentDidMount(fetchArticles)
 
   const searchArticles = async () => {
     setLoading(true)
