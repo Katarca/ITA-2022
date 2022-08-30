@@ -20,7 +20,7 @@ export const Articles = () => {
   const [errorMsg, setErrorMsg] = useState(null as null | string)
   const [emptyInputError, setEmptyInputError] = useState(null as null | string)
 
-  const fetchArticles = async () => {
+  useComponentDidMount(async () => {
     setLoading(true)
     try {
       const json = await services.getAllArticles()
@@ -30,9 +30,7 @@ export const Articles = () => {
       setErrorMsg(`An error occurred while fetching articles`)
     }
     setLoading(false)
-  }
-
-  useComponentDidMount(fetchArticles)
+  })
 
   const searchArticles = async () => {
     setLoading(true)

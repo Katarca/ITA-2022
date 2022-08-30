@@ -20,7 +20,7 @@ const useLogicState = () => {
   const [newContent, setNewContent] = useState('')
   const [editing, setEditing] = useState(false)
 
-  const fetchArticles = async () => {
+  useComponentDidMount(async () => {
     setLoading(true)
     try {
       const json = await services.getArticleById(id!)
@@ -33,9 +33,7 @@ const useLogicState = () => {
       setErrorMsg(`An error occurred while fetching article`)
     }
     setLoading(false)
-  }
-
-  useComponentDidMount(fetchArticles)
+  })
 
   const deleteArticle = async () => {
     try {
