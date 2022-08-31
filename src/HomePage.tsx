@@ -25,11 +25,11 @@ export const HomePage = () => {
       <RouterLink to={urls.mortgageCalculator}>
         <P_LinkBodyText>Mortgage Calculator</P_LinkBodyText>
       </RouterLink>
-      <RouterLink to={urls.httpFilter}>
-        <P_LinkBodyText>Http Filter</P_LinkBodyText>
-      </RouterLink>
       <RouterLink to={urls.blog}>
         <P_LinkBodyText>Blog</P_LinkBodyText>
+      </RouterLink>
+      <RouterLink to={urls.blogApp}>
+        <P_LinkBodyText>Blog Post App</P_LinkBodyText>
       </RouterLink>
     </StyledHomePage>
   )
