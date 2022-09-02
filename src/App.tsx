@@ -8,6 +8,7 @@ import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
+import { ToDoAppRedux } from './todo-list-redux/ToDoAppRedux'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
 import { urls } from './helpers/urls'
@@ -30,6 +31,7 @@ export function App() {
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
           <Route path={urls.nestedBlog} element={<BlogApp />} />
           <Route path={urls.nestedBlogApp} element={<ArticlesContext />} />
+          <Route path={urls.todoListRedux} element={<ToDoAppRedux />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>

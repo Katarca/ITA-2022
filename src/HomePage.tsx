@@ -28,6 +28,9 @@ export const HomePage = () => {
       <RouterLink to={urls.blogApp}>
         <P_LinkBodyText>Blog Post App</P_LinkBodyText>
       </RouterLink>
+      <RouterLink to={urls.todoListRedux}>
+        <P_LinkBodyText>ToDo List Redux</P_LinkBodyText>
+      </RouterLink>
     </StyledHomePage>
   )
 }
