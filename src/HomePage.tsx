@@ -10,9 +10,6 @@ export const HomePage = () => {
       <RouterLink to={urls.jsWeb}>
         <P_LinkBodyText>Javascript Web</P_LinkBodyText>
       </RouterLink>
-      <RouterLink to={urls.counterApp}>
-        <P_LinkBodyText>Counter App</P_LinkBodyText>
-      </RouterLink>
       <RouterLink to={urls.todoList}>
         <P_LinkBodyText>ToDo List</P_LinkBodyText>
       </RouterLink>
