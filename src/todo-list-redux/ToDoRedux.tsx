@@ -25,7 +25,7 @@ export const ToDoRedux = (props: ToDoProps) => {
         <Div_FlexContainer>
           <Div_IconBox
             onClick={() => {
-              dispatch(toDoActions.toggleCompleted({ id: props.id, completed: !props.completed }))
+              dispatch(toDoActions.toggleCompleted(props.id))
             }}
           >
             {props.completed && <CompletedIcon />}

@@ -19,16 +19,17 @@ const toDoSlice = createSlice({
       }),
     },
     deleteToDo(state, action: PayloadAction<string>) {
-      const index = state.findIndex(toDo => toDo.id === action.payload)
-      state.splice(index, 1)
+      return state.filter(toDo => toDo.id !== action.payload)
     },
-    toggleCompleted(state, action: PayloadAction<{ id: string; completed: boolean }>) {
-      const index = state.findIndex(toDo => toDo.id === action.payload.id)
-      state[index].completed = action.payload.completed
+    toggleCompleted(state, action: PayloadAction<string>) {
+      return state.map(toDo =>
+        action.payload === toDo.id ? { ...toDo, completed: !toDo.completed } : toDo
+      )
     },
     editToDo(state, action: PayloadAction<{ id: string; newTask: string }>) {
-      const index = state.findIndex(toDo => toDo.id === action.payload.id)
-      state[index].task = action.payload.newTask
+      return state.map(toDo =>
+        action.payload.id === toDo.id ? { ...toDo, task: action.payload.newTask } : toDo
+      )
     },
   },
 })
