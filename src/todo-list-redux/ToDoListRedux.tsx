@@ -16,10 +16,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+const toDos = useSelector((state: RootState) => state)
+
 export const ToDoListRedux = () => {
   const [task, setTask] = useState('')
 
-  const toDos = useSelector((state: RootState) => state)
   const dispatch = useDispatch<AppDispatch>()
 
   const [filter, setFilter] = useState('all' as keyof typeof filterMap)
