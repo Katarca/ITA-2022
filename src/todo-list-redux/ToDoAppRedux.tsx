@@ -1,8 +1,8 @@
 import { Provider } from 'react-redux'
 import { ToDoListRedux } from './ToDoListRedux'
 import { debounce } from 'ts-debounce'
+import { localStorageKey, store } from './store'
 import { saveToLocalStorage } from '../utils/browserStorage'
-import { store } from './store'
 import React from 'react'
 
 export type ToDoProps = {
@@ -10,8 +10,6 @@ export type ToDoProps = {
   task: string
   completed: boolean
 }
-
-export const localStorageKey = 'reduxToDos'
 
 store.subscribe(
   debounce(() => {

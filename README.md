@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+# ITA 2022 React Practice
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Clone the repository to get started.
 
-## Available Scripts
+## [](#clone-repository)Clone
 
-In the project directory, you can run:
+```
+git clone https://github.com/Katarca/ITA-2022
+```
 
-### `npm start`
+### [](#install)Install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### [](#start)Start
 
-### `npm test`
+```
+npm run start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## [](#react-apps)React Apps
 
-### `npm run build`
+### [](#javascript-web)JavaScript Web
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[JS web](https://github.com/Katarca/ITA-2022/tree/main/src/javascript-web)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A simple static web page about JavaScript's origin.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### [](#todo-list)ToDo List
 
-### `npm run eject`
+[ToDo List](https://github.com/Katarca/ITA-2022/tree/main/src/todo-list)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+A simple application that allows you to add, edit, delete and filter your daily tasks, which are saved in local storage.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### [](#todo-list-redux)ToDo List Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+[ToDo List Redux](https://github.com/Katarca/ITA-2022/tree/main/src/todo-list-redux)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Redux version of ToDo List app.
 
-## Learn More
+### [](#blog)Blog
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Blog](https://github.com/Katarca/ITA-2022/tree/main/src/blog)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+A blog application that allows you to write, edit and delete articles in markdown. Articles are saved in local storage.
+
+### [](#blog-post-app)Blog Post App
+
+[Blog Post App](https://github.com/Katarca/ITA-2022/tree/main/src/blog-post-app)
+
+A version of blog application with backend file system.
+
+### [](#hacker-typer)Hacker Typer Clone
+
+[Hacker Typer](https://github.com/Katarca/ITA-2022/tree/main/src/hacker-typer)
+
+A clone of [hacker typer](https://hackertyper.com/).
+
+### [](#memory-game)Memory Game
+
+[Memory Game](https://github.com/Katarca/ITA-2022/tree/main/src/memory-game)
+
+A simple game built to test a users memory.
+
+### [](#mortgage-calculator)Mortgage Calculator
+
+[Mortgage Calculator](https://github.com/Katarca/ITA-2022/tree/main/src/mortgage-calculator)
+
+An application that calculates monthly payments, remain balance, interest and principal paid of mortgage.
