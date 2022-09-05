@@ -1,3 +1,4 @@
+import { AppDispatch, RootState } from './store'
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
@@ -5,45 +6,24 @@ import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { ToDo } from './ToDo'
+import { ToDoProps } from './ToDoAppRedux'
+import { ToDoRedux } from './ToDoRedux'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
-import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
-import { idGenerator } from '../utils/idGenerator'
+import { toDoActions } from './toDoSlice'
 import { urls } from '../helpers/urls'
-import { useLocalStorage } from '../utils/useLocalStorage'
-import React, { useContext, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-export type ToDoProps = {
-  id: string
-  task: string
-  completed: boolean
-}
+const getState = (state: RootState) => state
 
-const useLogicState = () => {
-  const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
-  return {
-    toDos,
-    setToDos,
-  }
-}
-
-export const { ContextProvider: ToDoContextProvider, Context: ToDoStateContext } =
-  genericHookContextBuilder(useLogicState)
-
-export const ToDoApp = () => {
-  return (
-    <ToDoContextProvider>
-      <ToDoList />
-    </ToDoContextProvider>
-  )
-}
-
-const ToDoList = () => {
+export const ToDoListRedux = () => {
   const [task, setTask] = useState('')
 
-  const toDoLogic = useContext(ToDoStateContext)
+  const toDos = useSelector(getState)
+
+  const dispatch = useDispatch<AppDispatch>()
 
   const [filter, setFilter] = useState('all' as keyof typeof filterMap)
 
@@ -53,29 +33,22 @@ const ToDoList = () => {
     completed: (toDo: ToDoProps) => toDo.completed,
   }
 
-  const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
+  const activeToDos = toDos.filter(filterMap['active'])
 
   return (
     <HelmetProvider>
       <Div_Container>
         <Helmet>
-          <title>Katarína Soušková | ToDo List</title>
+          <title>Katarína Soušková | ToDo List Redux</title>
         </Helmet>
-        <H_TodoHeading>ToDo List</H_TodoHeading>
+        <H_TodoHeading>ToDo List Redux</H_TodoHeading>
         <CustomForm
           onSubmit={e => {
             e.preventDefault()
             if (task.trim().length === 0) {
               return
             }
-            toDoLogic.setToDos([
-              {
-                id: idGenerator(),
-                task,
-                completed: false,
-              },
-              ...toDoLogic.toDos,
-            ])
+            dispatch(toDoActions.addToDo(task))
             setTask('')
           }}
         >
@@ -88,8 +61,8 @@ const ToDoList = () => {
           />
         </CustomForm>
         <Ul_List>
-          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
+          {toDos.filter(filterMap[filter]).map(toDo => (
+            <ToDoRedux id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
           ))}
         </Ul_List>
         {activeToDos.length >= 1 && (

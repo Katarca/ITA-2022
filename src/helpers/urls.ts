@@ -3,7 +3,6 @@ import { convertToSlug } from '../utils/convertToSlug'
 export const urls = {
   homePage: '/',
   jsWeb: '/js',
-  counterApp: '/counter-app',
   todoList: '/todo-list',
   hackerTyper: '/hacker-typer',
   memoryGame: '/memory-game',
@@ -19,6 +18,7 @@ export const urls = {
   articleDetailRoute: '/article-detail/:slug/:id',
   nestedBlog: '/blog/*',
   nestedBlogApp: '/blog-app/*',
+  todoListRedux: '/todo-list-redux',
 } as const
 
 export const newArticleUrl = `${urls.blog}${urls.newArticle}`

@@ -10,9 +10,6 @@ export const HomePage = () => {
       <RouterLink to={urls.jsWeb}>
         <P_LinkBodyText>Javascript Web</P_LinkBodyText>
       </RouterLink>
-      <RouterLink to={urls.counterApp}>
-        <P_LinkBodyText>Counter App</P_LinkBodyText>
-      </RouterLink>
       <RouterLink to={urls.todoList}>
         <P_LinkBodyText>ToDo List</P_LinkBodyText>
       </RouterLink>
@@ -30,6 +27,9 @@ export const HomePage = () => {
       </RouterLink>
       <RouterLink to={urls.blogApp}>
         <P_LinkBodyText>Blog Post App</P_LinkBodyText>
+      </RouterLink>
+      <RouterLink to={urls.todoListRedux}>
+        <P_LinkBodyText>ToDo List Redux</P_LinkBodyText>
       </RouterLink>
     </StyledHomePage>
   )
