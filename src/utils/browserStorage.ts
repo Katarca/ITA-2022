@@ -1,4 +1,4 @@
-export const loadStateLocalStorage = <T>(key: string, initialValue: T) => {
+export const loadFromLocalStorage = <T>(key: string, initialValue: T) => {
   if (typeof window === 'undefined') {
     return initialValue
   }
@@ -6,12 +6,11 @@ export const loadStateLocalStorage = <T>(key: string, initialValue: T) => {
     const item = window.localStorage.getItem(key)
     return item ? JSON.parse(item) : initialValue
   } catch (error) {
-    console.error()
     return initialValue
   }
 }
 
-export const saveStateLocalStorage = <T>(key: string, state: T) => {
+export const saveToLocalStorage = <T>(key: string, state: T) => {
   try {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(key, JSON.stringify(state))

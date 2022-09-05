@@ -16,10 +16,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const toDos = useSelector((state: RootState) => state)
+const getState = (state: RootState) => state
 
 export const ToDoListRedux = () => {
   const [task, setTask] = useState('')
+
+  const toDos = useSelector(getState)
 
   const dispatch = useDispatch<AppDispatch>()
 
