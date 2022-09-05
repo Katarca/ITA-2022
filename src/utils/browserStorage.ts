@@ -1,4 +1,4 @@
-export const loadState = <T>(key: string, initialValue: T) => {
+export const loadStateLocalStorage = <T>(key: string, initialValue: T) => {
   if (typeof window === 'undefined') {
     return initialValue
   }
@@ -11,7 +11,7 @@ export const loadState = <T>(key: string, initialValue: T) => {
   }
 }
 
-export const saveState = <T>(key: string, state: T) => {
+export const saveStateLocalStorage = <T>(key: string, state: T) => {
   try {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(key, JSON.stringify(state))

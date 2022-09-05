@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { ToDoListRedux } from './ToDoListRedux'
 import { debounce } from 'ts-debounce'
-import { saveState } from '../utils/browserStorage'
+import { saveStateLocalStorage } from '../utils/browserStorage'
 import { store } from './store'
 import React from 'react'
 
@@ -13,7 +13,7 @@ export type ToDoProps = {
 
 store.subscribe(
   debounce(() => {
-    saveState('reduxToDos', store.getState())
+    saveStateLocalStorage('reduxToDos', store.getState())
   }, 800)
 )
 
