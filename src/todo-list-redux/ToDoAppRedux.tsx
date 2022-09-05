@@ -11,9 +11,11 @@ export type ToDoProps = {
   completed: boolean
 }
 
+export const localStorageKey = 'reduxToDos'
+
 store.subscribe(
   debounce(() => {
-    saveStateLocalStorage('reduxToDos', store.getState())
+    saveStateLocalStorage(localStorageKey, store.getState())
   }, 800)
 )
 

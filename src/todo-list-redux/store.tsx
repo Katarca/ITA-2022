@@ -1,11 +1,11 @@
-import { ToDoProps } from './ToDoAppRedux'
+import { ToDoProps, localStorageKey } from './ToDoAppRedux'
 import { configureStore } from '@reduxjs/toolkit'
 import { loadStateLocalStorage } from '../utils/browserStorage'
 import { toDoReducers } from './toDoSlice'
 
 export const store = configureStore({
   reducer: toDoReducers,
-  preloadedState: loadStateLocalStorage('reduxToDos', [] as ToDoProps[]),
+  preloadedState: loadStateLocalStorage(localStorageKey, [] as ToDoProps[]),
 })
 
 export type RootState = ReturnType<typeof store.getState>
