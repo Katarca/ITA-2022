@@ -22,13 +22,13 @@ export const ToDoListRedux = () => {
   const toDos = useSelector((state: RootState) => state)
   const dispatch = useDispatch<AppDispatch>()
 
+  const [filter, setFilter] = useState('all' as keyof typeof filterMap)
+
   const filterMap = {
     all: () => true,
     active: (toDo: ToDoProps) => !toDo.completed,
     completed: (toDo: ToDoProps) => toDo.completed,
   }
-
-  const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
   const activeToDos = toDos.filter(filterMap['active'])
 

@@ -45,13 +45,13 @@ const ToDoList = () => {
 
   const toDoLogic = useContext(ToDoStateContext)
 
+  const [filter, setFilter] = useState('all' as keyof typeof filterMap)
+
   const filterMap = {
     all: () => true,
     active: (toDo: ToDoProps) => !toDo.completed,
     completed: (toDo: ToDoProps) => toDo.completed,
   }
-
-  const [filter, setFilter] = useState<keyof typeof filterMap>('all')
 
   const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
 
