@@ -1,7 +1,6 @@
 import { Div_TextContainer } from '../components/TextContainer'
 import { H_Heading } from '../components/Heading'
 import { P_BodyTextGrey, P_BodyTextWhite } from '../components/BodyText'
-import { RouterLink } from '../../components/RouterLink'
 import { styles } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
 import React from 'react'
@@ -34,14 +33,6 @@ export const Today = () => {
           It&apos;s a great time to learn JavaScript!
         </P_BodyTextGrey>
       </Div_TextContainer>
-      <ReturnContainer>
-        <TextWhite>Return home</TextWhite>
-        <RouterLink to={urls.homePage}>
-          <ArrowIcon xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
-            <path d='M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z' />
-          </ArrowIcon>
-        </RouterLink>
-      </ReturnContainer>
     </TodaySection>
   )
 }
@@ -54,23 +45,5 @@ const TodaySection = styled.section`
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
-`
-
-const ArrowIcon = styled.svg`
-  fill: ${styles.colors.white};
-  transform: rotate(180deg);
-`
-
-const TextWhite = styled.span`
-  font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.white};
-`
-
-const ReturnContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: ${styles.spacing.xs};
-  padding: ${styles.spacing.sm};
+  padding: ${styles.spacing.md};
 `
