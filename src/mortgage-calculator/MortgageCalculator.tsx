@@ -33,7 +33,7 @@ const calculateAmortization = (arg: {
 
   // Formula borrowed from https://www.financevpraxi.cz/finance-vyber-financniho-produktu
   const amountAfterInflation = (amount: number, i: number) =>
-    amount * (1 + -arg.inflation / 100) ** (i / 12) - 1
+    amount * (1 + (1 + -arg.inflation / 100) ** (i / 12) - 1)
 
   const mortgageData = [
     {
@@ -129,6 +129,7 @@ export const MortgageCalculator = () => {
             </Div_InputWrapper>
           </Div_InputsContainer>
         </MCForm>
+        {dataExist && <Charts loanDetail={loanDetail} windowWidth={windowWidth} />}
         {dataExist && (
           <>
             {windowWidth && windowWidth > device.tabletPortrait ? (
@@ -195,7 +196,6 @@ export const MortgageCalculator = () => {
             )}
           </>
         )}
-        {dataExist && <Charts loanDetail={loanDetail} windowWidth={windowWidth} />}
       </Div_Container>
     </HelmetProvider>
   )
@@ -210,7 +210,6 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
 
   return (
     <>
-      <H_SubHeading>Values without inflation</H_SubHeading>
       <Div_ChartsContainer>
         <Div_ChartContainer>
           <ResponsiveContainer width={chartWidth} aspect={1.5}>
@@ -218,6 +217,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               data={props.loanDetail.map((data, i) => ({
                 principal: roundAmount(data.monthlyPrincipal),
                 interest: roundAmount(data.monthlyInterest),
+                principalInflation: roundAmount(data.monthlyPrincipalInflation),
+                interestInflation: roundAmount(data.monthlyInterestInflation),
                 index: i + 1,
               }))}
               margin={{
@@ -234,6 +235,8 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <Legend />
               <Line type='monotone' dataKey='principal' stroke={styles.colors.orange300} />
               <Line type='monotone' dataKey='interest' stroke={styles.colors.grey300} />
+              <Line type='monotone' dataKey='principalInflation' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='interestInflation' stroke={styles.colors.grey300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
@@ -242,6 +245,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
             <LineChart
               data={props.loanDetail.map((data, i) => ({
                 balance: roundAmount(data.balance),
+                balanceInflation: roundAmount(data.balanceInflation),
                 index: i + 1,
               }))}
               margin={{
@@ -257,57 +261,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <Tooltip />
               <Legend />
               <Line type='monotone' dataKey='balance' stroke={styles.colors.orange300} />
-            </LineChart>
-          </ResponsiveContainer>
-        </Div_ChartContainer>
-      </Div_ChartsContainer>
-      <H_SubHeading>Values with inflation</H_SubHeading>
-      <Div_ChartsContainer>
-        <Div_ChartContainer>
-          <ResponsiveContainer width={chartWidth} aspect={1.5}>
-            <LineChart
-              data={props.loanDetail.map((data, i) => ({
-                principal: roundAmount(data.monthlyPrincipalInflation),
-                interest: roundAmount(data.monthlyInterestInflation),
-                index: i + 1,
-              }))}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-              <XAxis dataKey='index' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type='monotone' dataKey='principal' stroke={styles.colors.orange300} />
-              <Line type='monotone' dataKey='interest' stroke={styles.colors.grey300} />
-            </LineChart>
-          </ResponsiveContainer>
-        </Div_ChartContainer>
-        <Div_ChartContainer>
-          <ResponsiveContainer width={chartWidth} aspect={1.5}>
-            <LineChart
-              data={props.loanDetail.map((data, i) => ({
-                balance: roundAmount(data.balanceInflation),
-                index: i + 1,
-              }))}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
-              <XAxis dataKey='index' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type='monotone' dataKey='balance' stroke={styles.colors.orange300} />
+              <Line type='monotone' dataKey='balanceInflation' stroke={styles.colors.grey300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { P_BodyText } from './BodyText'
+import { breakpoint, styles } from '../helpers/theme'
 import { ReactComponent as githubLogo } from '../images/github.svg'
-import { styles } from '../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -32,6 +32,10 @@ const Div_ProjectCard = styled.div`
   width: 350px;
   border-radius: 8px;
   border: 1px solid ${styles.colors.orangeTransparent};
+  justify-self: center;
+  ${breakpoint.phone} {
+    width: 250px;
+  }
 `
 
 const Img_ProjectImg = styled.img`

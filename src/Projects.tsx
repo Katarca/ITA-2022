@@ -1,9 +1,7 @@
 import { Card } from './components/Card'
-import { Link } from 'react-router-dom'
-import { P_BodyText, P_LinkBodyText } from './components/BodyText'
+import { P_LinkBodyText } from './components/BodyText'
 import { RouterLink } from './components/RouterLink'
-import { ReactComponent as githubLogo } from './images/github.svg'
-import { styles } from './helpers/theme'
+import { breakpoint, styles } from './helpers/theme'
 import { urls } from './helpers/urls'
 import React from 'react'
 import blogImg from './images/blog.png'
@@ -11,6 +9,7 @@ import blogPostImg from './images/blogpostapp.png'
 import hackerTyperImg from './images/hackertyper.png'
 import jsImg from './images/jsweb.png'
 import memoryGameImg from './images/memorygame.png'
+import mortgageImg from './images/mortgagecalculator.png'
 import styled from 'styled-components'
 import todoImg from './images/todolist.png'
 
@@ -59,13 +58,23 @@ export const Projects = () => {
         src={blogPostImg}
         githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/blog-post-app'
       />
-      <RouterLink to={urls.mortgageCalculator}>
-        <P_LinkBodyText>Mortgage Calculator</P_LinkBodyText>
-      </RouterLink>
+      <Card
+        text='Mortgage Calculator'
+        to={urls.mortgageCalculator}
+        src={mortgageImg}
+        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/mortgage-calculator'
+      />
     </Div_ProjectsSection>
   )
 }
 
 const Div_ProjectsSection = styled.div`
-  padding: ${styles.spacing.md} 0;
+  padding: ${styles.spacing.md};
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: ${styles.spacing.sm};
+  ${breakpoint.phone} {
+    padding: ${styles.spacing.sm};
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 `

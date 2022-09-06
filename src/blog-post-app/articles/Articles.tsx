@@ -27,7 +27,7 @@ export const Articles = () => {
       articlesLogic.setArticles(json)
     } catch (error) {
       articlesLogic.setArticles([])
-      setErrorMsg(`An error occurred while fetching articles`)
+      setErrorMsg(`Database is unavailable`)
     }
     setLoading(false)
   })
@@ -39,7 +39,7 @@ export const Articles = () => {
       articlesLogic.setSearchedArticles(json)
     } catch (error) {
       articlesLogic.setSearchedArticles([])
-      setErrorMsg(`An error occurred while fetching articles`)
+      setErrorMsg(`Database is unavailable`)
     }
     setLoading(false)
   }
