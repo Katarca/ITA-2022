@@ -4,6 +4,7 @@ import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
+import { MainNavbar } from './components/MainNavbar'
 import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
@@ -22,6 +23,7 @@ export function App() {
         <Helmet>
           <title>Katarína Soušková</title>
         </Helmet>
+        <MainNavbar />
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
