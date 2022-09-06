@@ -4,9 +4,10 @@ import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
-import { MainNavbar } from './components/MainNavbar'
 import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
+import { Navbar } from './components/Navbar'
+import { Projects } from './Projects'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
 import { ToDoAppRedux } from './todo-list-redux/ToDoAppRedux'
@@ -23,9 +24,10 @@ export function App() {
         <Helmet>
           <title>Katarína Soušková</title>
         </Helmet>
-        <MainNavbar />
+        <Navbar />
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />
+          <Route path={urls.projects} element={<Projects />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
           <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
