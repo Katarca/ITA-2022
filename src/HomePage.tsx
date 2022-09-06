@@ -4,30 +4,22 @@ import styled from 'styled-components'
 
 export const HomePage = () => {
   return (
-    <StyledHomePage>
-      <Div_IntroContainer>
-        <P_IntroText>
-          Welcome to my portfolio
-          <br />
-          My name is <Span_NameSpan>Katarína</Span_NameSpan>
-          <br />I am a Software Developer
-        </P_IntroText>
-        <Div_PhotoPlaceholder />
-      </Div_IntroContainer>
-    </StyledHomePage>
+    <Div_HomeContainer>
+      <P_IntroText>
+        Welcome to my portfolio
+        <br />
+        My name is <Span_NameSpan>Katarína</Span_NameSpan>
+        <br />I am a Software Developer
+      </P_IntroText>
+      <Div_PhotoPlaceholder />
+    </Div_HomeContainer>
   )
 }
 
-const StyledHomePage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: ${styles.spacing.md};
-`
-
-const Div_IntroContainer = styled.div`
+const Div_HomeContainer = styled.div`
   width: 80vw;
+  min-height: 80vh;
+  margin: auto;
   padding: ${styles.spacing.md} 0;
   display: flex;
   align-items: center;

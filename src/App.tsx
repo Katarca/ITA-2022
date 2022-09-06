@@ -43,7 +43,9 @@ export function App() {
   )
 }
 
-const StyledApp = styled.div``
+const StyledApp = styled.div`
+  min-height: 100vh;
+`
 
 const GlobalStyle = createGlobalStyle`
     *,
