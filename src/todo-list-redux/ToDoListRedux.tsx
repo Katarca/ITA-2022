@@ -4,14 +4,12 @@ import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
+import { P_BodyText } from '../components/BodyText'
 import { ToDoProps } from './ToDoAppRedux'
 import { ToDoRedux } from './ToDoRedux'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
-import { urls } from '../helpers/urls'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -89,9 +87,6 @@ export const ToDoListRedux = () => {
             <P_BodyText>Completed</P_BodyText>
           </TransparentButtonBorder>
         </Div_ButtonContainer>
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </HelmetProvider>
   )

@@ -100,9 +100,6 @@ export const BlogApp = () => {
           <Route path={urls.newArticle} element={<NewArticle />} />
           <Route path={articleDetailUrl} element={<ArticleDetail />} />
         </Routes>
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </BlogContextProvider>
   )

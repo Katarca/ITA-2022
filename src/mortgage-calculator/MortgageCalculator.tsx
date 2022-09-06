@@ -13,11 +13,9 @@ import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
 import { H_Heading, H_SubHeading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
+import { P_BodyText } from '../components/BodyText'
 import { breakpoint, device, styles } from '../helpers/theme'
 import { formatAmount, roundAmount } from '../utils/formatAmount'
-import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -198,9 +196,6 @@ export const MortgageCalculator = () => {
           </>
         )}
         {dataExist && <Charts loanDetail={loanDetail} windowWidth={windowWidth} />}
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </HelmetProvider>
   )

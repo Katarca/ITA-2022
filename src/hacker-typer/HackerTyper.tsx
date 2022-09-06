@@ -2,11 +2,8 @@ import { CustomTextarea } from '../components/Textarea'
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_LinkBodyText } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { dummyCode } from './dummyCode'
 import { styles } from '../helpers/theme'
-import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
@@ -60,10 +57,8 @@ export const HackerTyper = () => {
           onChange={!message ? runCode : undefined}
           autoFocus={true}
           onKeyDown={handleKeyDown}
+          spellCheck={false}
         />
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </HelmetProvider>
   )
