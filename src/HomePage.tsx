@@ -46,12 +46,12 @@ const Span_NameSpan = styled.span`
   color: ${styles.colors.orange300};
 `
 const Div_PhotoPlaceholder = styled.div`
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   background-color: black;
   ${breakpoint.phone} {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
   }
 `

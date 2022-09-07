@@ -20,6 +20,7 @@ export const urls = {
   nestedBlogApp: '/blog-app/*',
   todoListRedux: '/todo-list-redux',
   projects: '/projects',
+  cv: '/cv',
 } as const
 
 export const newArticleUrl = `${urls.blog}${urls.newArticle}`

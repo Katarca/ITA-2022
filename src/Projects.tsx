@@ -27,6 +27,7 @@ export const Projects = () => {
         to={urls.todoListRedux}
         src={todoImg}
         githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/todo-list-redux'
+        redux={true}
       />
       <Card
         text='JavaScript Web'
@@ -57,6 +58,7 @@ export const Projects = () => {
         to={urls.blogApp}
         src={blogPostImg}
         githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/blog-post-app'
+        node={true}
       />
       <Card
         text='Mortgage Calculator'

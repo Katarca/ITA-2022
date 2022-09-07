@@ -1,5 +1,6 @@
 import { ArticlesContext } from './blog-post-app/articles/ArticlesContext'
 import { BlogApp } from './blog/Blog'
+import { CV } from './CV'
 import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
@@ -28,6 +29,7 @@ export function App() {
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />
           <Route path={urls.projects} element={<Projects />} />
+          <Route path={urls.cv} element={<CV />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
           <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />

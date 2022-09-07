@@ -15,7 +15,7 @@ export const Navbar = () => {
           <RouterLink to={urls.projects}>Projects</RouterLink>
         </Li_NavItem>
         <Li_NavItem>
-          <RouterLink to={urls.homePage}>CV</RouterLink>
+          <RouterLink to={urls.cv}>CV</RouterLink>
         </Li_NavItem>
       </Ul_NavList>
     </Nav_MainNav>

@@ -11,6 +11,7 @@ export const styles = {
     black: '#000000',
     matrixGreen: '#03A062',
     red: '#FF0000',
+    pinkStyledComponents: '#9e5685',
   },
   spacing: {
     xs: '10px',

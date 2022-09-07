@@ -2,7 +2,6 @@ import { Div_TextContainer } from '../components/TextContainer'
 import { H_Heading } from '../components/Heading'
 import { P_BodyTextGrey, P_BodyTextWhite } from '../components/BodyText'
 import { styles } from '../../helpers/theme'
-import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
