@@ -1,4 +1,3 @@
-import { Div_Container } from './components/Container'
 import { H_Heading, H_SubHeading } from './components/Heading'
 import { P_BodyText } from './components/BodyText'
 import { styles } from './helpers/theme'
