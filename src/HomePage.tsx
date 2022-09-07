@@ -1,5 +1,6 @@
 import { breakpoint, styles } from './helpers/theme'
 import React from 'react'
+import profilePhoto from './images/profilePhoto.jpeg'
 import styled from 'styled-components'
 
 export const HomePage = () => {
@@ -11,7 +12,7 @@ export const HomePage = () => {
         My name is <Span_NameSpan>Katarína</Span_NameSpan>
         <br />I am a Software Developer
       </P_IntroText>
-      <Div_PhotoPlaceholder />
+      <Img_ProfileImg src={profilePhoto} />
     </Div_HomeContainer>
   )
 }
@@ -45,11 +46,11 @@ const P_IntroText = styled.p`
 const Span_NameSpan = styled.span`
   color: ${styles.colors.orange300};
 `
-const Div_PhotoPlaceholder = styled.div`
+
+const Img_ProfileImg = styled.img`
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background-color: black;
   ${breakpoint.phone} {
     width: 250px;
     height: 250px;
