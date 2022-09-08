@@ -53,5 +53,5 @@ export const HistorySection = styled.section`
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
+  padding: ${styles.spacing.md};
 `

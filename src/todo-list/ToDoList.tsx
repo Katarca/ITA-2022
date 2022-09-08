@@ -3,8 +3,7 @@ import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText, P_LinkBodyText } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
+import { P_BodyText } from '../components/BodyText'
 import { ToDo } from './ToDo'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
@@ -116,9 +115,6 @@ const ToDoList = () => {
             <P_BodyText>Completed</P_BodyText>
           </TransparentButtonBorder>
         </Div_ButtonContainer>
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </HelmetProvider>
   )

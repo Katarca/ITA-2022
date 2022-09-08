@@ -28,9 +28,6 @@ export const ArticlesRoutes = () => {
         <Route path={urls.newArticle} element={<NewArticleContext />} />
         <Route path={urls.articleDetailRoute} element={<ArticleDetailContext />} />
       </Routes>
-      <RouterLink to={urls.homePage}>
-        <P_LinkBodyText>Return home</P_LinkBodyText>
-      </RouterLink>
     </Div_Container>
   )
 }

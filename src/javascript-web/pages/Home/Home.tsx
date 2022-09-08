@@ -13,7 +13,6 @@ import typescriptLogo from './Images/typescript.png'
 export const Home = () => {
   return (
     <HomeSection id='home'>
-      <NavGap />
       <HomeContainer>
         <HomeTextContainer>
           <MainHeading>JavaScript</MainHeading>
@@ -52,10 +51,7 @@ const HomeSection = styled.section`
   background-color: ${styles.colors.black};
   color: ${styles.colors.white};
   flex-direction: column;
-  justify-content: space-between;
-`
-const NavGap = styled.div`
-  height: ${styles.spacing.xl};
+  justify-content: space-around;
 `
 
 const HomeContainer = styled.div`

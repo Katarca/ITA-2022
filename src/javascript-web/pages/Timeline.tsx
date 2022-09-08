@@ -146,7 +146,7 @@ const TimelineSection = styled.section`
   min-height: 100vh;
   display: flex;
   background-color: ${styles.colors.yellow300};
-  padding: ${styles.spacing.xl} 0 ${styles.spacing.md} 0;
+  padding: 0 0 ${styles.spacing.md} 0;
 `
 
 const TimelineItems = styled.div`

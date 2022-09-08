@@ -1,13 +1,10 @@
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_LinkBodyText } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { breakpoint, styles } from '../helpers/theme'
 import { delay } from '../utils/delay'
 import { idGenerator } from '../utils/idGenerator'
 import { shuffleArray } from '../utils/shuffleArray'
-import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -116,9 +113,6 @@ export const MemoryGame = () => {
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
-        <RouterLink to={urls.homePage}>
-          <P_LinkBodyText>Return home</P_LinkBodyText>
-        </RouterLink>
       </Div_Container>
     </HelmetProvider>
   )

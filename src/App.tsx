@@ -1,11 +1,14 @@
 import { ArticlesContext } from './blog-post-app/articles/ArticlesContext'
 import { BlogApp } from './blog/Blog'
+import { CV } from './CV'
 import { HackerTyper } from './hacker-typer/HackerTyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { HomePage } from './HomePage'
 import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
 import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
+import { Navbar } from './components/Navbar'
+import { Projects } from './Projects'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
 import { ToDoAppRedux } from './todo-list-redux/ToDoAppRedux'
@@ -22,8 +25,11 @@ export function App() {
         <Helmet>
           <title>Katarína Soušková</title>
         </Helmet>
+        <Navbar />
         <Routes>
           <Route path={urls.homePage} element={<HomePage />} />
+          <Route path={urls.projects} element={<Projects />} />
+          <Route path={urls.cv} element={<CV />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
           <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
@@ -39,7 +45,9 @@ export function App() {
   )
 }
 
-const StyledApp = styled.div``
+const StyledApp = styled.div`
+  min-height: 100vh;
+`
 
 const GlobalStyle = createGlobalStyle`
     *,
