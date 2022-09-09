@@ -14,6 +14,7 @@ export const styles = {
     pinkStyledComponents: '#9e5685',
   },
   spacing: {
+    xxs: '5px',
     xs: '10px',
     sm: '20px',
     md: '50px',
