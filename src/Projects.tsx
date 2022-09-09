@@ -2,7 +2,7 @@ import { Card } from './components/Card'
 import { P_LinkBodyText } from './components/BodyText'
 import { RouterLink } from './components/RouterLink'
 import { breakpoint, styles } from './helpers/theme'
-import { urls } from './helpers/urls'
+import { githubUrl, urls } from './helpers/urls'
 import React from 'react'
 import blogImg from './images/blog.png'
 import blogPostImg from './images/blogpostapp.png'
@@ -16,55 +16,45 @@ import todoImg from './images/todolist.png'
 export const Projects = () => {
   return (
     <Div_ProjectsSection>
-      <Card
-        text='ToDo List'
-        to={urls.todoList}
-        src={todoImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/todo-list'
-      />
+      <Card text='ToDo List' to={urls.todoList} src={todoImg} githubUrl={`${githubUrl}todo-list`} />
       <Card
         text='ToDo List Redux'
         to={urls.todoListRedux}
         src={todoImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/todo-list-redux'
+        githubUrl={`${githubUrl}todo-list-redux`}
         redux={true}
       />
       <Card
         text='JavaScript Web'
         to={urls.jsWeb}
         src={jsImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/javascript-web'
+        githubUrl={`${githubUrl}javascript-web`}
       />
       <Card
         text='Hacker Typer'
         to={urls.hackerTyper}
         src={hackerTyperImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/hacker-typer'
+        githubUrl={`${githubUrl}hacker-typer`}
       />
       <Card
         text='Memory Game'
         to={urls.memoryGame}
         src={memoryGameImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/memory-game'
+        githubUrl={`${githubUrl}memory-game`}
       />
-      <Card
-        text='Blog'
-        to={urls.blog}
-        src={blogImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/blog'
-      />
+      <Card text='Blog' to={urls.blog} src={blogImg} githubUrl={`${githubUrl}blog`} />
       <Card
         text='Blog Post App'
         to={urls.blogApp}
         src={blogPostImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/blog-post-app'
+        githubUrl={`${githubUrl}blog-post-app`}
         node={true}
       />
       <Card
         text='Mortgage Calculator'
         to={urls.mortgageCalculator}
         src={mortgageImg}
-        githubUrl='https://github.com/Katarca/ITA-2022/tree/main/src/mortgage-calculator'
+        githubUrl={`${githubUrl}mortgage-calculator`}
       />
     </Div_ProjectsSection>
   )
