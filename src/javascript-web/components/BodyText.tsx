@@ -24,7 +24,7 @@ export const P_BodyTextBlack = styled.p`
 
 export const P_BodyTextDarkGrey = styled.p`
   font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.grey900};
+  color: ${styles.colors.grey800};
   &:not(:last-child) {
     padding-bottom: ${styles.spacing.sm};
   }

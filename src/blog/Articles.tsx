@@ -46,6 +46,12 @@ const Div_ArticleBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-color: ${styles.colors.orange300};
+  }
 `
 export const P_BlogText = styled.p`
   font-size: ${styles.fontSize.sm};

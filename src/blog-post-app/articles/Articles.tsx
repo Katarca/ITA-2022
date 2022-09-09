@@ -6,7 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { blogAppUrl } from '../../helpers/urls'
+import { blogAppUrl, githubUrl } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
 import { services } from '../../utils/services'
 import { useComponentDidMount } from '../../utils/useComponentDidMount'
@@ -62,7 +62,7 @@ export const Articles = () => {
             setEmptyInputError(null)
           }}
         >
-          <div>
+          <Div_InputContainer>
             <CustomInput
               type='text'
               placeholder='search article'
@@ -72,7 +72,7 @@ export const Articles = () => {
             <TransparentButtonBorder type='submit'>
               <P_BodyText>Search</P_BodyText>
             </TransparentButtonBorder>
-          </div>
+          </Div_InputContainer>
           {emptyInputError && (
             <Div_MsgContainer>
               <P_BodyText>Please enter value</P_BodyText>
@@ -84,7 +84,17 @@ export const Articles = () => {
         {loading ? (
           <MessageJSX text='Loading articles...' />
         ) : errorMsg ? (
-          <MessageJSX text={errorMsg} />
+          <MessageJSX text={errorMsg}>
+            <Div_MsgBox>
+              <P_BlogTextXs>
+                To make the app work download repository from{' '}
+                <A_Link href={`${githubUrl}`} target='_blank'>
+                  github
+                </A_Link>{' '}
+                and run it on localhost
+              </P_BlogTextXs>
+            </Div_MsgBox>
+          </MessageJSX>
         ) : (
           <ArticlesJSX />
         )}
@@ -118,4 +128,14 @@ export const Div_MsgContainer = styled.div`
 `
 const Div_FormContainer = styled.div`
   padding: ${styles.spacing.sm} 0;
+`
+const A_Link = styled.a`
+  font-size: ${styles.fontSize.xs};
+  color: ${styles.colors.orangeTransparent};
+`
+const Div_InputContainer = styled.div`
+  text-align: center;
+`
+const Div_MsgBox = styled.div`
+  padding: ${styles.spacing.xs};
 `

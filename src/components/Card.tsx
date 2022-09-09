@@ -48,6 +48,11 @@ const Div_ProjectCard = styled.div`
   border: 1px solid ${styles.colors.orangeTransparent};
   justify-self: center;
   position: relative;
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
   ${breakpoint.phone} {
     width: 250px;
   }

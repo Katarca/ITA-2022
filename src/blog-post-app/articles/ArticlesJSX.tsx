@@ -79,6 +79,11 @@ const Div_ArticleBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-color: ${styles.colors.orange300};
+  }
 `
 const Div_TextContainer = styled.div`
   text-align: right;
