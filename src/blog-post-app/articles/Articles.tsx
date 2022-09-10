@@ -88,7 +88,7 @@ export const Articles = () => {
             <Div_MsgBox>
               <P_BlogTextXs>
                 To make the app work download repository from{' '}
-                <A_Link href={`${githubUrl}`} target='_blank'>
+                <A_Link href={githubUrl} target='_blank'>
                   github
                 </A_Link>{' '}
                 and run it on localhost
