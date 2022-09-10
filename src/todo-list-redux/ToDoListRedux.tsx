@@ -39,7 +39,7 @@ export const ToDoListRedux = () => {
         <Helmet>
           <title>Katarína Soušková | ToDo List Redux</title>
         </Helmet>
-        <H_TodoHeading>ToDo List Redux</H_TodoHeading>
+        <H_Heading>What need to be done?</H_Heading>
         <CustomForm
           onSubmit={e => {
             e.preventDefault()
@@ -91,10 +91,6 @@ export const ToDoListRedux = () => {
     </HelmetProvider>
   )
 }
-
-const H_TodoHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 
 const Ul_List = styled.ul`
   padding: ${styles.spacing.xs};

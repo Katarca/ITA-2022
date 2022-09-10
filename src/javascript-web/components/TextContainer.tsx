@@ -1,10 +1,10 @@
-import { breakpoint, styles } from '../../helpers/theme'
-import styled, { css } from 'styled-components'
+import { breakpoint } from '../../helpers/theme'
+import styled from 'styled-components'
 
 export const Div_TextContainer = styled.div`
   width: 70%;
   margin: 0 auto;
   ${breakpoint.phone} {
-    width: 80%;
+    width: 100%;
   }
 `

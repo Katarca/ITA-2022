@@ -3,9 +3,10 @@ import styled from 'styled-components'
 
 export const H_Heading = styled.h1`
   text-align: center;
-  font-size: ${styles.fontSize.lg};
-  padding: ${styles.spacing.sm};
+  font-size: ${styles.fontSize.md};
   color: ${styles.colors.orange300};
+  font-weight: normal;
+  padding: ${styles.spacing.sm};
 `
 
 export const H_SubHeading = styled.h2`

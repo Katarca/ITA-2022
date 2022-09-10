@@ -14,7 +14,7 @@ import styled from 'styled-components'
 export const ArticlesRoutes = () => {
   return (
     <Div_Container>
-      <H_BlogHeading>Blog Post App</H_BlogHeading>
+      <H_Heading>Blog Post App</H_Heading>
       <Nav_BlogNavbar>
         <RouterLink to={urls.blogApp}>
           <P_LinkBodyText>All Articles</P_LinkBodyText>
@@ -32,9 +32,6 @@ export const ArticlesRoutes = () => {
   )
 }
 
-const H_BlogHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 const Nav_BlogNavbar = styled.nav`
   display: flex;
   width: 60%;

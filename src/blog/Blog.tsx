@@ -86,7 +86,7 @@ export const BlogApp = () => {
   return (
     <BlogContextProvider>
       <Div_Container>
-        <H_BlogHeading>Blog</H_BlogHeading>
+        <H_Heading>Blog</H_Heading>
         <Nav_BlogNavbar>
           <RouterLink to={urls.blog}>
             <P_LinkBodyText>Articles</P_LinkBodyText>
@@ -105,9 +105,6 @@ export const BlogApp = () => {
   )
 }
 
-const H_BlogHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 const Nav_BlogNavbar = styled.nav`
   display: flex;
   width: 60%;

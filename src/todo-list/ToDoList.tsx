@@ -9,6 +9,7 @@ import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { idGenerator } from '../utils/idGenerator'
+import { lsToDoListKey } from '../helpers/lsKeys'
 import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
 import React, { useContext, useState } from 'react'
@@ -21,7 +22,7 @@ export type ToDoProps = {
 }
 
 const useLogicState = () => {
-  const [toDos, setToDos] = useLocalStorage('toDoListLs', [] as ToDoProps[])
+  const [toDos, setToDos] = useLocalStorage(lsToDoListKey, [] as ToDoProps[])
   return {
     toDos,
     setToDos,
@@ -60,7 +61,7 @@ const ToDoList = () => {
         <Helmet>
           <title>Katarína Soušková | ToDo List</title>
         </Helmet>
-        <H_TodoHeading>ToDo List</H_TodoHeading>
+        <H_Heading>What need to be done?</H_Heading>
         <CustomForm
           onSubmit={e => {
             e.preventDefault()
@@ -119,10 +120,6 @@ const ToDoList = () => {
     </HelmetProvider>
   )
 }
-
-const H_TodoHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 
 const Ul_List = styled.ul`
   padding: ${styles.spacing.xs};
