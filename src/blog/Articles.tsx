@@ -1,6 +1,6 @@
 import { BlogStateContext } from './Blog'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText, P_BodyTextXs } from '../components/BodyText'
+import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, hoverStyles, styles } from '../helpers/theme'
 import { getArticleDetail } from '../helpers/urls'
@@ -20,8 +20,8 @@ export const Articles = () => {
             <Div_ArticleBox>
               <P_BlogText>{article.title}</P_BlogText>
               <Div_TextContainer>
-                <P_BlogTextXs>by {article.author}</P_BlogTextXs>
-                <P_BlogTextXs>{article.date}</P_BlogTextXs>
+                <P_BodyTextXsGrey>by {article.author}</P_BodyTextXsGrey>
+                <P_BodyTextXsGrey>{article.date}</P_BodyTextXsGrey>
               </Div_TextContainer>
             </Div_ArticleBox>
           </RouterLink>
@@ -53,14 +53,11 @@ const Div_ArticleBox = styled.div`
   }
 `
 export const P_BlogText = styled(P_BodyText)`
-  color: ${styles.colors.grey300};
   ${breakpoint.tabletPortrait} {
     text-align: center;
   }
 `
-export const P_BlogTextXs = styled(P_BodyTextXs)`
-  color: ${styles.colors.grey300};
-`
+
 const Div_TextContainer = styled.div`
   text-align: right;
   padding: ${styles.spacing.xs} 0;

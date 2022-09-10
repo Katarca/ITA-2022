@@ -8,7 +8,7 @@ import { P_BlogText } from '../articles/Articles'
 import { P_BlogTextXs } from '../articles/ArticlesJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { styles } from '../../helpers/theme'
+import { smTextStyles, styles } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext } from 'react'
@@ -134,13 +134,13 @@ const Div_ErrContainer = styled.div`
 `
 
 const Label_EditLabel = styled.label`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
 `
 
 const EditTextarea = styled(CustomTextarea)`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.white};
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
