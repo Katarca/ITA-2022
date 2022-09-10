@@ -28,7 +28,7 @@ npm run start
 
 A simple static web page about JavaScript's origin.
 
-![Javascript Web image](../images/jsweb.png)
+![Javascript Web image](./src/images/jsweb.png)
 
 ### [](#todo-list)ToDo List
 
