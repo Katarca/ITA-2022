@@ -95,6 +95,7 @@ export const ToDoListRedux = () => {
 const Ul_List = styled.ul`
   padding: ${styles.spacing.xs};
   width: 70%;
+  list-style: none;
   ${breakpoint.tabletPortrait} {
     width: 90%;
   }
