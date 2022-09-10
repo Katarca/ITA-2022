@@ -1,5 +1,5 @@
 import { BlogStateContext } from './Blog'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, hoverStyles, styles } from '../helpers/theme'
@@ -10,7 +10,7 @@ import styled from 'styled-components'
 export const Articles = () => {
   const blogLogic = useContext(BlogStateContext)
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Articles </title>
       </Helmet>
@@ -27,7 +27,7 @@ export const Articles = () => {
           </RouterLink>
         ))}
       </Div_ArticlesContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

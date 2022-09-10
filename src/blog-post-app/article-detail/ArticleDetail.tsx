@@ -1,6 +1,6 @@
 import { ArticleDetailJSX } from './ArticleDetailJSX'
 import { ArticleDetailStateContext } from './ArticleDetailContext'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_LinkBodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
@@ -13,7 +13,7 @@ export const ArticleDetail = () => {
   const articleData = useContext(ArticleDetailStateContext)
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>{articleData?.articleDetail.title}</title>
       </Helmet>
@@ -30,7 +30,7 @@ export const ArticleDetail = () => {
           <ArticleDetailJSX />
         )}
       </Div_ArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

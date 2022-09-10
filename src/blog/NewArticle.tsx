@@ -2,7 +2,7 @@ import { BlogStateContext } from './Blog'
 import { CustomInput } from '../components/Input'
 import { CustomTextarea } from '../components/Textarea'
 import { Form } from '../components/Form'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, smTextStyles, styles } from '../helpers/theme'
@@ -20,7 +20,7 @@ export const NewArticle = () => {
 
   const blogLogic = useContext(BlogStateContext)
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | New Article</title>
       </Helmet>
@@ -75,7 +75,7 @@ export const NewArticle = () => {
           </Div_ButtonContainer>
         </BlogForm>
       </Div_NewArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

@@ -2,7 +2,7 @@ import { ArticlesJSX } from './ArticlesJSX'
 import { ArticlesStateContext } from './ArticlesContext'
 import { CustomInput } from '../../components/Input'
 import { Form } from '../../components/Form'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
@@ -45,7 +45,7 @@ export const Articles = () => {
   }
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Articles </title>
       </Helmet>
@@ -99,7 +99,7 @@ export const Articles = () => {
           <ArticlesJSX />
         )}
       </Div_ArticlesContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

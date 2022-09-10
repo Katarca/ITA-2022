@@ -12,7 +12,7 @@ import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
 import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyTextXs } from '../components/BodyText'
 import { breakpoint, device, smTextStyles, styles } from '../helpers/theme'
 import { formatAmount, roundAmount } from '../utils/formatAmount'
@@ -87,7 +87,7 @@ export const MortgageCalculator = () => {
   const dataExist = principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Mortgage Calculator</title>
       </Helmet>
@@ -197,7 +197,7 @@ export const MortgageCalculator = () => {
           </>
         )}
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
 

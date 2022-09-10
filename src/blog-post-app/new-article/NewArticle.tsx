@@ -1,7 +1,7 @@
 import { CustomInput } from '../../components/Input'
 import { CustomTextarea } from '../../components/Textarea'
 import { Form } from '../../components/Form'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { NewArticleStateContext } from './NewArticleContext'
 import { P_BlogTextXs } from '../articles/ArticlesJSX'
@@ -15,7 +15,7 @@ export const NewArticle = () => {
   const newArticle = useContext(NewArticleStateContext)
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | New Article</title>
       </Helmet>
@@ -73,7 +73,7 @@ export const NewArticle = () => {
         </BlogForm>
         {newArticle.newArticleErr && <MessageJSX text={newArticle.newArticleErr} />}
       </Div_NewArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import { CustomTextarea } from '../components/Textarea'
 import { Div_Container } from '../components/Container'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { dummyCode } from './dummyCode'
 import { styles } from '../helpers/theme'
 import React, { useState } from 'react'
@@ -28,7 +28,7 @@ export const HackerTyper = () => {
   }
 
   return (
-    <HelmetProvider>
+    <>
       <Div_Container>
         <Helmet>
           <title>Katarína Soušková | Hacker Typer</title>
@@ -58,7 +58,7 @@ export const HackerTyper = () => {
           spellCheck={false}
         />
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
 

@@ -2,7 +2,7 @@ import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { ToDo } from './ToDo'
 import { TransparentButtonBorder } from '../components/Button'
@@ -55,11 +55,11 @@ const ToDoList = () => {
   const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
 
   return (
-    <HelmetProvider>
+    <>
+      <Helmet>
+        <title>Katarína Soušková | ToDo List</title>
+      </Helmet>
       <Div_Container>
-        <Helmet>
-          <title>Katarína Soušková | ToDo List</title>
-        </Helmet>
         <H_Heading>What needs to be done?</H_Heading>
         <CustomForm
           onSubmit={e => {
@@ -116,7 +116,7 @@ const ToDoList = () => {
           </TransparentButtonBorder>
         </Div_ButtonContainer>
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
 

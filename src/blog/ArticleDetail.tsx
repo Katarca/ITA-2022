@@ -1,6 +1,6 @@
 import { BlogStateContext } from './Blog'
 import { H_Heading, H_SubHeading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { MarkDown } from '../components/MarkDown'
 import { P_BlogText } from './Articles'
 import { P_LinkBodyText } from '../components/BodyText'
@@ -19,7 +19,7 @@ export const ArticleDetail = () => {
   const articleDetail = blogLogic.articles.find(article => convertToSlug(article.title) === slug)
 
   return articleDetail ? (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>{articleDetail.title}</title>
       </Helmet>
@@ -33,9 +33,9 @@ export const ArticleDetail = () => {
           <MarkDown>{articleDetail.content}</MarkDown>
         </Div_ContentContainer>
       </Div_ArticleContainer>
-    </HelmetProvider>
+    </>
   ) : (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>404 page not found</title>
       </Helmet>
@@ -46,7 +46,7 @@ export const ArticleDetail = () => {
           <P_LinkBodyText>Return to articles</P_LinkBodyText>
         </RouterLink>
       </Div_ArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 

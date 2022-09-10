@@ -1,6 +1,6 @@
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { breakpoint, styles } from '../helpers/theme'
 import { delay } from '../utils/delay'
 import { idGenerator } from '../utils/idGenerator'
@@ -88,7 +88,7 @@ export const MemoryGame = () => {
   }
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Memory Game</title>
       </Helmet>
@@ -114,7 +114,7 @@ export const MemoryGame = () => {
           </Div_BoardWrapper>
         </Div_BoardBox>
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
 const Div_BoardBox = styled.div`
