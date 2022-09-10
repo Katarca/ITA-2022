@@ -26,7 +26,7 @@ const Nav_MainNav = styled.nav`
   width: 70vw;
   margin: auto;
   padding: ${styles.spacing.md};
-  border-bottom: 1px solid ${styles.colors.orangeTransparent};
+  border-bottom: ${styles.border.orangeTransparent};
   ${breakpoint.tabletPortrait} {
     width: 90vw;
   }

@@ -332,7 +332,7 @@ const Div_MobileContainer = styled.div`
   flex-wrap: wrap;
   padding: ${styles.spacing.xs};
   margin: ${styles.spacing.xs};
-  border: 1px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 8px;
 `
 const Div_ChartsContainer = styled.div`

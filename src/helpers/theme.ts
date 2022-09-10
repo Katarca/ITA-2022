@@ -32,6 +32,12 @@ export const styles = {
     xl: '6rem',
     xxl: '8rem',
   },
+  border: {
+    white: '1px solid #ffffff',
+    orange: '1px solid #f77f1c',
+    orangeTransparent: '1px solid rgba(247, 127, 28, 0.5)',
+    grey300: '1px solid #9c9c9c',
+  },
 } as const
 
 export const device = {

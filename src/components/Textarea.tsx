@@ -9,7 +9,7 @@ const Textarea = (props: ComponentProps<'textarea'>) => {
 export const CustomTextarea = styled(Textarea)`
   -ms-overflow-style: none;
   scrollbar-width: none;
-  border: 2px solid ${styles.colors.orange300};
+  border: ${styles.border.orange};
   border-radius: 8px;
   background: transparent;
   &::-webkit-scrollbar {

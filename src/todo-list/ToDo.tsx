@@ -70,15 +70,15 @@ export const ToDo = (props: ToDoProps) => {
 }
 
 const Li_ListItem = styled.li`
-  border-top: 2px solid ${styles.colors.orangeTransparent};
-  border-right: 2px solid ${styles.colors.orangeTransparent};
-  border-left: 2px solid ${styles.colors.orangeTransparent};
+  border-top: ${styles.border.orangeTransparent};
+  border-right: ${styles.border.orangeTransparent};
+  border-left: ${styles.border.orangeTransparent};
   &:first-child {
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
   }
   &:last-child {
-    border-bottom: 2px solid ${styles.colors.orangeTransparent};
+    border-bottom: ${styles.border.orangeTransparent};
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -121,7 +121,7 @@ const Div_IconBox = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: ${styles.spacing.sm};
-  border: 2px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 5px;
   cursor: pointer;
 `

@@ -119,7 +119,7 @@ export const MemoryGame = () => {
 }
 const Div_BoardBox = styled.div`
   width: 35%;
-  border: 2px solid ${styles.colors.orange300};
+  border: ${styles.border.orange};
   border-radius: 8px;
   ${breakpoint.smallNotebook} {
     width: 50%;

@@ -45,7 +45,7 @@ export const Card = (props: CardProps) => {
 const Div_ProjectCard = styled.div`
   width: 350px;
   border-radius: 8px;
-  border: 1px solid ${styles.colors.orangeTransparent};
+  border: ${styles.border.orangeTransparent};
   justify-self: center;
   position: relative;
   ${hoverStyles}

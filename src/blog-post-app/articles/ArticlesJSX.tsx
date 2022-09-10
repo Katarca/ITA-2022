@@ -72,7 +72,7 @@ export const ArticlesJSX = () => {
 }
 
 const Div_ArticleBox = styled.div`
-  border: 2px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 8px;
   padding: ${styles.spacing.xs};
   display: flex;

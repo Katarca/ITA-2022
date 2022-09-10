@@ -111,7 +111,7 @@ const Div_DetailContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: ${styles.spacing.sm} 0;
-  border-bottom: 1px solid ${styles.colors.grey300};
+  border-bottom: ${styles.border.grey300};
 `
 
 const Div_ContentContainer = styled.div`

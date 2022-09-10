@@ -110,7 +110,7 @@ const Nav_BlogNavbar = styled.nav`
   width: 60%;
   justify-content: space-around;
   padding: ${styles.spacing.sm};
-  border-bottom: 2px solid ${styles.colors.orange300};
+  border-bottom: ${styles.border.orange};
   text-align: center;
   margin-bottom: ${styles.spacing.sm};
   ${breakpoint.tabletPortrait} {

@@ -8,7 +8,7 @@ const Button = (props: ComponentProps<'button'>) => {
 
 export const TransparentButtonBorder = styled(Button)`
   background: transparent;
-  border: 2px solid ${styles.colors.white};
+  border: ${styles.border.white};
   border-radius: 8px;
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
@@ -19,7 +19,7 @@ export const TransparentButtonBorder = styled(Button)`
     background-color: ${styles.colors.orange300};
   }
   &[aria-pressed='true'] {
-    border: 2px solid ${styles.colors.orange300};
+    border: ${styles.border.orange};
   }
   ${breakpoint.phone} {
     width: 80%;

@@ -11,7 +11,7 @@ export const CustomInput = styled(Input)`
   background: transparent;
   font-size: ${styles.fontSize.sm};
   color: ${styles.colors.white};
-  border: 2px solid ${styles.colors.white};
+  border: ${styles.border.white};
   border-radius: 8px;
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};

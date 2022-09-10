@@ -46,7 +46,7 @@ const Div_ArticleContainer = styled.div`
   padding: ${styles.spacing.md};
   margin: ${styles.spacing.md};
   width: 80%;
-  border: 1px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 8px;
   ${breakpoint.phone} {
     width: 100%;
