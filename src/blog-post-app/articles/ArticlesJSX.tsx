@@ -5,7 +5,7 @@ import { P_BodyText } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
 import { getArticleDetailUrl } from '../../helpers/urls'
-import { styles } from '../../helpers/theme'
+import { hoverStyles, styles } from '../../helpers/theme'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
@@ -79,9 +79,8 @@ const Div_ArticleBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  ${hoverStyles}
   &:hover {
-    transform: scale(1.05);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-color: ${styles.colors.orange300};
   }
 `

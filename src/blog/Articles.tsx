@@ -1,7 +1,7 @@
 import { BlogStateContext } from './Blog'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterLink } from '../components/RouterLink'
-import { breakpoint, styles } from '../helpers/theme'
+import { breakpoint, hoverStyles, styles } from '../helpers/theme'
 import { getArticleDetail, urls } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
@@ -46,10 +46,8 @@ const Div_ArticleBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  transition: 0.1s;
+  ${hoverStyles}
   &:hover {
-    transform: scale(1.05);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-color: ${styles.colors.orange300};
   }
 `

@@ -1,3 +1,5 @@
+import { css } from 'styled-components'
+
 export const styles = {
   colors: {
     white: '#ffffff',
@@ -53,3 +55,11 @@ export const breakpoint = {
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px)`,
 } as const
+
+export const hoverStyles = css`
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: ${styles.colors.grey900} 0px 5px 15px;
+  }
+`
