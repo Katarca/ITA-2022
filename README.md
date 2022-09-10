@@ -36,7 +36,7 @@ A simple static web page about JavaScript's origin.
 
 A simple application that allows you to add, edit, delete and filter your daily tasks, which are saved in local storage.
 
-![ToDo List image](../images/todolist.png)
+![ToDo List image](./src/images/todolist.png)
 
 ### [](#todo-list-redux)ToDo List Redux
 
@@ -44,7 +44,7 @@ A simple application that allows you to add, edit, delete and filter your daily 
 
 Redux version of ToDo List app.
 
-![ToDo List image](../images/todolist.png)
+![ToDo List image](./src/images/todolist.png)
 
 ### [](#blog)Blog
 
@@ -52,7 +52,7 @@ Redux version of ToDo List app.
 
 A blog application that allows you to write, edit and delete articles in markdown. Articles are saved in local storage.
 
-![Blog image](../images/blog.png)
+![Blog image](./src/images/blog.png)
 
 ### [](#blog-post-app)Blog Post App
 
@@ -60,7 +60,7 @@ A blog application that allows you to write, edit and delete articles in markdow
 
 A version of blog application with backend file system.
 
-![Blog image](../images/blogpostapp.png)
+![Blog image](./src/images/blogpostapp.png)
 
 ### [](#hacker-typer)Hacker Typer Clone
 
@@ -68,7 +68,7 @@ A version of blog application with backend file system.
 
 A clone of [hacker typer](https://hackertyper.com/).
 
-![Hacker Typer image](../images/hackertyper.png)
+![Hacker Typer image](./src/images/hackertyper.png)
 
 ### [](#memory-game)Memory Game
 
@@ -76,7 +76,7 @@ A clone of [hacker typer](https://hackertyper.com/).
 
 A simple game built to test a users memory.
 
-![Memory Game image](../images/memorygame.png)
+![Memory Game image](./src/images/memorygame.png)
 
 ### [](#mortgage-calculator)Mortgage Calculator
 
@@ -84,4 +84,4 @@ A simple game built to test a users memory.
 
 An application that calculates monthly payments, remain balance, interest and principal paid of mortgage.
 
-![Mortgage Calculator image](../images/mortgagecalculator.png)
+![Mortgage Calculator image](./src/images/mortgagecalculator.png)
