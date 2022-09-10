@@ -46,5 +46,6 @@ const Nav_BlogNavbar = styled.nav`
   ${breakpoint.phone} {
     width: auto;
     flex-direction: column;
+    gap: ${styles.spacing.xs};
   }
 `
