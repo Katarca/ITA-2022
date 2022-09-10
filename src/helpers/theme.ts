@@ -1,3 +1,5 @@
+import { css } from 'styled-components'
+
 export const styles = {
   colors: {
     white: '#ffffff',
@@ -6,7 +8,8 @@ export const styles = {
     orangeTransparent: 'rgba(247, 127, 28, 0.5)',
     grey300: '#9c9c9c',
     grey500: '#2f363e',
-    grey900: '#1b1b1b',
+    grey800: '#1b1b1b',
+    grey900: 'rgba(0, 0, 0, 0.35)',
     blue900: '#0A0048',
     black: '#000000',
     matrixGreen: '#03A062',
@@ -14,6 +17,7 @@ export const styles = {
     pinkStyledComponents: '#9e5685',
   },
   spacing: {
+    xxs: '5px',
     xs: '10px',
     sm: '20px',
     md: '50px',
@@ -51,3 +55,11 @@ export const breakpoint = {
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px)`,
 } as const
+
+export const hoverStyles = css`
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: ${styles.colors.grey900} 0px 5px 15px;
+  }
+`

@@ -31,6 +31,8 @@ export const getArticleDetail = (title: string) =>
 export const getArticleDetailUrl = (title: string, id: string) =>
   `${urls.blogApp}${urls.articleDetail}${convertToSlug(title)}/${id}`
 
-export const filterUrl = process.env.REACT_APP_URL
+export const filterUrl = process.env.REACT_APP_BLOG_BE_SEARCH_URL
 
-export const blogAppUrl = process.env.REACT_APP_URL_BLOG
+export const blogAppUrl = process.env.REACT_APP_BLOG_BE_ARTICLES_URL
+
+export const githubUrl = 'https://github.com/Katarca/ITA-2022/tree/main/src/'

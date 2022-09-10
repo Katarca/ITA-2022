@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { P_BodyText } from './BodyText'
-import { breakpoint, styles } from '../helpers/theme'
+import { breakpoint, hoverStyles, styles } from '../helpers/theme'
 import { ReactComponent as githubLogo } from '../images/github.svg'
 import { ReactComponent as nodeLogo } from '../images/nodejs.svg'
 import { ReactComponent as reactLogo } from '../images/react.svg'
@@ -48,6 +48,7 @@ const Div_ProjectCard = styled.div`
   border: 1px solid ${styles.colors.orangeTransparent};
   justify-self: center;
   position: relative;
+  ${hoverStyles}
   ${breakpoint.phone} {
     width: 250px;
   }

@@ -1,7 +1,7 @@
 import { BlogStateContext } from './Blog'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { RouterLink } from '../components/RouterLink'
-import { breakpoint, styles } from '../helpers/theme'
+import { breakpoint, hoverStyles, styles } from '../helpers/theme'
 import { getArticleDetail, urls } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
@@ -46,6 +46,10 @@ const Div_ArticleBox = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  ${hoverStyles}
+  &:hover {
+    border-color: ${styles.colors.orange300};
+  }
 `
 export const P_BlogText = styled.p`
   font-size: ${styles.fontSize.sm};

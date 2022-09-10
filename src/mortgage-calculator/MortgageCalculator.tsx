@@ -228,7 +228,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
                 bottom: 5,
               }}
             >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey800} />
               <XAxis dataKey='index' />
               <YAxis />
               <Tooltip />
@@ -255,7 +255,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
                 bottom: 5,
               }}
             >
-              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey900} />
+              <CartesianGrid strokeDasharray='3 3' stroke={styles.colors.grey800} />
               <XAxis dataKey='index' />
               <YAxis />
               <Tooltip />
