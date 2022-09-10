@@ -28,11 +28,15 @@ npm run start
 
 A simple static web page about JavaScript's origin.
 
+![Javascript Web image](../images/jsweb.png)
+
 ### [](#todo-list)ToDo List
 
 [ToDo List](https://github.com/Katarca/ITA-2022/tree/main/src/todo-list)
 
 A simple application that allows you to add, edit, delete and filter your daily tasks, which are saved in local storage.
+
+![ToDo List image](../images/todolist.png)
 
 ### [](#todo-list-redux)ToDo List Redux
 
@@ -40,11 +44,15 @@ A simple application that allows you to add, edit, delete and filter your daily 
 
 Redux version of ToDo List app.
 
+![ToDo List image](../images/todolist.png)
+
 ### [](#blog)Blog
 
 [Blog](https://github.com/Katarca/ITA-2022/tree/main/src/blog)
 
 A blog application that allows you to write, edit and delete articles in markdown. Articles are saved in local storage.
+
+![Blog image](../images/blog.png)
 
 ### [](#blog-post-app)Blog Post App
 
@@ -52,11 +60,15 @@ A blog application that allows you to write, edit and delete articles in markdow
 
 A version of blog application with backend file system.
 
+![Blog image](../images/blogpostapp.png)
+
 ### [](#hacker-typer)Hacker Typer Clone
 
 [Hacker Typer](https://github.com/Katarca/ITA-2022/tree/main/src/hacker-typer)
 
 A clone of [hacker typer](https://hackertyper.com/).
+
+![Hacker Typer image](../images/hackertyper.png)
 
 ### [](#memory-game)Memory Game
 
@@ -64,8 +76,12 @@ A clone of [hacker typer](https://hackertyper.com/).
 
 A simple game built to test a users memory.
 
+![Memory Game image](../images/memorygame.png)
+
 ### [](#mortgage-calculator)Mortgage Calculator
 
 [Mortgage Calculator](https://github.com/Katarca/ITA-2022/tree/main/src/mortgage-calculator)
 
 An application that calculates monthly payments, remain balance, interest and principal paid of mortgage.
+
+![Mortgage Calculator image](../images/mortgagecalculator.png)
