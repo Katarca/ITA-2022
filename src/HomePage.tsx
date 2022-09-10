@@ -52,7 +52,7 @@ const Img_ProfileImg = styled.img`
   height: 300px;
   border-radius: 50%;
   ${breakpoint.phone} {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
 `

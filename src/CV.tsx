@@ -75,9 +75,6 @@ const H_CvSubHeading = styled(H_SubHeading)`
   padding: ${styles.spacing.sm} ${styles.spacing.xs};
   color: ${styles.colors.grey300};
   font-weight: bold;
-  ${breakpoint.phone} {
-    font-size: ${styles.fontSize.sm};
-  }
 `
 
 const H_CvSubHeadingWhite = styled(H_SubHeading)`
@@ -85,9 +82,6 @@ const H_CvSubHeadingWhite = styled(H_SubHeading)`
   padding: ${styles.spacing.xs};
   color: ${styles.colors.white};
   font-weight: bold;
-  ${breakpoint.phone} {
-    font-size: ${styles.fontSize.sm};
-  }
 `
 
 const P_CvText = styled(P_BodyText)`

@@ -1,10 +1,9 @@
 import { breakpoint, styles } from '../helpers/theme'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const H_Heading = styled.h1`
+const headingStyles = css`
   text-align: center;
   font-size: ${styles.fontSize.md};
-  color: ${styles.colors.orange300};
   font-weight: normal;
   padding: ${styles.spacing.sm};
   ${breakpoint.phone} {
@@ -12,9 +11,12 @@ export const H_Heading = styled.h1`
   }
 `
 
+export const H_Heading = styled.h1`
+  ${headingStyles}
+  color: ${styles.colors.orange300};
+`
+
 export const H_SubHeading = styled.h2`
-  text-align: center;
-  font-size: ${styles.fontSize.md};
-  padding: ${styles.spacing.sm};
+  ${headingStyles}
   color: ${styles.colors.orangeTransparent};
 `
