@@ -6,11 +6,11 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { blogAppUrl, githubUrl } from '../../helpers/urls'
 import { breakpoint, styles } from '../../helpers/theme'
+import { githubUrl } from '../../helpers/urls'
 import { services } from '../../utils/services'
 import { useComponentDidMount } from '../../utils/useComponentDidMount'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export const Articles = () => {
@@ -86,13 +86,13 @@ export const Articles = () => {
         ) : errorMsg ? (
           <MessageJSX text={errorMsg}>
             <Div_MsgBox>
-              <P_BlogTextXs>
+              <P_MsgText>
                 To make the app work download repository from{' '}
                 <A_Link href={githubUrl} target='_blank'>
                   github
                 </A_Link>{' '}
                 and run it on localhost
-              </P_BlogTextXs>
+              </P_MsgText>
             </Div_MsgBox>
           </MessageJSX>
         ) : (
@@ -111,14 +111,13 @@ const Div_ArticlesContainer = styled.div`
     padding: ${styles.spacing.xs};
   }
 `
-export const P_BlogText = styled.p`
-  font-size: ${styles.fontSize.sm};
+export const P_BlogText = styled(P_BodyText)`
   color: ${styles.colors.grey300};
   ${breakpoint.tabletPortrait} {
     text-align: center;
   }
 `
-export const P_BlogTextXs = styled.p`
+export const P_MsgText = styled.p`
   font-size: ${styles.fontSize.xs};
   color: ${styles.colors.grey300};
 `

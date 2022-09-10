@@ -1,4 +1,4 @@
-import { styles } from '../helpers/theme'
+import { breakpoint, styles } from '../helpers/theme'
 import styled from 'styled-components'
 
 export const H_Heading = styled.h1`
@@ -7,6 +7,9 @@ export const H_Heading = styled.h1`
   color: ${styles.colors.orange300};
   font-weight: normal;
   padding: ${styles.spacing.sm};
+  ${breakpoint.phone} {
+    font-size: ${styles.fontSize.sm};
+  }
 `
 
 export const H_SubHeading = styled.h2`

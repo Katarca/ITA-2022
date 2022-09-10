@@ -66,7 +66,6 @@ const Link_CardLink = styled(Link)`
 `
 
 const P_CardText = styled(P_BodyText)`
-  font-size: ${styles.fontSize.sm};
   text-align: center;
 `
 const Div_CardHeader = styled.div`

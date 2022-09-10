@@ -1,7 +1,7 @@
 import { ArticlesStateContext } from './ArticlesContext'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BlogText } from './Articles'
-import { P_BodyText } from '../../components/BodyText'
+import { P_BodyText, P_BodyTextXs } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
 import { getArticleDetailUrl } from '../../helpers/urls'
@@ -88,8 +88,7 @@ const Div_TextContainer = styled.div`
   text-align: right;
   padding: ${styles.spacing.xs} 0;
 `
-const P_BlogTextXs = styled.p`
-  font-size: ${styles.fontSize.xs};
+export const P_BlogTextXs = styled(P_BodyTextXs)`
   color: ${styles.colors.grey300};
 `
 const Div_ButtonContainer = styled.div`

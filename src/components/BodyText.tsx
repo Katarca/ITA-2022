@@ -1,8 +1,8 @@
-import { styles } from '../helpers/theme'
+import { breakpoint, smTextStyles, styles, xsTextStyles } from '../helpers/theme'
 import styled from 'styled-components'
 
 export const P_BodyText = styled.p`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.white};
   &[aria-checked='true'] {
     text-decoration: line-through;
@@ -15,4 +15,15 @@ export const P_LinkBodyText = styled(P_BodyText)`
   &:hover {
     color: ${styles.colors.orange300};
   }
+`
+export const P_BodyTextXs = styled(P_BodyText)`
+  ${xsTextStyles}
+`
+
+export const P_BodyTextGrey = styled(P_BodyText)`
+  color: ${styles.colors.grey300};
+`
+
+export const P_BodyTextXsGrey = styled(P_BodyTextXs)`
+  color: ${styles.colors.grey300};
 `

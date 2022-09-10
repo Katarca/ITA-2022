@@ -16,7 +16,7 @@ export const P_BodyTextWhite = styled.p`
 `
 
 export const P_BodyTextBlack = styled.p`
-  font-size: ${styles.fontSize.sm};
+  font-size: ${styles.fontSize.xs};
   color: ${styles.colors.black};
   font-weight: 600;
   padding-bottom: ${styles.spacing.sm};

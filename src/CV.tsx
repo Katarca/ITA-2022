@@ -1,6 +1,6 @@
 import { H_Heading, H_SubHeading } from './components/Heading'
-import { P_BodyText } from './components/BodyText'
-import { breakpoint, styles } from './helpers/theme'
+import { P_BodyText, P_BodyTextXs } from './components/BodyText'
+import { breakpoint, smTextStyles, styles } from './helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -94,7 +94,7 @@ const P_CvText = styled(P_BodyText)`
   padding: ${styles.spacing.xxs} ${styles.spacing.sm};
 `
 const A_CvLink = styled.a`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.orangeTransparent};
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   text-decoration: none;
@@ -102,8 +102,7 @@ const A_CvLink = styled.a`
 const P_CvTextBold = styled(P_CvText)`
   font-weight: bold;
 `
-const P_CvTextXs = styled(P_CvText)`
-  font-size: ${styles.fontSize.xs};
+const P_CvTextXs = styled(P_BodyTextXs)`
   padding: 0 ${styles.spacing.sm};
   line-height: 1.5;
 `

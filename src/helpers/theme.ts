@@ -25,6 +25,7 @@ export const styles = {
     xl: '120px',
   },
   fontSize: {
+    xxs: '1.2rem',
     xs: '1.4rem',
     sm: '2rem',
     md: '3rem',
@@ -67,5 +68,19 @@ export const hoverStyles = css`
   &:hover {
     transform: scale(1.05);
     box-shadow: ${styles.colors.grey900} 0px 5px 15px;
+  }
+`
+
+export const smTextStyles = css`
+  font-size: ${styles.fontSize.sm};
+  ${breakpoint.phone} {
+    font-size: ${styles.fontSize.xs};
+  }
+`
+
+export const xsTextStyles = css`
+  font-size: ${styles.fontSize.xs};
+  ${breakpoint.phone} {
+    font-size: ${styles.fontSize.xxs};
   }
 `

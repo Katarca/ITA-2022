@@ -3,14 +3,13 @@ import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText } from '../components/BodyText'
+import { P_BodyText, P_BodyTextXs, P_BodyTextXsGrey } from '../components/BodyText'
 import { ToDo } from './ToDo'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder'
 import { idGenerator } from '../utils/idGenerator'
 import { lsToDoListKey } from '../helpers/lsKeys'
-import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../utils/useLocalStorage'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -93,11 +92,11 @@ const ToDoList = () => {
           ))}
         </Ul_List>
         {activeToDos.length >= 1 && (
-          <P_TaskText>
+          <P_BodyTextXsGrey>
             {activeToDos.length === 1
               ? `${activeToDos.length} task left`
               : `${activeToDos.length} tasks left`}
-          </P_TaskText>
+          </P_BodyTextXsGrey>
         )}
         <Div_ButtonContainer>
           <TransparentButtonBorder onClick={() => setFilter('all')} aria-pressed={'all' === filter}>
@@ -137,8 +136,4 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     width: 100%;
     align-items: center;
   }
-`
-const P_TaskText = styled(P_BodyText)`
-  font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.grey300};
 `

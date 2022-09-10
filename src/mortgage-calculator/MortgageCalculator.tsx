@@ -11,10 +11,10 @@ import {
 import { CustomInput } from '../components/Input'
 import { Div_Container } from '../components/Container'
 import { Form } from '../components/Form'
-import { H_Heading, H_SubHeading } from '../components/Heading'
+import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText } from '../components/BodyText'
-import { breakpoint, device, styles } from '../helpers/theme'
+import { P_BodyText, P_BodyTextXs } from '../components/BodyText'
+import { breakpoint, device, smTextStyles, styles } from '../helpers/theme'
 import { formatAmount, roundAmount } from '../utils/formatAmount'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -92,7 +92,7 @@ export const MortgageCalculator = () => {
         <title>Katarína Soušková | Mortgage Calculator</title>
       </Helmet>
       <Div_Container>
-        <H_MCHeading>Mortgage Calculator</H_MCHeading>
+        <H_Heading>Mortgage Calculator</H_Heading>
         <MCForm>
           <Div_InputsContainer>
             <Div_InputWrapper>
@@ -269,11 +269,6 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
     </>
   )
 }
-
-const H_MCHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.md};
-`
-
 const MCForm = styled(Form)`
   display: flex;
   align-items: center;
@@ -306,8 +301,8 @@ const Div_InputWrapper = styled.div`
 `
 
 const Label_MCLabel = styled.label`
+  ${smTextStyles}
   width: 100%;
-  font-size: ${styles.fontSize.sm};
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
 `
@@ -323,9 +318,8 @@ const Table_MCTable = styled.table`
     overflow-x: scroll;
   }
 `
-const P_TableText = styled(P_BodyText)`
+const P_TableText = styled(P_BodyTextXs)`
   padding: ${styles.spacing.xs} ${styles.spacing.xs} 0 ${styles.spacing.xs};
-  font-size: ${styles.fontSize.xs};
 `
 const Div_MobileContainer = styled.div`
   display: flex;
