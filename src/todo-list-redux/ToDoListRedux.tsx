@@ -39,7 +39,7 @@ export const ToDoListRedux = () => {
         <Helmet>
           <title>Katarína Soušková | ToDo List Redux</title>
         </Helmet>
-        <H_Heading>What need to be done?</H_Heading>
+        <H_Heading>What needs to be done?</H_Heading>
         <CustomForm
           onSubmit={e => {
             e.preventDefault()

@@ -94,7 +94,7 @@ export const MemoryGame = () => {
       </Helmet>
       <Div_Container>
         <H_Heading>
-          {matches === cards.length / 2 ? 'Congrats Partner!' : 'Wild West Memory Game 🤠'}
+          {matches === cards.length / 2 ? 'Congrats partner!' : 'Find pairs 🤠'}
         </H_Heading>
         <Div_BoardBox>
           <Div_BoardWrapper>

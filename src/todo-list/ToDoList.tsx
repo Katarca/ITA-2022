@@ -3,7 +3,7 @@ import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText, P_BodyTextXs, P_BodyTextXsGrey } from '../components/BodyText'
+import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { ToDo } from './ToDo'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
@@ -60,7 +60,7 @@ const ToDoList = () => {
         <Helmet>
           <title>Katarína Soušková | ToDo List</title>
         </Helmet>
-        <H_Heading>What need to be done?</H_Heading>
+        <H_Heading>What needs to be done?</H_Heading>
         <CustomForm
           onSubmit={e => {
             e.preventDefault()

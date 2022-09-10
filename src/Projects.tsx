@@ -1,6 +1,4 @@
 import { Card } from './components/Card'
-import { P_LinkBodyText } from './components/BodyText'
-import { RouterLink } from './components/RouterLink'
 import { breakpoint, styles } from './helpers/theme'
 import { githubUrl, urls } from './helpers/urls'
 import React from 'react'
