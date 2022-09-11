@@ -81,7 +81,7 @@ type TableProps = {
 export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
-  const [years, setYears] = useState(5)
+  const [years, setYears] = useState(30)
   const [inflation, setInflation] = useState(6)
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
   const [visibleYear, setVisibleYear] = useState(1)
