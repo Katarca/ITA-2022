@@ -34,7 +34,7 @@ export const CV = () => {
         <P_CvTextBold>Slovak university of agriculture, Nitra</P_CvTextBold>
         <P_CvTextXs>Bachelor&apos;s degree, Faculty of Agrobiology and Food Resources</P_CvTextXs>
         <P_CvTextXs>2013-2016</P_CvTextXs>
-        <H_CvSubHeadingWhite>Courses</H_CvSubHeadingWhite>
+        <H_CvSubHeading>Courses</H_CvSubHeading>
         <Div_CvBox>
           <P_CvTextBold>SmartBrains IT absolvent</P_CvTextBold>
           <P_CvTextXs>6/2022 - 9/2022</P_CvTextXs>
@@ -79,17 +79,9 @@ const H_CvHeading = styled(H_Heading)`
 const H_CvSubHeading = styled(H_SubHeading)`
   text-align: left;
   padding: ${styles.spacing.sm} ${styles.spacing.xs};
-  color: ${styles.colors.grey300};
+  color: ${styles.colors.orange300};
   font-weight: bold;
 `
-
-const H_CvSubHeadingWhite = styled(H_SubHeading)`
-  text-align: left;
-  padding: ${styles.spacing.xs};
-  color: ${styles.colors.white};
-  font-weight: bold;
-`
-
 const P_CvText = styled(P_BodyText)`
   padding: ${styles.spacing.xxs} ${styles.spacing.sm};
 `
