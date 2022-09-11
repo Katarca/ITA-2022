@@ -2,11 +2,10 @@ import { BlogStateContext } from './Blog'
 import { CustomInput } from '../components/Input'
 import { CustomTextarea } from '../components/Textarea'
 import { Form } from '../components/Form'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BlogTextXs } from './Articles'
-import { P_BodyText } from '../components/BodyText'
+import { Helmet } from 'react-helmet-async'
+import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
-import { breakpoint, styles } from '../helpers/theme'
+import { breakpoint, smTextStyles, styles } from '../helpers/theme'
 import { urls } from '../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext, useState } from 'react'
@@ -21,7 +20,7 @@ export const NewArticle = () => {
 
   const blogLogic = useContext(BlogStateContext)
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | New Article</title>
       </Helmet>
@@ -47,7 +46,7 @@ export const NewArticle = () => {
             />
             {blogLogic.titleErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{blogLogic.titleErr}</P_BlogTextXs>
+                <P_BodyTextXsGrey>{blogLogic.titleErr}</P_BodyTextXsGrey>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
@@ -56,7 +55,7 @@ export const NewArticle = () => {
             <BlogInput type='text' value={author} onChange={e => setAuthor(e.target.value)} />
             {blogLogic.authorErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{blogLogic.authorErr}</P_BlogTextXs>
+                <P_BodyTextXsGrey>{blogLogic.authorErr}</P_BodyTextXsGrey>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
@@ -65,7 +64,7 @@ export const NewArticle = () => {
             <BlogTextArea value={content} onChange={e => setContent(e.target.value)} />
             {blogLogic.contentErr && (
               <Div_ErrContainer>
-                <P_BlogTextXs>{blogLogic.contentErr}</P_BlogTextXs>
+                <P_BodyTextXsGrey>{blogLogic.contentErr}</P_BodyTextXsGrey>
               </Div_ErrContainer>
             )}
           </Div_InputContainer>
@@ -76,7 +75,7 @@ export const NewArticle = () => {
           </Div_ButtonContainer>
         </BlogForm>
       </Div_NewArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 
@@ -96,7 +95,7 @@ const BlogInput = styled(CustomInput)`
   border-color: ${styles.colors.orange300};
 `
 const BlogTextArea = styled(CustomTextarea)`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.white};
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
@@ -104,7 +103,7 @@ const BlogTextArea = styled(CustomTextarea)`
 `
 
 const Label_BlogLabel = styled.label`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
 `

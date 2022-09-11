@@ -1,7 +1,7 @@
 import { ArticlesStateContext } from './ArticlesContext'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BlogText } from './Articles'
-import { P_BodyText } from '../../components/BodyText'
+import { P_BodyText, P_BodyTextXs } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { TransparentButtonBorder } from '../../components/Button'
 import { getArticleDetailUrl } from '../../helpers/urls'
@@ -72,7 +72,7 @@ export const ArticlesJSX = () => {
 }
 
 const Div_ArticleBox = styled.div`
-  border: 2px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 8px;
   padding: ${styles.spacing.xs};
   display: flex;
@@ -88,8 +88,7 @@ const Div_TextContainer = styled.div`
   text-align: right;
   padding: ${styles.spacing.xs} 0;
 `
-const P_BlogTextXs = styled.p`
-  font-size: ${styles.fontSize.xs};
+export const P_BlogTextXs = styled(P_BodyTextXs)`
   color: ${styles.colors.grey300};
 `
 const Div_ButtonContainer = styled.div`

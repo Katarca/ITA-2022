@@ -1,15 +1,16 @@
 import { BlogStateContext } from './Blog'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
+import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { breakpoint, hoverStyles, styles } from '../helpers/theme'
-import { getArticleDetail, urls } from '../helpers/urls'
+import { getArticleDetail } from '../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const Articles = () => {
   const blogLogic = useContext(BlogStateContext)
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Articles </title>
       </Helmet>
@@ -19,14 +20,14 @@ export const Articles = () => {
             <Div_ArticleBox>
               <P_BlogText>{article.title}</P_BlogText>
               <Div_TextContainer>
-                <P_BlogTextXs>by {article.author}</P_BlogTextXs>
-                <P_BlogTextXs>{article.date}</P_BlogTextXs>
+                <P_BodyTextXsGrey>by {article.author}</P_BodyTextXsGrey>
+                <P_BodyTextXsGrey>{article.date}</P_BodyTextXsGrey>
               </Div_TextContainer>
             </Div_ArticleBox>
           </RouterLink>
         ))}
       </Div_ArticlesContainer>
-    </HelmetProvider>
+    </>
   )
 }
 
@@ -39,7 +40,7 @@ const Div_ArticlesContainer = styled.div`
   }
 `
 const Div_ArticleBox = styled.div`
-  border: 2px solid ${styles.colors.grey300};
+  border: ${styles.border.grey300};
   border-radius: 8px;
   padding: ${styles.spacing.xs};
   display: flex;
@@ -51,17 +52,12 @@ const Div_ArticleBox = styled.div`
     border-color: ${styles.colors.orange300};
   }
 `
-export const P_BlogText = styled.p`
-  font-size: ${styles.fontSize.sm};
-  color: ${styles.colors.grey300};
+export const P_BlogText = styled(P_BodyText)`
   ${breakpoint.tabletPortrait} {
     text-align: center;
   }
 `
-export const P_BlogTextXs = styled.p`
-  font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.grey300};
-`
+
 const Div_TextContainer = styled.div`
   text-align: right;
   padding: ${styles.spacing.xs} 0;

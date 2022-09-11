@@ -1,7 +1,6 @@
 import { CustomTextarea } from '../components/Textarea'
 import { Div_Container } from '../components/Container'
-import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { dummyCode } from './dummyCode'
 import { styles } from '../helpers/theme'
 import React, { useState } from 'react'
@@ -29,7 +28,7 @@ export const HackerTyper = () => {
   }
 
   return (
-    <HelmetProvider>
+    <>
       <Div_Container>
         <Helmet>
           <title>Katarína Soušková | Hacker Typer</title>
@@ -47,7 +46,6 @@ export const HackerTyper = () => {
             )}
           </div>
         )}
-        <H_HackHeading>Hacker Typer</H_HackHeading>
         <HackTextArea
           value={
             currentIndex === 0
@@ -60,13 +58,10 @@ export const HackerTyper = () => {
           spellCheck={false}
         />
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
 
-const H_HackHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.md};
-`
 const HackTextArea = styled(CustomTextarea)`
   width: 100%;
   height: 65vh;

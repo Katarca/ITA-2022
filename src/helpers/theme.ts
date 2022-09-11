@@ -25,12 +25,19 @@ export const styles = {
     xl: '120px',
   },
   fontSize: {
+    xxs: '1.2rem',
     xs: '1.4rem',
     sm: '2rem',
     md: '3rem',
     lg: '4rem',
     xl: '6rem',
     xxl: '8rem',
+  },
+  border: {
+    white: '1px solid #ffffff',
+    orange: '1px solid #f77f1c',
+    orangeTransparent: '1px solid rgba(247, 127, 28, 0.5)',
+    grey300: '1px solid #9c9c9c',
   },
 } as const
 
@@ -61,5 +68,19 @@ export const hoverStyles = css`
   &:hover {
     transform: scale(1.05);
     box-shadow: ${styles.colors.grey900} 0px 5px 15px;
+  }
+`
+
+export const smTextStyles = css`
+  font-size: ${styles.fontSize.sm};
+  ${breakpoint.phone} {
+    font-size: ${styles.fontSize.xs};
+  }
+`
+
+export const xsTextStyles = css`
+  font-size: ${styles.fontSize.xs};
+  ${breakpoint.phone} {
+    font-size: ${styles.fontSize.xxs};
   }
 `

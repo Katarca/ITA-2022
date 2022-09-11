@@ -45,7 +45,7 @@ export const Card = (props: CardProps) => {
 const Div_ProjectCard = styled.div`
   width: 350px;
   border-radius: 8px;
-  border: 1px solid ${styles.colors.orangeTransparent};
+  border: ${styles.border.orangeTransparent};
   justify-self: center;
   position: relative;
   ${hoverStyles}
@@ -66,7 +66,6 @@ const Link_CardLink = styled(Link)`
 `
 
 const P_CardText = styled(P_BodyText)`
-  font-size: ${styles.fontSize.sm};
   text-align: center;
 `
 const Div_CardHeader = styled.div`

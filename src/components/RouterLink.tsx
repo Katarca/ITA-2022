@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { styles } from '../helpers/theme'
+import { breakpoint, smTextStyles, styles } from '../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -13,9 +13,9 @@ export const RouterLink = (props: LinkProps) => {
 }
 
 const StyledLink = styled(Link)`
+  ${smTextStyles}
   text-decoration: none;
   color: ${styles.colors.white};
-  font-size: ${styles.fontSize.sm};
   padding: 0 ${styles.spacing.sm};
   cursor: pointer;
   &:hover {

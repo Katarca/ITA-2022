@@ -1,6 +1,6 @@
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { breakpoint, styles } from '../helpers/theme'
 import { delay } from '../utils/delay'
 import { idGenerator } from '../utils/idGenerator'
@@ -88,14 +88,14 @@ export const MemoryGame = () => {
   }
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | Memory Game</title>
       </Helmet>
       <Div_Container>
-        <H_MgHeading>
-          {matches === cards.length / 2 ? 'Congrats Partner!' : 'Wild West Memory Game 🤠'}
-        </H_MgHeading>
+        <H_Heading>
+          {matches === cards.length / 2 ? 'Congrats partner!' : 'Find pairs 🤠'}
+        </H_Heading>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
@@ -107,24 +107,19 @@ export const MemoryGame = () => {
                 ))
               ) : (
                 <Div_ResetContainer onClick={() => handleReset()}>
-                  <H_MgHeading>Reset game</H_MgHeading>
+                  <H_Heading>Reset game</H_Heading>
                 </Div_ResetContainer>
               )}
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
       </Div_Container>
-    </HelmetProvider>
+    </>
   )
 }
-
-const H_MgHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.md};
-`
-
 const Div_BoardBox = styled.div`
   width: 35%;
-  border: 2px solid ${styles.colors.orange300};
+  border: ${styles.border.orange};
   border-radius: 8px;
   ${breakpoint.smallNotebook} {
     width: 50%;

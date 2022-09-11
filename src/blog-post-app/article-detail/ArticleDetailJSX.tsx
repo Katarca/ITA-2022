@@ -4,10 +4,11 @@ import { CustomTextarea } from '../../components/Textarea'
 import { Form } from '../../components/Form'
 import { H_SubHeading } from '../../components/Heading'
 import { MarkDown } from '../../components/MarkDown'
-import { P_BlogText, P_BlogTextXs } from '../articles/Articles'
+import { P_BlogText } from '../articles/Articles'
+import { P_BlogTextXs } from '../articles/ArticlesJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { styles } from '../../helpers/theme'
+import { smTextStyles, styles } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
 import { useNavigate } from 'react-router-dom'
 import React, { useContext } from 'react'
@@ -111,7 +112,7 @@ const Div_DetailContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   padding: ${styles.spacing.sm} 0;
-  border-bottom: 1px solid ${styles.colors.grey300};
+  border-bottom: ${styles.border.grey300};
 `
 
 const Div_ContentContainer = styled.div`
@@ -133,13 +134,13 @@ const Div_ErrContainer = styled.div`
 `
 
 const Label_EditLabel = styled.label`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
 `
 
 const EditTextarea = styled(CustomTextarea)`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.white};
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};

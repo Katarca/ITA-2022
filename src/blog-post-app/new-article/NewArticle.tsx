@@ -1,13 +1,13 @@
 import { CustomInput } from '../../components/Input'
 import { CustomTextarea } from '../../components/Textarea'
 import { Form } from '../../components/Form'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { NewArticleStateContext } from './NewArticleContext'
-import { P_BlogTextXs } from '../articles/Articles'
+import { P_BlogTextXs } from '../articles/ArticlesJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { breakpoint, styles } from '../../helpers/theme'
+import { breakpoint, smTextStyles, styles } from '../../helpers/theme'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
@@ -15,7 +15,7 @@ export const NewArticle = () => {
   const newArticle = useContext(NewArticleStateContext)
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet>
         <title>Katarína Soušková | New Article</title>
       </Helmet>
@@ -73,7 +73,7 @@ export const NewArticle = () => {
         </BlogForm>
         {newArticle.newArticleErr && <MessageJSX text={newArticle.newArticleErr} />}
       </Div_NewArticleContainer>
-    </HelmetProvider>
+    </>
   )
 }
 
@@ -93,7 +93,7 @@ const BlogInput = styled(CustomInput)`
   border-color: ${styles.colors.orange300};
 `
 const BlogTextArea = styled(CustomTextarea)`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.white};
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
@@ -101,7 +101,7 @@ const BlogTextArea = styled(CustomTextarea)`
 `
 
 const Label_BlogLabel = styled.label`
-  font-size: ${styles.fontSize.sm};
+  ${smTextStyles}
   color: ${styles.colors.grey300};
   padding: 0 ${styles.spacing.xs};
 `

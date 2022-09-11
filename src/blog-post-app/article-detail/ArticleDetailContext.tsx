@@ -4,7 +4,7 @@ import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder
 import { services } from '../../utils/services'
 import { useComponentDidMount } from '../../utils/useComponentDidMount'
 import { useParams } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const useLogicState = () => {
   const params = useParams<{ id: string }>()

@@ -86,7 +86,7 @@ export const BlogApp = () => {
   return (
     <BlogContextProvider>
       <Div_Container>
-        <H_BlogHeading>Blog</H_BlogHeading>
+        <H_Heading>Blog</H_Heading>
         <Nav_BlogNavbar>
           <RouterLink to={urls.blog}>
             <P_LinkBodyText>Articles</P_LinkBodyText>
@@ -105,15 +105,12 @@ export const BlogApp = () => {
   )
 }
 
-const H_BlogHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 const Nav_BlogNavbar = styled.nav`
   display: flex;
   width: 60%;
   justify-content: space-around;
   padding: ${styles.spacing.sm};
-  border-bottom: 2px solid ${styles.colors.orange300};
+  border-bottom: ${styles.border.orange};
   text-align: center;
   margin-bottom: ${styles.spacing.sm};
   ${breakpoint.tabletPortrait} {
@@ -122,5 +119,6 @@ const Nav_BlogNavbar = styled.nav`
   ${breakpoint.phone} {
     width: auto;
     flex-direction: column;
+    gap: ${styles.spacing.xs};
   }
 `

@@ -14,7 +14,7 @@ import styled from 'styled-components'
 export const ArticlesRoutes = () => {
   return (
     <Div_Container>
-      <H_BlogHeading>Blog Post App</H_BlogHeading>
+      <H_Heading>Blog Post App</H_Heading>
       <Nav_BlogNavbar>
         <RouterLink to={urls.blogApp}>
           <P_LinkBodyText>All Articles</P_LinkBodyText>
@@ -32,15 +32,12 @@ export const ArticlesRoutes = () => {
   )
 }
 
-const H_BlogHeading = styled(H_Heading)`
-  font-size: ${styles.fontSize.lg};
-`
 const Nav_BlogNavbar = styled.nav`
   display: flex;
   width: 60%;
   justify-content: space-around;
   padding: ${styles.spacing.sm};
-  border-bottom: 2px solid ${styles.colors.orange300};
+  border-bottom: ${styles.border.orange};
   text-align: center;
   margin-bottom: ${styles.spacing.sm};
   ${breakpoint.tabletPortrait} {
@@ -49,5 +46,6 @@ const Nav_BlogNavbar = styled.nav`
   ${breakpoint.phone} {
     width: auto;
     flex-direction: column;
+    gap: ${styles.spacing.xs};
   }
 `
