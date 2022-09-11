@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async'
 import { MessageJSX } from '../../components/MessageJSX'
 import { P_BodyText } from '../../components/BodyText'
 import { TransparentButtonBorder } from '../../components/Button'
-import { breakpoint, styles } from '../../helpers/theme'
+import { breakpoint, smTextStyles, styles } from '../../helpers/theme'
 import { githubUrl } from '../../helpers/urls'
 import { services } from '../../utils/services'
 import { useComponentDidMount } from '../../utils/useComponentDidMount'
@@ -69,7 +69,7 @@ export const Articles = () => {
               onChange={e => articlesLogic.setSearchTerm(e.target.value)}
               value={articlesLogic.searchTerm}
             />
-            <TransparentButtonBorder type='submit'>
+            <TransparentButtonBorder type='submit' disabled={errorMsg ? true : false}>
               <P_BodyText>Search</P_BodyText>
             </TransparentButtonBorder>
           </Div_InputContainer>
@@ -117,9 +117,8 @@ export const P_BlogText = styled(P_BodyText)`
     text-align: center;
   }
 `
-export const P_MsgText = styled.p`
-  font-size: ${styles.fontSize.xs};
-  color: ${styles.colors.grey300};
+export const P_MsgText = styled(P_BodyText)`
+  color: ${styles.colors.orange300};
 `
 export const Div_MsgContainer = styled.div`
   margin: ${styles.spacing.xs};
@@ -129,8 +128,9 @@ const Div_FormContainer = styled.div`
   padding: ${styles.spacing.sm} 0;
 `
 const A_Link = styled.a`
-  font-size: ${styles.fontSize.xs};
+  ${smTextStyles}
   color: ${styles.colors.orangeTransparent};
+  text-decoration: none;
 `
 const Div_InputContainer = styled.div`
   text-align: center;
