@@ -30,6 +30,7 @@ const calculateAmortization = (arg: {
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
   const principalMonthlyRate = arg.principal * monthlyRate
   const balanceMonthlyRate = (i: number) => mortgageData[i - 1].balance * monthlyRate
+  const getYear = (i: number) => Math.ceil((i + 1) / 12)
 
   // Formula borrowed from https://www.financevpraxi.cz/finance-vyber-financniho-produktu
   const amountAfterInflation = (amount: number, i: number) =>
@@ -51,8 +52,8 @@ const calculateAmortization = (arg: {
 
   for (let i = 1; i < months; i++) {
     mortgageData.push({
-      year: Math.ceil((i + 1) / 12),
-      month: Math.ceil((i + 1) / 12) > 1 ? i + 1 - 12 * (Math.ceil((i + 1) / 12) - 1) : i + 1,
+      year: getYear(i),
+      month: getYear(i) > 1 ? i + 1 - 12 * (getYear(i) - 1) : i + 1,
       monthlyPayment: payment,
       balance: mortgageData[i - 1].balance - (payment - balanceMonthlyRate(i)),
       balanceInflation: amountAfterInflation(
