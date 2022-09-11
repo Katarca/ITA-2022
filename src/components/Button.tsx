@@ -18,6 +18,15 @@ export const TransparentButtonBorder = styled(Button)`
   &:hover {
     background-color: ${styles.colors.orange300};
   }
+  &:disabled {
+    background-color: ${styles.colors.grey500};
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      transform: unset;
+      box-shadow: unset;
+    }
+  }
   &[aria-pressed='true'] {
     border: ${styles.border.orange};
   }
