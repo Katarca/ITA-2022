@@ -17,7 +17,7 @@ import { P_BodyTextXs } from '../components/BodyText'
 import { breakpoint, device, smTextStyles, styles } from '../helpers/theme'
 import { formatAmount, roundAmount } from '../utils/formatAmount'
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const calculateAmortization = (arg: {
   principal: number
@@ -37,6 +37,8 @@ const calculateAmortization = (arg: {
 
   const mortgageData = [
     {
+      year: 1,
+      month: 1,
       monthlyPayment: payment,
       balance: arg.principal - (payment - principalMonthlyRate),
       balanceInflation: arg.principal - (payment - principalMonthlyRate),
@@ -49,6 +51,8 @@ const calculateAmortization = (arg: {
 
   for (let i = 1; i < months; i++) {
     mortgageData.push({
+      year: Math.ceil((i + 1) / 12),
+      month: Math.ceil((i + 1) / 12) > 1 ? i + 1 - 12 * (Math.ceil((i + 1) / 12) - 1) : i + 1,
       monthlyPayment: payment,
       balance: mortgageData[i - 1].balance - (payment - balanceMonthlyRate(i)),
       balanceInflation: amountAfterInflation(
@@ -67,12 +71,20 @@ const calculateAmortization = (arg: {
 
 type Loan = ReturnType<typeof calculateAmortization>
 
+type TableProps = {
+  visible: boolean
+  month: number
+  year: number
+  visibleYear: number
+}
+
 export const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(1500000)
   const [interestRate, setInterestRate] = useState(4.8)
   const [years, setYears] = useState(5)
   const [inflation, setInflation] = useState(6)
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
+  const [visibleYear, setVisibleYear] = useState(1)
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,7 +149,7 @@ export const MortgageCalculator = () => {
                 <thead>
                   <tr>
                     <th>
-                      <P_TableText>Month</P_TableText>
+                      <P_TableText>Year / Month</P_TableText>
                     </th>
                     <th>
                       <P_TableText>Monthly Payment (CZK)</P_TableText>
@@ -155,9 +167,18 @@ export const MortgageCalculator = () => {
                 </thead>
                 <tbody>
                   {loanDetail.map((data, i) => (
-                    <tr key={i}>
+                    <Tr_TableRow
+                      key={i}
+                      visible={data.month === 1 || visibleYear === data.year}
+                      visibleYear={visibleYear}
+                      month={data.month}
+                      year={data.year}
+                      onClick={() => setVisibleYear(data.year)}
+                    >
                       <td>
-                        <P_TableText>{i + 1}</P_TableText>
+                        <P_TableText>
+                          {data.year}y {data.month}m
+                        </P_TableText>
                       </td>
                       <td>
                         <P_TableText>{formatAmount(data.monthlyPayment)}</P_TableText>
@@ -171,15 +192,24 @@ export const MortgageCalculator = () => {
                       <td>
                         <P_TableText>{formatAmount(data.monthlyPrincipal)}</P_TableText>
                       </td>
-                    </tr>
+                    </Tr_TableRow>
                   ))}
                 </tbody>
               </Table_MCTable>
             ) : (
               <>
                 {loanDetail.map((data, i) => (
-                  <Div_MobileContainer key={i}>
-                    <P_TableText>{i + 1} month</P_TableText>
+                  <Div_MobileContainer
+                    key={i}
+                    visible={data.month === 1 || visibleYear === data.year}
+                    visibleYear={visibleYear}
+                    month={data.month}
+                    year={data.year}
+                    onClick={() => setVisibleYear(data.year)}
+                  >
+                    <P_TableText>
+                      {data.year} year {data.month} month
+                    </P_TableText>
                     <P_TableText>
                       Monthly payment: {formatAmount(data.monthlyPayment)} CZK
                     </P_TableText>
@@ -269,6 +299,27 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
     </>
   )
 }
+
+const Tr_TableRow = styled.tr<TableProps>`
+  cursor: pointer;
+  ${({ visible }) =>
+    !visible &&
+    css`
+      display: none;
+    `}
+  ${({ month }) =>
+    month === 1 &&
+    css`
+      background-color: ${styles.colors.orangeTransparent};
+    `}
+    ${({ visibleYear, year, month }) =>
+    visibleYear === year &&
+    month === 1 &&
+    css`
+      background-color: ${styles.colors.orange300};
+    `}
+`
+
 const MCForm = styled(Form)`
   display: flex;
   align-items: center;
@@ -321,13 +372,30 @@ const Table_MCTable = styled.table`
 const P_TableText = styled(P_BodyTextXs)`
   padding: ${styles.spacing.xs} ${styles.spacing.xs} 0 ${styles.spacing.xs};
 `
-const Div_MobileContainer = styled.div`
+const Div_MobileContainer = styled.div<TableProps>`
   display: flex;
   flex-wrap: wrap;
   padding: ${styles.spacing.xs};
   margin: ${styles.spacing.xs};
   border: ${styles.border.grey300};
   border-radius: 8px;
+  cursor: pointer;
+  ${({ visible }) =>
+    !visible &&
+    css`
+      display: none;
+    `}
+  ${({ month }) =>
+    month === 1 &&
+    css`
+      background-color: ${styles.colors.orangeTransparent};
+    `}
+    ${({ visibleYear, year, month }) =>
+    visibleYear === year &&
+    month === 1 &&
+    css`
+      background-color: ${styles.colors.orange300};
+    `}
 `
 const Div_ChartsContainer = styled.div`
   padding: ${styles.spacing.md} 0;
