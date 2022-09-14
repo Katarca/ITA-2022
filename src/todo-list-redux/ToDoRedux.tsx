@@ -10,7 +10,7 @@ import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
 import { useDispatch } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 
 export const ToDoRedux = (props: ToDoProps) => {
@@ -20,7 +20,23 @@ export const ToDoRedux = (props: ToDoProps) => {
   const dispatch = useDispatch<AppDispatch>()
 
   return (
-    <Li_ListItem>
+    <Li_ListItem
+      draggable='true'
+      onDragStart={() => {
+        props.dragItem.current = props.index
+      }}
+      onDragEnter={() => {
+        props.dragOverItem.current = props.index
+      }}
+      onDragEnd={() => {
+        dispatch(
+          toDoActions.sortToDos({
+            dragItem: props.dragItem.current,
+            dragOverItem: props.dragOverItem.current,
+          })
+        )
+      }}
+    >
       <Div_TodoContainer>
         <Div_FlexContainer>
           <Div_IconBox

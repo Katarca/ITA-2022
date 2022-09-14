@@ -31,6 +31,10 @@ const toDoSlice = createSlice({
         action.payload.id === toDo.id ? { ...toDo, task: action.payload.newTask } : toDo
       )
     },
+    sortToDos(state, action: PayloadAction<{ dragItem: number; dragOverItem: number }>) {
+      const draggedItem = state.splice(action.payload.dragItem, 1)[0]
+      state.splice(action.payload.dragOverItem, 0, draggedItem)
+    },
   },
 })
 
