@@ -13,7 +13,13 @@ import { useDispatch } from 'react-redux'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 
-export const ToDoRedux = (props: ToDoProps) => {
+type ToDoItem = ToDoProps & {
+  index: number
+  dragItem: React.MutableRefObject<number>
+  dragOverItem: React.MutableRefObject<number>
+}
+
+export const ToDoRedux = (props: ToDoItem) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState(props.task)
 
@@ -83,6 +89,7 @@ export const ToDoRedux = (props: ToDoProps) => {
 }
 
 const Li_ListItem = styled.li`
+  cursor: grab;
   border-top: ${styles.border.orangeTransparent};
   border-right: ${styles.border.orangeTransparent};
   border-left: ${styles.border.orangeTransparent};

@@ -10,9 +10,6 @@ export type ToDoProps = {
   id: string
   task: string
   completed: boolean
-  index: number
-  dragItem: React.MutableRefObject<number>
-  dragOverItem: React.MutableRefObject<number>
 }
 
 store.subscribe(
