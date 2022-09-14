@@ -2,7 +2,57 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
 import util from 'util'
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Article:
+ *       type: object
+ *       required:
+ *         - id
+ *         - title
+ *         - slug
+ *         - date
+ *         - author
+ *         - content
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated id of the article
+ *         title:
+ *           type: string
+ *           description: The article title
+ *         slug:
+ *           type: string
+ *           description: The auto-generated slug of the article
+ *         date:
+ *           type: string
+ *           description: The auto-generated date of the article
+ *         author:
+ *           type: string
+ *           description: The article author
+ *         content:
+ *           type: string
+ *           description: The article content
+ *       example:
+ *         id: 0.7313266947047554
+ *         title: Article title
+ *         slug: article-title
+ *         date: 28/08/2022
+ *         author: anonym
+ *         content: Article content...
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Articles
+ *   description: The blog managing API
+ */
 
 const app = express()
 const port = 5000
@@ -23,6 +73,33 @@ const formatTerm = (term: string) => convertToSlug(term).replaceAll('-', '')
 const getIdString = () => Math.random().toString()
 
 const createDate = () => new Date().toLocaleDateString()
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Blog Post Api',
+      version: '1.0.0',
+      description: 'A simple blog api',
+      contact: {
+        name: 'Katarína Soušková',
+        url: 'https://souskova.eu',
+        email: 'souskovakatarina@gmail.com',
+      },
+    },
+    servers: [
+      {
+        url: 'http://localhost:5000/articles',
+      },
+    ],
+  },
+
+  apis: ['src/index.ts'],
+}
+
+const specs = swaggerJSDoc(options)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
 
 type Article = {
   id: string
@@ -49,6 +126,31 @@ const writeFile = util.promisify(fs.writeFile)
 const writeJsonData = async (data: {}) =>
   await writeFile(`${__dirname}/../blogData.json`, JSON.stringify(data, null, 2), 'utf8')
 
+/**
+ * @swagger
+ * /articles/search/{search}:
+ *   get:
+ *     summary: Returns the list of all searched articles
+ *     tags: [Articles]
+ *     parameters:
+ *       - in: path
+ *         name: search
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The article search term
+ *     responses:
+ *       200:
+ *         description: The list of searched articles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Article'
+ *       500:
+ *         description: Server error
+ */
 app.get('/articles/search/:search', async (req, res, next) => {
   try {
     const data = await getJsonData()
@@ -63,6 +165,24 @@ app.get('/articles/search/:search', async (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /articles:
+ *   get:
+ *     summary: Returns the list of all the articles
+ *     tags: [Articles]
+ *     responses:
+ *       200:
+ *         description: The list of the articles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Article'
+ *       500:
+ *         description: Server error
+ */
 app.get('/articles', async (req, res, next) => {
   try {
     const data = await getJsonData()
@@ -73,6 +193,31 @@ app.get('/articles', async (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /articles/{id}:
+ *   get:
+ *     summary: Get the article by id
+ *     tags: [Article]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The article id
+ *     responses:
+ *       200:
+ *         description: The article description by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Article'
+ *       404:
+ *         description: The article was not found
+ *       500:
+ *         description: Server error
+ */
 app.get('/articles/:id', async (req, res, next) => {
   try {
     const data = await getJsonData()
@@ -85,6 +230,28 @@ app.get('/articles/:id', async (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /articles:
+ *   post:
+ *     summary: Create a new article
+ *     tags: [Article]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Article'
+ *     responses:
+ *       200:
+ *         description: The article was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Article'
+ *       500:
+ *         description: Server error
+ */
 app.post('/articles', async (req, res, next) => {
   try {
     const newArticle = {
@@ -104,6 +271,27 @@ app.post('/articles', async (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /articles/{id}:
+ *   delete:
+ *     summary: Delete article by id
+ *     tags: [Article]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The article id
+ *     responses:
+ *       200:
+ *         description: The article was deleted
+ *       404:
+ *         description: The article was not found
+ *       500:
+ *         description: Server error
+ */
 app.delete('/articles/:id', async (req, res, next) => {
   try {
     const data = await getJsonData()
@@ -119,6 +307,37 @@ app.delete('/articles/:id', async (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /articles/{id}:
+ *  post:
+ *    summary: Update the article by the id
+ *    tags: [Article]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The article id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Article'
+ *    responses:
+ *      200:
+ *        description: The article was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Article'
+ *      404:
+ *        description: The article was not found
+ *      500:
+ *        description: Server error
+ */
 app.post('/articles/:id', async (req, res, next) => {
   try {
     const data = await getJsonData()
