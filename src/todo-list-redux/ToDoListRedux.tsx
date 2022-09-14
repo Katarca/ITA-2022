@@ -11,7 +11,7 @@ import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 
 const getState = (state: RootState) => state
@@ -32,6 +32,9 @@ export const ToDoListRedux = () => {
   }
 
   const activeToDos = toDos.filter(filterMap['active'])
+
+  const dragItem = useRef(0)
+  const dragOverItem = useRef(0)
 
   return (
     <>
@@ -59,8 +62,16 @@ export const ToDoListRedux = () => {
           />
         </CustomForm>
         <Ul_List>
-          {toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDoRedux id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
+          {toDos.filter(filterMap[filter]).map((toDo, i) => (
+            <ToDoRedux
+              id={toDo.id}
+              key={toDo.id}
+              task={toDo.task}
+              completed={toDo.completed}
+              index={i}
+              dragItem={dragItem}
+              dragOverItem={dragOverItem}
+            />
           ))}
         </Ul_List>
         {activeToDos.length >= 1 && (

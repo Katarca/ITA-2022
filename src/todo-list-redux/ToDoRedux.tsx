@@ -10,17 +10,39 @@ import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
 import { useDispatch } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 
-export const ToDoRedux = (props: ToDoProps) => {
+type ToDoItem = ToDoProps & {
+  index: number
+  dragItem: React.MutableRefObject<number>
+  dragOverItem: React.MutableRefObject<number>
+}
+
+export const ToDoRedux = (props: ToDoItem) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState(props.task)
 
   const dispatch = useDispatch<AppDispatch>()
 
   return (
-    <Li_ListItem>
+    <Li_ListItem
+      draggable='true'
+      onDragStart={() => {
+        props.dragItem.current = props.index
+      }}
+      onDragEnter={() => {
+        props.dragOverItem.current = props.index
+      }}
+      onDragEnd={() => {
+        dispatch(
+          toDoActions.sortToDos({
+            dragItem: props.dragItem.current,
+            dragOverItem: props.dragOverItem.current,
+          })
+        )
+      }}
+    >
       <Div_TodoContainer>
         <Div_FlexContainer>
           <Div_IconBox
@@ -67,6 +89,7 @@ export const ToDoRedux = (props: ToDoProps) => {
 }
 
 const Li_ListItem = styled.li`
+  cursor: grab;
   border-top: ${styles.border.orangeTransparent};
   border-right: ${styles.border.orangeTransparent};
   border-left: ${styles.border.orangeTransparent};
