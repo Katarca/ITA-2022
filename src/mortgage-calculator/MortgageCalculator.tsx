@@ -30,6 +30,7 @@ const calculateAmortization = (arg: {
   const payment = arg.principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)))
   const principalMonthlyRate = arg.principal * monthlyRate
   const balanceMonthlyRate = (i: number) => mortgageData[i - 1].balance * monthlyRate
+  const monthlyValueIncrease = (i: number) => Math.pow(1 + arg.inflation / 100, i / 12)
 
   // Formula borrowed from https://www.financevpraxi.cz/finance-vyber-financniho-produktu
   const amountAfterInflation = (amount: number, i: number) =>
@@ -46,6 +47,7 @@ const calculateAmortization = (arg: {
       monthlyInterestInflation: principalMonthlyRate,
       monthlyPrincipal: payment - principalMonthlyRate,
       monthlyPrincipalInflation: payment - principalMonthlyRate,
+      propertyValue: arg.principal * monthlyValueIncrease(1),
     },
   ]
 
@@ -64,6 +66,7 @@ const calculateAmortization = (arg: {
       monthlyInterestInflation: amountAfterInflation(balanceMonthlyRate(i), i),
       monthlyPrincipal: payment - balanceMonthlyRate(i),
       monthlyPrincipalInflation: amountAfterInflation(payment - balanceMonthlyRate(i), i),
+      propertyValue: arg.principal * monthlyValueIncrease(i + 1),
     })
   }
 
@@ -277,6 +280,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               data={props.loanDetail.map((data, i) => ({
                 balance: roundAmount(data.balance),
                 balanceInflation: roundAmount(data.balanceInflation),
+                propertyValue: roundAmount(data.propertyValue),
                 index: i + 1,
               }))}
               margin={{
@@ -293,6 +297,7 @@ const Charts = (props: { loanDetail: Loan; windowWidth: number | undefined }) =>
               <Legend />
               <Line type='monotone' dataKey='balance' stroke={styles.colors.orange300} />
               <Line type='monotone' dataKey='balanceInflation' stroke={styles.colors.grey300} />
+              <Line type='monotone' dataKey='propertyValue' stroke={styles.colors.yellow300} />
             </LineChart>
           </ResponsiveContainer>
         </Div_ChartContainer>
