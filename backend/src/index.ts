@@ -173,7 +173,7 @@ app.get('/articles/search/:search', async (req, res, next) => {
  *     tags: [Articles]
  *     responses:
  *       200:
- *         description: The list of the articles
+ *         description: The list of all the articles
  *         content:
  *           application/json:
  *             schema:
@@ -208,7 +208,7 @@ app.get('/articles', async (req, res, next) => {
  *         description: The article id
  *     responses:
  *       200:
- *         description: The article description by id
+ *         description: The article detail by id
  *         content:
  *           application/json:
  *             schema:
