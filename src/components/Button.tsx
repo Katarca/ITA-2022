@@ -12,8 +12,8 @@ export const TransparentButtonBorder = styled(Button)`
   border-radius: 8px;
   padding: ${styles.spacing.xs} ${styles.spacing.sm};
   margin: ${styles.spacing.xs};
-  cursor: pointer;
   width: fit-content;
+  cursor: pointer;
   ${hoverStyles}
   &:hover {
     background-color: ${styles.colors.orange300};
