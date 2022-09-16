@@ -8,6 +8,7 @@ import { JavaScriptWeb } from './javascript-web/JavaScriptWeb'
 import { MemoryGame } from './memory-game/MemoryGame'
 import { MortgageCalculator } from './mortgage-calculator/MortgageCalculator'
 import { Navbar } from './components/Navbar'
+import { NotFound } from './404'
 import { Projects } from './Projects'
 import { Route, Routes } from 'react-router-dom'
 import { ToDoApp } from './todo-list/ToDoList'
@@ -38,6 +39,7 @@ export function App() {
           <Route path={urls.nestedBlog} element={<BlogApp />} />
           <Route path={urls.nestedBlogApp} element={<ArticlesContext />} />
           <Route path={urls.todoListRedux} element={<ToDoAppRedux />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         <GlobalStyle />
       </StyledApp>
