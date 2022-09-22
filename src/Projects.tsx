@@ -21,12 +21,6 @@ export const Projects = () => {
       <Div_ProjectsSection>
         <Card
           text='ToDo List'
-          to={urls.todoList}
-          src={todoImg}
-          githubUrl={`${githubUrl}todo-list`}
-        />
-        <Card
-          text='ToDo List Redux'
           to={urls.todoListRedux}
           src={todoImg}
           githubUrl={`${githubUrl}todo-list-redux`}

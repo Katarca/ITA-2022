@@ -11,7 +11,6 @@ import { Navbar } from './components/Navbar'
 import { NotFound } from './404'
 import { Projects } from './Projects'
 import { Route, Routes } from 'react-router-dom'
-import { ToDoApp } from './todo-list/ToDoList'
 import { ToDoAppRedux } from './todo-list-redux/ToDoAppRedux'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
@@ -32,7 +31,6 @@ export function App() {
           <Route path={urls.projects} element={<Projects />} />
           <Route path={urls.cv} element={<CV />} />
           <Route path={urls.jsWeb} element={<JavaScriptWeb />} />
-          <Route path={urls.todoList} element={<ToDoApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
