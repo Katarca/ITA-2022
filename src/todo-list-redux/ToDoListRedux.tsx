@@ -2,6 +2,7 @@ import { AppDispatch, RootState } from './store'
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { H_Heading } from '../components/Heading'
 import { Helmet } from 'react-helmet-async'
 import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
@@ -33,8 +34,15 @@ export const ToDoListRedux = () => {
 
   const activeToDos = toDos.filter(filterMap['active'])
 
-  const dragItem = useRef(0)
-  const dragOverItem = useRef(0)
+  const handleOnDragEnd = (result: DropResult) => {
+    if (!result.destination) return
+    dispatch(
+      toDoActions.sortToDos({
+        dragItem: result.source.index,
+        dragOverItem: result.destination.index,
+      })
+    )
+  }
 
   return (
     <>
@@ -61,19 +69,33 @@ export const ToDoListRedux = () => {
             autoComplete='off'
           />
         </CustomForm>
-        <Ul_List>
-          {toDos.filter(filterMap[filter]).map((toDo, i) => (
-            <ToDoRedux
-              id={toDo.id}
-              key={toDo.id}
-              task={toDo.task}
-              completed={toDo.completed}
-              index={i}
-              dragItem={dragItem}
-              dragOverItem={dragOverItem}
-            />
-          ))}
-        </Ul_List>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId='toDoListRedux'>
+            {provided => (
+              <Ul_List {...provided.droppableProps} ref={provided.innerRef}>
+                {toDos.filter(filterMap[filter]).map((toDo, index) => (
+                  <Draggable key={toDo.id} draggableId={toDo.id} index={index}>
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <ToDoRedux
+                          id={toDo.id}
+                          key={toDo.id}
+                          task={toDo.task}
+                          completed={toDo.completed}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </Ul_List>
+            )}
+          </Droppable>
+        </DragDropContext>
         {activeToDos.length >= 1 && (
           <P_BodyTextXsGrey>
             {activeToDos.length === 1

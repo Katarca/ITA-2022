@@ -12,37 +12,14 @@ import { toDoActions } from './toDoSlice'
 import { useDispatch } from 'react-redux'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-
-type ToDoItem = ToDoProps & {
-  index: number
-  dragItem: React.MutableRefObject<number>
-  dragOverItem: React.MutableRefObject<number>
-}
-
-export const ToDoRedux = (props: ToDoItem) => {
+export const ToDoRedux = (props: ToDoProps) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState(props.task)
 
   const dispatch = useDispatch<AppDispatch>()
 
   return (
-    <Li_ListItem
-      draggable='true'
-      onDragStart={() => {
-        props.dragItem.current = props.index
-      }}
-      onDragEnter={() => {
-        props.dragOverItem.current = props.index
-      }}
-      onDragEnd={() => {
-        dispatch(
-          toDoActions.sortToDos({
-            dragItem: props.dragItem.current,
-            dragOverItem: props.dragOverItem.current,
-          })
-        )
-      }}
-    >
+    <Li_ListItem>
       <Div_TodoContainer>
         <Div_FlexContainer>
           <Div_IconBox
