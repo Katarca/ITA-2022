@@ -70,18 +70,10 @@ export const ToDo = (props: ToDoProps) => {
 }
 
 const Li_ListItem = styled.li`
-  border-top: ${styles.border.orangeTransparent};
-  border-right: ${styles.border.orangeTransparent};
-  border-left: ${styles.border.orangeTransparent};
-  &:first-child {
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
-  &:last-child {
-    border-bottom: ${styles.border.orangeTransparent};
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
+  cursor: grab;
+  border-radius: 8px;
+  background: ${styles.colors.whiteTransparent};
+  margin-bottom: ${styles.spacing.xxs};
 `
 const CrossIcon = styled(crossIcon)`
   width: 25px;

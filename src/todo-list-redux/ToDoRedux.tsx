@@ -10,7 +10,7 @@ import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
 import { useDispatch } from 'react-redux'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 export const ToDoRedux = (props: ToDoProps) => {
   const [editing, setEditing] = useState(false)
@@ -67,18 +67,9 @@ export const ToDoRedux = (props: ToDoProps) => {
 
 const Li_ListItem = styled.li`
   cursor: grab;
-  border-top: ${styles.border.orangeTransparent};
-  border-right: ${styles.border.orangeTransparent};
-  border-left: ${styles.border.orangeTransparent};
-  &:first-child {
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
-  &:last-child {
-    border-bottom: ${styles.border.orangeTransparent};
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
+  border-radius: 8px;
+  background: ${styles.colors.whiteTransparent};
+  margin-bottom: ${styles.spacing.xxs};
 `
 const CrossIcon = styled(crossIcon)`
   width: 25px;

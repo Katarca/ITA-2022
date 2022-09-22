@@ -81,12 +81,7 @@ export const ToDoListRedux = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <ToDoRedux
-                          id={toDo.id}
-                          key={toDo.id}
-                          task={toDo.task}
-                          completed={toDo.completed}
-                        />
+                        <ToDoRedux id={toDo.id} task={toDo.task} completed={toDo.completed} />
                       </div>
                     )}
                   </Draggable>

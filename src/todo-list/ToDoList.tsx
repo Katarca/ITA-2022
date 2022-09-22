@@ -107,12 +107,7 @@ const ToDoList = () => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <ToDo
-                          id={toDo.id}
-                          key={toDo.id}
-                          task={toDo.task}
-                          completed={toDo.completed}
-                        />
+                        <ToDo id={toDo.id} task={toDo.task} completed={toDo.completed} />
                       </div>
                     )}
                   </Draggable>
