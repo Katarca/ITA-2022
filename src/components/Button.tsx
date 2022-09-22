@@ -40,5 +40,8 @@ export const TransparentButton = styled(Button)`
   margin: 0 ${styles.spacing.xs};
   cursor: pointer;
   border: none;
-  ${hoverStyles}
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.05);
+  }
 `
