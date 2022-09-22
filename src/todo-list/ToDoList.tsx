@@ -1,6 +1,7 @@
 import { CustomForm } from '../components/Form'
 import { CustomInput } from '../components/Input'
 import { Div_Container, Div_FlexContainer } from '../components/Container'
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { H_Heading } from '../components/Heading'
 import { Helmet } from 'react-helmet-async'
 import { P_BodyText, P_BodyTextXsGrey } from '../components/BodyText'
@@ -54,6 +55,14 @@ const ToDoList = () => {
 
   const activeToDos = toDoLogic.toDos.filter(filterMap['active'])
 
+  const handleOnDragEnd = (result: DropResult) => {
+    if (!result.destination) return
+    const toDos = Array.from(toDoLogic.toDos)
+    const [reorderedToDo] = toDos.splice(result.source.index, 1)
+    toDos.splice(result.destination.index, 0, reorderedToDo)
+    toDoLogic.setToDos(toDos)
+  }
+
   return (
     <>
       <Helmet>
@@ -86,11 +95,33 @@ const ToDoList = () => {
             autoComplete='off'
           />
         </CustomForm>
-        <Ul_List>
-          {toDoLogic.toDos.filter(filterMap[filter]).map(toDo => (
-            <ToDo id={toDo.id} key={toDo.id} task={toDo.task} completed={toDo.completed} />
-          ))}
-        </Ul_List>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId='toDoList'>
+            {provided => (
+              <Ul_List {...provided.droppableProps} ref={provided.innerRef}>
+                {toDoLogic.toDos.filter(filterMap[filter]).map((toDo, index) => (
+                  <Draggable key={toDo.id} draggableId={toDo.id} index={index}>
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <ToDo
+                          id={toDo.id}
+                          key={toDo.id}
+                          task={toDo.task}
+                          completed={toDo.completed}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </Ul_List>
+            )}
+          </Droppable>
+        </DragDropContext>
         {activeToDos.length >= 1 && (
           <P_BodyTextXsGrey>
             {activeToDos.length === 1
