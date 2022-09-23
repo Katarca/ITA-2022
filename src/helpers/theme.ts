@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 export const styles = {
   colors: {
     white: '#ffffff',
+    whiteTransparent: 'rgba(255, 255, 255, 0.1)',
     yellow300: '#f7df1c',
     orange300: '#f77f1c',
     orangeTransparent: 'rgba(247, 127, 28, 0.5)',

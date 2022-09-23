@@ -10,39 +10,16 @@ import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { styles } from '../helpers/theme'
 import { toDoActions } from './toDoSlice'
 import { useDispatch } from 'react-redux'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-type ToDoItem = ToDoProps & {
-  index: number
-  dragItem: React.MutableRefObject<number>
-  dragOverItem: React.MutableRefObject<number>
-}
-
-export const ToDoRedux = (props: ToDoItem) => {
+export const ToDoRedux = (props: ToDoProps) => {
   const [editing, setEditing] = useState(false)
   const [newTask, setNewTask] = useState(props.task)
 
   const dispatch = useDispatch<AppDispatch>()
 
   return (
-    <Li_ListItem
-      draggable='true'
-      onDragStart={() => {
-        props.dragItem.current = props.index
-      }}
-      onDragEnter={() => {
-        props.dragOverItem.current = props.index
-      }}
-      onDragEnd={() => {
-        dispatch(
-          toDoActions.sortToDos({
-            dragItem: props.dragItem.current,
-            dragOverItem: props.dragOverItem.current,
-          })
-        )
-      }}
-    >
+    <Li_ListItem>
       <Div_TodoContainer>
         <Div_FlexContainer>
           <Div_IconBox
@@ -90,18 +67,9 @@ export const ToDoRedux = (props: ToDoItem) => {
 
 const Li_ListItem = styled.li`
   cursor: grab;
-  border-top: ${styles.border.orangeTransparent};
-  border-right: ${styles.border.orangeTransparent};
-  border-left: ${styles.border.orangeTransparent};
-  &:first-child {
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
-  &:last-child {
-    border-bottom: ${styles.border.orangeTransparent};
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
+  border-radius: 8px;
+  background: ${styles.colors.whiteTransparent};
+  margin-bottom: ${styles.spacing.xxs};
 `
 const CrossIcon = styled(crossIcon)`
   width: 25px;
