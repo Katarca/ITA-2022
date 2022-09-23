@@ -8,9 +8,7 @@ export const Form = (props: ComponentProps<'form'>) => {
 
 export const CustomForm = styled(Form)`
   display: flex;
+  justify-content: center;
   padding: ${styles.spacing.sm};
   max-width: 100%;
-  ${breakpoint.phone} {
-    flex-direction: column;
-  }
 `
