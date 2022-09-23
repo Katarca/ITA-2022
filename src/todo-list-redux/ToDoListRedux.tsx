@@ -10,9 +10,10 @@ import { ToDoProps } from './ToDoAppRedux'
 import { ToDoRedux } from './ToDoRedux'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
+import { ReactComponent as crossIcon } from './icons/cross-icon.svg'
 import { toDoActions } from './toDoSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const getState = (state: RootState) => state
@@ -61,13 +62,16 @@ export const ToDoListRedux = () => {
             setTask('')
           }}
         >
-          <CustomInput
+          <ToDoInput
             type='text'
             placeholder='task'
             value={task}
             onChange={e => setTask(e.target.value)}
             autoComplete='off'
           />
+          <PlusButton>
+            <PlusIcon />
+          </PlusButton>
         </CustomForm>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId='toDoListRedux'>
@@ -137,4 +141,21 @@ const Div_ButtonContainer = styled(Div_FlexContainer)`
     width: 100%;
     align-items: center;
   }
+`
+
+const ToDoInput = styled(CustomInput)`
+  ${breakpoint.phone} {
+    max-width: 60%;
+  }
+`
+
+const PlusButton = styled(TransparentButtonBorder)`
+  ${breakpoint.phone} {
+    width: fit-content;
+  }
+`
+
+const PlusIcon = styled(crossIcon)`
+  fill: ${styles.colors.white};
+  transform: rotate(45deg);
 `
