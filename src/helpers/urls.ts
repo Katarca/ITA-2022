@@ -21,6 +21,7 @@ export const urls = {
   todoListRedux: '/todo-list-redux',
   projects: '/projects',
   cv: '/cv',
+  ticTacToe: '/tic-tac-toe',
 } as const
 
 export const newArticleUrl = `${urls.blog}${urls.newArticle}`

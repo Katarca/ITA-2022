@@ -58,6 +58,12 @@ export const Projects = () => {
           src={mortgageImg}
           githubUrl={`${githubUrl}mortgage-calculator`}
         />
+        <Card
+          text='Tic Tac Toe'
+          to={urls.ticTacToe}
+          src={memoryGameImg}
+          githubUrl={`${githubUrl}memory-game`}
+        />
       </Div_ProjectsSection>
     </>
   )

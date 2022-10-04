@@ -11,6 +11,7 @@ import { Navbar } from './components/Navbar'
 import { NotFound } from './404'
 import { Projects } from './Projects'
 import { Route, Routes } from 'react-router-dom'
+import { TicTacToe } from './tic-tac-toe/TicTacToe'
 import { ToDoAppRedux } from './todo-list-redux/ToDoAppRedux'
 import { createGlobalStyle } from 'styled-components'
 import { styles } from './helpers/theme'
@@ -37,6 +38,7 @@ export function App() {
           <Route path={urls.nestedBlog} element={<BlogApp />} />
           <Route path={urls.nestedBlogApp} element={<ArticlesContext />} />
           <Route path={urls.todoListRedux} element={<ToDoAppRedux />} />
+          <Route path={urls.ticTacToe} element={<TicTacToe />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <GlobalStyle />
