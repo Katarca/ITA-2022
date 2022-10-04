@@ -6,6 +6,8 @@ import { breakpoint, styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+type Board = ('' | 'x' | 'o')[][]
+
 const boardSize = 10
 const winLength = 5
 
@@ -14,7 +16,7 @@ const createBoard = (n: number) => {
 }
 
 // Code borrowed from https://www.codegrepper.com/search.php?q=diagonal%20matrix%20javascript
-const getDiagonals = (grid: Array<Array<'' | 'x' | 'o'>>) => {
+const getDiagonals = (grid: Board) => {
   let result = []
   let temp
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
@@ -32,9 +34,27 @@ const getDiagonals = (grid: Array<Array<'' | 'x' | 'o'>>) => {
   return result
 }
 
+const getReverseDiagonals = (grid: Board) => {
+  let result = []
+  let temp
+  for (let k = 2 * (boardSize - 1); k >= 0; --k) {
+    temp = []
+    for (let y = 0; y <= boardSize - 1; ++y) {
+      let x = k + y - (boardSize - 1)
+      if (x >= 0 && x < boardSize) {
+        temp.push(grid[x][y])
+      }
+    }
+    if (temp.length > 0) {
+      result.push(temp)
+    }
+  }
+  return result
+}
+
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
-  const [board, setBoard] = useState<Array<Array<'' | 'x' | 'o'>>>(createBoard(boardSize))
+  const [board, setBoard] = useState<Board>(createBoard(boardSize))
   const [winner, setWinner] = useState(null as null | 'x' | 'o')
 
   const handlePlayerMove = (row: number, column: number) => {
@@ -42,7 +62,7 @@ export const TicTacToe = () => {
     return board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
   }
 
-  const checkForWinner = (board: Array<Array<'' | 'x' | 'o'>>, row: number, column: number) => {
+  const checkForWinner = (board: Board, row: number, column: number) => {
     if (
       board[row].join('').includes(turn.repeat(winLength)) ||
       board
@@ -50,6 +70,9 @@ export const TicTacToe = () => {
         .join('')
         .includes(turn.repeat(winLength)) ||
       getDiagonals(board)
+        .map(diagonal => diagonal.join(''))
+        .some(diagonal => diagonal.includes(turn.repeat(winLength))) ||
+      getReverseDiagonals(board)
         .map(diagonal => diagonal.join(''))
         .some(diagonal => diagonal.includes(turn.repeat(winLength)))
     ) {
@@ -78,24 +101,21 @@ export const TicTacToe = () => {
         <title>Katarína Soušková | Tic Tac Toe</title>
       </Helmet>
       <Div_Container>
-        <H_Heading>{!winner && turn}</H_Heading>
+        <H_Heading>{winner ? `Winner is ${winner}` : `Player: ${turn}`}</H_Heading>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
               {!winner ? (
                 board.map((row, y) =>
                   row.map((col, x) => (
-                    <Div_Card
-                      key={(x + 1).toString() + (y + 1).toString()}
-                      onClick={() => handleClick(y, x)}
-                    >
+                    <Div_Card key={x.toString() + y.toString()} onClick={() => handleClick(y, x)}>
                       <P_BodyText>{col}</P_BodyText>
                     </Div_Card>
                   ))
                 )
               ) : (
                 <Div_ResetContainer onClick={() => handleReset()}>
-                  <H_Heading>Reset Game {winner}</H_Heading>
+                  <H_Heading>Reset Game</H_Heading>
                 </Div_ResetContainer>
               )}
             </Div_Board>
@@ -147,8 +167,8 @@ const Div_Card = styled.div`
   border: 1px solid ${styles.colors.orangeTransparent};
 `
 const Div_ResetContainer = styled.div`
-  grid-column: 1/5;
-  grid-row: 1/5;
+  grid-column: 1 / ${boardSize + 1};
+  grid-row: 1 / ${boardSize + 1};
   display: flex;
   justify-content: center;
   align-items: center;
