@@ -11,6 +11,7 @@ import memoryGameImg from './images/memorygame.png'
 import mortgageImg from './images/mortgagecalculator.png'
 import styled from 'styled-components'
 import todoImg from './images/todolist.png'
+import tttImg from './images/tictactoe.png'
 
 export const Projects = () => {
   return (
@@ -61,8 +62,8 @@ export const Projects = () => {
         <Card
           text='Tic Tac Toe'
           to={urls.ticTacToe}
-          src={memoryGameImg}
-          githubUrl={`${githubUrl}memory-game`}
+          src={tttImg}
+          githubUrl={`${githubUrl}tic-tac-toe`}
         />
       </Div_ProjectsSection>
     </>
