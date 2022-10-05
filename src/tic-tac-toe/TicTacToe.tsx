@@ -25,7 +25,7 @@ const getDiagonals = (grid: Board) => {
     for (let y = boardSize - 1; y >= 0; --y) {
       let x = k - y
       if (x >= 0 && x < boardSize) {
-        temp.push(grid[y][x])
+        temp.push(grid[x][y])
       }
     }
     if (temp.length > 0) {
@@ -109,11 +109,11 @@ export const TicTacToe = () => {
           <Div_BoardWrapper>
             <Div_Board>
               {!winner ? (
-                board.map((row, y) =>
-                  row.map((col, x) => (
+                board.map((row, x) =>
+                  row.map((col, y) => (
                     <Div_BoardItem
                       key={x.toString() + y.toString()}
-                      onClick={() => handleClick(y, x)}
+                      onClick={() => handleClick(x, y)}
                     >
                       <P_BodyText>{col}</P_BodyText>
                     </Div_BoardItem>
