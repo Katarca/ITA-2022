@@ -2,6 +2,7 @@ import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
+import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -102,6 +103,7 @@ export const TicTacToe = () => {
         <title>Katarína Soušková | Tic Tac Toe</title>
       </Helmet>
       <Div_Container>
+        <P_BodyTextOrange>{!winner && `${winLength} symbols win the game`}</P_BodyTextOrange>
         <H_Heading>{winner ? `Winner is ${winner}` : `Player: ${turn}`}</H_Heading>
         <Div_BoardBox>
           <Div_BoardWrapper>
@@ -122,6 +124,13 @@ export const TicTacToe = () => {
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
+        <Div_ButtonContainer>
+          {!winner && (
+            <TransparentButtonBorder onClick={() => handleReset()}>
+              <P_BodyText>Reset</P_BodyText>
+            </TransparentButtonBorder>
+          )}
+        </Div_ButtonContainer>
       </Div_Container>
     </>
   )
@@ -174,4 +183,10 @@ const Div_ResetContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`
+const P_BodyTextOrange = styled(P_BodyText)`
+  color: ${styles.colors.orangeTransparent};
+`
+const Div_ButtonContainer = styled.div`
+  padding: ${styles.spacing.sm} 0;
 `
