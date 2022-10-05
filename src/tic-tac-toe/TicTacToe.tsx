@@ -11,14 +11,14 @@ type Board = ('' | 'x' | 'o')[][]
 const boardSize = 10
 const winLength = 5
 
-const createBoard = (n: number) => {
-  return [...Array(n)].map(_ => Array(n).fill(''))
+const createBoard = () => {
+  return [...Array(boardSize)].map(_ => Array(boardSize).fill(''))
 }
 
 // Code borrowed from https://www.codegrepper.com/search.php?q=diagonal%20matrix%20javascript
 const getDiagonals = (grid: Board) => {
-  let result = []
-  let temp
+  let result: Board = []
+  let temp: Array<'' | 'x' | 'o'>
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
     for (let y = boardSize - 1; y >= 0; --y) {
@@ -35,11 +35,11 @@ const getDiagonals = (grid: Board) => {
 }
 
 const getReverseDiagonals = (grid: Board) => {
-  let result = []
-  let temp
-  for (let k = 2 * (boardSize - 1); k >= 0; --k) {
+  let result: Board = []
+  let temp: Array<'' | 'x' | 'o'>
+  for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
-    for (let y = 0; y <= boardSize - 1; ++y) {
+    for (let y = boardSize - 1; y >= 0; --y) {
       let x = k + y - (boardSize - 1)
       if (x >= 0 && x < boardSize) {
         temp.push(grid[x][y])
@@ -52,32 +52,33 @@ const getReverseDiagonals = (grid: Board) => {
   return result
 }
 
+const checkSymbols = (direction: Array<'' | 'x' | 'o'>, turn: 'x' | 'o') =>
+  direction.join('').includes(turn.repeat(winLength))
+
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
-  const [board, setBoard] = useState<Board>(createBoard(boardSize))
+  const [board, setBoard] = useState<Board>(createBoard())
   const [winner, setWinner] = useState(null as null | 'x' | 'o')
-
-  const handlePlayerMove = (row: number, column: number) => {
-    setBoard(board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x)))
-    return board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
-  }
 
   const checkForWinner = (board: Board, row: number, column: number) => {
     if (
-      board[row].join('').includes(turn.repeat(winLength)) ||
-      board
-        .map(x => x[column])
-        .join('')
-        .includes(turn.repeat(winLength)) ||
-      getDiagonals(board)
-        .map(diagonal => diagonal.join(''))
-        .some(diagonal => diagonal.includes(turn.repeat(winLength))) ||
-      getReverseDiagonals(board)
-        .map(diagonal => diagonal.join(''))
-        .some(diagonal => diagonal.includes(turn.repeat(winLength)))
+      checkSymbols(board[row], turn) ||
+      checkSymbols(
+        board.map(x => x[column]),
+        turn
+      ) ||
+      checkSymbols(getDiagonals(board)[row + column], turn) ||
+      checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
     ) {
       setWinner(turn)
     }
+  }
+
+  const handlePlayerMove = (row: number, column: number) => {
+    setBoard(board =>
+      board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
+    )
+    return board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
   }
 
   const handleClick = (row: number, column: number) => {
@@ -91,7 +92,7 @@ export const TicTacToe = () => {
   }
 
   const handleReset = () => {
-    setBoard(createBoard(boardSize))
+    setBoard(createBoard())
     setWinner(null)
   }
 
