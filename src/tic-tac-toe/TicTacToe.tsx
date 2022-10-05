@@ -111,9 +111,12 @@ export const TicTacToe = () => {
               {!winner ? (
                 board.map((row, y) =>
                   row.map((col, x) => (
-                    <Div_Card key={x.toString() + y.toString()} onClick={() => handleClick(y, x)}>
+                    <Div_BoardItem
+                      key={x.toString() + y.toString()}
+                      onClick={() => handleClick(y, x)}
+                    >
                       <P_BodyText>{col}</P_BodyText>
-                    </Div_Card>
+                    </Div_BoardItem>
                   ))
                 )
               ) : (
@@ -169,7 +172,7 @@ const Div_Board = styled.div`
   grid-template-columns: repeat(${boardSize}, 1fr);
   grid-template-rows: repeat(${boardSize}, 1fr);
 `
-const Div_Card = styled.div`
+const Div_BoardItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
