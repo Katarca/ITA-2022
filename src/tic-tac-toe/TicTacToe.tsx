@@ -77,21 +77,23 @@ const checkSymbolsReverseDiagonal = (board: Board, row: number, column: number, 
 // in getReverseDiagonals function row = iteration + column - (boardSize - 1)
 // to get the right reverse diagonal: iteration = row - column + (boardSize - 1)
 
+const checkForWinner = (board: Board, row: number, column: number, turn: 'x' | 'o') => {
+  if (
+    checkSymbolsRow(board, row, turn) ||
+    checkSymbolsColumn(board, column, turn) ||
+    checkSymbolsDiagonal(board, row, column, turn) ||
+    checkSymbolsReverseDiagonal(board, row, column, turn)
+  ) {
+    return turn
+  } else {
+    return null
+  }
+}
+
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
   const [board, setBoard] = useState(createBoard())
   const [winner, setWinner] = useState(null as null | 'x' | 'o')
-
-  const checkForWinner = (board: Board, row: number, column: number) => {
-    if (
-      checkSymbolsRow(board, row, turn) ||
-      checkSymbolsColumn(board, column, turn) ||
-      checkSymbolsDiagonal(board, row, column, turn) ||
-      checkSymbolsReverseDiagonal(board, row, column, turn)
-    ) {
-      setWinner(turn)
-    }
-  }
 
   const handlePlayerMove = (row: number, column: number) => {
     setBoard(board =>
@@ -102,7 +104,7 @@ export const TicTacToe = () => {
 
   const handleClick = (row: number, column: number) => {
     if (board[row][column] !== cell) return
-    checkForWinner(handlePlayerMove(row, column), row, column)
+    setWinner(checkForWinner(handlePlayerMove(row, column), row, column, turn))
     if (turn === 'x') {
       setTurn('o')
     } else {
