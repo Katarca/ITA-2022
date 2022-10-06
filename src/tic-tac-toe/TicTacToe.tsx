@@ -7,22 +7,21 @@ import { breakpoint, styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const emptyCell = ' '
+const cell = ' ' as ' ' | 'x' | 'o'
 
-type Cell = typeof emptyCell | 'x' | 'o'
-type Board = Cell[][]
+type Board = ReturnType<typeof createBoard>
 
 const boardSize = 10
 const winLength = 5
 
-const createBoard = (): Board => {
-  return Array.from({ length: boardSize }, () => Array.from({ length: boardSize }, () => emptyCell))
+const createBoard = () => {
+  return Array.from({ length: boardSize }, () => Array.from({ length: boardSize }, () => cell))
 }
 
 // Code borrowed from https://www.codegrepper.com/search.php?q=diagonal%20matrix%20javascript
 const getDiagonals = (grid: Board) => {
   let result: Board = []
-  let temp: Cell[]
+  let temp: typeof cell[]
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
     for (let y = boardSize - 1; y >= 0; --y) {
@@ -40,7 +39,7 @@ const getDiagonals = (grid: Board) => {
 
 const getReverseDiagonals = (grid: Board) => {
   let result: Board = []
-  let temp: Cell[]
+  let temp: typeof cell[]
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
     for (let y = boardSize - 1; y >= 0; --y) {
@@ -56,7 +55,7 @@ const getReverseDiagonals = (grid: Board) => {
   return result
 }
 
-const checkSymbols = (direction: Cell[], turn: 'x' | 'o') =>
+const checkSymbols = (direction: typeof cell[], turn: 'x' | 'o') =>
   direction.join('').includes(turn.repeat(winLength))
 
 const checkSymbolsRow = (board: Board, row: number, turn: 'x' | 'o') =>
@@ -98,7 +97,7 @@ export const TicTacToe = () => {
   }
 
   const handleClick = (row: number, column: number) => {
-    if (board[row][column] !== emptyCell) return
+    if (board[row][column] !== cell) return
     checkForWinner(handlePlayerMove(row, column), row, column)
     if (turn === 'x') {
       setTurn('o')
