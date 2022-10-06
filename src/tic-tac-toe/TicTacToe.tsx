@@ -95,11 +95,12 @@ export const TicTacToe = () => {
   const [board, setBoard] = useState(createBoard())
   const [winner, setWinner] = useState(null as null | 'x' | 'o')
 
+  const updatedBoard = (row: number, column: number) =>
+    board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
+
   const handlePlayerMove = (row: number, column: number) => {
-    setBoard(board =>
-      board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
-    )
-    return board.map((x, i) => (row === i ? x.map((y, i) => (column === i ? turn : y)) : x))
+    setBoard(updatedBoard(row, column))
+    return updatedBoard(row, column)
   }
 
   const handleClick = (row: number, column: number) => {
