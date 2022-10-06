@@ -69,9 +69,13 @@ const checkSymbolsColumn = (board: Board, column: number, turn: 'x' | 'o') =>
 
 const checkSymbolsDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
   checkSymbols(getDiagonals(board)[row + column], turn)
+// in getDiagonals function row = iteration - column
+// to get the right diagonal: iteration = row + column
 
 const checkSymbolsReverseDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
   checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
+// in getReverseDiagonals function row = iteration + column - (boardSize - 1)
+// to get the right reverse diagonal: iteration = row - column + (boardSize - 1)
 
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
