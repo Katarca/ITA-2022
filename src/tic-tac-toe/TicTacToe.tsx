@@ -67,15 +67,15 @@ const checkSymbolsColumn = (board: Board, column: number, turn: 'x' | 'o') =>
     turn
   )
 
-const checkSymbolsDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
-  checkSymbols(getDiagonals(board)[row + column], turn)
 // in getDiagonals function row = iteration - column
 // to get the right diagonal: iteration = row + column
+const checkSymbolsDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
+  checkSymbols(getDiagonals(board)[row + column], turn)
 
-const checkSymbolsReverseDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
-  checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
 // in getReverseDiagonals function row = iteration + column - (boardSize - 1)
 // to get the right reverse diagonal: iteration = row - column + (boardSize - 1)
+const checkSymbolsReverseDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
+  checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
 
 const checkForWinner = (board: Board, row: number, column: number, turn: 'x' | 'o') => {
   if (
@@ -106,11 +106,7 @@ export const TicTacToe = () => {
   const handleClick = (row: number, column: number) => {
     if (board[row][column] !== cell) return
     setWinner(checkForWinner(handlePlayerMove(row, column), row, column, turn))
-    if (turn === 'x') {
-      setTurn('o')
-    } else {
-      setTurn('x')
-    }
+    setTurn(p => (p === 'x' ? 'o' : 'x'))
   }
 
   const handleReset = () => {
