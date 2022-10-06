@@ -7,19 +7,19 @@ import { breakpoint, styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type Board = ('' | 'x' | 'o')[][]
+type Board = (' ' | 'x' | 'o')[][]
 
 const boardSize = 10
 const winLength = 5
 
-const createBoard = () => {
-  return [...Array(boardSize)].map(_ => Array(boardSize).fill(''))
+const createBoard = (): Board => {
+  return Array.from({ length: boardSize }, () => Array.from({ length: boardSize }, () => ' '))
 }
 
 // Code borrowed from https://www.codegrepper.com/search.php?q=diagonal%20matrix%20javascript
 const getDiagonals = (grid: Board) => {
   let result: Board = []
-  let temp: Array<'' | 'x' | 'o'>
+  let temp: Array<' ' | 'x' | 'o'>
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
     for (let y = boardSize - 1; y >= 0; --y) {
@@ -37,7 +37,7 @@ const getDiagonals = (grid: Board) => {
 
 const getReverseDiagonals = (grid: Board) => {
   let result: Board = []
-  let temp: Array<'' | 'x' | 'o'>
+  let temp: Array<' ' | 'x' | 'o'>
   for (let k = 0; k <= 2 * (boardSize - 1); ++k) {
     temp = []
     for (let y = boardSize - 1; y >= 0; --y) {
@@ -53,12 +53,12 @@ const getReverseDiagonals = (grid: Board) => {
   return result
 }
 
-const checkSymbols = (direction: Array<'' | 'x' | 'o'>, turn: 'x' | 'o') =>
+const checkSymbols = (direction: Array<' ' | 'x' | 'o'>, turn: 'x' | 'o') =>
   direction.join('').includes(turn.repeat(winLength))
 
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
-  const [board, setBoard] = useState<Board>(createBoard())
+  const [board, setBoard] = useState(createBoard())
   const [winner, setWinner] = useState(null as null | 'x' | 'o')
 
   const checkForWinner = (board: Board, row: number, column: number) => {
@@ -83,7 +83,7 @@ export const TicTacToe = () => {
   }
 
   const handleClick = (row: number, column: number) => {
-    if (board[row][column] !== '') return
+    if (board[row][column] !== ' ') return
     checkForWinner(handlePlayerMove(row, column), row, column)
     if (turn === 'x') {
       setTurn('o')
