@@ -56,6 +56,21 @@ const getReverseDiagonals = (grid: Board) => {
 const checkSymbols = (direction: Array<' ' | 'x' | 'o'>, turn: 'x' | 'o') =>
   direction.join('').includes(turn.repeat(winLength))
 
+const checkSymbolsRow = (board: Board, row: number, turn: 'x' | 'o') =>
+  checkSymbols(board[row], turn)
+
+const checkSymbolsColumn = (board: Board, column: number, turn: 'x' | 'o') =>
+  checkSymbols(
+    board.map(x => x[column]),
+    turn
+  )
+
+const checkSymbolsDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
+  checkSymbols(getDiagonals(board)[row + column], turn)
+
+const checkSymbolsReverseDiagonal = (board: Board, row: number, column: number, turn: 'x' | 'o') =>
+  checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
+
 export const TicTacToe = () => {
   const [turn, setTurn] = useState('x' as 'x' | 'o')
   const [board, setBoard] = useState(createBoard())
@@ -63,13 +78,10 @@ export const TicTacToe = () => {
 
   const checkForWinner = (board: Board, row: number, column: number) => {
     if (
-      checkSymbols(board[row], turn) ||
-      checkSymbols(
-        board.map(x => x[column]),
-        turn
-      ) ||
-      checkSymbols(getDiagonals(board)[row + column], turn) ||
-      checkSymbols(getReverseDiagonals(board)[row - column + (boardSize - 1)], turn)
+      checkSymbolsRow(board, row, turn) ||
+      checkSymbolsColumn(board, column, turn) ||
+      checkSymbolsDiagonal(board, row, column, turn) ||
+      checkSymbolsReverseDiagonal(board, row, column, turn)
     ) {
       setWinner(turn)
     }
