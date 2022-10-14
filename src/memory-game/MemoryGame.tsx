@@ -102,11 +102,11 @@ export const MemoryGame = () => {
         <H_Heading>
           {matches === cards.length / 2 ? 'Congrats partner!' : 'Find all pairs 🤠'}
         </H_Heading>
-        <Div_PaddingContainer>
+        <Div_TextContainer>
           <P_BodyTextOrange>
             moves: {moves} | pairs: {matches}
           </P_BodyTextOrange>
-        </Div_PaddingContainer>
+        </Div_TextContainer>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
@@ -118,15 +118,16 @@ export const MemoryGame = () => {
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
-        <Div_PaddingContainer>
+        <Div_ButtonContainer>
           <TransparentButtonBorder onClick={() => handleReset()}>
             <P_BodyText>Reset</P_BodyText>
           </TransparentButtonBorder>
-        </Div_PaddingContainer>
+        </Div_ButtonContainer>
       </Div_Container>
     </>
   )
 }
+
 const Div_BoardBox = styled.div`
   width: 35%;
   border: ${styles.border.orange};
@@ -176,17 +177,15 @@ const P_EmojiText = styled.p`
     font-size: ${styles.fontSize.md};
   }
 `
-const Div_ResetContainer = styled.div`
-  grid-column: 1/5;
-  grid-row: 1/5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+
+const Div_TextContainer = styled.div`
+  padding-bottom: ${styles.spacing.sm};
 `
-const Div_PaddingContainer = styled.div`
+
+const Div_ButtonContainer = styled.div`
   padding: ${styles.spacing.sm} 0;
 `
+
 const P_BodyTextOrange = styled(P_BodyText)`
-  color: ${styles.colors.orange300};
+  color: ${styles.colors.orangeTransparent};
 `
