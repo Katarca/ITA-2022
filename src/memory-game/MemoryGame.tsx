@@ -1,6 +1,8 @@
 import { Div_Container } from '../components/Container'
 import { H_Heading } from '../components/Heading'
 import { Helmet } from 'react-helmet-async'
+import { P_BodyText } from '../components/BodyText'
+import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
 import { delay } from '../utils/delay'
 import { idGenerator } from '../utils/idGenerator'
@@ -34,6 +36,7 @@ export const MemoryGame = () => {
   const [cards, setCards] = useState(createBoard())
   const [selectedCard, setSelectedCard] = useState(null as Card | null)
   const [matches, setMatches] = useState(0)
+  const [moves, setMoves] = useState(0)
 
   const handleCardClick = (clickedCard: Card) => {
     if (!clickedCard.frozen) cardClick(clickedCard)
@@ -49,7 +52,8 @@ export const MemoryGame = () => {
       setSelectedCard(clickedCard)
       return
     } else if (clickedCard.value === selectedCard.value) {
-      setMatches(matches + 1)
+      setMatches(prevMatches => prevMatches + 1)
+      setMoves(prevMoves => prevMoves + 1)
       setCards(
         cards.map(card =>
           card.id === clickedCard.id || card.id === selectedCard.id
@@ -60,6 +64,7 @@ export const MemoryGame = () => {
       setSelectedCard(null)
       return
     } else if (selectedCard && clickedCard.value !== selectedCard.value) {
+      setMoves(prevMoves => prevMoves + 1)
       const flipBack = async () => {
         setCards(
           cards.map(card =>
@@ -85,6 +90,7 @@ export const MemoryGame = () => {
   const handleReset = () => {
     setCards(createBoard())
     setMatches(0)
+    setMoves(0)
   }
 
   return (
@@ -94,25 +100,29 @@ export const MemoryGame = () => {
       </Helmet>
       <Div_Container>
         <H_Heading>
-          {matches === cards.length / 2 ? 'Congrats partner!' : 'Find pairs 🤠'}
+          {matches === cards.length / 2 ? 'Congrats partner!' : 'Find all pairs 🤠'}
         </H_Heading>
+        <Div_PaddingContainer>
+          <P_BodyTextOrange>
+            moves: {moves} | pairs: {matches}
+          </P_BodyTextOrange>
+        </Div_PaddingContainer>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
-              {matches !== cards.length / 2 ? (
-                cards.map(card => (
-                  <Div_Card key={card.id} onClick={() => handleCardClick(card)}>
-                    <P_EmojiText>{card.flipped ? card.value : '❌'}</P_EmojiText>
-                  </Div_Card>
-                ))
-              ) : (
-                <Div_ResetContainer onClick={() => handleReset()}>
-                  <H_Heading>Reset game</H_Heading>
-                </Div_ResetContainer>
-              )}
+              {cards.map(card => (
+                <Div_Card key={card.id} onClick={() => handleCardClick(card)}>
+                  <P_EmojiText>{card.flipped ? card.value : '❌'}</P_EmojiText>
+                </Div_Card>
+              ))}
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
+        <Div_PaddingContainer>
+          <TransparentButtonBorder onClick={() => handleReset()}>
+            <P_BodyText>Reset</P_BodyText>
+          </TransparentButtonBorder>
+        </Div_PaddingContainer>
       </Div_Container>
     </>
   )
@@ -173,4 +183,10 @@ const Div_ResetContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`
+const Div_PaddingContainer = styled.div`
+  padding: ${styles.spacing.sm} 0;
+`
+const P_BodyTextOrange = styled(P_BodyText)`
+  color: ${styles.colors.orange300};
 `

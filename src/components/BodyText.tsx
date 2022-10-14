@@ -1,4 +1,4 @@
-import { breakpoint, smTextStyles, styles, xsTextStyles } from '../helpers/theme'
+import { smTextStyles, styles, xsTextStyles } from '../helpers/theme'
 import styled from 'styled-components'
 
 export const P_BodyText = styled.p`
