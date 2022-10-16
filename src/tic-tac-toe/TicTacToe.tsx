@@ -104,7 +104,7 @@ export const TicTacToe = () => {
   }
 
   const handleClick = (row: number, column: number) => {
-    if (board[row][column] !== cell) return
+    if (board[row][column] !== cell || winner) return
     setWinner(checkForWinner(handlePlayerMove(row, column), row, column, turn))
     setTurn(p => (p === 'x' ? 'o' : 'x'))
   }
@@ -125,31 +125,23 @@ export const TicTacToe = () => {
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
-              {!winner ? (
-                board.map((row, x) =>
-                  row.map((col, y) => (
-                    <Div_BoardItem
-                      key={x.toString() + y.toString()}
-                      onClick={() => handleClick(x, y)}
-                    >
-                      <P_BodyText>{col}</P_BodyText>
-                    </Div_BoardItem>
-                  ))
-                )
-              ) : (
-                <Div_ResetContainer onClick={() => handleReset()}>
-                  <H_Heading>Reset Game</H_Heading>
-                </Div_ResetContainer>
+              {board.map((row, x) =>
+                row.map((col, y) => (
+                  <Div_BoardItem
+                    key={x.toString() + y.toString()}
+                    onClick={() => handleClick(x, y)}
+                  >
+                    <P_BodyText>{col}</P_BodyText>
+                  </Div_BoardItem>
+                ))
               )}
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
         <Div_ButtonContainer>
-          {!winner && (
-            <TransparentButtonBorder onClick={() => handleReset()}>
-              <P_BodyText>Reset</P_BodyText>
-            </TransparentButtonBorder>
-          )}
+          <TransparentButtonBorder onClick={() => handleReset()}>
+            <P_BodyText>Reset</P_BodyText>
+          </TransparentButtonBorder>
         </Div_ButtonContainer>
       </Div_Container>
     </>
@@ -196,14 +188,7 @@ const Div_BoardItem = styled.div`
   cursor: pointer;
   border: 1px solid ${styles.colors.orangeTransparent};
 `
-const Div_ResetContainer = styled.div`
-  grid-column: 1 / ${boardSize + 1};
-  grid-row: 1 / ${boardSize + 1};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
+
 const P_BodyTextOrange = styled(P_BodyText)`
   color: ${styles.colors.orangeTransparent};
 `
