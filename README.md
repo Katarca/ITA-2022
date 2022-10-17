@@ -88,8 +88,8 @@ An application that calculates monthly payments, remain balance, interest and pr
 
 ### [](#tic-tac-toe)Tic Tac Toe
 
-[Mortgage Calculator](https://github.com/Katarca/ITA-2022/tree/main/src/tic-tac-toe)
+[Tic Tac Toe](https://github.com/Katarca/ITA-2022/tree/main/src/tic-tac-toe)
 
 A simple tic tac toe game for two players.
 
-![Mortgage Calculator image](./src/images/tictactoe.png)
+![Tic Tac Toe image](./src/images/tictactoe.png)
