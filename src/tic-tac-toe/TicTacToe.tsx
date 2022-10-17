@@ -216,15 +216,19 @@ const Div_ButtonContainer = styled.div`
 `
 const CircleIcon = styled(circleIcon)<{ winner?: 'x' | 'o' | null }>`
   fill: ${props => (props.winner === 'o' ? styles.colors.orange300 : styles.colors.grey300)};
-  display: inline-block;
-  max-width: 20px;
+  width: 20px;
+  ${breakpoint.phone} {
+    width: 15px;
+  }
 `
 
 const CrossIcon = styled(crossIcon)<{ winner?: 'x' | 'o' | null }>`
   fill: ${props =>
     props.winner === 'x' ? styles.colors.orange300 : styles.colors.orangeTransparent};
-  display: inline-block;
-  max-width: 20px;
+  width: 20px;
+  ${breakpoint.phone} {
+    width: 15px;
+  }
 `
 
 const Div_HeadingContainer = styled.div`
