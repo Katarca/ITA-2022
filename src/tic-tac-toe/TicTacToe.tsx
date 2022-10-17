@@ -125,9 +125,13 @@ export const TicTacToe = () => {
         <P_BodyTextOrange>{winLength} symbols win the game</P_BodyTextOrange>
         <Div_HeadingContainer>
           <H_Heading>{winner ? `Winner is ` : `Player:`}</H_Heading>
-          {winner === 'x' || turn === 'x' ? (
+          {winner === 'x' ? (
             <CrossIcon winner={winner} />
-          ) : winner === 'o' || turn === 'o' ? (
+          ) : winner === 'o' ? (
+            <CircleIcon winner={winner} />
+          ) : turn === 'x' ? (
+            <CrossIcon winner={winner} />
+          ) : turn === 'o' ? (
             <CircleIcon winner={winner} />
           ) : null}
         </Div_HeadingContainer>
