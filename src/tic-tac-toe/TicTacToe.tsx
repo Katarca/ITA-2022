@@ -150,8 +150,6 @@ export const TicTacToe = () => {
 
 const Div_BoardBox = styled.div`
   width: 35%;
-  border: ${styles.border.orange};
-  border-radius: 8px;
   ${breakpoint.smallNotebook} {
     width: 50%;
   }
@@ -186,7 +184,9 @@ const Div_BoardItem = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: 1px solid ${styles.colors.orangeTransparent};
+  background: ${styles.colors.whiteTransparent};
+  height: 80%;
+  width: 80%;
 `
 
 const P_BodyTextOrange = styled(P_BodyText)`
