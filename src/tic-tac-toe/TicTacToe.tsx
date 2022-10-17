@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
+import { ReactComponent as circleIcon } from './icons/circle.svg'
+import { ReactComponent as crossIcon } from './icons/cross.svg'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -120,8 +122,19 @@ export const TicTacToe = () => {
         <title>Katarína Soušková | Tic Tac Toe</title>
       </Helmet>
       <Div_Container>
-        <P_BodyTextOrange>{!winner && `${winLength} symbols win the game`}</P_BodyTextOrange>
-        <H_Heading>{winner ? `Winner is ${winner}` : `Player: ${turn}`}</H_Heading>
+        <P_BodyTextOrange>{winLength} symbols win the game</P_BodyTextOrange>
+        <Div_HeadingContainer>
+          <H_Heading>{winner ? `Winner is ` : `Player:`}</H_Heading>
+          {winner === 'x' ? (
+            <CrossIcon winner={winner} />
+          ) : winner === 'o' ? (
+            <CircleIcon winner={winner} />
+          ) : turn === 'x' ? (
+            <CrossIcon />
+          ) : turn === 'o' ? (
+            <CircleIcon />
+          ) : null}
+        </Div_HeadingContainer>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
@@ -131,7 +144,13 @@ export const TicTacToe = () => {
                     key={x.toString() + y.toString()}
                     onClick={() => handleClick(x, y)}
                   >
-                    <P_BodyText>{col}</P_BodyText>
+                    {col === 'x' ? (
+                      <CrossIcon winner={winner} />
+                    ) : col === 'o' ? (
+                      <CircleIcon winner={winner} />
+                    ) : (
+                      ''
+                    )}
                   </Div_BoardItem>
                 ))
               )}
@@ -194,4 +213,22 @@ const P_BodyTextOrange = styled(P_BodyText)`
 `
 const Div_ButtonContainer = styled.div`
   padding: ${styles.spacing.sm} 0;
+`
+const CircleIcon = styled(circleIcon)<{ winner?: 'x' | 'o' | null }>`
+  fill: ${props => (props.winner === 'o' ? styles.colors.orange300 : styles.colors.grey300)};
+  display: inline-block;
+  max-width: 20px;
+`
+
+const CrossIcon = styled(crossIcon)<{ winner?: 'x' | 'o' | null }>`
+  fill: ${props =>
+    props.winner === 'x' ? styles.colors.orange300 : styles.colors.orangeTransparent};
+  display: inline-block;
+  max-width: 20px;
+`
+
+const Div_HeadingContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
