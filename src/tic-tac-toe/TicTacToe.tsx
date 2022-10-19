@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
 import { TransparentButtonBorder } from '../components/Button'
 import { breakpoint, styles } from '../helpers/theme'
+import { ReactComponent as circleIcon } from './icons/circle.svg'
+import { ReactComponent as crossIcon } from './icons/cross.svg'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -104,7 +106,7 @@ export const TicTacToe = () => {
   }
 
   const handleClick = (row: number, column: number) => {
-    if (board[row][column] !== cell) return
+    if (board[row][column] !== cell || winner) return
     setWinner(checkForWinner(handlePlayerMove(row, column), row, column, turn))
     setTurn(p => (p === 'x' ? 'o' : 'x'))
   }
@@ -120,36 +122,45 @@ export const TicTacToe = () => {
         <title>Katarína Soušková | Tic Tac Toe</title>
       </Helmet>
       <Div_Container>
-        <P_BodyTextOrange>{!winner && `${winLength} symbols win the game`}</P_BodyTextOrange>
-        <H_Heading>{winner ? `Winner is ${winner}` : `Player: ${turn}`}</H_Heading>
+        <P_BodyTextOrange>{winLength} symbols win the game</P_BodyTextOrange>
+        <Div_HeadingContainer>
+          <H_Heading>{winner ? `Winner is ` : `Player:`}</H_Heading>
+          {winner === 'x' ? (
+            <CrossIcon winner={winner} />
+          ) : winner === 'o' ? (
+            <CircleIcon winner={winner} />
+          ) : turn === 'x' ? (
+            <CrossIcon winner={winner} />
+          ) : turn === 'o' ? (
+            <CircleIcon winner={winner} />
+          ) : null}
+        </Div_HeadingContainer>
         <Div_BoardBox>
           <Div_BoardWrapper>
             <Div_Board>
-              {!winner ? (
-                board.map((row, x) =>
-                  row.map((col, y) => (
-                    <Div_BoardItem
-                      key={x.toString() + y.toString()}
-                      onClick={() => handleClick(x, y)}
-                    >
-                      <P_BodyText>{col}</P_BodyText>
-                    </Div_BoardItem>
-                  ))
-                )
-              ) : (
-                <Div_ResetContainer onClick={() => handleReset()}>
-                  <H_Heading>Reset Game</H_Heading>
-                </Div_ResetContainer>
+              {board.map((row, x) =>
+                row.map((col, y) => (
+                  <Div_BoardItem
+                    key={x.toString() + y.toString()}
+                    onClick={() => handleClick(x, y)}
+                  >
+                    {col === 'x' ? (
+                      <CrossIcon winner={winner} />
+                    ) : col === 'o' ? (
+                      <CircleIcon winner={winner} />
+                    ) : (
+                      ''
+                    )}
+                  </Div_BoardItem>
+                ))
               )}
             </Div_Board>
           </Div_BoardWrapper>
         </Div_BoardBox>
         <Div_ButtonContainer>
-          {!winner && (
-            <TransparentButtonBorder onClick={() => handleReset()}>
-              <P_BodyText>Reset</P_BodyText>
-            </TransparentButtonBorder>
-          )}
+          <TransparentButtonBorder onClick={() => handleReset()}>
+            <P_BodyText>Reset</P_BodyText>
+          </TransparentButtonBorder>
         </Div_ButtonContainer>
       </Div_Container>
     </>
@@ -158,8 +169,6 @@ export const TicTacToe = () => {
 
 const Div_BoardBox = styled.div`
   width: 35%;
-  border: ${styles.border.orange};
-  border-radius: 8px;
   ${breakpoint.smallNotebook} {
     width: 50%;
   }
@@ -194,19 +203,36 @@ const Div_BoardItem = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: 1px solid ${styles.colors.orangeTransparent};
+  background: ${styles.colors.whiteTransparent};
+  height: 80%;
+  width: 80%;
 `
-const Div_ResetContainer = styled.div`
-  grid-column: 1 / ${boardSize + 1};
-  grid-row: 1 / ${boardSize + 1};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
+
 const P_BodyTextOrange = styled(P_BodyText)`
   color: ${styles.colors.orangeTransparent};
 `
 const Div_ButtonContainer = styled.div`
   padding: ${styles.spacing.sm} 0;
+`
+const CircleIcon = styled(circleIcon)<{ winner?: 'x' | 'o' | null }>`
+  fill: ${props => (props.winner === 'o' ? styles.colors.orange300 : styles.colors.grey300)};
+  width: 20px;
+  ${breakpoint.phone} {
+    width: 15px;
+  }
+`
+
+const CrossIcon = styled(crossIcon)<{ winner?: 'x' | 'o' | null }>`
+  fill: ${props =>
+    props.winner === 'x' ? styles.colors.orange300 : styles.colors.orangeTransparent};
+  width: 20px;
+  ${breakpoint.phone} {
+    width: 15px;
+  }
+`
+
+const Div_HeadingContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
