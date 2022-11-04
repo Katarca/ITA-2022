@@ -79,7 +79,7 @@ type TableProps = {
   visible: boolean
   month: number
   year: number
-  visibleYear: number
+  visibleYears: Array<number>
 }
 
 export const MortgageCalculator = () => {
@@ -88,7 +88,7 @@ export const MortgageCalculator = () => {
   const [years, setYears] = useState(30)
   const [inflation, setInflation] = useState(6)
   const [windowWidth, setWindowWidth] = useState(undefined as undefined | number)
-  const [visibleYear, setVisibleYear] = useState(1)
+  const [visibleYears, setVisibleYears] = useState([1])
 
   useEffect(() => {
     const handleResize = () => {
@@ -101,6 +101,14 @@ export const MortgageCalculator = () => {
 
   const loanDetail = calculateAmortization({ principal, interestRate, years, inflation })
   const dataExist = principal > 0 && interestRate > 0 && years > 0 && loanDetail.length > 0
+
+  const handleRowClick = (year: number) => {
+    if (visibleYears.includes(year)) {
+      setVisibleYears(visibleYears.filter(visibleYear => visibleYear !== year))
+    } else {
+      setVisibleYears(visibleYears => [...visibleYears, year])
+    }
+  }
 
   return (
     <>
@@ -153,7 +161,7 @@ export const MortgageCalculator = () => {
                 <thead>
                   <tr>
                     <th>
-                      <P_TableText>Year / Month</P_TableText>
+                      <P_TableText>Year/month</P_TableText>
                     </th>
                     <th>
                       <P_TableText>Monthly Payment (CZK)</P_TableText>
@@ -173,16 +181,14 @@ export const MortgageCalculator = () => {
                   {loanDetail.map((data, i) => (
                     <Tr_TableRow
                       key={i}
-                      visible={data.month === 1 || visibleYear === data.year}
-                      visibleYear={visibleYear}
+                      visible={data.month === 1 || visibleYears.includes(data.year)}
+                      visibleYears={visibleYears}
                       month={data.month}
                       year={data.year}
-                      onClick={() => setVisibleYear(data.year)}
+                      onClick={() => handleRowClick(data.year)}
                     >
                       <td>
-                        <P_TableText>
-                          {data.year}y {data.month}m
-                        </P_TableText>
+                        <P_TableText>{`${data.year}/${data.month}`}</P_TableText>
                       </td>
                       <td>
                         <P_TableText>{formatAmount(data.monthlyPayment)}</P_TableText>
@@ -205,15 +211,13 @@ export const MortgageCalculator = () => {
                 {loanDetail.map((data, i) => (
                   <Div_MobileContainer
                     key={i}
-                    visible={data.month === 1 || visibleYear === data.year}
-                    visibleYear={visibleYear}
+                    visible={data.month === 1 || visibleYears.includes(data.year)}
+                    visibleYears={visibleYears}
                     month={data.month}
                     year={data.year}
-                    onClick={() => setVisibleYear(data.year)}
+                    onClick={() => handleRowClick(data.year)}
                   >
-                    <P_TableText>
-                      {data.year} year {data.month} month
-                    </P_TableText>
+                    <P_TableText>{`${data.year}. year ${data.month}. month`}</P_TableText>
                     <P_TableText>
                       Monthly payment: {formatAmount(data.monthlyPayment)} CZK
                     </P_TableText>
@@ -316,13 +320,7 @@ const Tr_TableRow = styled.tr<TableProps>`
   ${({ month }) =>
     month === 1 &&
     css`
-      background-color: ${styles.colors.orangeTransparent};
-    `}
-    ${({ visibleYear, year, month }) =>
-    visibleYear === year &&
-    month === 1 &&
-    css`
-      background-color: ${styles.colors.orange300};
+      background-color: ${styles.colors.whiteTransparent};
     `}
 `
 
@@ -394,13 +392,7 @@ const Div_MobileContainer = styled.div<TableProps>`
   ${({ month }) =>
     month === 1 &&
     css`
-      background-color: ${styles.colors.orangeTransparent};
-    `}
-    ${({ visibleYear, year, month }) =>
-    visibleYear === year &&
-    month === 1 &&
-    css`
-      background-color: ${styles.colors.orange300};
+      background-color: ${styles.colors.whiteTransparent};
     `}
 `
 const Div_ChartsContainer = styled.div`

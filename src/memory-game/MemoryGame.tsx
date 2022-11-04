@@ -111,7 +111,11 @@ export const MemoryGame = () => {
           <Div_BoardWrapper>
             <Div_Board>
               {cards.map(card => (
-                <Div_Card key={card.id} onClick={() => handleCardClick(card)}>
+                <Div_Card
+                  key={card.id}
+                  onClick={() => handleCardClick(card)}
+                  flipped={card.flipped}
+                >
                   <P_EmojiText>{card.flipped ? card.value : '❌'}</P_EmojiText>
                 </Div_Card>
               ))}
@@ -130,7 +134,7 @@ export const MemoryGame = () => {
 
 const Div_BoardBox = styled.div`
   width: 35%;
-  border: ${styles.border.orange};
+  background-color: ${styles.colors.whiteTransparent};
   border-radius: 8px;
   ${breakpoint.smallNotebook} {
     width: 50%;
@@ -161,11 +165,15 @@ const Div_Board = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 `
-const Div_Card = styled.div`
+const Div_Card = styled.div<{ flipped: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => (props.flipped === false ? 'pointer' : 'context-menu')};
+  transition: 0.1s;
+  &:hover {
+    transform: ${props => props.flipped === false && 'scale(1.05)'};
+  }
 `
 
 const P_EmojiText = styled.p`

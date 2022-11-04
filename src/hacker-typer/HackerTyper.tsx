@@ -1,8 +1,9 @@
 import { CustomTextarea } from '../components/Textarea'
 import { Div_Container } from '../components/Container'
+import { H_SubHeading } from '../components/Heading'
 import { Helmet } from 'react-helmet-async'
+import { breakpoint, styles } from '../helpers/theme'
 import { dummyCode } from './dummyCode'
-import { styles } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
@@ -33,19 +34,11 @@ export const HackerTyper = () => {
         <Helmet>
           <title>Katarína Soušková | Hacker Typer</title>
         </Helmet>
-        {message && (
-          <div>
-            {message === 'Access denied' ? (
-              <Div_DeniedContainer>
-                <H_MsgHeading>{message}</H_MsgHeading>
-              </Div_DeniedContainer>
-            ) : (
-              <Div_GrantedContainer>
-                <H_MsgHeading>{message}</H_MsgHeading>
-              </Div_GrantedContainer>
-            )}
-          </div>
-        )}
+        {message ? (
+          <Div_HackMsg message={message}>
+            <H_MsgHeading>{message}</H_MsgHeading>
+          </Div_HackMsg>
+        ) : null}
         <HackTextArea
           value={
             currentIndex === 0
@@ -68,31 +61,32 @@ const HackTextArea = styled(CustomTextarea)`
   font-size: ${styles.fontSize.xs};
   color: ${styles.colors.orange300};
   padding: ${styles.spacing.xs};
+  border: none;
+  background-color: ${styles.colors.whiteTransparent};
+  &:focus {
+    outline: none;
+  }
 `
 
-const MsgContainerStyles = css`
+const Div_HackMsg = styled.div<{ message: 'Access denied' | 'Access granted' | null }>`
   position: absolute;
   z-index: 99;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: ${styles.colors.black};
+  border: 2px solid
+    ${props => (props.message === 'Access granted' ? styles.colors.matrixGreen : styles.colors.red)};
+  color: ${props =>
+    props.message === 'Access granted' ? styles.colors.matrixGreen : styles.colors.red};
+  & > h2 {
+    color: ${props =>
+      props.message === 'Access granted' ? styles.colors.matrixGreen : styles.colors.red};
+    white-space: nowrap;
+  }
 `
 
-const Div_GrantedContainer = styled.div`
-  ${MsgContainerStyles};
-  border: 2px solid ${styles.colors.matrixGreen};
-  color: ${styles.colors.matrixGreen};
-`
-
-const Div_DeniedContainer = styled.div`
-  ${MsgContainerStyles};
-  border: 2px solid ${styles.colors.red};
-  color: ${styles.colors.red};
-`
-
-const H_MsgHeading = styled.h2`
+const H_MsgHeading = styled(H_SubHeading)`
   text-transform: uppercase;
-  font-size: ${styles.fontSize.md};
   padding: ${styles.spacing.md};
 `
