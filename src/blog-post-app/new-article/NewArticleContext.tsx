@@ -1,4 +1,3 @@
-import { Article } from '../articles/ArticlesContext'
 import { NewArticle } from './NewArticle'
 import { delay } from '../../utils/delay'
 import { genericHookContextBuilder } from '../../utils/genericHookContextBuilder'
@@ -8,8 +7,6 @@ import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 
 const useLogicState = () => {
-  const [newArticle, setNewArticle] = useState({} as Article)
-
   const [titleErr, setTitleErr] = useState(null as null | string)
   const [authorErr, setAuthorErr] = useState(null as null | string)
   const [contentErr, setContentErr] = useState(null as null | string)

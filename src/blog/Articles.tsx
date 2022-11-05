@@ -40,7 +40,7 @@ const Div_ArticlesContainer = styled.div`
   }
 `
 const Div_ArticleBox = styled.div`
-  border: ${styles.border.grey300};
+  background-color: ${styles.colors.whiteTransparent};
   border-radius: 8px;
   padding: ${styles.spacing.xs};
   display: flex;
